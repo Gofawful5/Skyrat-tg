@@ -44,7 +44,7 @@
 	var/penis_girth_reduction_step = 2
 
 	/// Largest size the chem can make a mob's breasts
-	var/max_breast_size = 16
+	var/max_breast_size = 25
 	/// How much breasts are increased in size each time it's run
 	var/breast_size_increase_step = 1
 	/// Smallest size the chem can make a mob's breasts
@@ -388,7 +388,7 @@
 					to_chat(exposed_mob, span_purple("Your [pick(words_for_bigger)] [pick(bigger_boob_text_list)] [pick(action_text_list)]about [mob_breasts.genital_size] inches in diameter."))
 					return
 				else
-					if(mob_breasts?.genital_size >= (max_breast_size - 2))
+					if(mob_breasts?.genital_size >= (max_breast_size - 8))
 						exposed_mob.visible_message(span_notice("[exposed_mob]'s [pick(words_for_bigger)] [pick(bigger_boob_text_list)] [pick(public_bigger_action_text_list)]"))
 						to_chat(exposed_mob, span_purple("Your [pick(words_for_bigger)] [pick(bigger_boob_text_list)] [pick(action_text_list)]about [translation]-cups."))
 						return
@@ -405,7 +405,7 @@
 					to_chat(exposed_mob, span_purple("Your [pick(words_for_bigger)] [pick(bigger_boob_text_list)] [pick(action_text_list)]about [mob_breasts.genital_size] inches in diameter."))
 					return
 				else
-					if(mob_breasts?.genital_size >= (max_breast_size - 2))
+					if(mob_breasts?.genital_size >= (max_breast_size - 8))
 						exposed_mob.visible_message(span_notice("[exposed_mob]'s [pick(boob_text_list)] [pick(public_bigger_action_text_list)]"))
 						to_chat(exposed_mob, span_purple("Your [pick(words_for_bigger)] [pick(bigger_boob_text_list)] [pick(action_text_list)]about [translation]-cups."))
 						return
@@ -414,12 +414,21 @@
 						to_chat(exposed_mob, span_purple("Your [pick(boob_text_list)] [pick(action_text_list)]about [translation]-cups."))
 						return
 
-	if((mob_breasts?.genital_size >= (max_breast_size - 2)) && (exposed_mob.w_uniform || exposed_mob.wear_suit))
+	if((mob_breasts?.genital_size >= (max_breast_size - 8)) && (exposed_mob.w_uniform || exposed_mob.wear_suit))
 		var/target_bodypart = exposed_mob.get_bodypart(BODY_ZONE_CHEST)
 		if(prob(damage_chance))
 			to_chat(exposed_mob, span_danger("Your breasts begin to strain against your clothes!"))
 			exposed_mob.adjustOxyLoss(5, 0)
-			exposed_mob.apply_damage(1, BRUTE, target_bodypart)
+			exposed_mob.apply_damage(0.1, BRUTE, target_bodypart)
+			if(prob(80))
+				if(exposed_mob.w_uniform.damaged_clothes == CLOTHING_PRISTINE)
+					exposed_mob.w_uniform.damaged_clothes = CLOTHING_DAMAGED
+					exposed_mob.update_inv_w_uniform()
+					return
+				if(exposed_mob.w_uniform.damaged_clothes == CLOTHING_DAMAGED)
+					exposed_mob.w_uniform.damaged_clothes = CLOTHING_SHREDDED
+					exposed_mob.update_inv_w_uniform()
+					return
 
 /datum/reagent/drug/aphrodisiac/breast_enlarger/overdose_effects(mob/living/carbon/human/exposed_mob) //Turns you into a female if character is male. Also supposed to add breasts but enlargement_amount'm too dumb to figure out how to make it work
 	var/obj/item/organ/genital/penis/mob_penis = exposed_mob.getorganslot(ORGAN_SLOT_PENIS)
