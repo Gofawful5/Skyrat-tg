@@ -113,21 +113,12 @@
 
 /datum/station_trait/overflow_job_bureaucracy/proc/set_overflow_job_override(datum/source)
 	SIGNAL_HANDLER
-	/* SKYRAT EDIT START - Nice try lol
+
 	var/datum/job/picked_job = pick(SSjob.joinable_occupations)
-	*/ // ORIGINAL END
-	var/list/jobs_to_use = list(
-		/datum/job/clown,
-		/datum/job/bartender,
-		/datum/job/cook,
-		/datum/job/botanist,
-		/datum/job/cargo_technician,
-		/datum/job/mime,
-		/datum/job/janitor,
-		/datum/job/prisoner,
-		)
-	var/datum/job/picked_job = pick(jobs_to_use)
-	// SKYRAT EDIT END
+	//SKYRAT EDIT START
+	while(picked_job.veteran_only)
+		picked_job = pick(SSjob.joinable_occupations)
+	//SKYRAT EDIT END
 	chosen_job_name = lowertext(picked_job.title) // like Chief Engineers vs like chief engineers
 	SSjob.set_overflow_role(picked_job.type)
 
@@ -184,8 +175,8 @@
 			/obj/item/melee/baseball_bat = 10,
 			/obj/item/melee/chainofcommand/tailwhip = 10,
 			/obj/item/melee/chainofcommand/tailwhip/kitty = 10,
-			/obj/item/reagent_containers/food/drinks/bottle = 20,
-			/obj/item/reagent_containers/food/drinks/bottle/kong = 5,
+			/obj/item/reagent_containers/cup/glass/bottle = 20,
+			/obj/item/reagent_containers/cup/glass/bottle/kong = 5,
 			/obj/item/switchblade/extended = 10,
 			/obj/item/sign/random = 10,
 			/obj/item/gun/ballistic/automatic/pistol = 1,
@@ -195,7 +186,7 @@
 
 /datum/station_trait/revenge_of_pun_pun/proc/arm_monke()
 	SIGNAL_HANDLER
-	var/mob/living/carbon/human/species/monkey/punpun/punpun = locate()
+	var/mob/living/carbon/human/species/monkey/punpun/punpun = GLOB.the_one_and_only_punpun
 	if(!punpun)
 		return
 	var/weapon_type = pick_weight(weapon_types)

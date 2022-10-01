@@ -1,6 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aac" = (
-/obj/item/book/granter/spell/summonitem{
+/obj/item/book/granter/action/spell/summonitem{
 	name = "\proper an extremely flamboyant book"
 	},
 /turf/open/misc/xen,
@@ -26,7 +26,7 @@
 /turf/open/floor/plating,
 /area/awaymission/black_mesa/tram_room)
 "aan" = (
-/obj/machinery/door_timer{
+/obj/machinery/status_display/door_timer{
 	id = "Mesa 2";
 	name = "Cell 2";
 	pixel_x = -32
@@ -50,9 +50,8 @@
 /area/awaymission/black_mesa/entrance_hall)
 "aaO" = (
 /obj/item/clothing/mask/gas/hecu1,
-/turf/open/floor/plating{
-	icon_state = "platingdmg1"
-	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/plating,
 /area/awaymission/black_mesa/security_outpost)
 "aaS" = (
 /obj/structure/railing{
@@ -117,7 +116,7 @@
 /area/awaymission/black_mesa/xen/vortigaunt_village_nihilanth)
 "abS" = (
 /obj/structure/table,
-/obj/item/reagent_containers/food/drinks/mug/tea,
+/obj/item/reagent_containers/cup/glass/mug/tea,
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa/to_cryo_room)
 "acc" = (
@@ -372,9 +371,7 @@
 /turf/open/misc/ironsand/black_mesa,
 /area/awaymission/black_mesa)
 "aew" = (
-/obj/structure/sign/warning/chem_diamond{
-	pixel_y = 32
-	},
+/obj/structure/sign/warning/chem_diamond/directional/north,
 /obj/machinery/light/cold{
 	dir = 1
 	},
@@ -693,9 +690,8 @@
 "ahW" = (
 /obj/machinery/door/airlock/maintenance,
 /obj/effect/mapping_helpers/airlock/locked,
-/turf/open/floor/iron/textured{
-	icon_state = "floorscorched2"
-	},
+/obj/effect/mapping_helpers/burnt_floor,
+/turf/open/floor/iron/textured,
 /area/awaymission/black_mesa/tram_room)
 "aic" = (
 /obj/structure/closet/crate/large,
@@ -853,10 +849,7 @@
 /turf/closed/wall/r_wall,
 /area/awaymission/black_mesa/black_ops_bus)
 "akI" = (
-/obj/structure/sink{
-	dir = 4;
-	pixel_x = -12
-	},
+/obj/structure/sink/directional/east,
 /obj/structure/alien/weeds/xen,
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa/to_cryo_room)
@@ -947,18 +940,16 @@
 /area/awaymission/black_mesa/gas_emitter_chamber)
 "alG" = (
 /obj/effect/mob_spawn/corpse/human/scientist,
-/turf/open/floor/iron/textured{
-	icon_state = "floorscorched2"
-	},
+/obj/effect/mapping_helpers/burnt_floor,
+/turf/open/floor/iron/textured,
 /area/awaymission/black_mesa/hecu_zone_external_hall)
 "alO" = (
 /obj/structure/alien/weeds/xen,
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa/entrance_lobby)
 "alV" = (
-/turf/open/floor/iron/smooth_large{
-	icon_state = "damaged2"
-	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa/hecu_zone_external_hall)
 "amf" = (
 /obj/structure/lattice/catwalk,
@@ -1110,7 +1101,7 @@
 	pixel_y = 29
 	},
 /obj/structure/table,
-/obj/item/reagent_containers/food/drinks/bottle/beer/light{
+/obj/item/reagent_containers/cup/glass/bottle/beer/light{
 	pixel_x = -6;
 	pixel_y = -6
 	},
@@ -1374,9 +1365,7 @@
 /turf/open/floor/plating,
 /area/awaymission/black_mesa/entrance)
 "aqM" = (
-/obj/structure/sign/warning/no_smoking/circle{
-	pixel_y = 32
-	},
+/obj/structure/sign/warning/no_smoking/circle/directional/north,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa/cryo_room)
 "aqQ" = (
@@ -1397,7 +1386,7 @@
 /turf/open/floor/iron,
 /area/awaymission/black_mesa/security_outpost)
 "aqU" = (
-/obj/machinery/door_timer{
+/obj/machinery/status_display/door_timer{
 	id = "Mesa 3";
 	name = "Cell 3";
 	pixel_x = -32
@@ -1522,7 +1511,7 @@
 /turf/open/misc/xen,
 /area/awaymission/black_mesa/xen/crowbar_nook)
 "asA" = (
-/obj/machinery/door_timer{
+/obj/machinery/status_display/door_timer{
 	id = "Mesa 1";
 	name = "Cell 1";
 	pixel_x = -32
@@ -1718,9 +1707,8 @@
 /turf/open/floor/bamboo,
 /area/awaymission/black_mesa/xen/vortigaunt_village_nihilanth)
 "avx" = (
-/turf/open/floor/iron/textured{
-	icon_state = "floorscorched2"
-	},
+/obj/effect/mapping_helpers/burnt_floor,
+/turf/open/floor/iron/textured,
 /area/awaymission/black_mesa/tram_room)
 "avz" = (
 /obj/item/ammo_box/advanced/b10mm,
@@ -1771,7 +1759,7 @@
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa/entrance_hall)
 "awm" = (
-/obj/machinery/door_timer{
+/obj/machinery/status_display/door_timer{
 	id = "Mesa 5";
 	name = "Cell 5";
 	pixel_x = 32
@@ -1932,9 +1920,8 @@
 	dir = 8
 	},
 /obj/item/armament_points_card/hecu,
-/turf/open/floor/plating{
-	icon_state = "platingdmg2"
-	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/plating,
 /area/awaymission/black_mesa/security_outpost)
 "ayH" = (
 /obj/machinery/light/cold,
@@ -2085,7 +2072,7 @@
 /turf/open/floor/iron,
 /area/awaymission/black_mesa/security_outpost)
 "aAq" = (
-/obj/machinery/door_timer{
+/obj/machinery/status_display/door_timer{
 	id = "Mesa 6";
 	name = "Cell 6";
 	pixel_x = 32
@@ -2141,7 +2128,7 @@
 /area/awaymission/black_mesa/tram_room)
 "aAI" = (
 /obj/structure/table,
-/obj/item/reagent_containers/food/drinks/bottle/beer/almost_empty{
+/obj/item/reagent_containers/cup/glass/bottle/beer/almost_empty{
 	pixel_x = 8;
 	pixel_y = 3
 	},
@@ -2180,9 +2167,8 @@
 "aBd" = (
 /obj/machinery/light/cold,
 /obj/effect/gibspawner/human/bodypartless,
-/turf/open/floor/iron/textured{
-	icon_state = "floorscorched2"
-	},
+/obj/effect/mapping_helpers/burnt_floor,
+/turf/open/floor/iron/textured,
 /area/awaymission/black_mesa/tram_room)
 "aBe" = (
 /obj/structure/rack/shelf,
@@ -2192,9 +2178,8 @@
 /obj/item/ammo_box/a357,
 /obj/item/ammo_box/a357/match,
 /obj/item/ammo_box/a357/match,
-/turf/open/floor/plating{
-	icon_state = "platingdmg1"
-	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/plating,
 /area/awaymission/black_mesa/security_outpost)
 "aBf" = (
 /obj/structure/railing/corner{
@@ -2204,7 +2189,7 @@
 /area/awaymission/black_mesa/tram_room)
 "aBh" = (
 /obj/structure/table,
-/obj/item/reagent_containers/food/drinks/bottle/beer/light{
+/obj/item/reagent_containers/cup/glass/bottle/beer/light{
 	pixel_x = -5;
 	pixel_y = 9
 	},
@@ -2298,9 +2283,7 @@
 /turf/open/floor/iron,
 /area/awaymission/black_mesa/entrance_lobby)
 "aCe" = (
-/obj/structure/sign/warning/chem_diamond{
-	pixel_y = 32
-	},
+/obj/structure/sign/warning/chem_diamond/directional/north,
 /obj/machinery/light/cold{
 	dir = 1
 	},
@@ -2356,9 +2339,7 @@
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa/to_cryo_room)
 "aCI" = (
-/obj/structure/sign/warning/chem_diamond{
-	pixel_y = 32
-	},
+/obj/structure/sign/warning/chem_diamond/directional/north,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa/cryo_room)
 "aCK" = (
@@ -2429,7 +2410,7 @@
 	},
 /obj/machinery/door/window/brigdoor{
 	name = "Brig Control Desk";
-	req_access_txt = "3"
+	req_access = list("armory")
 	},
 /obj/item/folder/red,
 /obj/item/folder/red,
@@ -2492,7 +2473,7 @@
 /obj/item/stack/spacecash/c1{
 	pixel_y = 5
 	},
-/obj/item/reagent_containers/glass/rag,
+/obj/item/reagent_containers/cup/rag,
 /turf/open/floor/iron/dark,
 /area/awaymission/black_mesa/security_outpost)
 "aEW" = (
@@ -2618,14 +2599,13 @@
 /area/awaymission/black_mesa/tram_room)
 "aGy" = (
 /obj/item/paper/crumpled/awaymissions/moonoutpost19/hastey_note{
-	info = "<i>Right, I'm a commie? So what? I'm proud of it..</i>"
+	default_raw_text = "<i>Right, I'm a commie? So what? I'm proud of it..</i>"
 	},
-/obj/item/reagent_containers/food/drinks/bottle/vodka{
+/obj/item/reagent_containers/cup/glass/bottle/vodka{
 	pixel_x = 11
 	},
-/turf/open/floor/plating{
-	icon_state = "platingdmg1"
-	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/plating,
 /area/awaymission/black_mesa/security_outpost)
 "aGB" = (
 /obj/structure/table,
@@ -2702,7 +2682,7 @@
 /obj/machinery/door/window/brigdoor{
 	dir = 1;
 	name = "Brig Control Desk";
-	req_access_txt = "3"
+	req_access = list("armory")
 	},
 /obj/item/paper,
 /obj/machinery/door/firedoor,
@@ -3241,22 +3221,22 @@
 /turf/open/misc/ironsand/black_mesa,
 /area/awaymission/black_mesa)
 "aOa" = (
-/obj/item/reagent_containers/food/condiment/milk{
+/obj/item/reagent_containers/condiment/milk{
 	pixel_x = 6;
 	pixel_y = 8
 	},
-/obj/item/reagent_containers/food/condiment/sugar{
+/obj/item/reagent_containers/condiment/sugar{
 	pixel_y = 4
 	},
-/obj/item/reagent_containers/food/condiment/soymilk{
+/obj/item/reagent_containers/condiment/soymilk{
 	pixel_x = -6;
 	pixel_y = 8
 	},
-/obj/item/reagent_containers/food/drinks/ice{
+/obj/item/reagent_containers/cup/glass/ice{
 	pixel_x = -4;
 	pixel_y = -2
 	},
-/obj/item/reagent_containers/food/drinks/bottle/cream{
+/obj/item/reagent_containers/cup/glass/bottle/juice/cream{
 	pixel_x = 3;
 	pixel_y = -2
 	},
@@ -3277,7 +3257,7 @@
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa/to_cryo_room)
 "aOj" = (
-/obj/machinery/door_timer{
+/obj/machinery/status_display/door_timer{
 	id = "Mesa 4";
 	name = "Cell 4";
 	pixel_x = 32
@@ -3325,20 +3305,20 @@
 	name = "Jim Norton's Quebecois Coffee table"
 	},
 /obj/item/paper{
-	info = "Jim Norton's Quebecois Coffee.         You see, in 2265 the Quebecois had finally had enough of Canada's shit, and went to the one place that wasn't corrupted by Canuckistan.Je vais au seul endroit qui n'a pas ??? corrompu par les Canadiens ... ESPACE.";
+	default_raw_text = "Jim Norton's Quebecois Coffee.         You see, in 2265 the Quebecois had finally had enough of Canada's shit, and went to the one place that wasn't corrupted by Canuckistan.Je vais au seul endroit qui n'a pas ??? corrompu par les Canadiens ... ESPACE.";
 	name = "Coffee Shop";
 	pixel_x = -4;
 	pixel_y = 6
 	},
-/obj/item/reagent_containers/food/drinks/mug/coco{
+/obj/item/reagent_containers/cup/glass/mug/coco{
 	pixel_x = -2;
 	pixel_y = 4
 	},
-/obj/item/reagent_containers/food/drinks/mug/tea{
+/obj/item/reagent_containers/cup/glass/mug/tea{
 	pixel_x = 4;
 	pixel_y = 2
 	},
-/obj/item/reagent_containers/food/drinks/coffee{
+/obj/item/reagent_containers/cup/glass/coffee{
 	pixel_x = -3
 	},
 /obj/structure/window/reinforced{
@@ -3393,7 +3373,7 @@
 /turf/open/floor/plating,
 /area/awaymission/black_mesa/entrance)
 "aPB" = (
-/obj/item/reagent_containers/food/drinks/soda_cans/grey_bull,
+/obj/item/reagent_containers/cup/soda_cans/grey_bull,
 /turf/open/misc/ironsand/black_mesa,
 /area/awaymission/black_mesa)
 "aPG" = (
@@ -3478,9 +3458,7 @@
 /area/awaymission/black_mesa)
 "aQF" = (
 /obj/machinery/portable_atmospherics/canister/nob,
-/obj/structure/sign/warning/chem_diamond{
-	pixel_y = 32
-	},
+/obj/structure/sign/warning/chem_diamond/directional/north,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa/gas_emitter_chamber)
 "aQL" = (
@@ -3549,10 +3527,7 @@
 /obj/item/clothing/suit/apron/chef{
 	name = "Jim Norton's Quebecois Coffee apron"
 	},
-/obj/structure/sink{
-	dir = 8;
-	pixel_x = 12
-	},
+/obj/structure/sink/directional/west,
 /obj/effect/turf_decal/bot,
 /turf/open/floor/iron/dark,
 /area/awaymission/black_mesa/security_outpost)
@@ -3635,9 +3610,8 @@
 /obj/structure/railing{
 	dir = 1
 	},
-/turf/open/floor/iron/textured{
-	icon_state = "floorscorched2"
-	},
+/obj/effect/mapping_helpers/burnt_floor,
+/turf/open/floor/iron/textured,
 /area/awaymission/black_mesa/tram_room)
 "aSL" = (
 /obj/structure/rack/shelf,
@@ -4080,9 +4054,8 @@
 /obj/item/gun/ballistic/revolver/mateba{
 	fire_select_modes = list(1,2)
 	},
-/turf/open/floor/plating{
-	icon_state = "platingdmg2"
-	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/plating,
 /area/awaymission/black_mesa/security_outpost)
 "aYf" = (
 /obj/effect/mob_spawn/corpse/human/engineer,
@@ -4137,11 +4110,11 @@
 	},
 /obj/item/knife/combat,
 /obj/item/clothing/glasses/night,
-/obj/item/clothing/suit/armor/vest/russian/nri{
+/obj/item/clothing/suit/armor/vest/russian{
 	pixel_x = -6;
 	pixel_y = -2
 	},
-/obj/item/clothing/head/helmet/rus_helmet/nri{
+/obj/item/clothing/head/helmet/rus_helmet{
 	pixel_x = -7;
 	pixel_y = 8
 	},
@@ -4151,9 +4124,8 @@
 /obj/item/clothing/shoes/combat,
 /obj/item/storage/belt/military/nri,
 /obj/item/clothing/gloves/tackler/combat/insulated,
-/turf/open/floor/plating{
-	icon_state = "platingdmg1"
-	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/plating,
 /area/awaymission/black_mesa/security_outpost)
 "aYK" = (
 /turf/open/misc/asteroid/snow/standard_air,
@@ -4360,7 +4332,7 @@
 /area/awaymission/black_mesa/employee_dorm_room)
 "blz" = (
 /obj/machinery/door_buttons/airlock_controller{
-	name = "elevator button";
+	name = "Elevator Button";
 	pixel_x = -23
 	},
 /turf/open/floor/mineral/titanium,
@@ -4785,7 +4757,6 @@
 /turf/open/floor/plating,
 /area/awaymission/black_mesa/black_ops_turret_blockade)
 "civ" = (
-/obj/structure/table,
 /obj/structure/table,
 /obj/item/pizzabox/pineapple,
 /turf/open/floor/iron/textured,
@@ -5788,7 +5759,7 @@
 /area/awaymission/black_mesa/hecu_zone_towards_facility)
 "eab" = (
 /obj/machinery/door_buttons/airlock_controller{
-	name = "elevator button";
+	name = "Elevator Button";
 	pixel_y = 23
 	},
 /turf/open/floor/mineral/titanium,
@@ -5958,11 +5929,6 @@
 /obj/effect/random_mob_placer/security_guard,
 /turf/open/floor/iron/smooth,
 /area/awaymission/black_mesa/black_ops_armory)
-"exc" = (
-/obj/item/book/granter/traitsr/ventcrawl_book,
-/obj/effect/spawner/random/bioluminescent_plant,
-/turf/open/misc/xen,
-/area/awaymission/black_mesa/xen/acid_lake)
 "exd" = (
 /obj/item/target,
 /turf/open/floor/engine,
@@ -5975,7 +5941,7 @@
 /area/awaymission/black_mesa/xen/acid_lake_building)
 "ezH" = (
 /obj/structure/table,
-/obj/item/reagent_containers/glass/beaker/synthflesh,
+/obj/item/reagent_containers/cup/beaker/synthflesh,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa/deep_sci_chem)
 "ezT" = (
@@ -6434,10 +6400,10 @@
 /area/awaymission/black_mesa/high_security_surgery)
 "fwx" = (
 /obj/structure/table,
-/obj/item/reagent_containers/food/drinks/coffee{
+/obj/item/reagent_containers/cup/glass/coffee{
 	pixel_x = -3
 	},
-/obj/item/reagent_containers/food/drinks/mug/tea{
+/obj/item/reagent_containers/cup/glass/mug/tea{
 	pixel_x = 4;
 	pixel_y = 2
 	},
@@ -6823,9 +6789,7 @@
 "guk" = (
 /obj/structure/table,
 /obj/item/folder/red,
-/obj/structure/sign/warning/no_smoking/circle{
-	pixel_y = 32
-	},
+/obj/structure/sign/warning/no_smoking/circle/directional/north,
 /obj/structure/alien/weeds/xen,
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa/entrance_large_office)
@@ -6839,7 +6803,7 @@
 	},
 /obj/structure/table,
 /obj/item/storage/fancy/donut_box,
-/obj/item/reagent_containers/food/drinks/coffee,
+/obj/item/reagent_containers/cup/glass/coffee,
 /obj/item/assembly/signaler,
 /obj/item/gun_maintenance_supplies,
 /obj/item/gun_maintenance_supplies,
@@ -6930,9 +6894,8 @@
 /area/awaymission/black_mesa/equipment_room)
 "gIr" = (
 /obj/effect/random_mob_placer/xen,
-/turf/open/floor/iron/smooth_large{
-	icon_state = "damaged2"
-	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa/high_security_servers)
 "gIM" = (
 /obj/effect/turf_decal/stripes,
@@ -6976,9 +6939,7 @@
 /turf/closed/wall/r_wall,
 /area/awaymission/black_mesa/black_ops_hall)
 "gMx" = (
-/obj/machinery/shower{
-	dir = 4
-	},
+/obj/machinery/shower/directional/east,
 /turf/open/floor/iron/freezer,
 /area/awaymission/black_mesa/hecu_zone_bathroom)
 "gNG" = (
@@ -7072,9 +7033,7 @@
 	dir = 1
 	},
 /obj/structure/lattice/catwalk,
-/obj/structure/sign/warning/secure_area{
-	pixel_y = 32
-	},
+/obj/structure/sign/warning/secure_area/directional/north,
 /turf/open/floor/plating,
 /area/awaymission/black_mesa/genetics_elevator)
 "gWB" = (
@@ -7457,7 +7416,7 @@
 /area/awaymission/black_mesa/xen/acid_lake)
 "hMp" = (
 /obj/structure/table,
-/obj/item/reagent_containers/food/drinks/mug/tea{
+/obj/item/reagent_containers/cup/glass/mug/tea{
 	pixel_x = 4;
 	pixel_y = 2
 	},
@@ -7845,9 +7804,8 @@
 /turf/closed/wall/r_wall,
 /area/awaymission/black_mesa/entrance_internal_hall)
 "iKp" = (
-/turf/open/floor/iron/smooth_large{
-	icon_state = "damaged2"
-	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa/high_security_hallway)
 "iKG" = (
 /obj/structure/chair/office,
@@ -7997,9 +7955,7 @@
 /turf/open/floor/iron/dark,
 /area/awaymission/black_mesa/hecu_zone_camp)
 "jaA" = (
-/obj/structure/sign/warning/no_smoking/circle{
-	pixel_y = 32
-	},
+/obj/structure/sign/warning/no_smoking/circle/directional/north,
 /obj/structure/flora/biolumi/lamp/weaklight,
 /obj/structure/alien/weeds/xen,
 /turf/open/floor/iron/textured_large,
@@ -8599,9 +8555,8 @@
 "kkK" = (
 /obj/effect/mob_spawn/corpse/human/scientist,
 /obj/item/resonator/upgraded,
-/turf/open/floor/iron/smooth_large{
-	icon_state = "damaged2"
-	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa/high_security_servers)
 "klO" = (
 /obj/effect/turf_decal/stripes,
@@ -8764,8 +8719,8 @@
 /area/awaymission/black_mesa/entrance_internal_hall)
 "kAW" = (
 /obj/structure/table,
-/obj/item/reagent_containers/glass/beaker/large,
-/obj/item/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/item/reagent_containers/cup/beaker/large,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa/deep_sci_chem)
 "kBh" = (
@@ -8982,7 +8937,7 @@
 /area/awaymission/black_mesa/genetics)
 "kZK" = (
 /obj/machinery/door_buttons/airlock_controller{
-	name = "elevator button";
+	name = "Elevator Button";
 	pixel_x = -23
 	},
 /turf/open/floor/mineral/titanium,
@@ -9030,9 +8985,7 @@
 /obj/machinery/light/broken{
 	dir = 1
 	},
-/obj/structure/sign/warning/no_smoking/circle{
-	pixel_y = 32
-	},
+/obj/structure/sign/warning/no_smoking/circle/directional/north,
 /obj/structure/alien/weeds/xen,
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa/scientist_hall)
@@ -9061,9 +9014,7 @@
 /turf/open/misc/ironsand/black_mesa,
 /area/awaymission/black_mesa/hecu_zone_camp)
 "lgz" = (
-/obj/structure/sign/warning/no_smoking/circle{
-	pixel_y = 32
-	},
+/obj/structure/sign/warning/no_smoking/circle/directional/north,
 /obj/item/storage/fancy/cigarettes/cigpack_uplift{
 	pixel_x = 13;
 	pixel_y = -3
@@ -9170,9 +9121,8 @@
 /turf/open/floor/circuit,
 /area/awaymission/black_mesa/lambda_teleporter)
 "lpg" = (
-/turf/open/floor/iron/smooth_large{
-	icon_state = "damaged2"
-	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa/high_security_servers)
 "lpp" = (
 /obj/machinery/computer,
@@ -9266,11 +9216,11 @@
 /area/awaymission/black_mesa/black_ops_entrance)
 "lDC" = (
 /obj/structure/closet/wardrobe,
-/obj/item/reagent_containers/food/drinks/bottle/whiskey,
-/obj/item/reagent_containers/food/drinks/drinkingglass/shotglass,
-/obj/item/reagent_containers/food/drinks/drinkingglass/shotglass,
-/obj/item/reagent_containers/food/drinks/drinkingglass/shotglass,
-/obj/item/reagent_containers/food/drinks/drinkingglass/shotglass,
+/obj/item/reagent_containers/cup/glass/bottle/whiskey,
+/obj/item/reagent_containers/cup/glass/drinkingglass/shotglass,
+/obj/item/reagent_containers/cup/glass/drinkingglass/shotglass,
+/obj/item/reagent_containers/cup/glass/drinkingglass/shotglass,
+/obj/item/reagent_containers/cup/glass/drinkingglass/shotglass,
 /turf/open/floor/iron/dark/yellow,
 /area/awaymission/black_mesa/hecu_zone_bathroom)
 "lDP" = (
@@ -9582,7 +9532,7 @@
 /area/awaymission/black_mesa/entrance_internal_hall)
 "mnV" = (
 /obj/structure/table,
-/obj/item/reagent_containers/glass/beaker/bluespace,
+/obj/item/reagent_containers/cup/beaker/bluespace,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa/deep_sci_chem)
 "mpE" = (
@@ -9749,10 +9699,7 @@
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa/employee_dorm_room)
 "mNg" = (
-/obj/structure/sink{
-	dir = 4;
-	pixel_x = -12
-	},
+/obj/structure/sink/directional/east,
 /obj/structure/mirror{
 	pixel_x = -28
 	},
@@ -9775,7 +9722,7 @@
 /turf/open/floor/iron/dark,
 /area/awaymission/black_mesa/resonant_chamber)
 "mPM" = (
-/obj/item/reagent_containers/food/drinks/bottle/beer/almost_empty,
+/obj/item/reagent_containers/cup/glass/bottle/beer/almost_empty,
 /obj/effect/spawner/random/trash/mess,
 /turf/open/floor/wood/parquet,
 /area/awaymission/black_mesa/employee_dorm_room)
@@ -9885,9 +9832,7 @@
 "neu" = (
 /obj/machinery/light/red,
 /obj/structure/lattice/catwalk,
-/obj/structure/sign/warning/secure_area{
-	pixel_y = -32
-	},
+/obj/structure/sign/warning/secure_area/directional/south,
 /turf/open/floor/plating,
 /area/awaymission/black_mesa/genetics_elevator)
 "neA" = (
@@ -9927,7 +9872,7 @@
 /area/awaymission/black_mesa/entrance_hall)
 "njp" = (
 /obj/structure/table,
-/obj/item/reagent_containers/food/drinks/coffee,
+/obj/item/reagent_containers/cup/glass/coffee,
 /turf/open/floor/iron/dark,
 /area/awaymission/black_mesa/science_internal)
 "njF" = (
@@ -10041,9 +9986,7 @@
 /turf/open/floor/iron/textured,
 /area/awaymission/black_mesa/employee_dorm_room)
 "nsz" = (
-/obj/structure/sign/warning/xeno_mining{
-	pixel_x = -32
-	},
+/obj/structure/sign/warning/xeno_mining/directional/west,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa/deep_sci_hall)
 "ntL" = (
@@ -10096,9 +10039,7 @@
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa/black_ops_bus)
 "nxI" = (
-/obj/structure/sign/warning/gas_mask{
-	pixel_x = 32
-	},
+/obj/structure/sign/warning/gas_mask/directional/east,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa/deep_sci_storage)
 "nxS" = (
@@ -10396,9 +10337,8 @@
 /turf/closed/wall/r_wall,
 /area/awaymission/black_mesa/dorm_computers)
 "oeY" = (
-/turf/open/floor/iron/textured{
-	icon_state = "floorscorched2"
-	},
+/obj/effect/mapping_helpers/burnt_floor,
+/turf/open/floor/iron/textured,
 /area/awaymission/black_mesa/employee_dorm_room)
 "ofE" = (
 /obj/effect/random_mob_placer/blackops,
@@ -11199,7 +11139,6 @@
 /area/awaymission/black_mesa/high_security_hallway)
 "pYd" = (
 /obj/structure/closet/crate/large,
-/obj/structure/closet/crate/large,
 /obj/item/ammo_box/magazine/mp5,
 /turf/open/floor/plating,
 /area/awaymission/black_mesa/science_tunnel)
@@ -11267,9 +11206,7 @@
 /obj/machinery/light/broken{
 	dir = 8
 	},
-/obj/structure/sign/warning/no_smoking/circle{
-	pixel_y = 32
-	},
+/obj/structure/sign/warning/no_smoking/circle/directional/north,
 /obj/structure/alien/weeds/xen,
 /obj/item/shield/riot/tele,
 /turf/open/floor/iron/freezer,
@@ -11444,9 +11381,7 @@
 	},
 /area/awaymission/black_mesa/hecu_zone_external_sec)
 "qyN" = (
-/obj/structure/sign/warning/xeno_mining{
-	pixel_x = -32
-	},
+/obj/structure/sign/warning/xeno_mining/directional/west,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa/deep_sci_storage)
 "qzB" = (
@@ -11480,11 +11415,6 @@
 /obj/effect/spawner/random/bioluminescent_plant,
 /turf/open/misc/dirt/planet/xen,
 /area/awaymission/black_mesa/xen/freeman_puzzle)
-"qEs" = (
-/obj/structure/closet/crate/large,
-/obj/item/ammo_box/magazine/mp5,
-/turf/open/floor/plating,
-/area/awaymission/black_mesa/science_tunnel)
 "qEt" = (
 /obj/effect/turf_decal/stripes{
 	dir = 4
@@ -12206,7 +12136,7 @@
 /area/awaymission/black_mesa/high_security_surgery)
 "rSt" = (
 /obj/machinery/door_buttons/airlock_controller{
-	name = "elevator button";
+	name = "Elevator Button";
 	pixel_y = 23
 	},
 /turf/open/floor/mineral/titanium,
@@ -12301,9 +12231,7 @@
 	},
 /area/awaymission/black_mesa/entrance_internal_hall)
 "sdX" = (
-/obj/structure/sign/warning/gas_mask{
-	pixel_x = 32
-	},
+/obj/structure/sign/warning/gas_mask/directional/east,
 /obj/structure/closet/crate/bin,
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa/deep_sci_storage)
@@ -12324,9 +12252,8 @@
 /area/awaymission/black_mesa/deep_sci_medbay)
 "sfA" = (
 /obj/item/pickaxe/diamond,
-/turf/open/floor/iron/smooth_large{
-	icon_state = "damaged2"
-	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa/high_security_hallway)
 "sfK" = (
 /obj/structure/table,
@@ -12383,9 +12310,7 @@
 /turf/open/floor/iron/dark,
 /area/awaymission/black_mesa/science_labs)
 "sls" = (
-/obj/structure/sign/warning/no_smoking/circle{
-	pixel_y = 32
-	},
+/obj/structure/sign/warning/no_smoking/circle/directional/north,
 /turf/open/floor/iron/dark,
 /area/awaymission/black_mesa/science_decon_room)
 "sma" = (
@@ -12707,7 +12632,7 @@
 /turf/open/floor/bamboo,
 /area/awaymission/black_mesa/xen/vortigaunt_village)
 "sXR" = (
-/obj/machinery/gravity_generator/main/station/admin,
+/obj/machinery/gravity_generator,
 /turf/open/floor/engine,
 /area/awaymission/black_mesa/black_ops_server)
 "sXV" = (
@@ -12935,7 +12860,7 @@
 /area/awaymission/black_mesa/deep_sci_storage)
 "tvK" = (
 /obj/structure/table,
-/obj/item/reagent_containers/food/drinks/coffee{
+/obj/item/reagent_containers/cup/glass/coffee{
 	pixel_x = -3
 	},
 /obj/item/food/cakeslice/pound_cake_slice{
@@ -13169,9 +13094,7 @@
 /turf/open/floor/bamboo,
 /area/awaymission/black_mesa/xen/vortigaunt_village)
 "tUX" = (
-/obj/machinery/shower{
-	dir = 8
-	},
+/obj/machinery/shower/directional/west,
 /turf/open/floor/iron/freezer,
 /area/awaymission/black_mesa/hecu_zone_bathroom)
 "tVa" = (
@@ -14198,9 +14121,7 @@
 /area/awaymission/black_mesa/black_ops_server)
 "way" = (
 /obj/structure/table,
-/obj/structure/sign/warning/no_smoking/circle{
-	pixel_y = 32
-	},
+/obj/structure/sign/warning/no_smoking/circle/directional/north,
 /obj/structure/alien/weeds/xen,
 /obj/effect/spawner/random/exotic/technology,
 /turf/open/floor/iron/textured_large,
@@ -14283,7 +14204,7 @@
 "wmF" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/table,
-/obj/item/reagent_containers/food/drinks/bottle/beer/light,
+/obj/item/reagent_containers/cup/glass/bottle/beer/light,
 /turf/open/floor/iron/dark,
 /area/awaymission/black_mesa/xen/acid_lake)
 "wmH" = (
@@ -15015,9 +14936,7 @@
 /area/awaymission/black_mesa/black_ops_hall)
 "xQH" = (
 /obj/structure/table,
-/obj/structure/sign/warning/no_smoking/circle{
-	pixel_y = 32
-	},
+/obj/structure/sign/warning/no_smoking/circle/directional/north,
 /obj/item/stack/sheet/plasteel,
 /turf/open/floor/iron/textured_large,
 /area/awaymission/black_mesa/science_labs)
@@ -29234,7 +29153,7 @@ rIg
 rIg
 rIg
 eaL
-exc
+xqs
 eaL
 eaL
 rIg
@@ -69309,7 +69228,7 @@ ozz
 jJJ
 lwG
 pYd
-qEs
+pYd
 ozz
 ozz
 xEP

@@ -29,10 +29,6 @@ GLOBAL_LIST_INIT(loadout_shoes, generate_loadout_items(/datum/loadout_item/shoes
 	name = "High-Heel Jackboots"
 	item_path = /obj/item/clothing/shoes/jackboots/heel
 
-/datum/loadout_item/shoes/thighboot
-	name = "Thigh Boots"
-	item_path = /obj/item/clothing/shoes/jackboots/thigh
-
 /datum/loadout_item/shoes/kneeboot
 	name = "Knee Boots"
 	item_path = /obj/item/clothing/shoes/jackboots/knee
@@ -56,6 +52,10 @@ GLOBAL_LIST_INIT(loadout_shoes, generate_loadout_items(/datum/loadout_item/shoes
 /datum/loadout_item/shoes/work_boots
 	name = "Work Boots"
 	item_path = /obj/item/clothing/shoes/workboots
+
+/datum/loadout_item/shoes/work_boots/old
+	name = "Old Work Boots"
+	item_path = /obj/item/clothing/shoes/workboots/old
 
 /datum/loadout_item/shoes/mining_boots
 	name = "Mining Boots"
@@ -165,13 +165,17 @@ GLOBAL_LIST_INIT(loadout_shoes, generate_loadout_items(/datum/loadout_item/shoes
 	name = "High Heels"
 	item_path = /obj/item/clothing/shoes/high_heels
 
+/datum/loadout_item/shoes/black_heels
+	name = "Black Heels"
+	item_path = /obj/item/clothing/shoes/black_heels
+
 /datum/loadout_item/shoes/disco
 	name = "Green Snakeskin Shoes"
 	item_path = /obj/item/clothing/shoes/discoshoes
 
 /datum/loadout_item/shoes/dominaheels
 	name = "Dominant Heels"
-	item_path = /obj/item/clothing/shoes/dominaheels
+	item_path = /obj/item/clothing/shoes/latex_heels/domina_heels
 
 /datum/loadout_item/shoes/griffin
 	name = "Griffon Boots"
@@ -208,33 +212,10 @@ GLOBAL_LIST_INIT(loadout_shoes, generate_loadout_items(/datum/loadout_item/shoes
 	item_path = /obj/item/clothing/shoes/clown_shoes/jester
 	restricted_roles = list(JOB_CLOWN)
 
-/*
-*	FAMILIES
-*/
-
-/datum/loadout_item/shoes/deckers
-	name = "Deckers Shoes"
-	item_path = /obj/item/clothing/shoes/deckers
-
-/datum/loadout_item/shoes/morningstar
-	name = "Morningstar Shoes"
-	item_path = /obj/item/clothing/shoes/morningstar
-
-/datum/loadout_item/shoes/saints
-	name = "Saints Shoes"
-	item_path = /obj/item/clothing/shoes/saints
-
-/datum/loadout_item/shoes/phantom
-	name = "Phantom Shoes"
-	item_path = /obj/item/clothing/shoes/phantom
-
-/datum/loadout_item/shoes/sybil
-	name = "Sybil Shoes"
-	item_path = /obj/item/clothing/shoes/sybil_slickers
-
-/datum/loadout_item/shoes/basil
-	name = "Basil Shoes"
-	item_path = /obj/item/clothing/shoes/basil_boys
+/datum/loadout_item/shoes/clown_shoes/pink
+	name = "Pink Clown Shoes"
+	item_path = /obj/item/clothing/shoes/clown_shoes/pink
+	restricted_roles = list(JOB_CLOWN)
 
 /*
 *	DONATOR

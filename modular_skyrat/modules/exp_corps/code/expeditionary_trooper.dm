@@ -5,7 +5,7 @@
 	faction = FACTION_STATION
 	total_positions = 4
 	spawn_positions = 4
-	supervisors = "the captain"
+	supervisors = SUPERVISOR_CAPTAIN
 	selection_color = "#ffeeff"
 	minimal_player_age = 40
 	exp_requirements = 400
@@ -32,11 +32,6 @@
 
 	job_flags = JOB_ANNOUNCE_ARRIVAL | JOB_CREW_MANIFEST | JOB_EQUIP_RANK | JOB_CREW_MEMBER | JOB_NEW_PLAYER_JOINABLE | JOB_REOPEN_ON_ROUNDSTART_LOSS | JOB_ASSIGN_QUIRKS
 
-/datum/job/expeditionary_trooper/after_spawn(mob/living/carbon/human/H, mob/M)
-	. = ..()
-	to_chat(M, span_redtext("As a Vanguard Operative you are not part of security! You must not perform security duties unless absolutely nessecary. \
-	Do not valid hunt using your equipment. Use common sense. Failure to follow these simple rules will result in a job ban."))
-
 /datum/outfit/job/expeditionary_trooper
 	name = "Vanguard Operative"
 	jobtype = /datum/job/expeditionary_trooper
@@ -52,7 +47,7 @@
 
 	box = /obj/item/storage/box/survival/expeditionary_corps
 
-	backpack_contents = list(/obj/item/advanced_choice_beacon/exp_corps)
+	backpack_contents = list(/obj/item/summon_beacon/vanguard)
 
 	id = /obj/item/card/id/advanced/silver/exp_corps
 	id_trim = /datum/id_trim/job/expeditionary_trooper
@@ -82,7 +77,7 @@
 	new /obj/item/storage/box/donkpockets(src)
 	new /obj/item/flashlight/glowstick(src)
 	new /obj/item/tank/internals/emergency_oxygen/double(src)
-	new /obj/item/reagent_containers/food/drinks/waterbottle(src)
+	new /obj/item/reagent_containers/cup/glass/waterbottle(src)
 	new /obj/item/reagent_containers/blood/universal(src)
 	new /obj/item/reagent_containers/syringe(src)
 	new /obj/item/storage/pill_bottle/multiver(src)

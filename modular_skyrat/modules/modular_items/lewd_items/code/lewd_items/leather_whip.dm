@@ -13,7 +13,7 @@
 	righthand_file = 'modular_skyrat/modules/modular_items/lewd_items/icons/mob/lewd_inhands/lewd_inhand_right.dmi'
 	w_class = WEIGHT_CLASS_NORMAL
 	hitsound = 'sound/weapons/whip.ogg'
-	moth_edible = FALSE
+	clothing_flags = INEDIBLE_CLOTHING
 	//When taking that thing in mouth
 	modifies_speech = TRUE
 	flags_cover = MASKCOVERSMOUTH
@@ -77,11 +77,6 @@
 		"weak" = image (icon = src.icon, icon_state = "leather_whip_pink_weak"),
 		"hard" = image(icon = src.icon, icon_state = "leather_crotch_pink_hard"))
 
-//to update model lol
-/obj/item/clothing/mask/leatherwhip/ComponentInitialize()
-	. = ..()
-	AddElement(/datum/element/update_icon_updates_onmob)
-
 /obj/item/clothing/mask/leatherwhip/equipped(mob/target, slot)
 	. = ..()
 
@@ -94,12 +89,12 @@
 	update_overlays()
 
 //to change color
-/obj/item/clothing/mask/leatherwhip/AltClick(mob/user, obj/item/I)
+/obj/item/clothing/mask/leatherwhip/AltClick(mob/user)
 	if(!color_changed)
 		. = ..()
 		if(.)
 			return
-		var/choice = show_radial_menu(user,src, whip_designs, custom_check = CALLBACK(src, .proc/check_menu, user, I), radius = 36, require_near = TRUE)
+		var/choice = show_radial_menu(user, src, whip_designs, custom_check = CALLBACK(src, .proc/check_menu, user), radius = 36, require_near = TRUE)
 		if(!choice)
 			return FALSE
 		current_whip_color = choice
@@ -113,7 +108,7 @@
 		. = ..()
 		if(.)
 			return
-		var/choice = show_radial_menu(user,src, whip_forms, custom_check = CALLBACK(src, .proc/check_menu, user, I), radius = 36, require_near = TRUE)
+		var/choice = show_radial_menu(user, src, whip_forms, custom_check = CALLBACK(src, .proc/check_menu, user), radius = 36, require_near = TRUE)
 		if(!choice)
 			return FALSE
 		current_whip_form = choice
@@ -129,8 +124,9 @@
 		return FALSE
 	return TRUE
 
-/obj/item/clothing/mask/leatherwhip/Initialize()
+/obj/item/clothing/mask/leatherwhip/Initialize(mapload)
 	. = ..()
+	AddElement(/datum/element/update_icon_updates_onmob)
 	update_icon_state()
 	update_icon()
 	if(!length(whip_designs))
@@ -176,7 +172,7 @@
 				message = (user == target) ? pick("Knocks [target.p_them()]self down with [src]", "Uses [src] to knock [target.p_them()]self on the ground") : pick("drops [target] to the ground with [src]", "uses [src] to put [target] on [target.p_their()] knees")
 				if(target.stat != DEAD)
 					if(prob(60))
-						target.emote(pick("gasp","shiver"))
+						target.try_lewd_autoemote(pick("gasp", "shiver"))
 					if(prob(10))
 						target.apply_status_effect(/datum/status_effect/subspace)
 				target.Paralyze(1)//don't touch it. It's domination tool, it should have ability to put someone on kneels. I already inserted check for PREF YOU CAN'T ABUSE THIS ITEM
@@ -186,7 +182,7 @@
 				message = (user == target) ? pick("knocks [target.p_them()]self down with [src]", "gently uses [src] to knock [target.p_them()]self on the ground") : pick("drops [target] to the ground with [src]", "uses [src] to put [target] on [target.p_their()] knees")
 				if(target.stat != DEAD)
 					if(prob(30))
-						target.emote(pick("gasp","shiver"))
+						target.try_lewd_autoemote(pick("gasp", "shiver"))
 					if(prob(10))
 						target.apply_status_effect(/datum/status_effect/subspace)
 				target.Paralyze(1)
@@ -202,7 +198,7 @@
 				message = (user == target) ? pick("knocks [target.p_them()]self down with [src]", "uses [src] to knock [target.p_them()]self on the ground") : pick("Hardly drops [target] on the ground with [src]", "uses [src] to put [target] on [target.p_their()] knees")
 				if(target.stat != DEAD)
 					if(prob(60))
-						target.emote(pick("gasp","shiver"))
+						target.try_lewd_autoemote(pick("gasp", "shiver"))
 					if(prob(10))
 						target.apply_status_effect(/datum/status_effect/subspace)
 				target.Paralyze(1)//don't touch it. It's domination tool, it should have ability to put someone on kneels. I already inserted check for PREF YOU CAN'T ABUSE THIS ITEM
@@ -212,7 +208,7 @@
 				message = (user == target) ? pick("Knocks [target.p_them()]self down with [src]", "gently uses [src] to knock [target.p_them()]self on the ground") : pick("drops [target] to the ground with [src]", "uses [src] to put [target] on [target.p_their()] knees")
 				if(target.stat != DEAD)
 					if(prob(30))
-						target.emote(pick("gasp","shiver"))
+						target.try_lewd_autoemote(pick("gasp", "shiver"))
 					if(prob(10))
 						target.apply_status_effect(/datum/status_effect/subspace)
 				target.Paralyze(1)
@@ -223,7 +219,7 @@
 			targetedsomewhere = TRUE
 			message = (user == target) ? pick("wraps [src] around [target.p_their()] neck, choking [target.p_them()]self", "chokes [target.p_them()]self with [src]") : pick("chokes [target] with [src]", "twines [src] around [target]'s neck!")
 			if(prob(70) && (target.stat != DEAD))
-				target.emote(pick("gasp","choke", "moan"))
+				target.try_lewd_autoemote(pick("gasp", "choke", "moan"))
 			target.adjustArousal(3)
 			target.adjustPain(5)
 			playsound(loc, 'modular_skyrat/modules/modular_items/lewd_items/sounds/latex.ogg', 80)
@@ -234,38 +230,38 @@
 				to_chat(user, span_danger("[target]'s butt is covered!"))
 				return
 			if(current_whip_type == "weak")
-				message = (user == target) ? pick("whips [target.p_them()]self with [src]", "flogs [target.p_them()]self with [src]") :pick("playfully flogs [target]'s thighs with [src]","flogs [target] with [src]","mercilessly flogs [target] with [src]")
+				message = (user == target) ? pick("whips [target.p_them()]self with [src]", "flogs [target.p_them()]self with [src]") :pick("playfully flogs [target]'s thighs with [src]", "flogs [target] with [src]", "mercilessly flogs [target] with [src]")
 				if(target.stat != DEAD)
 					if(prob(70))
-						target.emote(pick("moan","twitch"))
+						target.try_lewd_autoemote(pick("moan", "twitch"))
 					if(prob(10))
 						target.apply_status_effect(/datum/status_effect/subspace)
 				target.adjustArousal(5)
 				target.adjustPain(5)
 				target.apply_status_effect(/datum/status_effect/spanked)
 				if(HAS_TRAIT(target, TRAIT_MASOCHISM || TRAIT_BIMBO))
-					SEND_SIGNAL(target, COMSIG_ADD_MOOD_EVENT, "pervert spanked", /datum/mood_event/perv_spanked)
+					target.add_mood_event("pervert spanked", /datum/mood_event/perv_spanked)
 				playsound(loc, 'sound/weapons/whip.ogg', 60)
 
 			if(current_whip_type == "hard")
-				message = (user == target) ? pick("roughly flogs [target.p_them()]self with [src]", "flogs [target.p_them()]self with [src]") : pick("playfully flogs [target]'s thighs with [src]","flogs [target] with [src]","mercilessly flogs [target] with [src]")
+				message = (user == target) ? pick("roughly flogs [target.p_them()]self with [src]", "flogs [target.p_them()]self with [src]") : pick("playfully flogs [target]'s thighs with [src]", "flogs [target] with [src]", "mercilessly flogs [target] with [src]")
 				if(target.stat != DEAD)
 					if(prob(70))
-						target.emote(pick("moan","twitch","twitch_s","scream"))
+						target.try_lewd_autoemote(pick("moan", "twitch", "twitch_s", "scream"))
 					if(prob(10))
 						target.apply_status_effect(/datum/status_effect/subspace)
 				target.adjustArousal(3)
 				target.adjustPain(8)
 				target.apply_status_effect(/datum/status_effect/spanked)
 				if(HAS_TRAIT(target, TRAIT_MASOCHISM || TRAIT_BIMBO))
-					SEND_SIGNAL(target, COMSIG_ADD_MOOD_EVENT, "pervert spanked", /datum/mood_event/perv_spanked)
+					target.add_mood_event("pervert spanked", /datum/mood_event/perv_spanked)
 				playsound(loc, 'sound/weapons/whip.ogg', 100)
 		else
 			if(current_whip_type == "hard")
-				message = (user == target) ? pick("disciplines [target.p_them()]self with [src]","lashes [target.p_them()]self with [src]") : pick("lashes [target] with [src]","Uses [src] to discipline [target]", "disciplines [target] with [src]")
+				message = (user == target) ? pick("disciplines [target.p_them()]self with [src]", "lashes [target.p_them()]self with [src]") : pick("lashes [target] with [src]", "Uses [src] to discipline [target]", "disciplines [target] with [src]")
 				if(target.stat != DEAD)
 					if(prob(50))
-						target.emote(pick("moan","twitch","twitch_s","scream"))
+						target.try_lewd_autoemote(pick("moan", "twitch", "twitch_s", "scream"))
 					if(prob(10))
 						target.apply_status_effect(/datum/status_effect/subspace)
 					target.do_jitter_animation()
@@ -273,10 +269,10 @@
 				playsound(loc, 'sound/weapons/whip.ogg', 100)
 
 			else
-				message = (user == target) ? pick("whips [target.p_them()]self with [src]","lashes [target.p_them()]self with [src]") : pick("playfully lashes [target] with [src]","disciplines [target] with [src]", "gently lashes [target] with [src]")
+				message = (user == target) ? pick("whips [target.p_them()]self with [src]", "lashes [target.p_them()]self with [src]") : pick("playfully lashes [target] with [src]", "disciplines [target] with [src]", "gently lashes [target] with [src]")
 				if(target.stat != DEAD)
 					if(prob(30))
-						target.emote(pick("moan","twitch"))
+						target.try_lewd_autoemote(pick("moan", "twitch"))
 					if(prob(10))
 						target.apply_status_effect(/datum/status_effect/subspace)
 					target.do_jitter_animation()

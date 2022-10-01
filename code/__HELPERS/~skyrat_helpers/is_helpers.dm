@@ -6,6 +6,7 @@
 #define issynthhuman(A) (is_species(A,/datum/species/robotic/synthetic_human))
 //Actual Species
 #define isvox(A) (is_species(A,/datum/species/vox))
+#define isvoxprimalis(A) (is_species(A,/datum/species/vox_primalis))
 #define ispodweak(A) (is_species(A,/datum/species/pod/podweak))
 #define isxenohybrid(A) (is_species(A,/datum/species/xeno))
 #define isdwarf(A) (is_species(A,/datum/species/dwarf))
@@ -28,6 +29,7 @@
 #define ishumanoid(A) (is_species(A,/datum/species/humanoid))
 #define ismammal(A) (is_species(A,/datum/species/mammal))
 #define isinsect(A) (is_species(A,/datum/species/insect))
+#define isfeline(A) (isfelinid(A) || istajaran(A) || HAS_TRAIT(A, TRAIT_FELINE))
 
 // Xen mobs
 #define isxenmob(A) (istype(A, /mob/living/simple_animal/hostile/blackmesa/xen))

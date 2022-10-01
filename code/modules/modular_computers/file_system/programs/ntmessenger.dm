@@ -5,10 +5,11 @@
 	program_icon_state = "command"
 	program_state = PROGRAM_STATE_BACKGROUND
 	extended_desc = "This program allows old-school communication with other modular devices."
-	size = 8
+	size = 0
+	undeletable = TRUE // It comes by default in tablets, can't be downloaded, takes no space and should obviously not be able to be deleted.
+	available_on_ntnet = FALSE
 	usage_flags = PROGRAM_TABLET
 	ui_header = "ntnrc_idle.gif"
-	available_on_ntnet = TRUE
 	tgui_id = "NtosMessenger"
 	program_icon = "comment-alt"
 	alert_able = TRUE
@@ -47,6 +48,14 @@
 	var/mime_mode = FALSE
 	/// Whether this app can send messages to all.
 	var/spam_mode = FALSE
+
+/datum/computer_file/program/messenger/try_insert(obj/item/attacking_item, mob/living/user)
+	if(!istype(attacking_item, /obj/item/photo))
+		return FALSE
+	var/obj/item/photo/pic = attacking_item
+	computer.saved_image = pic.picture
+	ProcessPhoto()
+	return TRUE
 
 /datum/computer_file/program/messenger/proc/ScrubMessengerList()
 	var/list/dictionary = list()
@@ -94,7 +103,7 @@
 		photo_path = deter_path
 
 /datum/computer_file/program/messenger/ui_state(mob/user)
-	if(istype(user, /mob/living/silicon))
+	if(issilicon(user))
 		return GLOB.reverse_contained_state
 	return GLOB.default_state
 
@@ -131,6 +140,9 @@
 		if("PDA_sendEveryone")
 			if(!sending_and_receiving)
 				to_chat(usr, span_notice("ERROR: Device has sending disabled."))
+				return
+			if(!spam_mode)
+				to_chat(usr, span_notice("ERROR: Device does not have mass-messaging perms."))
 				return
 
 			var/list/targets = list()
@@ -252,6 +264,9 @@
 	if (!string_targets.len)
 		return FALSE
 
+	if (prob(1))
+		message += " Sent from my PDA"
+
 	var/datum/signal/subspace/messaging/tablet_msg/signal = new(computer, list(
 		"name" = fake_name || computer.saved_identification,
 		"job" = fake_job || computer.saved_job,
@@ -347,16 +362,25 @@
 		if(signal.data["emojis"] == TRUE)//so will not parse emojis as such from pdas that don't send emojis
 			inbound_message = emoji_parse(inbound_message)
 
-		if(ringer_status)
+		if(ringer_status && L.is_literate())
 			to_chat(L, "<span class='infoplain'>[icon2html(src)] <b>PDA message from [hrefstart][signal.data["name"]] ([signal.data["job"]])[hrefend], </b>[inbound_message] [reply]</span>")
 
 
 	if (ringer_status)
 		computer.ring(ringtone)
 
+/// topic call that answers to people pressing "(Reply)" in chat
 /datum/computer_file/program/messenger/Topic(href, href_list)
 	..()
-
+	if(QDELETED(src))
+		return
+	// send an activation message, open the messenger, kill whoever reads this nesting mess
+	if(!computer.enabled)
+		if(!computer.turn_on(usr, open_ui = FALSE))
+			return
+	if(computer.active_program != src)
+		if(!computer.open_program(usr, src))
+			return
 	if(!href_list["close"] && usr.canUseTopic(computer, BE_CLOSE, FALSE, NO_TK))
 		switch(href_list["choice"])
 			if("Message")

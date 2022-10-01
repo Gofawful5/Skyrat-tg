@@ -25,11 +25,12 @@
 /obj/item/clothing/suit/jacket
 	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
 
-/obj/item/clothing/suit/ianshirt
+/obj/item/clothing/suit/costume/ianshirt
 	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
 
 /obj/item/clothing/suit/poncho
 	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
+	gets_cropped_on_taurs = FALSE
 
 /obj/item/clothing/suit/wizrobe
 	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
@@ -67,17 +68,26 @@
 /obj/item/clothing/suit/armor/riot/knight/greyscale
 	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
 
-/obj/item/clothing/suit/toggle/armor/vest/centcom_formal
-	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
-
 /obj/item/clothing/suit/hooded/cultrobes/void
 	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
 
 /obj/item/clothing/suit/hooded/cultrobes/eldritch
 	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
 
-/obj/item/clothing/suit/armor/vest/marine
+/obj/item/clothing/suit/armor/hos/trenchcoat/winter
 	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
+
+/obj/item/clothing/suit/armor/vest
+	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
+
+/obj/item/clothing/suit/armor/vest/marine/security
+	supports_variations_flags = NONE
+
+/obj/item/clothing/suit/armor/vest/marine/engineer
+	supports_variations_flags = NONE
+
+/obj/item/clothing/suit/armor/vest/leather //This item blows
+	supports_variations_flags = NONE
 
 /obj/item/clothing/suit/changeling
 	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
@@ -87,46 +97,28 @@
  * Clothing that does not have a digitigrade version, and thus will squash legs to fit.
  */
 
-/obj/item/clothing/suit/yakuza
+/obj/item/clothing/suit/costume/tmc
 	supports_variations_flags = NONE
 
-/obj/item/clothing/suit/dutch
+/obj/item/clothing/suit/costume/pg
 	supports_variations_flags = NONE
 
-/obj/item/clothing/suit/driscoll
+/obj/item/clothing/suit/costume/deckers
 	supports_variations_flags = NONE
 
-/obj/item/clothing/suit/irs
+/obj/item/clothing/suit/jacket/oversized
 	supports_variations_flags = NONE
 
-/obj/item/clothing/suit/osi
+/obj/item/clothing/suit/jacket/fancy
 	supports_variations_flags = NONE
 
-/obj/item/clothing/suit/tmc
+/obj/item/clothing/suit/costume/soviet
 	supports_variations_flags = NONE
 
-/obj/item/clothing/suit/pg
+/obj/item/clothing/suit/costume/yuri
 	supports_variations_flags = NONE
 
-/obj/item/clothing/suit/deckers
-	supports_variations_flags = NONE
-
-/obj/item/clothing/suit/morningstar
-	supports_variations_flags = NONE
-
-/obj/item/clothing/suit/saints
-	supports_variations_flags = NONE
-
-/obj/item/clothing/suit/phantom
-	supports_variations_flags = NONE
-
-/obj/item/clothing/suit/allies
-	supports_variations_flags = NONE
-
-/obj/item/clothing/suit/soviet
-	supports_variations_flags = NONE
-
-/obj/item/clothing/suit/yuri
+/obj/item/clothing/suit/costume/football_armor
 	supports_variations_flags = NONE
 
 /obj/item/clothing/suit/security

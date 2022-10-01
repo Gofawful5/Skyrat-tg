@@ -80,16 +80,8 @@ GLOBAL_LIST_INIT(loadout_exosuits, generate_loadout_items(/datum/loadout_item/su
 *	SUSPENDERS
 */
 
-/datum/loadout_item/suit/suspenders_blue
-	name = "Blue Suspenders"
-	item_path = /obj/item/clothing/suit/toggle/suspenders/blue
-
-/datum/loadout_item/suit/suspenders_grey
-	name = "Grey Suspenders"
-	item_path = /obj/item/clothing/suit/toggle/suspenders/gray
-
-/datum/loadout_item/suit/suspenders_red
-	name = "Red Suspenders"
+/datum/loadout_item/suit/suspenders
+	name = "Recolorable Suspenders"
 	item_path = /obj/item/clothing/suit/toggle/suspenders
 
 /*
@@ -98,7 +90,7 @@ GLOBAL_LIST_INIT(loadout_exosuits, generate_loadout_items(/datum/loadout_item/su
 
 /datum/loadout_item/suit/white_dress
 	name = "White Dress"
-	item_path = /obj/item/clothing/suit/whitedress
+	item_path = /obj/item/clothing/suit/costume/whitedress
 
 /*
 *	LABCOATS
@@ -122,11 +114,11 @@ GLOBAL_LIST_INIT(loadout_exosuits, generate_loadout_items(/datum/loadout_item/su
 
 /datum/loadout_item/suit/poncho_green
 	name = "Green Poncho"
-	item_path = /obj/item/clothing/suit/poncho/green
+	item_path = /obj/item/clothing/suit/costume/poncho/green
 
 /datum/loadout_item/suit/poncho_red
 	name = "Red Poncho"
-	item_path = /obj/item/clothing/suit/poncho/red
+	item_path = /obj/item/clothing/suit/costume/poncho/red
 
 
 /*
@@ -135,7 +127,7 @@ GLOBAL_LIST_INIT(loadout_exosuits, generate_loadout_items(/datum/loadout_item/su
 
 /datum/loadout_item/suit/bomber_jacket
 	name = "Bomber Jacket"
-	item_path = /obj/item/clothing/suit/jacket
+	item_path = /obj/item/clothing/suit/jacket/bomber
 
 /datum/loadout_item/suit/military_jacket
 	name = "Military Jacket"
@@ -156,6 +148,22 @@ GLOBAL_LIST_INIT(loadout_exosuits, generate_loadout_items(/datum/loadout_item/su
 /datum/loadout_item/suit/leather_coat
 	name = "Leather Coat"
 	item_path = /obj/item/clothing/suit/jacket/leather/overcoat
+
+/datum/loadout_item/suit/jacket_sweater
+	name = "Recolorable Sweater Jacket"
+	item_path = /obj/item/clothing/suit/toggle/jacket/sweater
+
+/datum/loadout_item/suit/jacket_oversized
+	name = "Recolorable Oversized Jacket"
+	item_path = /obj/item/clothing/suit/jacket/oversized
+
+/datum/loadout_item/suit/jacket_fancy
+	name = "Recolorable Fancy Fur Coat"
+	item_path = /obj/item/clothing/suit/jacket/fancy
+
+/datum/loadout_item/suit/ethereal_raincoat
+	name = "Ethereal Raincoat"
+	item_path = /obj/item/clothing/suit/hooded/ethereal_raincoat
 
 /*
 *	LETTERMAN
@@ -199,23 +207,23 @@ GLOBAL_LIST_INIT(loadout_exosuits, generate_loadout_items(/datum/loadout_item/su
 
 /datum/loadout_item/suit/snowman
 	name = "Snowman Outfit"
-	item_path = /obj/item/clothing/suit/snowman
+	item_path = /obj/item/clothing/suit/costume/snowman
 
 /datum/loadout_item/suit/chicken
 	name = "Chicken Suit"
-	item_path = /obj/item/clothing/suit/chickensuit
+	item_path = /obj/item/clothing/suit/costume/chickensuit
 
 /datum/loadout_item/suit/monkey
 	name = "Monkey Suit"
-	item_path = /obj/item/clothing/suit/monkeysuit
+	item_path = /obj/item/clothing/suit/costume/monkeysuit
 
 /datum/loadout_item/suit/cardborg
 	name = "Cardborg Suit"
-	item_path = /obj/item/clothing/suit/cardborg
+	item_path = /obj/item/clothing/suit/costume/cardborg
 
 /datum/loadout_item/suit/xenos
 	name = "Xenos Suit"
-	item_path = /obj/item/clothing/suit/xenos
+	item_path = /obj/item/clothing/suit/costume/xenos
 
 /datum/loadout_item/suit/ian_costume
 	name = "Corgi Costume"
@@ -265,31 +273,19 @@ GLOBAL_LIST_INIT(loadout_exosuits, generate_loadout_items(/datum/loadout_item/su
 
 /datum/loadout_item/suit/ianshirt
 	name = "Ian Shirt"
-	item_path = /obj/item/clothing/suit/ianshirt
+	item_path = /obj/item/clothing/suit/costume/ianshirt
 
 /datum/loadout_item/suit/wornshirt
 	name = "Worn Shirt"
 	item_path = /obj/item/clothing/suit/wornshirt
 
-/datum/loadout_item/suit/tailcoat
-	name = "Tailcoat"
-	item_path = /obj/item/clothing/suit/costume/tailcoat
-
 /datum/loadout_item/suit/duster
 	name = "Colorable Duster"
-	item_path = /obj/item/clothing/suit/duster/colorable
+	item_path = /obj/item/clothing/suit/duster
 
 /datum/loadout_item/suit/peacoat
 	name = "Colorable Peacoat"
 	item_path = /obj/item/clothing/suit/toggle/peacoat
-
-/datum/loadout_item/suit/dresscoat
-	name = "Black Dresscoat"
-	item_path = /obj/item/clothing/suit/costume/vic_dresscoat
-
-/datum/loadout_item/suit/dresscoat_red
-	name = "Red Dresscoat"
-	item_path = /obj/item/clothing/suit/costume/vic_dresscoat/red
 
 /datum/loadout_item/suit/trackjacket
 	name = "Track Jacket"
@@ -325,7 +321,7 @@ GLOBAL_LIST_INIT(loadout_exosuits, generate_loadout_items(/datum/loadout_item/su
 
 /datum/loadout_item/suit/hawaiian_shirt
 	name = "Hawaiian Shirt"
-	item_path = /obj/item/clothing/suit/hawaiian
+	item_path = /obj/item/clothing/suit/costume/hawaiian
 
 /datum/loadout_item/suit/hawaiian_blue
 	name = "Blue Hawaiian Shirt"
@@ -361,11 +357,11 @@ GLOBAL_LIST_INIT(loadout_exosuits, generate_loadout_items(/datum/loadout_item/su
 
 /datum/loadout_item/suit/poly
 	name = "Polychromic Wintercoat"
-	item_path = /obj/item/clothing/suit/hooded/wintercoat/polychromic
+	item_path = /obj/item/clothing/suit/hooded/wintercoat/colourable
 
 /datum/loadout_item/suit/urban
 	name = "Urban Coat"
-	item_path = /obj/item/clothing/suit/urban/polychromic
+	item_path = /obj/item/clothing/suit/urban
 
 /datum/loadout_item/suit/maxson
 	name = "Fancy Brown Coat"
@@ -376,24 +372,20 @@ GLOBAL_LIST_INIT(loadout_exosuits, generate_loadout_items(/datum/loadout_item/su
 	item_path = /obj/item/clothing/suit/blackfurrich
 
 /datum/loadout_item/suit/dutchjacket
-	name = "Dutch Jacket"
+	name = "Western Jacket"
 	item_path = /obj/item/clothing/suit/dutchjacketsr
 
 /datum/loadout_item/suit/caretaker
 	name = "Caretaker Jacket"
 	item_path = /obj/item/clothing/suit/victoriantailcoatbutler
 
-/datum/loadout_item/suit/yakuzajacket
-	name = "Asian Jacket"
-	item_path = /obj/item/clothing/suit/yakuza
-
 /datum/loadout_item/suit/jacketbomber_alt
 	name = "Bomber Jacket w/ Zipper"
 	item_path = /obj/item/clothing/suit/toggle/jacket
 
-/datum/loadout_item/suit/polyjacketleather
-	name = "Colorable Leather Jacket"
-	item_path = /obj/item/clothing/suit/jacket/leather/polychromic
+/datum/loadout_item/suit/colourable_leather_jacket
+	name = "Colourable Leather Jacket"
+	item_path = /obj/item/clothing/suit/jacket/leather/colourable
 
 /datum/loadout_item/suit/woolcoat
 	name = "Leather Overcoat"
@@ -424,6 +416,10 @@ GLOBAL_LIST_INIT(loadout_exosuits, generate_loadout_items(/datum/loadout_item/su
 /datum/loadout_item/suit/cardigan
 	name = "Cardigan"
 	item_path = /obj/item/clothing/suit/toggle/jacket/cardigan
+
+/datum/loadout_item/suit/blastwave_suit
+	name = "Blastwave Trenchcoat"
+	item_path = /obj/item/clothing/suit/blastwave
 
 /*
 *	HOODIES
@@ -567,7 +563,7 @@ GLOBAL_LIST_INIT(loadout_exosuits, generate_loadout_items(/datum/loadout_item/su
 
 /datum/loadout_item/suit/brit
 	name = "High Vis Armored Vest"
-	item_path = /obj/item/clothing/suit/toggle/brit/sec
+	item_path = /obj/item/clothing/suit/armor/vest/peacekeeper/brit
 	restricted_roles = list(JOB_HEAD_OF_SECURITY, JOB_SECURITY_OFFICER, JOB_WARDEN, JOB_DETECTIVE, JOB_SECURITY_MEDIC, JOB_CORRECTIONS_OFFICER)
 
 /datum/loadout_item/suit/british_jacket
@@ -615,57 +611,25 @@ GLOBAL_LIST_INIT(loadout_exosuits, generate_loadout_items(/datum/loadout_item/su
 *	FAMILIES
 */
 
-/datum/loadout_item/suit/osi
-	name = "OSI Coat"
-	item_path = /obj/item/clothing/suit/osi
-
 /datum/loadout_item/suit/tmc
 	name = "TMC Coat"
-	item_path = /obj/item/clothing/suit/tmc
+	item_path = /obj/item/clothing/suit/costume/tmc
 
 /datum/loadout_item/suit/pg
 	name = "PG Coat"
-	item_path = /obj/item/clothing/suit/pg
-
-/datum/loadout_item/suit/driscoll
-	name = "Driscoll Coat"
-	item_path = /obj/item/clothing/suit/driscoll
+	item_path = /obj/item/clothing/suit/costume/pg
 
 /datum/loadout_item/suit/deckers
 	name = "Deckers Coat"
-	item_path = /obj/item/clothing/suit/deckers
-
-/datum/loadout_item/suit/morningstar
-	name = "Morningstar Coat"
-	item_path = /obj/item/clothing/suit/morningstar
-
-/datum/loadout_item/suit/saints
-	name = "Saints Coat"
-	item_path = /obj/item/clothing/suit/saints
-
-/datum/loadout_item/suit/phantom
-	name = "Phantom Coat"
-	item_path = /obj/item/clothing/suit/phantom
-
-/datum/loadout_item/suit/sybil
-	name = "Sybil Coat"
-	item_path = /obj/item/clothing/suit/sybil_slickers
-
-/datum/loadout_item/suit/basil
-	name = "Basil Coat"
-	item_path = /obj/item/clothing/suit/basil_boys
+	item_path = /obj/item/clothing/suit/costume/deckers
 
 /datum/loadout_item/suit/soviet
 	name = "Soviet Coat"
-	item_path = /obj/item/clothing/suit/soviet
-
-/datum/loadout_item/suit/allies
-	name = "Allies Coat"
-	item_path = /obj/item/clothing/suit/allies
+	item_path = /obj/item/clothing/suit/costume/soviet
 
 /datum/loadout_item/suit/yuri
 	name = "Yuri Coat"
-	item_path = /obj/item/clothing/suit/yuri
+	item_path = /obj/item/clothing/suit/costume/yuri
 
 /*
 *	DONATOR

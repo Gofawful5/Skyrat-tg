@@ -84,6 +84,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/plane_master_controller)
 	name = PLANE_MASTERS_GAME
 	controlled_planes = list(
 		FLOOR_PLANE,
+		TRANSPARENT_FLOOR_PLANE,
 		GAME_PLANE,
 		GAME_PLANE_FOV_HIDDEN,
 		GAME_PLANE_UPPER,
@@ -93,6 +94,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/plane_master_controller)
 		GHOST_PLANE,
 		POINT_PLANE,
 		LIGHTING_PLANE,
+		AREA_PLANE,
 	)
 
 /// Controller of all planes we're ok with changing with colorblind logic
@@ -106,11 +108,11 @@ INITIALIZE_IMMEDIATE(/atom/movable/plane_master_controller)
 		GAME_PLANE_FOV_HIDDEN,
 		GAME_PLANE_UPPER,
 		GAME_PLANE_UPPER_FOV_HIDDEN,
+		ABOVE_GAME_NO_MOUSE_PLANE,
 		ABOVE_GAME_PLANE,
 		MASSIVE_OBJ_PLANE,
 		GHOST_PLANE,
 		POINT_PLANE,
-		RAD_TEXT_PLANE,
 		LIGHTING_PLANE,
 		O_LIGHTING_VISUAL_PLANE,
 		ABOVE_LIGHTING_PLANE,
@@ -121,5 +123,6 @@ INITIALIZE_IMMEDIATE(/atom/movable/plane_master_controller)
 		RUNECHAT_PLANE,
 		HUD_PLANE,
 		ABOVE_HUD_PLANE,
+		AREA_PLANE,
 	)
 

@@ -55,10 +55,15 @@
 	item_type = /obj/item/clothing/suit/hooded/ablative
 	description = "A hooded coat that can be worn above a jumpsuit, allowing you to reflect and absorb energy weapons."
 
+/datum/opposing_force_equipment/clothing/muffling_balaclava
+	name = "Voice-Muffling Balaclava"
+	item_type = /obj/item/clothing/mask/infiltrator
+	description = "A balaclava that muffles your voice, masking your identity. Also provides flash immunity!"
+
 //NRI larping equipment here
 
 /datum/opposing_force_equipment/clothing/nrihelm
-	item_type = /obj/item/clothing/head/helmet/rus_helmet/nri
+	item_type = /obj/item/clothing/head/helmet/rus_helmet
 
 /datum/opposing_force_equipment/clothing/nriberet
 	item_type = /obj/item/clothing/head/beret/sec/nri
@@ -66,7 +71,7 @@
 	description = "An armored beret worn by high-ranking NRI officers"
 
 /datum/opposing_force_equipment/clothing/reduthelm
-	item_type = /obj/item/clothing/head/helmet/nri_heavy
+	item_type = /obj/item/clothing/head/helmet/nri_heavy/old
 	description = "A specialized ultra-heavy composite ballistic helmet stolen from space russians. Purpose-built for heavy duty combat, \
 				or murder with a frying pan."
 
@@ -74,7 +79,7 @@
 	item_type = /obj/item/clothing/suit/armor/vest/russian/nri
 
 /datum/opposing_force_equipment/clothing/redut
-	item_type = /obj/item/clothing/suit/armor/heavy/nri
+	item_type = /obj/item/clothing/suit/armor/heavy/nri/old
 
 /datum/opposing_force_equipment/clothing/nrijumpsuit
 	item_type = /obj/item/clothing/under/costume/nri

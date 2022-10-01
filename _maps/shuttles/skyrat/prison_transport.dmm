@@ -30,7 +30,7 @@
 "bR" = (
 /obj/machinery/door/airlock/command/glass{
 	name = "Connecting Tube";
-	req_access_txt = "101"
+	req_access = list("cent_general")
 	},
 /turf/open/floor/iron/smooth_large,
 /area/shuttle/prison_transport)
@@ -81,9 +81,7 @@
 /area/shuttle/prison_transport)
 "gp" = (
 /obj/structure/mirror/directional/south,
-/obj/machinery/shower{
-	dir = 1
-	},
+/obj/machinery/shower/directional/north,
 /obj/effect/turf_decal/weather/dirt,
 /turf/open/floor/iron/shuttle/evac{
 	icon_state = "floorsec2"
@@ -147,7 +145,7 @@
 "iH" = (
 /obj/machinery/door/airlock/command/glass{
 	name = "Connecting Tube";
-	req_access_txt = "101"
+	req_access = list("cent_general")
 	},
 /turf/open/floor/iron/smooth_half,
 /area/shuttle/prison_transport)
@@ -229,7 +227,7 @@
 "km" = (
 /obj/machinery/door/airlock/command{
 	name = "Cockpit";
-	req_access_txt = "101"
+	req_access = list("cent_general")
 	},
 /turf/open/floor/iron/dark/blue,
 /area/shuttle/prison_transport)
@@ -290,7 +288,7 @@
 /area/shuttle/prison_transport)
 "oA" = (
 /obj/machinery/door/airlock/external/glass{
-	req_access_txt = "101"
+	req_access = list("cent_general")
 	},
 /turf/open/floor/iron/smooth,
 /area/shuttle/prison_transport)
@@ -360,7 +358,7 @@
 "to" = (
 /obj/machinery/button/door/directional/east{
 	id = "prisontransportlockdownc3";
-	req_access_txt = "101"
+	req_access = list("cent_general")
 	},
 /obj/effect/turf_decal/trimline/brown/warning{
 	dir = 8
@@ -518,7 +516,7 @@
 "BN" = (
 /obj/machinery/door/airlock/command/glass{
 	name = "Connecting Tube";
-	req_access_txt = "101"
+	req_access = list("cent_general")
 	},
 /turf/open/floor/iron/smooth,
 /area/shuttle/prison_transport)
@@ -532,7 +530,7 @@
 "BX" = (
 /obj/machinery/door/airlock/command{
 	name = "Flight Deck";
-	req_access_txt = "101"
+	req_access = list("cent_general")
 	},
 /turf/open/floor/iron/dark/blue,
 /area/shuttle/prison_transport)
@@ -595,7 +593,7 @@
 /area/shuttle/prison_transport)
 "Fh" = (
 /obj/machinery/door/airlock/external/glass{
-	req_access_txt = "101"
+	req_access = list("cent_general")
 	},
 /obj/machinery/door/poddoor/preopen{
 	id = "prisontransportouter"
@@ -604,7 +602,7 @@
 	callTime = 250;
 	dwidth = 10;
 	height = 10;
-	id = "prison_transport";
+	shuttle_id = "prison_transport";
 	launch_status = 0;
 	movement_force = list("KNOCKDOWN" = 0, "THROW" = 0);
 	name = "Prison Transporter NSS-74";
@@ -720,7 +718,7 @@
 "Ke" = (
 /obj/machinery/button/door/directional/east{
 	id = "prisontransportlockdownc2";
-	req_access_txt = "101"
+	req_access = list("cent_general")
 	},
 /obj/effect/turf_decal/trimline/brown/warning{
 	dir = 8
@@ -908,9 +906,7 @@
 /turf/open/floor/iron/smooth_large,
 /area/shuttle/prison_transport)
 "Wg" = (
-/obj/machinery/shower{
-	dir = 1
-	},
+/obj/machinery/shower/directional/north,
 /obj/structure/mirror/directional/south,
 /obj/effect/turf_decal/weather/dirt,
 /turf/open/floor/iron/shuttle/evac{
@@ -920,7 +916,7 @@
 "Ws" = (
 /obj/machinery/button/door/directional/east{
 	id = "prisontransportlockdownc1";
-	req_access_txt = "101"
+	req_access = list("cent_general")
 	},
 /obj/effect/turf_decal/trimline/brown/warning{
 	dir = 8

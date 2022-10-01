@@ -20,7 +20,7 @@
 	active = null
 	return ..()
 
-/datum/computer_file/program/supermatter_monitor/process_tick()
+/datum/computer_file/program/supermatter_monitor/process_tick(delta_time)
 	..()
 	var/new_status = get_status()
 	if(last_status != new_status)
@@ -30,7 +30,7 @@
 		if(istype(computer))
 			computer.update_appearance()
 
-/datum/computer_file/program/supermatter_monitor/run_program(mob/living/user)
+/datum/computer_file/program/supermatter_monitor/on_start(mob/living/user)
 	. = ..(user)
 	if(!(active in GLOB.machines))
 		active = null

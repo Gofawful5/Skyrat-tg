@@ -24,7 +24,7 @@
 
 /obj/item/clothing/head/foilhat/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
-	if(slot != ITEM_SLOT_HEAD || warped)
+	if(!(slot & ITEM_SLOT_HEAD) || warped)
 		return
 	if(paranoia)
 		QDEL_NULL(paranoia)
@@ -98,7 +98,7 @@
 		";WE REPEAT OUR LIVES DAILY WITHOUT FURTHER QUESTIONS!!"
 	)
 	user.say(pick(conspiracy_line), forced=type)
-	var/obj/item/organ/brain/brain = user.getorganslot(ORGAN_SLOT_BRAIN)
+	var/obj/item/organ/internal/brain/brain = user.getorganslot(ORGAN_SLOT_BRAIN)
 	if(brain)
 		brain.setOrganDamage(BRAIN_DAMAGE_DEATH)
 	return OXYLOSS

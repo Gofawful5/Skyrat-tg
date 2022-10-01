@@ -17,13 +17,14 @@
 		TRAIT_NOBREATH,
 		TRAIT_VIRUSIMMUNE,
 		TRAIT_CAN_USE_FLIGHT_POTION,
+		TRAIT_LITERATE,
 	)
 	inherent_biotypes = MOB_UNDEAD | MOB_HUMANOID
 	mutant_bodyparts = list("wings" = "None")
 	exotic_bloodtype = "U"
 	use_skintones = TRUE
-	mutantheart = /obj/item/organ/heart/vampire
-	mutanttongue = /obj/item/organ/tongue/vampire
+	mutantheart = /obj/item/organ/internal/heart/vampire
+	mutanttongue = /obj/item/organ/internal/tongue/vampire
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	examine_limb_id = SPECIES_HUMAN
 	skinned_type = /obj/item/stack/sheet/animalhide/human
@@ -47,15 +48,6 @@
 	new_vampire.set_safe_hunger_level()
 	if(SSevents.holidays && SSevents.holidays[HALLOWEEN])
 		halloween_version = TRUE
-	if(isnull(batform) && halloween_version) // You can only have a batform during Halloween.
-		batform = new
-		new_vampire.AddSpell(batform)
-
-/datum/species/hemophage/on_species_loss(mob/living/carbon/ex_vampire)
-	. = ..()
-	if(!isnull(batform))
-		ex_vampire.RemoveSpell(batform)
-		QDEL_NULL(batform)
 
 /datum/species/hemophage/spec_life(mob/living/carbon/human/vampire, delta_time, times_fired)
 	. = ..()
@@ -70,9 +62,6 @@
 	vampire.blood_volume -= 0.125 * delta_time
 	if(vampire.blood_volume <= BLOOD_VOLUME_SURVIVE)
 		to_chat(vampire, span_danger("You ran out of blood!"))
-		var/obj/shapeshift_holder/holder = locate() in vampire
-		if(holder)
-			holder.shape.death() //make sure we're killing the bat if you are out of blood, if you don't it creates weird situations where the bat is alive but the caster is dead.
 		vampire.death() // Owch! Ran out of blood.
 	var/area/A = get_area(vampire)
 	if(istype(A, /area/station/service/chapel) && halloween_version) // If hemophages have bat form, they cannot enter the church
@@ -93,10 +82,9 @@
     "Others find their way into mostly-vampiric communities, turning others into their own kind; though, the virus can only transmit to hosts that are incredibly low on blood, taking advantage of their reduced immune system efficiency and higher rate of blood creation to be able to survive the initial few days within their host.",
     "\"What the fuck does any of this mean?\" - Doctor Micheals, reading their CentCom report about the new 'hires'.")
 
-/obj/effect/proc_holder/spell/targeted/shapeshift/bat
-	name = "Bat Form"
-	desc = "Take on the shape a space bat."
-	invocation = "*snap"
-	charge_max = 5 SECONDS
-	cooldown_min = 5 SECONDS
-	shapeshift_type = /mob/living/simple_animal/hostile/retaliate/bat
+/datum/species/hemophage/prepare_human_for_preview(mob/living/carbon/human/human)
+	human.skin_tone = "albino"
+	human.hair_color = "#1d1d1d"
+	human.hairstyle = "Pompadour (Big)"
+	human.update_mutant_bodyparts(TRUE)
+	human.update_body(TRUE)

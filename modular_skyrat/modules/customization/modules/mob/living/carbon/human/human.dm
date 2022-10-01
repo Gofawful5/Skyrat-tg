@@ -13,7 +13,7 @@
 						continue
 					if(G.is_hidden(src))
 						continue
-					var/obj/item/organ/genital/ORG = getorganslot(G.associated_organ_slot)
+					var/obj/item/organ/external/genital/ORG = getorganslot(G.associated_organ_slot)
 					if(!ORG)
 						continue
 					line += ORG.get_description_string(G)
@@ -28,6 +28,9 @@
 
 /mob/living/carbon/human/species/vox
 	race = /datum/species/vox
+
+/mob/living/carbon/human/species/vox_primalis
+	race = /datum/species/vox_primalis
 
 /mob/living/carbon/human/species/ipc
 	race = /datum/species/robotic/ipc
@@ -100,4 +103,49 @@
 	to_chat(usr, span_notice("[try_hide_mutant_parts ? "You try and hide your mutant body parts under your clothes." : "You no longer try and hide your mutant body parts"]"))
 	update_mutant_bodyparts()
 
+// Feign impairment verb
+#define DEFAULT_TIME 30
+#define MAX_TIME 36000 // 10 hours
 
+/mob/living/carbon/human/verb/acting()
+	set category = "IC"
+	set name = "Feign Impairment"
+	set desc = "Pretend to be impaired for a defined duration."
+
+	if(stat != CONSCIOUS)
+		to_chat(usr, span_warning("You can't do this right now..."))
+		return
+
+	var/static/list/choices = list("drunkenness", "stuttering", "jittering")
+	var/impairment = tgui_input_list(src, "Select an impairment to perform:", "Impairments", choices)
+	if(!impairment)
+		return
+
+	var/duration = tgui_input_number(src, "How long would you like to feign [impairment] for?", "Duration in seconds", DEFAULT_TIME, MAX_TIME)
+	switch(impairment)
+		if("drunkenness")
+			var/mob/living/living_user = usr
+			if(istype(living_user))
+				living_user.add_mood_event("drunk", /datum/mood_event/drunk)
+			set_slurring_if_lower(duration SECONDS)
+		if("stuttering")
+			set_stutter_if_lower(duration SECONDS)
+		if("jittering")
+			set_dizzy_if_lower(duration SECONDS)
+
+	if(duration)
+		addtimer(CALLBACK(src, .proc/acting_expiry, impairment), duration SECONDS)
+		to_chat(src, "You are now feigning [impairment].")
+
+/mob/living/carbon/human/proc/acting_expiry(impairment)
+	if(impairment)
+		// Procs when fake impairment duration ends, useful for calling extra events to wrap up too
+		if(impairment == "drunkenness")
+			var/mob/living/living_user = usr
+			if(istype(living_user))
+				living_user.clear_mood_event("drunk")
+		// Notify the user
+		to_chat(src, "You are no longer feigning [impairment].")
+
+#undef DEFAULT_TIME
+#undef MAX_TIME

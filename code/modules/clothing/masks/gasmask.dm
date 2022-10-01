@@ -115,7 +115,7 @@
 	desc = "Oooh, gold and green. Fancy! This should help as you sit in your office."
 	icon = 'icons/obj/clothing/masks.dmi'
 	worn_icon = 'icons/mob/clothing/mask.dmi'
-	worn_icon_state = "centcomspace"
+	worn_icon_state = "gas_centcom"
 	icon_state = "gas_centcom"
 	inhand_icon_state = "gas_centcom"
 	resistance_flags = FIRE_PROOF | ACID_PROOF
@@ -213,7 +213,7 @@
 
 	if(src && choice && !user.incapacitated() && in_range(user,src))
 		icon_state = options[choice]
-		user.update_inv_wear_mask()
+		user.update_worn_mask()
 		update_action_buttons()
 		to_chat(user, span_notice("Your Clown Mask has now morphed into [choice], all praise the Honkmother!"))
 		return TRUE
@@ -285,7 +285,7 @@
 		/* SKYRAT ADDITION END
 		icon_state = options[choice]
 		*/
-		user.update_inv_wear_mask()
+		user.update_worn_mask()
 		update_action_buttons()
 		to_chat(user, span_notice("Your Mime Mask has now morphed into [choice]!"))
 		return TRUE
@@ -323,6 +323,7 @@
 	name = "owl mask"
 	desc = "Twoooo!"
 	icon_state = "owl"
+	inhand_icon_state = "owl_mask"
 	clothing_flags = MASKINTERNALS
 	flags_cover = MASKCOVERSEYES
 	resistance_flags = FLAMMABLE
@@ -373,7 +374,7 @@
 
 	if(src && choice && !M.stat && in_range(M,src))
 		icon_state = options[choice]
-		user.update_inv_wear_mask()
+		user.update_worn_mask()
 		update_action_buttons()
 		to_chat(M, span_notice("The Tiki Mask has now changed into the [choice] Mask!"))
 		return 1
@@ -390,14 +391,6 @@
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	flags_inv = HIDEFACIALHAIR|HIDEFACE|HIDEEYES|HIDEEARS|HIDEHAIR|HIDESNOUT
 	has_fov = FALSE
-
-/obj/item/clothing/mask/gas/driscoll
-	name = "driscoll mask"
-	desc = "Great for train hijackings. Works like a normal full face gas mask, but won't conceal your identity."
-	icon_state = "driscoll_mask"
-	flags_inv = HIDEFACIALHAIR
-	w_class = WEIGHT_CLASS_NORMAL
-	inhand_icon_state = "driscoll_mask"
 
 /obj/item/clothing/mask/gas/prop
 	name = "prop gas mask"
@@ -419,3 +412,11 @@
 	flags_cover = MASKCOVERSMOUTH
 	resistance_flags = FLAMMABLE
 	has_fov = FALSE
+
+/obj/item/clothing/mask/gas/driscoll
+	name = "driscoll mask"
+	desc = "Great for train hijackings. Works like a normal full face gas mask, but won't conceal your identity."
+	icon_state = "driscoll_mask"
+	flags_inv = HIDEFACIALHAIR
+	w_class = WEIGHT_CLASS_NORMAL
+	inhand_icon_state = "driscoll_mask"

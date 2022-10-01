@@ -16,7 +16,7 @@ SUBSYSTEM_DEF(events)
 
 	var/list/previously_run = list() //SKYRAT EDIT ADDITION
 
-/datum/controller/subsystem/events/Initialize(time, zlevel)
+/datum/controller/subsystem/events/Initialize()
 	for(var/type in typesof(/datum/round_event_control))
 		var/datum/round_event_control/E = new type()
 		if(!E.typepath)
@@ -30,8 +30,7 @@ SUBSYSTEM_DEF(events)
 	frequency_lower = CONFIG_GET(number/event_frequency_lower)
 	frequency_upper = CONFIG_GET(number/event_frequency_upper)
 	// SKYRAT EDIT END
-	return ..()
-
+	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/events/fire(resumed = FALSE)
 	if(!resumed)
@@ -92,7 +91,7 @@ SUBSYSTEM_DEF(events)
 	// Only alive, non-AFK human players count towards this.
 	var/sum_of_weights = 0
 	for(var/datum/round_event_control/E in control)
-		if(!E.canSpawnEvent(players_amt))
+		if(!E.can_spawn_event(players_amt))
 			continue
 		//SKYRAT EDIT ADDITION
 		if(threat_override && !E.alert_observers)
@@ -109,7 +108,7 @@ SUBSYSTEM_DEF(events)
 	sum_of_weights = rand(0,sum_of_weights) //reusing this variable. It now represents the 'weight' we want to select
 
 	for(var/datum/round_event_control/E in control)
-		if(!E.canSpawnEvent(players_amt))
+		if(!E.can_spawn_event(players_amt))
 			continue
 		sum_of_weights -= E.weight
 
@@ -123,41 +122,6 @@ SUBSYSTEM_DEF(events)
 		E.max_occurrences = 0
 	else if(. == EVENT_READY)
 		E.runEvent(random = TRUE)
-
-//allows a client to trigger an event
-//aka Badmin Central
-// > Not in modules/admin
-// REEEEEEEEE
-// Why the heck is this here! Took me so damn long to find!
-/client/proc/forceEvent()
-	set name = "Trigger Event"
-	set category = "Admin.Events"
-
-	if(!holder ||!check_rights(R_FUN))
-		return
-
-	holder.forceEvent()
-
-/datum/admins/proc/forceEvent()
-	var/dat = ""
-	var/normal = ""
-	var/magic = ""
-	var/holiday = ""
-	for(var/datum/round_event_control/E in SSevents.control)
-		dat = "<BR><A href='?src=[REF(src)];[HrefToken()];forceevent=[REF(E)]'>[E]</A>"
-		if(E.holidayID)
-			holiday += dat
-		else if(E.wizardevent)
-			magic += dat
-		else
-			normal += dat
-
-	dat = normal + "<BR>" + magic + "<BR>" + holiday
-
-	var/datum/browser/popup = new(usr, "forceevent", "Force Random Event", 300, 750)
-	popup.set_content(dat)
-	popup.open()
-
 
 /*
 //////////////

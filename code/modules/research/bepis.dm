@@ -69,7 +69,7 @@
 		say("Deposited [deposit_value] credits into storage.")
 		update_appearance()
 		return
-	if(istype(O, /obj/item/card/id))
+	if(isidcard(O))
 		var/obj/item/card/id/Card = O
 		if(Card.registered_account)
 			account = Card.registered_account
@@ -81,6 +81,9 @@
 	return ..()
 
 /obj/machinery/rnd/bepis/screwdriver_act(mob/living/user, obj/item/tool)
+	return default_deconstruction_screwdriver(user, "chamber_open", "chamber", tool)
+
+/obj/machinery/rnd/bepis/screwdriver_act_secondary(mob/living/user, obj/item/tool)
 	return default_deconstruction_screwdriver(user, "chamber_open", "chamber", tool)
 
 /obj/machinery/rnd/bepis/RefreshParts()

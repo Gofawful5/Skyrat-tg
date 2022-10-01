@@ -59,7 +59,7 @@
 	if(!holder)
 		return FALSE
 
-	if(!istype(I, /obj/item/card/id))
+	if(!isidcard(I))
 		return FALSE
 
 	if(stored_card)
@@ -97,6 +97,8 @@
 	if(!stored_card)
 		to_chat(user, span_warning("There are no cards in \the [src]."))
 		return FALSE
+
+	SpinAnimation()
 
 	if(user && !issilicon(user) && in_range(src, user))
 		user.put_in_hands(stored_card)

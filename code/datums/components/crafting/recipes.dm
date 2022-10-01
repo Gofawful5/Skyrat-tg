@@ -58,9 +58,9 @@
 	reqs = list(/datum/reagent/fuel = 50,
 				/obj/item/stack/cable_coil = 1,
 				/obj/item/assembly/igniter = 1,
-				/obj/item/reagent_containers/food/drinks/soda_cans = 1)
-	parts = list(/obj/item/reagent_containers/food/drinks/soda_cans = 1)
-	time = 15
+				/obj/item/reagent_containers/cup/soda_cans = 1)
+	parts = list(/obj/item/reagent_containers/cup/soda_cans = 1)
+	time = 1.5 SECONDS
 	category = CAT_WEAPONRY
 	subcategory = CAT_WEAPON
 
@@ -92,11 +92,11 @@
 
 /datum/crafting_recipe/molotov
 	name = "Molotov"
-	result = /obj/item/reagent_containers/food/drinks/bottle/molotov
-	reqs = list(/obj/item/reagent_containers/glass/rag = 1,
-				/obj/item/reagent_containers/food/drinks/bottle = 1)
-	parts = list(/obj/item/reagent_containers/food/drinks/bottle = 1)
-	time = 40
+	result = /obj/item/reagent_containers/cup/glass/bottle/molotov
+	reqs = list(/obj/item/reagent_containers/cup/rag = 1,
+				/obj/item/reagent_containers/cup/glass/bottle = 1)
+	parts = list(/obj/item/reagent_containers/cup/glass/bottle = 1)
+	time = 4 SECONDS
 	category = CAT_WEAPONRY
 	subcategory = CAT_WEAPON
 
@@ -143,9 +143,9 @@
 /datum/crafting_recipe/tailclub
 	name = "Tail Club"
 	result = /obj/item/tailclub
-	reqs = list(/obj/item/organ/tail/lizard = 1,
+	reqs = list(/obj/item/organ/external/tail/lizard = 1,
 				/obj/item/stack/sheet/iron = 1)
-	blacklist = list(/obj/item/organ/tail/lizard/fake)
+	blacklist = list(/obj/item/organ/external/tail/lizard/fake)
 	time = 40
 	category = CAT_WEAPONRY
 	subcategory = CAT_WEAPON
@@ -153,9 +153,9 @@
 /datum/crafting_recipe/tailwhip
 	name = "Liz O' Nine Tails"
 	result = /obj/item/melee/chainofcommand/tailwhip
-	reqs = list(/obj/item/organ/tail/lizard = 1,
+	reqs = list(/obj/item/organ/external/tail/lizard = 1,
 				/obj/item/stack/cable_coil = 1)
-	blacklist = list(/obj/item/organ/tail/lizard/fake)
+	blacklist = list(/obj/item/organ/external/tail/lizard/fake)
 	time = 40
 	category = CAT_WEAPONRY
 	subcategory = CAT_WEAPON
@@ -163,7 +163,7 @@
 /datum/crafting_recipe/catwhip
 	name = "Cat O' Nine Tails"
 	result = /obj/item/melee/chainofcommand/tailwhip/kitty
-	reqs = list(/obj/item/organ/tail/cat = 1,
+	reqs = list(/obj/item/organ/external/tail/cat = 1,
 				/obj/item/stack/cable_coil = 1)
 	time = 40
 	category = CAT_WEAPONRY
@@ -354,7 +354,7 @@
 /datum/crafting_recipe/cleanbot
 	name = "Cleanbot"
 	result = /mob/living/simple_animal/bot/cleanbot
-	reqs = list(/obj/item/reagent_containers/glass/bucket = 1,
+	reqs = list(/obj/item/reagent_containers/cup/bucket = 1,
 				/obj/item/assembly/prox_sensor = 1,
 				/obj/item/bodypart/r_arm/robot = 1)
 	time = 40
@@ -635,7 +635,7 @@
 	name = "Lizard Cloche Hat"
 	result = /obj/item/clothing/head/lizard
 	time = 10
-	reqs = list(/obj/item/organ/tail/lizard = 1)
+	reqs = list(/obj/item/organ/external/tail/lizard = 1)
 	category = CAT_CLOTHING
 
 /datum/crafting_recipe/lizardhat_alternate
@@ -649,8 +649,8 @@
 	name = "Kitty Ears"
 	result = /obj/item/clothing/head/kitty/genuine
 	time = 10
-	reqs = list(/obj/item/organ/tail/cat = 1,
-				/obj/item/organ/ears/cat = 1)
+	reqs = list(/obj/item/organ/external/tail/cat = 1,
+				/obj/item/organ/internal/ears/cat = 1)
 	category = CAT_CLOTHING
 
 
@@ -668,6 +668,14 @@
 	..()
 	blacklist |= typesof(/obj/item/radio/headset)
 	blacklist |= typesof(/obj/item/radio/intercom)
+
+/datum/crafting_recipe/mothplush
+	name = "Moth Plushie"
+	result = /obj/item/toy/plush/moth
+	reqs = list(/obj/item/stack/sheet/animalhide/mothroach = 1,
+				/obj/item/organ/internal/heart = 1,
+				/obj/item/stack/sheet/cloth = 3)
+	category = CAT_MISC
 
 /datum/crafting_recipe/mixedbouquet
 	name = "Mixed bouquet"
@@ -742,6 +750,29 @@
 	time = 200
 	category = CAT_MISC
 
+/datum/crafting_recipe/trapdoor_kit
+	name = "Trapdoor Construction Kit"
+	result = /obj/item/trapdoor_kit
+	reqs = list(/obj/item/stack/sheet/iron = 4,
+		/obj/item/stack/rods = 4,
+		/obj/item/stack/cable_coil = 10,
+		/obj/item/stock_parts/manipulator = 2,
+		/obj/item/assembly/signaler = 1)
+	tool_behaviors = list(TOOL_WELDER, TOOL_SCREWDRIVER)
+	time = 10 SECONDS
+	category = CAT_MISC
+
+/datum/crafting_recipe/trapdoor_remote
+	name = "Trapdoor Remote"
+	result = /obj/item/trapdoor_remote/preloaded // since its useless without its assembly just require an assembly to craft it
+	reqs = list(
+		/obj/item/compact_remote = 1,
+		/obj/item/stack/cable_coil = 5,
+		/obj/item/assembly/trapdoor = 1)
+	tool_behaviors = list(TOOL_SCREWDRIVER, TOOL_WIRECUTTER)
+	time = 5 SECONDS
+	category = CAT_MISC
+
 /datum/crafting_recipe/mousetrap
 	name = "Mouse Trap"
 	result = /obj/item/assembly/mousetrap
@@ -760,7 +791,7 @@
 
 /datum/crafting_recipe/flashlight_eyes
 	name = "Flashlight Eyes"
-	result = /obj/item/organ/eyes/robotic/flashlight
+	result = /obj/item/organ/internal/eyes/robotic/flashlight
 	time = 10
 	reqs = list(
 		/obj/item/flashlight = 2,
@@ -785,7 +816,7 @@
 
 /datum/crafting_recipe/sillycup
 	name = "Paper Cup"
-	result =  /obj/item/reagent_containers/food/drinks/sillycup
+	result =  /obj/item/reagent_containers/cup/glass/sillycup
 	time = 1 SECONDS
 	reqs = list(/obj/item/paper = 2)
 	category = CAT_MISC
@@ -806,13 +837,13 @@
 	name = "Curtains"
 	reqs = list(/obj/item/stack/sheet/cloth = 4, /obj/item/stack/rods = 1)
 	result = /obj/structure/curtain/cloth
-	category = CAT_MISC
+	category = CAT_STRUCTURE
 
 /datum/crafting_recipe/showercurtain
 	name = "Shower Curtains"
 	reqs = list(/obj/item/stack/sheet/cloth = 2, /obj/item/stack/sheet/plastic = 2, /obj/item/stack/rods = 1)
 	result = /obj/structure/curtain
-	category = CAT_MISC
+	category = CAT_STRUCTURE
 
 /datum/crafting_recipe/extendohand_r
 	name = "Extendo-Hand (Right Arm)"
@@ -973,6 +1004,7 @@
 	result = /obj/structure/bonfire
 	category = CAT_PRIMAL
 
+/* SKYRAT EDIT START: Ash Rituals
 /datum/crafting_recipe/skeleton_key
 	name = "Skeleton Key"
 	time = 30
@@ -980,6 +1012,7 @@
 	result = /obj/item/skeleton_key
 	always_available = FALSE
 	category = CAT_PRIMAL
+SKYRAT EDIT STOP: Ash Rituals */
 
 /datum/crafting_recipe/rake //Category resorting incoming
 	name = "Rake"
@@ -992,7 +1025,7 @@
 	name = "Wooden Bucket"
 	time = 30
 	reqs = list(/obj/item/stack/sheet/mineral/wood = 3)
-	result = /obj/item/reagent_containers/glass/bucket/wooden
+	result = /obj/item/reagent_containers/cup/bucket/wooden
 	category = CAT_PRIMAL
 
 /datum/crafting_recipe/ore_sensor
@@ -1077,6 +1110,15 @@
 	reqs = list(/obj/item/stack/sheet/cloth = 4)
 	category = CAT_CLOTHING
 
+/datum/crafting_recipe/flower_garland
+	name = "Flower Garland"
+	result = /obj/item/clothing/head/garland
+	time = 10
+	reqs = list(/obj/item/food/grown/poppy = 4,
+				/obj/item/food/grown/harebell = 4,
+				/obj/item/food/grown/rose = 4)
+	category = CAT_CLOTHING
+
 /datum/crafting_recipe/guillotine
 	name = "Guillotine"
 	result = /obj/structure/guillotine
@@ -1085,7 +1127,7 @@
 				/obj/item/stack/sheet/mineral/wood = 20,
 				/obj/item/stack/cable_coil = 10)
 	tool_behaviors = list(TOOL_SCREWDRIVER, TOOL_WRENCH, TOOL_WELDER)
-	category = CAT_MISC
+	category = CAT_STRUCTURE
 
 /datum/crafting_recipe/aitater
 	name = "intelliTater"
@@ -1218,7 +1260,7 @@
 	if(istype(T, /turf/open/water))
 		return TRUE
 	var/obj/machinery/shower/S = locate() in T
-	if(S?.on)
+	if(S?.actually_on)
 		return TRUE
 
 //Same but with wheat
@@ -1237,7 +1279,7 @@
 				/obj/item/stack/sheet/mineral/zaukerite = 15,
 				/obj/item/stack/sheet/iron = 30,
 				)
-	category = CAT_MISC
+	category = CAT_STRUCTURE
 
 /datum/crafting_recipe/bluespace_vendor_mount
 	name = "Bluespace Vendor Wall Mount"
@@ -1281,7 +1323,7 @@
 				/obj/item/stack/sheet/glass = 10,
 				/obj/item/aquarium_kit = 1
 				)
-	category = CAT_MISC
+	category = CAT_STRUCTURE
 
 /datum/crafting_recipe/mod_core_standard
 	name = "MOD core (Standard)"
@@ -1291,7 +1333,7 @@
 	reqs = list(/obj/item/stack/cable_coil = 5,
 				/obj/item/stack/rods = 2,
 				/obj/item/stack/sheet/glass = 1,
-				/obj/item/organ/heart/ethereal = 1,
+				/obj/item/organ/internal/heart/ethereal = 1,
 				)
 	category = CAT_MISC
 
@@ -1312,7 +1354,7 @@
 	name = "Alcohol burner"
 	result = /obj/item/burner
 	time = 5 SECONDS
-	reqs = list(/obj/item/reagent_containers/glass/beaker = 1,
+	reqs = list(/obj/item/reagent_containers/cup/beaker = 1,
 				/datum/reagent/consumable/ethanol = 15,
 				/obj/item/paper = 1
 				)
@@ -1322,7 +1364,7 @@
 	name = "Oil burner"
 	result = /obj/item/burner/oil
 	time = 5 SECONDS
-	reqs = list(/obj/item/reagent_containers/glass/beaker = 1,
+	reqs = list(/obj/item/reagent_containers/cup/beaker = 1,
 				/datum/reagent/fuel/oil = 15,
 				/obj/item/paper = 1
 				)
@@ -1332,7 +1374,7 @@
 	name = "Fuel burner"
 	result = /obj/item/burner/fuel
 	time = 5 SECONDS
-	reqs = list(/obj/item/reagent_containers/glass/beaker = 1,
+	reqs = list(/obj/item/reagent_containers/cup/beaker = 1,
 				/datum/reagent/fuel = 15,
 				/obj/item/paper = 1
 				)
@@ -1741,6 +1783,54 @@
 	crafted_pipe.pipe_color = COLOR_VERY_LIGHT_GRAY
 	crafted_pipe.setDir(user.dir)
 	crafted_pipe.update()
+
+/datum/crafting_recipe/steam_vent
+	name = "Steam Vent"
+	result = /obj/structure/steam_vent
+	time = 8
+	reqs = list(/obj/item/stack/sheet/iron = 2,
+				/obj/item/stack/tile/iron = 1,
+				/obj/item/stock_parts/water_recycler = 1)
+	category = CAT_STRUCTURE
+
+/datum/crafting_recipe/coffee_cartridge
+	name = "Bootleg Coffee Cartridge"
+	result = /obj/item/coffee_cartridge/bootleg
+	time = 2 SECONDS
+	reqs = list(
+		/obj/item/blank_coffee_cartridge = 1,
+		/datum/reagent/toxin/coffeepowder = 10,
+	)
+	category = CAT_MISC
+
+/datum/crafting_recipe/toiletbong
+	name = "Toiletbong"
+	category = CAT_STRUCTURE
+	tool_behaviors = list(TOOL_WRENCH)
+	reqs = list(
+		/obj/item/flamethrower = 1)
+	result = /obj/structure/toiletbong
+	time = 5 SECONDS
+	additional_req_text = " plasma tank (on flamethrower), toilet"
+
+/datum/crafting_recipe/toiletbong/check_requirements(mob/user, list/collected_requirements)
+	if((locate(/obj/structure/toilet) in range(1, user.loc)) == null)
+		return FALSE
+	var/obj/item/flamethrower/flamethrower = collected_requirements[/obj/item/flamethrower][1]
+	if(flamethrower.ptank == null)
+		return FALSE
+	return TRUE
+
+/datum/crafting_recipe/toiletbong/on_craft_completion(mob/user, atom/result)
+	var/obj/structure/toiletbong/toiletbong = result
+	var/obj/structure/toilet/toilet = locate(/obj/structure/toilet) in range(1, user.loc)
+	for (var/obj/item/cistern_item in toilet.contents)
+		cistern_item.forceMove(user.loc)
+		to_chat(user, span_warning("[cistern_item] falls out of the toilet!"))
+	toiletbong.dir = toilet.dir
+	toiletbong.loc = toilet.loc
+	qdel(toilet)
+	to_chat(user, span_notice("[user] attaches the flamethrower to the repurposed toilet."))
 
 #undef CRAFTING_MACHINERY_CONSUME
 #undef CRAFTING_MACHINERY_USE

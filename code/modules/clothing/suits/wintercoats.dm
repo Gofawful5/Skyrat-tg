@@ -19,11 +19,11 @@
 		/obj/item/lighter,
 		/obj/item/modular_computer/tablet/pda,
 		/obj/item/radio,
+		/obj/item/storage/bag/books,
 		/obj/item/storage/fancy/cigarettes,
 		/obj/item/tank/internals/emergency_oxygen,
 		/obj/item/tank/internals/plasmaman,
 		/obj/item/toy,
-		/obj/item/storage/bag/books,
 	)
 
 /obj/item/clothing/head/hooded/winterhood
@@ -37,6 +37,38 @@
 	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
 	flags_inv = HIDEHAIR|HIDEEARS
 	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 10, FIRE = 0, ACID = 0)
+
+// An coat intended for use for general crew EVA, with values close to those of the space suits found in EVA normally
+// Slight extra armor, bulky size, slows you down, can carry a large oxygen tank, won't burn off.
+/obj/item/clothing/suit/hooded/wintercoat/eva
+	name = "\proper Endotherm winter coat"
+	desc = "A thickly padded winter coat to keep the wearer well insulated no matter the circumstances. It has a harness for a larger oxygen tank attached to the back."
+	icon_state = "coateva"
+	w_class = WEIGHT_CLASS_BULKY
+	slowdown = 0.75
+	armor = list(MELEE = 10, BULLET = 0, LASER = 10, ENERGY = 10, BOMB = 0, BIO = 50, FIRE = 50, ACID = 20)
+	strip_delay = 6 SECONDS
+	equip_delay_other = 6 SECONDS
+	min_cold_protection_temperature = SPACE_SUIT_MIN_TEMP_PROTECT // Protects very cold.
+	max_heat_protection_temperature = SPACE_SUIT_MAX_TEMP_PROTECT // Protects a little hot.
+	flags_inv = HIDEJUMPSUIT
+	clothing_flags = THICKMATERIAL
+	resistance_flags = NONE
+	hoodtype = /obj/item/clothing/head/hooded/winterhood/eva
+
+/obj/item/clothing/suit/hooded/wintercoat/eva/Initialize(mapload)
+	. = ..()
+	allowed += /obj/item/tank/internals
+
+/obj/item/clothing/head/hooded/winterhood/eva
+	name = "\proper Endotherm winter hood"
+	desc = "A thickly padded hood attached to an even thicker coat."
+	icon_state = "hood_eva"
+	armor = list(MELEE = 10, BULLET = 0, LASER = 10, ENERGY = 10, BOMB = 0, BIO = 50, FIRE = 50, ACID = 20)
+	min_cold_protection_temperature = SPACE_HELM_MIN_TEMP_PROTECT
+	max_heat_protection_temperature = SPACE_HELM_MAX_TEMP_PROTECT
+	clothing_flags = THICKMATERIAL|SNUG_FIT // Snug fit doesn't really matter, but might as well
+	resistance_flags = NONE
 
 // CentCom
 /obj/item/clothing/suit/hooded/wintercoat/centcom
@@ -100,7 +132,7 @@
 		/obj/item/hatchet,
 		/obj/item/plant_analyzer,
 		/obj/item/reagent_containers/spray/plantbgone,
-		/obj/item/reagent_containers/glass/bottle,
+		/obj/item/reagent_containers/cup/bottle,
 		/obj/item/reagent_containers/spray/pestspray,
 		/obj/item/seeds,
 		/obj/item/storage/bag/plants,
@@ -120,8 +152,8 @@
 	allowed = list(
 		/obj/item/grenade/chem_grenade,
 		/obj/item/holosign_creator,
-		/obj/item/reagent_containers/glass/beaker,
-		/obj/item/reagent_containers/glass/bottle,
+		/obj/item/reagent_containers/cup/beaker,
+		/obj/item/reagent_containers/cup/bottle,
 		/obj/item/reagent_containers/spray,
 	)
 	hoodtype = /obj/item/clothing/head/hooded/winterhood/janitor
@@ -132,7 +164,7 @@
 
 // Security Officer
 /obj/item/clothing/suit/hooded/wintercoat/security
-	name = "security winter coat"
+	name = "security winter jacket"
 	desc = "A red, armour-padded winter coat. It glitters with a mild ablative coating and a robust air of authority.  The zipper tab is a pair of jingly little handcuffs that get annoying after the first ten seconds."
 	icon_state = "coatsecurity"
 	inhand_icon_state = "coatsecurity"
@@ -148,19 +180,6 @@
 	icon_state = "hood_security"
 	armor = list(MELEE = 25, BULLET = 15, LASER = 30, ENERGY = 40, BOMB = 25, BIO = 0, FIRE = 0, ACID = 45)
 
-// Head of Security
-/obj/item/clothing/suit/hooded/wintercoat/security/hos
-	name = "head of security's winter coat"
-	desc = "A black, armour-padded winter coat with red and gold stripes on the arms, lovingly woven with a Kevlar interleave and reinforced with semi-ablative polymers and a silver azide fill material. The zipper tab looks like a tiny replica of Beepsky." // SKYRAT EDIT - ORIGINAL: desc = "A red, armour-padded winter coat, lovingly woven with a Kevlar interleave and reinforced with semi-ablative polymers and a silver azide fill material. The zipper tab looks like a tiny replica of Beepsky."
-	icon_state = "coathos"
-	inhand_icon_state = "coathos"
-	armor = list(MELEE = 35, BULLET = 25, LASER = 40, ENERGY = 50, BOMB = 35, BIO = 0, FIRE = 0, ACID = 55)
-	hoodtype = /obj/item/clothing/head/hooded/winterhood/security/hos
-
-/obj/item/clothing/head/hooded/winterhood/security/hos
-	desc = "A black, armour-padded winter hood with red and gold stripes on the arms, lovingly woven with a Kevlar interleave. Definitely not bulletproof, especially not the part where your face goes." // SKYRAT EDIT - ORIGINAL: desc = "A red, armour-padded winter hood, lovingly woven with a Kevlar interleave. Definitely not bulletproof, especially not the part where your face goes."
-	icon_state = "hood_hos"
-
 // Medical Doctor
 /obj/item/clothing/suit/hooded/wintercoat/medical
 	name = "medical winter coat"
@@ -172,8 +191,8 @@
 		/obj/item/gun/syringe,
 		/obj/item/healthanalyzer,
 		/obj/item/reagent_containers/dropper,
-		/obj/item/reagent_containers/glass/beaker,
-		/obj/item/reagent_containers/glass/bottle,
+		/obj/item/reagent_containers/cup/beaker,
+		/obj/item/reagent_containers/cup/bottle,
 		/obj/item/reagent_containers/hypospray,
 		/obj/item/reagent_containers/pill,
 		/obj/item/reagent_containers/syringe,
@@ -264,13 +283,13 @@
 		/obj/item/dnainjector,
 		/obj/item/paper,
 		/obj/item/reagent_containers/dropper,
-		/obj/item/reagent_containers/glass/beaker,
-		/obj/item/reagent_containers/glass/bottle,
+		/obj/item/reagent_containers/cup/beaker,
+		/obj/item/reagent_containers/cup/bottle,
 		/obj/item/reagent_containers/hypospray,
 		/obj/item/reagent_containers/pill,
 		/obj/item/reagent_containers/syringe,
-		/obj/item/storage/pill_bottle,
 		/obj/item/storage/bag/xeno,
+		/obj/item/storage/pill_bottle,
 	)
 	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 10, BIO = 0, FIRE = 20, ACID = 0)
 	hoodtype = /obj/item/clothing/head/hooded/winterhood/science
@@ -334,9 +353,10 @@
 	allowed = list(
 		/obj/item/analyzer,
 		/obj/item/construction/rcd,
+		/obj/item/fireaxe/metal_h2_axe,
 		/obj/item/pipe_dispenser,
-		/obj/item/t_scanner,
 		/obj/item/storage/bag/construction,
+		/obj/item/t_scanner,
 	)
 	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, FIRE = 20, ACID = 0)
 	hoodtype = /obj/item/clothing/head/hooded/winterhood/engineering
@@ -403,14 +423,20 @@
 	icon_state = "hood_cargo"
 
 // Quartermaster
-/obj/item/clothing/suit/hooded/wintercoat/qm
+/obj/item/clothing/suit/hooded/wintercoat/cargo/qm
 	name = "quartermaster's winter coat"
 	desc = "A dark brown winter coat that has a golden crate pin for its zipper pully."
 	icon_state = "coatqm"
 	inhand_icon_state = "coatqm"
-	hoodtype = /obj/item/clothing/head/hooded/winterhood/qm
+	hoodtype = /obj/item/clothing/head/hooded/winterhood/cargo/qm
 
-/obj/item/clothing/head/hooded/winterhood/qm
+/obj/item/clothing/suit/hooded/wintercoat/cargo/qm/Initialize(mapload)
+	. = ..()
+	allowed += list(
+		/obj/item/melee/baton/telescopic,
+	)
+
+/obj/item/clothing/head/hooded/winterhood/cargo/qm
 	desc = "A dark brown winter hood"
 	icon_state = "hood_qm"
 
@@ -425,9 +451,9 @@
 		/obj/item/mining_scanner,
 		/obj/item/pickaxe,
 		/obj/item/resonator,
+		/obj/item/storage/bag/ore,
 		/obj/item/t_scanner/adv_mining_scanner,
 		/obj/item/tank/internals,
-		/obj/item/storage/bag/ore,
 	)
 	armor = list(MELEE = 10, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, FIRE = 0, ACID = 0)
 	hoodtype = /obj/item/clothing/head/hooded/winterhood/miner

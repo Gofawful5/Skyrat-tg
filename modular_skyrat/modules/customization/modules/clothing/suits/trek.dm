@@ -18,8 +18,8 @@
 				/obj/item/hypospray,
 				/obj/item/healthanalyzer,
 				/obj/item/reagent_containers/syringe,
-				/obj/item/reagent_containers/glass/vial,
-				/obj/item/reagent_containers/glass/beaker,
+				/obj/item/reagent_containers/cup/vial,
+				/obj/item/reagent_containers/cup/beaker,
 				/obj/item/storage/pill_bottle,
 				/obj/item/taperecorder)
 	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
@@ -51,11 +51,11 @@
 	inhand_icon_state = "fedmodernblue"
 
 /obj/item/clothing/suit/fedcoat/modern/eng
-	name = "modern eng Federation jacket"
+	name = "modern engineering Federation jacket"
 	icon_state = "fedmoderneng"
 	inhand_icon_state = "fedmoderneng"
 
 /obj/item/clothing/suit/fedcoat/modern/sec
-	name = "modern sec Federation jacket"
+	name = "modern security Federation jacket"
 	icon_state = "fedmodernsec"
 	inhand_icon_state = "fedmodernsec"

@@ -61,7 +61,10 @@
 	new /obj/item/storage/box/rubbershot(src)
 	new /obj/item/storage/box/rubbershot(src)
 
-//////////////////////////AMMO BOXES
+/*
+*	AMMO BOXES
+*/
+
 /obj/item/storage/box/ammo_box
 	name = "ammo box"
 	desc = "A box filled with ammunition."
@@ -77,14 +80,6 @@
 	icon_state = "microfusion_box"
 
 /obj/item/storage/box/ammo_box/microfusion/PopulateContents()
-	new /obj/item/storage/bag/ammo(src)
-	new /obj/item/stock_parts/cell/microfusion(src)
-	new /obj/item/stock_parts/cell/microfusion(src)
-	new /obj/item/stock_parts/cell/microfusion(src)
-
-/obj/item/storage/box/ammo_box/microfusion/bagless
-
-/obj/item/storage/box/ammo_box/microfusion/bagless/PopulateContents()
 	new /obj/item/stock_parts/cell/microfusion(src)
 	new /obj/item/stock_parts/cell/microfusion(src)
 	new /obj/item/stock_parts/cell/microfusion(src)

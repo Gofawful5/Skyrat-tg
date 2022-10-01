@@ -12,23 +12,23 @@
 #define PLANE_SPACE -95
 #define PLANE_SPACE_PARALLAX -90
 
-#define GRAVITY_PULSE_PLANE -11
+#define GRAVITY_PULSE_PLANE -12
 #define GRAVITY_PULSE_RENDER_TARGET "*GRAVPULSE_RENDER_TARGET"
 
-#define OPENSPACE_LAYER 600 //Openspace layer over all
-
-#define TRANSPARENT_FLOOR_PLANE -10 //Transparent plane that shows openspace underneath the floor
-#define OPENSPACE_PLANE -9 //Openspace plane below all turfs
-#define OPENSPACE_BACKDROP_PLANE -8 //Black square just over openspace plane to guaranteed cover all in openspace turf
+#define TRANSPARENT_FLOOR_PLANE -11 //Transparent plane that shows openspace underneath the floor
+#define OPENSPACE_PLANE -10 //Openspace plane below all turfs
+#define OPENSPACE_BACKDROP_PLANE -9 //Black square just over openspace plane to guaranteed cover all in openspace turf
 
 
-#define FLOOR_PLANE -7
+#define FLOOR_PLANE -8
 
-#define GAME_PLANE -6
-#define GAME_PLANE_FOV_HIDDEN -5
-#define GAME_PLANE_UPPER -4
-#define GAME_PLANE_UPPER_FOV_HIDDEN -3
+#define GAME_PLANE -7
+#define GAME_PLANE_FOV_HIDDEN -6
+#define GAME_PLANE_UPPER -5
+#define GAME_PLANE_UPPER_FOV_HIDDEN -4
 
+///Slightly above the game plane but does not catch mouse clicks. Useful for certain visuals that should be clicked through, like seethrough trees
+#define ABOVE_GAME_NO_MOUSE_PLANE -3
 #define ABOVE_GAME_PLANE -2
 
 #define MOUSE_TRANSPARENT_PLANE -1 //SKYRAT EDIT ADDITION - Pollution port
@@ -58,6 +58,7 @@
 #define GAS_PIPE_VISIBLE_LAYER 2.47 //layer = initial(layer) + piping_layer / 1000 in atmospherics/update_icon() to determine order of pipe overlap
 #define GAS_FILTER_LAYER 2.48
 #define GAS_PUMP_LAYER 2.49
+#define PLUMBING_PIPE_VISIBILE_LAYER 2.495//layer = initial(layer) + ducting_layer / 3333 in atmospherics/handle_layer() to determine order of duct overlap
 #define LOW_OBJ_LAYER 2.5
 ///catwalk overlay of /turf/open/floor/catwalk_floor
 #define CATWALK_LAYER 2.51
@@ -71,7 +72,8 @@
 #define BELOW_OPEN_DOOR_LAYER 2.6
 #define BLASTDOOR_LAYER 2.65
 #define OPEN_DOOR_LAYER 2.7
-#define DOOR_HELPER_LAYER 2.71 //keep this above OPEN_DOOR_LAYER
+#define DOOR_ACCESS_HELPER_LAYER 2.71 //keep this above OPEN_DOOR_LAYER, special layer used for /obj/effect/mapping_helpers/airlock/access
+#define DOOR_HELPER_LAYER 2.72 //keep this above DOOR_ACCESS_HELPER_LAYER and OPEN_DOOR_LAYER since the others tend to have tiny sprites that tend to be covered up.
 #define PROJECTILE_HIT_THRESHHOLD_LAYER 2.75 //projectiles won't hit objects at or below this layer if possible
 #define TABLE_LAYER 2.8
 #define GATEWAY_UNDERLAY_LAYER 2.85
@@ -120,6 +122,7 @@
 #define GASFIRE_LAYER 5.05
 #define RIPPLE_LAYER 5.1
 
+#define OPENSPACE_LAYER 600 //Openspace layer over all
 
 #define BLACKNESS_PLANE 0 //To keep from conflicts with SEE_BLACKNESS internals
 
@@ -127,8 +130,6 @@
 #define MASSIVE_OBJ_PLANE 70
 #define GHOST_PLANE 80
 #define POINT_PLANE 90
-
-#define RAD_TEXT_PLANE 90
 
 //---------- LIGHTING -------------
 ///Normal 1 per turf dynamic lighting underlays
@@ -189,6 +190,8 @@
 #define RUNECHAT_PLANE 501
 /// Plane for balloon text (text that fades up)
 #define BALLOON_CHAT_PLANE 502
+/// Bubble for typing indicators
+#define TYPING_LAYER 500
 
 //-------------------- HUD ---------------------
 //HUD layer defines
@@ -212,18 +215,6 @@
 #define RENDER_PLANE_NON_GAME 9995
 #define RENDER_PLANE_MASTER 9999
 //----------------------------------------------------
-
-
-//SKYRAT EDIT: Lobby Cam
-///Plane of the "splash" icon used that shows on the lobby screen. Nothing should ever be above this. (Except the logo)
-#define BLACK_FADE 9997
-#define SKYRAT_LOGO 9999
-//SKYRAT EDIT: Lobby Cam
-
-//SKYRAT EDIT: Chat Indicator
-#define CHAT_INDICATOR_LAYER 6 // 1 above BYOND's FLY_LAYER
-//SKYRAT EDIT: Chat Indicator
-
 
 #define LOBBY_BACKGROUND_LAYER 3
 #define LOBBY_BUTTON_LAYER 4

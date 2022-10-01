@@ -7,13 +7,13 @@
 	supports_variations_flags = CLOTHING_SNOUTED_VARIATION_NO_NEW_ICON
 
 /obj/item/clothing/head/helmet/gladiator
-    supports_variations_flags = CLOTHING_SNOUTED_VARIATION_NO_NEW_ICON
+	supports_variations_flags = CLOTHING_SNOUTED_VARIATION_NO_NEW_ICON
 
 /obj/item/clothing/head/chefhat
-    supports_variations_flags = CLOTHING_SNOUTED_VARIATION_NO_NEW_ICON
+	supports_variations_flags = CLOTHING_SNOUTED_VARIATION_NO_NEW_ICON
 
 /obj/item/clothing/head/hos/beret
-    supports_variations_flags = CLOTHING_SNOUTED_VARIATION_NO_NEW_ICON
+	supports_variations_flags = CLOTHING_SNOUTED_VARIATION_NO_NEW_ICON
 
 /obj/item/clothing/head/soft/paramedic
 	supports_variations_flags = CLOTHING_SNOUTED_VARIATION_NO_NEW_ICON
@@ -123,7 +123,7 @@
 /obj/item/clothing/head/helmet/space/beret
 	supports_variations_flags = CLOTHING_SNOUTED_VARIATION_NO_NEW_ICON
 
-/obj/item/clothing/head/helmet/police
+/obj/item/clothing/head/warden/police
 	supports_variations_flags = CLOTHING_SNOUTED_VARIATION_NO_NEW_ICON
 
 /obj/item/clothing/head/helmet/swat
@@ -191,7 +191,7 @@
 /obj/item/clothing/head/morningstar
 	supports_variations_flags = NONE
 
-/obj/item/clothing/head/saints
+/obj/item/clothing/head/fancy
 	supports_variations_flags = NONE
 
 /obj/item/clothing/head/allies
@@ -200,10 +200,7 @@
 /obj/item/clothing/head/yuri
 	supports_variations_flags = NONE
 
-/obj/item/clothing/head/sybil_slickers
-	supports_variations_flags = NONE
-
-/obj/item/clothing/head/basil_boys
+/obj/item/clothing/head/football_helmet
 	supports_variations_flags = NONE
 
 /obj/item/clothing/head/helmet/alt

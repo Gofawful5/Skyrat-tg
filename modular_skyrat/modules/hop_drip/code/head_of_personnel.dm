@@ -18,7 +18,7 @@
 	icon_state = "satchel_hop"
 	inhand_icon_state = "satchel_hop"
 
-/obj/item/storage/backpack/duffel/head_of_personnel
+/obj/item/storage/backpack/duffelbag/head_of_personnel
 	name = "head of personnel duffelbag"
 	desc = "A robust duffelbag issued to Nanotrasen's finest second."
 	icon = 'modular_skyrat/modules/hop_drip/icons/hop_packs.dmi'
@@ -34,6 +34,6 @@
 	icon_state = "com_headset_alt"
 	inhand_icon_state = "com_headset_alt"
 
-/obj/item/radio/headset/heads/hop/alt/ComponentInitialize()
+/obj/item/radio/headset/heads/hop/alt/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/wearertargeting/earprotection, list(ITEM_SLOT_EARS))

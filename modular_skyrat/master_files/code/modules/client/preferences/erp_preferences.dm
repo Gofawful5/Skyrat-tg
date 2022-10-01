@@ -53,9 +53,6 @@
 		return FALSE
 	. = ..()
 
-/datum/preference/toggle/erp/cum_face
-	savefile_key = "cum_face_pref"
-
 /datum/preference/toggle/erp/sex_toy
 	savefile_key = "sextoy_pref"
 
@@ -76,6 +73,9 @@
 
 /datum/preference/toggle/erp/autocum
 	savefile_key = "autocum_pref"
+
+/datum/preference/toggle/erp/autoemote
+	savefile_key = "autoemote_pref"
 
 /datum/preference/choiced/erp_status
 	category = PREFERENCE_CATEGORY_NON_CONTEXTUAL

@@ -5,32 +5,10 @@
 #define BONUS_STUTTER 10
 
 /obj/item/melee/baton/telescopic/contractor_baton
-	/// Ref to the baton holster, should the baton have one.
-	var/obj/item/mod/module/baton_holster/holster
 	/// Bitflags for what upgrades the baton has
 	var/upgrade_flags
 	/// If the baton lists its upgrades
 	var/lists_upgrades = TRUE
-
-/obj/item/melee/baton/telescopic/contractor_baton/Initialize(mapload)
-	. = ..()
-	RegisterSignal(src, COMSIG_STORAGE_ENTERED, .proc/storage_undeploy)
-
-/obj/item/melee/baton/telescopic/contractor_baton/dropped(mob/user, silent)
-	. = ..()
-	if(!holster)
-		return
-	holster.undeploy(user)
-
-/obj/item/melee/baton/telescopic/contractor_baton/proc/storage_undeploy(mob/user)
-	if(!holster)
-		return
-	if(!user)
-		user = holster?.mod?.wearer
-	var/obj/item/storage = src.loc
-	var/datum/component/storage/storagecomp = storage.GetComponent(/datum/component/storage)
-	storagecomp.remove_from_storage(src, get_turf(src))
-	holster.undeploy(user)
 
 /obj/item/melee/baton/telescopic/contractor_baton/attack_secondary(mob/living/victim, mob/living/user, params)
 	if(!(upgrade_flags & BATON_CUFF_UPGRADE) || !active)
@@ -76,7 +54,7 @@
 	if((upgrade_flags & BATON_FOCUS_UPGRADE))
 		if(target == user.mind?.opposing_force?.contractor_hub?.current_contract?.contract.target?.current) // Pain
 			target.apply_damage(BONUS_STAMINA_DAM, STAMINA, BODY_ZONE_CHEST)
-			target.adjust_timed_status_effect(10 SECONDS, /datum/status_effect/speech/stutter)
+			target.adjust_stutter(10 SECONDS)
 
 /obj/item/melee/baton/telescopic/contractor_baton/examine(mob/user)
 	. = ..()

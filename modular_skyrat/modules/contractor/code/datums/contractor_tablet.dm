@@ -20,7 +20,7 @@
 	/// If this is the first opening of the tablet
 	var/first_load = TRUE
 
-/datum/computer_file/program/contract_uplink/run_program(mob/living/user)
+/datum/computer_file/program/contract_uplink/on_start(mob/living/user)
 	. = ..(user)
 
 /datum/computer_file/program/contract_uplink/ui_act(action, params)
@@ -208,6 +208,7 @@
 	else
 		data["logged_in"] = FALSE
 
-	program_icon_state = screen_to_be
+	if(screen_to_be)
+		program_icon_state = screen_to_be
 	update_computer_icon()
 	return data

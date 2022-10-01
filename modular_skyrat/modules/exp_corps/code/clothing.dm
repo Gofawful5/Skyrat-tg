@@ -56,9 +56,9 @@
 	name = "pointman's chest rig"
 
 /obj/item/storage/belt/military/expeditionary_corps/pointman/PopulateContents()
-	new /obj/item/reagent_containers/food/drinks/bottle/whiskey(src)
+	new /obj/item/reagent_containers/cup/glass/bottle/whiskey(src)
 	new /obj/item/stack/sheet/plasteel(src,5)
-	new /obj/item/reagent_containers/glass/bottle/morphine(src)
+	new /obj/item/reagent_containers/cup/bottle/morphine(src)
 
 /obj/item/storage/belt/military/expeditionary_corps/marksman
 	name = "marksman's chest rig"
@@ -196,7 +196,7 @@
 
 /obj/item/clothing/head/helmet/expeditionary_corps/proc/enable_nv(mob/user)
 	if(current_user)
-		var/obj/item/organ/eyes/my_eyes = current_user.getorgan(/obj/item/organ/eyes)
+		var/obj/item/organ/internal/eyes/my_eyes = current_user.getorgan(/obj/item/organ/internal/eyes)
 		if(my_eyes)
 			my_eyes.lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
 			my_eyes.see_in_dark = 8
@@ -205,7 +205,7 @@
 
 /obj/item/clothing/head/helmet/expeditionary_corps/proc/disable_nv()
 	if(current_user)
-		var/obj/item/organ/eyes/my_eyes = current_user.getorgan(/obj/item/organ/eyes)
+		var/obj/item/organ/internal/eyes/my_eyes = current_user.getorgan(/obj/item/organ/internal/eyes)
 		if(my_eyes)
 			my_eyes.lighting_alpha = initial(my_eyes.lighting_alpha)
 			my_eyes.see_in_dark = initial(my_eyes.see_in_dark)

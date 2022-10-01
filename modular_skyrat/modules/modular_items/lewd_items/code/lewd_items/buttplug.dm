@@ -39,16 +39,12 @@
 		"medium" = image(icon = src.icon, icon_state = "buttplug_pink_medium"),
 		"big" = image(icon = src.icon, icon_state = "buttplug_pink_big"))
 
-/obj/item/clothing/sextoy/buttplug/ComponentInitialize()
-	. = ..()
-	AddElement(/datum/element/update_icon_updates_onmob)
-
-/obj/item/clothing/sextoy/buttplug/AltClick(mob/user, obj/item/object)
+/obj/item/clothing/sextoy/buttplug/AltClick(mob/user)
 	if(!color_changed)
 		. = ..()
 		if(.)
 			return
-		var/choice = show_radial_menu(user,src, buttplug_designs, custom_check = CALLBACK(src, .proc/check_menu, user, object), radius = 36, require_near = TRUE)
+		var/choice = show_radial_menu(user, src, buttplug_designs, custom_check = CALLBACK(src, .proc/check_menu, user), radius = 36, require_near = TRUE)
 		if(!choice)
 			return FALSE
 		current_color = choice
@@ -62,15 +58,16 @@
 			. = ..()
 			if(.)
 				return
-			var/choice = show_radial_menu(user,src, buttplug_forms, custom_check = CALLBACK(src, .proc/check_menu, user, object), radius = 36, require_near = TRUE)
+			var/choice = show_radial_menu(user, src, buttplug_forms, custom_check = CALLBACK(src, .proc/check_menu, user), radius = 36, require_near = TRUE)
 			if(!choice)
 				return FALSE
 			current_size = choice
 			update_icon()
 			form_changed = TRUE
 
-/obj/item/clothing/sextoy/buttplug/Initialize()
+/obj/item/clothing/sextoy/buttplug/Initialize(mapload)
 	. = ..()
+	AddElement(/datum/element/update_icon_updates_onmob)
 	set_light(0)
 	update_light()
 	update_icon_state()
@@ -107,7 +104,7 @@
 	var/mob/living/carbon/human/target = loc
 	if(!istype(target))
 		return
-	//i tried using switch here, but it need static value, and u.arousal can't be it. So fuck switches. Reject it, embrace the IFs
+	// I tried using switch here, but it need static value, and u.arousal can't be it. So fuck switches. Reject it, embrace the IFs
 	if(current_size == "small" && target.arousal < 30)
 		target.adjustArousal(0.6 * delta_time)
 		target.adjustPleasure(0.7 * delta_time)

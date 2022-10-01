@@ -48,7 +48,7 @@
 					/obj/item/clothing/glasses/blindfold/kinky = 5,
 					/obj/item/clothing/ears/kinky_headphones = 5,
 					/obj/item/clothing/mask/gas/bdsm_mask = 5,
-					/obj/item/reagent_containers/glass/lewd_filter = 5,
+					/obj/item/reagent_containers/cup/lewd_filter = 5,
 					/obj/item/clothing/glasses/hypno = 4,
 					/obj/item/clothing/head/kitty = 4,
 					/obj/item/clothing/head/rabbitears = 4,
@@ -74,6 +74,7 @@
 					/obj/item/clothing/under/misc/stripper/bunnysuit = 5,
 					/obj/item/clothing/under/misc/stripper/bunnysuit/white = 5,
 					/obj/item/clothing/under/misc/gear_harness = 4,
+					/obj/item/clothing/under/dress/corset = 4,
 
 					//hands
 					/obj/item/clothing/gloves/ball_mittens = 8,
@@ -82,10 +83,10 @@
 
 					//legs
 					/obj/item/clothing/shoes/latex_socks = 8,
-					/obj/item/clothing/shoes/latexheels = 4,
-					/obj/item/clothing/shoes/dominaheels = 4,
-					/obj/item/clothing/shoes/jackboots/thigh = 3,
+					/obj/item/clothing/shoes/latex_heels = 4,
+					/obj/item/clothing/shoes/latex_heels/domina_heels = 4,
 					/obj/item/clothing/shoes/jackboots/knee = 3,
+					/obj/item/clothing/under/pants/chaps = 4,
 
 					//belt
 					/obj/item/clothing/strapon = 6,
@@ -94,10 +95,10 @@
 					//chems
 					/obj/item/reagent_containers/pill/crocin = 20,
 					/obj/item/reagent_containers/pill/camphor = 10,
-					/obj/item/reagent_containers/glass/bottle/crocin = 6,
-					/obj/item/reagent_containers/glass/bottle/camphor = 3,
-					/obj/item/reagent_containers/glass/bottle/breast_enlarger = 6, //Those are legal 'cause you can just turn off prefs in round in "CLOWN SMOKE MACHINE+PENIS ENLARGEMENT CHEMICAL CASE". Yes, i have special code-phrase for this. I've seen some shit.
-					/obj/item/reagent_containers/glass/bottle/penis_enlarger = 6,
+					/obj/item/reagent_containers/cup/bottle/crocin = 6,
+					/obj/item/reagent_containers/cup/bottle/camphor = 3,
+					/obj/item/reagent_containers/cup/bottle/breast_enlarger = 6, //Those are legal 'cause you can just turn off prefs in round in "CLOWN SMOKE MACHINE+PENIS ENLARGEMENT CHEMICAL CASE". Yes, i have special code-phrase for this. I've seen some shit.
+					/obj/item/reagent_containers/cup/bottle/penis_enlarger = 6,
 
 					//special
 					/obj/item/clothing/glasses/nice_goggles = 1, //easter egg, don't touch plz)
@@ -110,8 +111,6 @@
 					/obj/item/storage/box/shibari_stand = 4)
 
 	premium = list(
-		/obj/item/clothing/under/dress/corset = 4,
-		/obj/item/clothing/under/pants/chaps = 4,
 		/obj/item/clothing/neck/human_petcollar/locked/holo = 3)
 
 	contraband = list(
@@ -123,8 +122,8 @@
 					/obj/item/clothing/suit/straight_jacket/kinky_sleepbag = 2, //my favorite thing, spent 1 month on it. Don't remove please.
 					/obj/item/reagent_containers/pill/hexacrocin = 10,
 					/obj/item/reagent_containers/pill/pentacamphor = 5,
-					/obj/item/reagent_containers/glass/bottle/hexacrocin = 4,
-					/obj/item/reagent_containers/glass/bottle/pentacamphor = 2)
+					/obj/item/reagent_containers/cup/bottle/hexacrocin = 4,
+					/obj/item/reagent_containers/cup/bottle/pentacamphor = 2)
 
 	refill_canister = /obj/item/vending_refill/lustwish
 	payment_department = ACCOUNT_SRV
@@ -138,8 +137,8 @@
         "teal" = image(icon = src.icon, icon_state = "lustwish_teal"))
 
 //Changing special secret var
-/obj/machinery/vending/dorms/attackby(obj/item/I, mob/living/user, params)
-	if(istype(I, /obj/item/lustwish_discount))
+/obj/machinery/vending/dorms/attackby(obj/item/used_item, mob/living/user, params)
+	if(istype(used_item, /obj/item/lustwish_discount))
 		user.visible_message(span_boldnotice("Something changes in [src] with a loud clunk."))
 		card_used = !card_used
 		switch(card_used)
@@ -153,12 +152,12 @@
 		return ..()
 
 //using multitool on pole
-/obj/machinery/vending/dorms/multitool_act(mob/living/user, obj/item/I)
+/obj/machinery/vending/dorms/multitool_act(mob/living/user, obj/item/used_item)
 	. = ..()
 	if(.)
 		return
 	if(card_used == TRUE)
-		var/choice = show_radial_menu(user,src, vend_designs, custom_check = CALLBACK(src, .proc/check_menu, user, I), radius = 50, require_near = TRUE)
+		var/choice = show_radial_menu(user, src, vend_designs, custom_check = CALLBACK(src, .proc/check_menu, user, used_item), radius = 50, require_near = TRUE)
 		if(!choice)
 			return FALSE
 		current_color = choice
@@ -175,7 +174,7 @@
 		return FALSE
 	return TRUE
 
-/obj/machinery/vending/dorms/Initialize()
+/obj/machinery/vending/dorms/Initialize(mapload)
 	. = ..()
 	update_icon_state()
 	update_icon()

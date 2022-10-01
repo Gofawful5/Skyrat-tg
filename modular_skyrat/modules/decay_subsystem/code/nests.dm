@@ -36,7 +36,7 @@
 	/// Does this nest passively spawn mobs too?
 	var/passive_spawning = FALSE
 
-/obj/structure/mob_spawner/Initialize()
+/obj/structure/mob_spawner/Initialize(mapload)
 	. = ..()
 	calculate_trigger_turfs()
 	if(passive_spawning)
@@ -131,7 +131,9 @@
 	retaliated = FALSE
 	visible_message(span_danger("[src] calms down."))
 
-///////////// CUSTOM SPAWNERS
+/*
+*	CUSTOM SPAWNERS
+*/
 
 /obj/structure/mob_spawner/spiders
 	name = "sticky cobwebs"
