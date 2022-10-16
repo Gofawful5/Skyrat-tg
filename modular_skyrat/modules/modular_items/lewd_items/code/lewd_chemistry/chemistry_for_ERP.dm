@@ -423,11 +423,11 @@
 			if(prob(80))
 				if(exposed_mob.w_uniform.damaged_clothes == CLOTHING_PRISTINE)
 					exposed_mob.w_uniform.damaged_clothes = CLOTHING_DAMAGED
-					exposed_mob.update_inv_w_uniform()
+					exposed_mob.w_uniform.update_clothes_damaged_state(CLOTHING_DAMAGED)
 					return
 				if(exposed_mob.w_uniform.damaged_clothes == CLOTHING_DAMAGED)
 					exposed_mob.w_uniform.damaged_clothes = CLOTHING_SHREDDED
-					exposed_mob.update_inv_w_uniform()
+					exposed_mob.w_uniform.update_clothes_damaged_state(CLOTHING_SHREDDED)
 					return
 
 /datum/reagent/drug/aphrodisiac/breast_enlarger/overdose_effects(mob/living/carbon/human/exposed_mob) //Turns you into a female if character is male. Also supposed to add breasts but enlargement_amount'm too dumb to figure out how to make it work
