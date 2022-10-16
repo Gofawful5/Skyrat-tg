@@ -131,11 +131,21 @@
 						to_chat(exposed_mob, span_purple("Your [pick(boob_text_list)] [pick(action_text_list)]about [translation]-cups."))
 						return
 
-	if((mob_breasts?.genital_size >= (max_breast_size - 2)) && (exposed_mob.w_uniform || exposed_mob.wear_suit))
+	if((mob_breasts?.genital_size >= (max_breast_size - 8)) && (exposed_mob.w_uniform || exposed_mob.wear_suit))
+		var/target_bodypart = exposed_mob.get_bodypart(BODY_ZONE_CHEST)
 		if(prob(damage_chance))
 			to_chat(exposed_mob, span_danger("Your breasts begin to strain against your clothes!"))
-			exposed_mob.adjustOxyLoss(5)
-			exposed_mob.apply_damage(1, BRUTE, exposed_mob.get_bodypart(BODY_ZONE_CHEST))
+			exposed_mob.adjustOxyLoss(5, 0)
+			exposed_mob.apply_damage(0.1, BRUTE, target_bodypart)
+			if(prob(80))
+				if(exposed_mob.w_uniform.damaged_clothes == CLOTHING_PRISTINE)
+					exposed_mob.w_uniform.damaged_clothes = CLOTHING_DAMAGED
+					exposed_mob.w_uniform.update_clothes_damaged_state(CLOTHING_DAMAGED)
+					return
+				if(exposed_mob.w_uniform.damaged_clothes == CLOTHING_DAMAGED)
+					exposed_mob.w_uniform.damaged_clothes = CLOTHING_SHREDDED
+					exposed_mob.w_uniform.update_clothes_damaged_state(CLOTHING_SHREDDED)
+					return
 
 // Turns you into a female if character is male. Also adds breasts.
 /datum/reagent/drug/aphrodisiac/succubus_milk/overdose_effects(mob/living/carbon/human/exposed_mob)
