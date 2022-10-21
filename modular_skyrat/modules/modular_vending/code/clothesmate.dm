@@ -8,8 +8,6 @@
 				/obj/item/clothing/head/costume/cowboyhat/sheriff = 5,
 				/obj/item/clothing/head/costume/cowboyhat/sheriff/alt = 5,
 				/obj/item/clothing/head/costume/cowboyhat/deputy = 5,
-				/obj/item/clothing/head/costume/cowboyhat/blackwide = 5,
-				/obj/item/clothing/head/costume/cowboyhat/wide = 5,
 				/obj/item/clothing/head/fedora/beige = 5,
 				/obj/item/clothing/head/fedora/white = 5,
 				/obj/item/clothing/head/fedora/fedblack = 5,
@@ -21,7 +19,6 @@
 			"name" = "Accessories",
 			"icon" = "glasses",
 			"products" = list(
-				/obj/item/clothing/neck/ranger_poncho = 5,
 				/obj/item/clothing/neck/cloak/colourable = 5,
 				/obj/item/clothing/neck/cloak/colourable/veil = 5,
 				/obj/item/clothing/neck/cloak/colourable/shroud = 5,

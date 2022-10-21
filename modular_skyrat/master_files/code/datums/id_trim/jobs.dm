@@ -40,7 +40,6 @@
 	assignment = "Blueshield"
 	trim_icon = 'modular_skyrat/master_files/icons/obj/card.dmi'
 	trim_state = "trim_blueshield"
-	orbit_icon = "shield-dog"
 	sechud_icon_state = SECHUD_BLUESHIELD
 	extra_access = list(ACCESS_SECURITY, ACCESS_BRIG, ACCESS_COURT, ACCESS_CARGO, ACCESS_GATEWAY) // Someone needs to come back and order these alphabetically, this is a nightmare
 	minimal_access = list(
@@ -54,7 +53,6 @@
 	assignment = "Nanotrasen Consultant"
 	trim_icon = 'modular_skyrat/master_files/icons/obj/card.dmi'
 	trim_state = "trim_nanotrasenconsultant"
-	orbit_icon = "clipboard-check"
 	sechud_icon_state = SECHUD_NT_CONSULTANT
 	extra_access = list()
 	minimal_access = list(ACCESS_SECURITY, ACCESS_BRIG_ENTRANCE, ACCESS_COURT, ACCESS_WEAPONS,
@@ -71,7 +69,6 @@
 	assignment = "Security Medic"
 	trim_icon = 'modular_skyrat/master_files/icons/obj/card.dmi'
 	trim_state = "trim_securitymedic"
-	orbit_icon = "heart-pulse"
 	sechud_icon_state = SECHUD_SECURITY_MEDIC
 	extra_access = list(ACCESS_DETECTIVE)
 	minimal_access = list(ACCESS_SECURITY, ACCESS_BRIG_ENTRANCE, ACCESS_BRIG, ACCESS_COURT, ACCESS_WEAPONS, ACCESS_MECH_SECURITY, ACCESS_MINERAL_STOREROOM, ACCESS_MAINT_TUNNELS)
@@ -88,7 +85,6 @@
 	assignment = "Vanguard Operative"
 	trim_icon = 'modular_skyrat/master_files/icons/obj/card.dmi'
 	trim_state = "trim_expeditionarytrooper"
-	orbit_icon = "person-rifle"
 	sechud_icon_state = SECHUD_VANGUARD_OPERATIVE
 	extra_access = list()
 	minimal_access = list(ACCESS_MAINT_TUNNELS, ACCESS_EVA, ACCESS_EXTERNAL_AIRLOCKS, ACCESS_TELEPORTER, ACCESS_GATEWAY, ACCESS_TECH_STORAGE,
@@ -98,7 +94,6 @@
 	assignment = "Corrections Officer"
 	trim_icon = 'modular_skyrat/master_files/icons/obj/card.dmi'
 	trim_state = "trim_corrections_officer"
-	orbit_icon = "hands-bound"
 	sechud_icon_state = SECHUD_CORRECTIONS_OFFICER
 	extra_access = list()
 	minimal_access = list(ACCESS_SECURITY, ACCESS_BRIG_ENTRANCE, ACCESS_BRIG, ACCESS_COURT,
@@ -110,7 +105,6 @@
 	assignment = "Barber"
 	trim_icon = 'modular_skyrat/master_files/icons/obj/card.dmi'
 	trim_state = "trim_barber"
-	orbit_icon = "scissors"
 	sechud_icon_state = SECHUD_BARBER
 	extra_access = list()
 	minimal_access = list(ACCESS_THEATRE, ACCESS_MAINT_TUNNELS, ACCESS_BARBER, ACCESS_SERVICE)

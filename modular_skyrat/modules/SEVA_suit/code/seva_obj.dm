@@ -23,10 +23,9 @@
 	desc = "A fire-proof hood for exploring hot environments. Its design doesn't allow for upgrading with goliath plates."
 	icon = 'modular_skyrat/master_files/icons/obj/clothing/hats.dmi'
 	worn_icon = 'modular_skyrat/master_files/icons/mob/clothing/head.dmi'
-	worn_icon_muzzled = 'modular_skyrat/master_files/icons/mob/clothing/head_muzzled.dmi'
 	icon_state = "seva"
 	body_parts_covered = HEAD
-	flags_inv = HIDEHAIR|HIDEFACE|HIDEEARS|HIDESNOUT
+	flags_inv = HIDEHAIR|HIDEFACE|HIDEEARS
 	cold_protection = HEAD
 	heat_protection = HEAD
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
@@ -41,4 +40,4 @@
 	worn_icon = 'modular_skyrat/master_files/icons/mob/clothing/mask.dmi'
 	icon_state = "seva"
 	resistance_flags = FIRE_PROOF
-	flags_inv = HIDEFACIALHAIR|HIDEFACE|HIDEEYES|HIDEEARS|HIDEHAIR|HIDESNOUT
+	flags_inv = HIDEFACIALHAIR|HIDEFACE|HIDEEYES|HIDEEARS|HIDEHAIR

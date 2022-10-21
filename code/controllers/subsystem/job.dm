@@ -677,7 +677,7 @@ SUBSYSTEM_DEF(job)
 /datum/controller/subsystem/job/Recover()
 	set waitfor = FALSE
 	var/oldjobs = SSjob.all_occupations
-	sleep(2 SECONDS)
+	sleep(20)
 	for (var/datum/job/job as anything in oldjobs)
 		INVOKE_ASYNC(src, .proc/RecoverJob, job)
 

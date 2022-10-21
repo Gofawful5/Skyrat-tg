@@ -7,6 +7,7 @@
 	size = 10
 	requires_ntnet = FALSE
 	available_on_ntnet = FALSE
+	unsendable = TRUE
 	undeletable = TRUE
 	tgui_id = "SyndContractor"
 	program_icon = "tasks"

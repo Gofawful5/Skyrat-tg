@@ -36,7 +36,7 @@
 	power_light = FALSE
 	requires_power = TRUE
 	ambience_index = AMBIENCE_CREEPY
-	area_flags = VALID_TERRITORY | UNIQUE_AREA | FLORA_ALLOWED
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | FLORA_ALLOWED | NO_ALERTS
 	min_ambience_cooldown = 70 SECONDS
 	max_ambience_cooldown = 220 SECONDS
 
@@ -49,7 +49,7 @@
 	power_equip = FALSE
 	power_light = FALSE
 	ambience_index = AMBIENCE_CREEPY
-	area_flags = VALID_TERRITORY | UNIQUE_AREA | FLORA_ALLOWED
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | FLORA_ALLOWED | NO_ALERTS
 	min_ambience_cooldown = 70 SECONDS
 	max_ambience_cooldown = 220 SECONDS
 
@@ -59,16 +59,16 @@
 
 /area/rockplanet/surface/outdoors/unexplored //monsters and ruins spawn here
 	icon_state = "unexplored"
-	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED | NO_ALERTS
 	map_generator = /datum/map_generator/cave_generator/rockplanet
 
 /area/rockplanet/surface/outdoors/unexplored/danger //megafauna will also spawn here
 	icon_state = "danger"
-	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED | MEGAFAUNA_SPAWN_ALLOWED
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED | MEGAFAUNA_SPAWN_ALLOWED | NO_ALERTS
 
 /area/rockplanet/surface/outdoors/explored
 	name = "Rockplanet Labor Camp"
-	area_flags = VALID_TERRITORY | UNIQUE_AREA
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | NO_ALERTS
 
 /area/security/checkpoint/auxiliary/has_gravity
 	name = "Security Checkpoint - Rockplanet"	//Duplicate name bad
