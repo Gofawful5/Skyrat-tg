@@ -254,7 +254,7 @@
 /datum/uplink_item/ammo/shotgun/meteor
 	name = "12g Meteorslug Shells"
 	desc = "An alternative 8-round meteorslug magazine for use in the Bulldog shotgun. \
-		Great for blasting airlocks off their frames and knocking down enemies."
+		Great for blasting holes into the hull and knocking down enemies."
 	item = /obj/item/ammo_box/magazine/m12g/meteor
 	purchasable_from = UPLINK_NUKE_OPS
 
@@ -387,11 +387,11 @@
 	item = /obj/item/ammo_casing/caseless/rocket
 	cost = 4
 
-/datum/uplink_item/ammo/rocket/hedp
-	name = "84mm HEDP Rocket"
-	desc = "A high-yield HEDP rocket; extremely effective against armored targets, as well as surrounding personnel. \
+/datum/uplink_item/ammo/rocket/heap
+	name = "84mm HEAP Rocket"
+	desc = "A high-yield HEAP rocket; extremely effective against literally everything and anything near that thing that doesn't exist anymore. \
 			Strike fear into the hearts of your enemies."
-	item = /obj/item/ammo_casing/caseless/rocket/hedp
+	item = /obj/item/ammo_casing/caseless/rocket/heap
 	cost = 6
 
 /datum/uplink_item/ammo/surplus_smg

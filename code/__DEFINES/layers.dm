@@ -66,9 +66,6 @@
 
 #define FULLSCREEN_PLANE 23
 
-///Visuals that represent sounds happening, and can be seen while blind.
-#define SOUND_EFFECT_VISUAL_PLANE 25
-
 ///--------------- FULLSCREEN RUNECHAT BUBBLES ------------
 
 ///Popup Chat Messages
@@ -123,6 +120,7 @@
 #define GAS_FILTER_LAYER 2.48
 #define GAS_PUMP_LAYER 2.49
 #define PLUMBING_PIPE_VISIBILE_LAYER 2.495//layer = initial(layer) + ducting_layer / 3333 in atmospherics/handle_layer() to determine order of duct overlap
+#define BOT_PATH_LAYER 2.497
 #define LOW_OBJ_LAYER 2.5
 ///catwalk overlay of /turf/open/floor/plating/catwalk_floor
 #define CATWALK_LAYER 2.51
@@ -213,10 +211,11 @@
 #define CRIT_LAYER 5
 #define CURSE_LAYER 6
 
-///--------------- SOUND EFFECT VISUALS ------------
+#define FOV_EFFECT_LAYER 100
+
+///--------------- FULLSCREEN RUNECHAT BUBBLES ------------
 /// Bubble for typing indicators
-#define TYPING_LAYER 1
-#define FOV_EFFECTS_LAYER 2 //Blindness effects are not layer 4, they lie to you
+#define TYPING_LAYER 500
 
 #define RADIAL_BACKGROUND_LAYER 0
 ///1000 is an unimportant number, it's just to normalize copied layers

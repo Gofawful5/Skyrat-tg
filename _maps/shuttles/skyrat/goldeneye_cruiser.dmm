@@ -1105,7 +1105,7 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/syndicate/cruiser/hallway)
 "xX" = (
-/mob/living/simple_animal/mouse/white{
+/mob/living/basic/mouse/white{
 	faction = list("Syndicate")
 	},
 /obj/structure/bed/maint,
@@ -2021,7 +2021,7 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate/cruiser/hallway)
 "QU" = (
-/obj/structure/janitorialcart{
+/obj/structure/mop_bucket/janitorialcart{
 	dir = 4
 	},
 /obj/item/reagent_containers/cup/bucket,

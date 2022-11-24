@@ -11,8 +11,6 @@
 	var/uid
 	///Static ID to ensure all IDs are unique.
 	var/static/file_uid = 0
-	///The hard drive that has this computer file stored.
-	var/obj/item/computer_hardware/hard_drive/holder
 	///The modular computer hosting the file.
 	var/obj/item/modular_computer/computer
 
@@ -21,15 +19,9 @@
 	uid = file_uid++
 
 /datum/computer_file/Destroy(force)
-	if(!holder)
-		return ..()
-
-	holder.remove_file(src)
-	// holder.holder is the computer that has drive installed. If we are Destroy()ing program that's currently running kill it.
-	if(computer && computer.active_program == src)
-		computer.kill_program(forced = TRUE)
-	holder = null
-	computer = null
+	if(computer)
+		computer.remove_file(src)
+		computer = null
 	return ..()
 
 // Returns independent copy of this file.
@@ -55,8 +47,8 @@
 /datum/computer_file/proc/on_examine(obj/item/modular_computer/source, mob/user)
 	return null
 
-/// Called when someone tries to insert something one of your applications needs, like an Intellicard for AI restoration. Return TRUE to cancel attackby chain.
-/datum/computer_file/proc/try_insert(obj/item/attacking_item, mob/living/user)
+/// Called when attacking a tablet with an item, checking if any application uses it. Return TRUE to cancel the attack chain.
+/datum/computer_file/proc/application_attackby(obj/item/attacking_item, mob/living/user)
 	return FALSE
 
 /**
