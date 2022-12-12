@@ -307,6 +307,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOFLASH "noflash"
 /// prevents xeno huggies implanting skeletons
 #define TRAIT_XENO_IMMUNE "xeno_immune"
+/// Allows the species to equip items that normally require a jumpsuit without having one equipped. Used by golems.
+#define TRAIT_NO_JUMPSUIT "no_jumpsuit"
 #define TRAIT_NAIVE "naive"
 /// always detect storms on icebox
 #define TRAIT_DETECT_STORM "detect_storm"
@@ -387,7 +389,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BLUSHING "blushing"
 /// This person is crying
 #define TRAIT_CRYING "crying"
-#define TRAIT_NOBLEED "nobleed" //This carbon doesn't bleed
+///This carbon doesn't bleed
+#define TRAIT_NOBLEED "nobleed"
 /// This atom can ignore the "is on a turf" check for simple AI datum attacks, allowing them to attack from bags or lockers as long as any other conditions are met
 #define TRAIT_AI_BAGATTACK "bagattack"
 /// This mobs bodyparts are invisible but still clickable.
@@ -400,7 +403,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 // You're immune to the hallucination effect of the supermatter, either
 // through force of will, or equipment. Present on /mob or /datum/mind
 #define TRAIT_MADNESS_IMMUNE "supermatter_madness_immune"
-
 // You can stare into the abyss, and it turns pink.
 // Being close enough to the supermatter makes it heal at higher temperatures
 // and emit less heat. Present on /mob or /datum/mind
@@ -610,6 +612,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_GRABWEAKNESS "grab_weakness"
 #define TRAIT_SNOB "snob"
 #define TRAIT_BALD "bald"
+#define TRAIT_SHAVED "shaved"
 #define TRAIT_BADTOUCH "bad_touch"
 #define TRAIT_EXTROVERT "extrovert"
 #define TRAIT_INTROVERT "introvert"
@@ -679,6 +682,12 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 /// this is used to bypass tongue language restrictions but not tongue disabilities
 #define TRAIT_TOWER_OF_BABEL "tower_of_babel"
+
+/// This target has recently been shot by a marksman coin and is very briefly immune to being hit by one again to prevent recursion
+#define TRAIT_RECENTLY_COINED "recently_coined"
+
+/// Receives echolocation images.
+#define TRAIT_ECHOLOCATION_RECEIVER "echolocation_receiver"
 
 //Medical Categories for quirks
 #define CAT_QUIRK_ALL 0
@@ -990,5 +999,15 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define RIGHT_LEG_TRAIT "right_leg"
 #define LEFT_LEG_TRAIT "left_leg"
 
-/// This target has recently been shot by a marksman coin and is very briefly immune to being hit by one again to prevent recursion
-#define TRAIT_RECENTLY_COINED "trait_recently_coined"
+/// Trait given by echolocation component.
+#define ECHOLOCATION_TRAIT "echolocation"
+
+///without a human having this trait, they speak as if they have no tongue.
+#define TRAIT_SPEAKS_CLEARLY "speaks_clearly"
+
+// specific sources for TRAIT_SPEAKS_CLEARLY
+
+///trait source that tongues should use
+#define SPEAKING_FROM_TONGUE "tongue"
+///trait source that sign language should use
+#define SPEAKING_FROM_HANDS "hands"
