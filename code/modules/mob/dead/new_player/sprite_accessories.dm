@@ -1739,6 +1739,10 @@
 	icon = 'icons/mob/species/podperson_hair.dmi'
 	em_block = TRUE
 
+/datum/sprite_accessory/pod_hair/bald
+	name = "Bald"
+	icon_state = null
+
 /datum/sprite_accessory/pod_hair/ivy
 	name = "Ivy"
 	icon_state = "ivy"
@@ -2188,7 +2192,7 @@
 /datum/sprite_accessory/moth_wings/plasmafire
 	name = "Plasmafire"
 	icon_state = "plasmafire"
-	
+
 /datum/sprite_accessory/moth_wings/moffra
 	name = "Moffra"
 	icon_state = "moffra"
@@ -2275,7 +2279,7 @@
 /datum/sprite_accessory/moth_antennae/plasmafire
 	name = "Plasmafire"
 	icon_state = "plasmafire"
-	
+
 /datum/sprite_accessory/moth_antennae/moffra
 	name = "Moffra"
 	icon_state = "moffra"
