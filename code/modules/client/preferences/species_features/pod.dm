@@ -23,7 +23,14 @@
 		if (accessory == null || accessory.icon_state == null)
 			continue
 
+<<<<<<< Updated upstream
+	for (var/pod_name in GLOB.pod_hair_list)
+		var/datum/sprite_accessory/pod_hair = GLOB.pod_hair_list[pod_name]
+		if(pod_hair.locked)
+			continue
+=======
 		var/icon/final_icon = new(head_icon)
+>>>>>>> Stashed changes
 
 		var/icon/beard_icon = values[name]
 		beard_icon.Blend(COLOR_DARK_MODERATE_LIME_GREEN, ICON_MULTIPLY)
@@ -37,7 +44,7 @@
 	return values
 
 /datum/preference/choiced/pod_hair/create_default_value()
-	return pick(GLOB.pod_hair_list)
+	return pick(assoc_to_keys_features(GLOB.pod_hair_list))
 
 /datum/preference/choiced/pod_hair/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["pod_hair"] = value
