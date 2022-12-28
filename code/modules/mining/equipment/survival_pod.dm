@@ -43,7 +43,7 @@
 	if(!used)
 		loc.visible_message(span_warning("\The [src] begins to shake. Stand back!"))
 		used = TRUE
-		sleep(50)
+		sleep(5 SECONDS)
 		var/turf/deploy_location = get_turf(src)
 		var/status = template.check_deploy(deploy_location)
 		switch(status)
@@ -91,19 +91,19 @@
 	smoothing_groups = list(SMOOTH_GROUP_SURVIVAL_TITANIUM_POD, SMOOTH_GROUP_SHUTTLE_PARTS)
 	canSmoothWith = list(SMOOTH_GROUP_SURVIVAL_TITANIUM_POD)
 
-/obj/structure/window/reinforced/shuttle/survival_pod/spawner/north
-	dir = NORTH
-
-/obj/structure/window/reinforced/shuttle/survival_pod/spawner/east
-	dir = EAST
-
-/obj/structure/window/reinforced/shuttle/survival_pod/spawner/west
-	dir = WEST
-
 /obj/structure/window/reinforced/survival_pod
 	name = "pod window"
 	icon = 'icons/obj/lavaland/survival_pod.dmi'
 	icon_state = "pwindow"
+
+/obj/structure/window/reinforced/survival_pod/spawner/north
+	dir = NORTH
+
+/obj/structure/window/reinforced/survival_pod/spawner/east
+	dir = EAST
+
+/obj/structure/window/reinforced/survival_pod/spawner/west
+	dir = WEST
 
 //Door
 /obj/machinery/door/airlock/survival_pod

@@ -3,39 +3,38 @@
 */
 
 /obj/item/storage/box/gunset
-	name = "gun supply box"
-	desc = "An Armadyne weapons supply box."
-	icon = 'modular_skyrat/modules/sec_haul/icons/guns/gunsets.dmi'
-	icon_state = "box"
-	var/box_state = "box"
-	var/opened = FALSE
+	name = "gun case"
+	desc = "A gun case with foam inserts laid out to fit a weapon, magazines, and gear securely."
+	icon_state = "guncase" //Currently only comes as a generic gray, though there's sprites for Armadyne branded ones in the icon file. There's also sprites for smaller ones!
 	inhand_icon_state = "sec-case"
+	icon = 'modular_skyrat/modules/sec_haul/icons/guns/gunsets.dmi'
 	lefthand_file = 'icons/mob/inhands/equipment/briefcase_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/briefcase_righthand.dmi'
-	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_BULKY
+	resistance_flags = FLAMMABLE
 	drop_sound = 'sound/items/handling/ammobox_drop.ogg'
 	pickup_sound =  'sound/items/handling/ammobox_pickup.ogg'
 	foldable = FALSE
 	illustration = null
+	var/opened = FALSE
+
+//Add this extra line to examine() if you make an armadyne variant: "It has a textured carbon grip, and the <b>[span_red("Armadyne Corporation")]</b> logo etched into the top."
 
 /obj/item/storage/box/gunset/PopulateContents()
 	. = ..()
 	new /obj/item/storage/bag/ammo(src)
-	new /obj/item/gun_maintenance_supplies(src)
 
 /obj/item/storage/box/gunset/update_icon()
 	. = ..()
 	if(opened)
-		icon_state = "[box_state]-open"
+		icon_state = "[initial(icon_state)]-open"
 	else
-		icon_state = box_state
+		icon_state = initial(icon_state)
 
 /obj/item/storage/box/gunset/AltClick(mob/user)
 	. = ..()
 	opened = !opened
 	update_icon()
-
 
 /obj/item/storage/box/gunset/attack_self(mob/user)
 	. = ..()
@@ -184,7 +183,7 @@
 */
 
 /obj/item/storage/box/gunset/zeta
-	name = "10mm Magnum revolver supply box"
+	name = "10mm revolver supply box"
 	desc = "Ideally contains a slow-firing revolver that packs a punch."
 
 /obj/item/storage/box/gunset/zeta/PopulateContents()
@@ -208,7 +207,7 @@
 	new /obj/item/ammo_box/revolver/revolution(src)
 	new /obj/item/ammo_box/revolver/revolution(src)
 	new /obj/item/ammo_box/revolver/revolution(src)
-	new /obj/item/ammo_box/advanced/b9mm(src)
+	new /obj/item/ammo_box/c9mm(src)
 
 /*
 *	PRIMARIES
@@ -277,7 +276,7 @@
 
 /obj/item/storage/box/gunset/pitbull
 	name = "10mm PDW supply box"
-	desc = "Ideally contains a slow-firing 10mm Auto PDW that packs a punch."
+	desc = "Ideally contains a slow-firing 10mm PDW that packs a punch."
 
 /obj/item/gun/ballistic/automatic/pitbull/nomag
 	spawnwithmagazine = FALSE
@@ -359,6 +358,7 @@
 /obj/item/storage/box/gunset/pdh_corpo
 	name = "pdh 'corporate' supply box"
 	w_class = WEIGHT_CLASS_NORMAL
+
 /obj/item/gun/ballistic/automatic/pistol/pdh/corpo/nomag
 	spawnwithmagazine = FALSE
 
@@ -369,6 +369,25 @@
 	new /obj/item/ammo_box/magazine/multi_sprite/pdh_corpo(src)
 	new /obj/item/ammo_box/magazine/multi_sprite/pdh_corpo(src)
 	new /obj/item/ammo_box/magazine/multi_sprite/pdh_corpo(src)
+
+/*
+*	STRIKER
+*/
+
+/obj/item/storage/box/gunset/pdh_striker
+	name = "pdh 'striker' supply box"
+	w_class = WEIGHT_CLASS_NORMAL
+
+/obj/item/gun/ballistic/automatic/pistol/pdh/striker/nomag
+	spawnwithmagazine = FALSE
+
+/obj/item/storage/box/gunset/pdh_striker/PopulateContents()
+	. = ..()
+	new /obj/item/gun/ballistic/automatic/pistol/pdh/striker/nomag(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/pdh_striker(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/pdh_striker(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/pdh_striker(src)
+	new /obj/item/ammo_box/magazine/multi_sprite/pdh_striker(src)
 
 // KRAUT SPACE MAGIC!
 /obj/item/storage/box/gunset/g11
