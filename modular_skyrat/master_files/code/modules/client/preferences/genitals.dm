@@ -2,6 +2,22 @@
 
 // ABSTRACT TYPES
 
+/datum/preference/toggle/allow_genitals
+	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
+	savefile_identifier = PREFERENCE_CHARACTER
+	savefile_key = "allow_genitals_toggle"
+	default_value = TRUE
+
+/datum/preference/toggle/allow_genitals/apply_to_human(mob/living/carbon/human/target, value, datum/preferences/preferences)
+	return TRUE // we dont actually want this to do anything
+
+/datum/preference/toggle/allow_genitals/is_accessible(datum/preferences/preferences)
+	if(CONFIG_GET(flag/disable_erp_preferences))
+		return FALSE
+	var/passed_initial_check = ..(preferences)
+	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences)
+	return erp_allowed && passed_initial_check
+
 /datum/preference/choiced/genital
 	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
 	savefile_identifier = PREFERENCE_CHARACTER
@@ -27,7 +43,7 @@
 		return FALSE
 	var/passed_initial_check = ..(preferences)
 	var/allowed = preferences.read_preference(/datum/preference/toggle/allow_mismatched_parts)
-	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences)
+	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences) && preferences.read_preference(/datum/preference/toggle/allow_genitals)
 	return erp_allowed && (passed_initial_check || allowed)
 
 /**
@@ -40,19 +56,22 @@
  * * preferences - The relevant character preferences.
  */
 /datum/preference/choiced/genital/proc/is_visible(mob/living/carbon/human/target, datum/preferences/preferences)
-	var/species_type = preferences.read_preference(/datum/preference/choiced/species)
-	var/datum/species/species = new species_type
+	if(!preferences.read_preference(/datum/preference/toggle/master_erp_preferences) || !preferences.read_preference(/datum/preference/toggle/allow_genitals))
+		return FALSE
 
-	var/species_available = (savefile_key in species.get_features())
-	var/overriding = preferences.read_preference(/datum/preference/toggle/allow_mismatched_parts)
-	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences)
-	return (species_available || overriding) && erp_allowed
+	if(preferences.read_preference(/datum/preference/toggle/allow_mismatched_parts))
+		return TRUE
+
+	var/datum/species/species = preferences.read_preference(/datum/preference/choiced/species)
+	species = new species
+
+	return (savefile_key in species.get_features())
 
 /datum/preference/choiced/genital/create_default_value()
 	return initial(default_accessory_type?.name) || "None"
 
 /datum/preference/choiced/genital/init_possible_values()
-	return assoc_to_keys(GLOB.sprite_accessories[relevant_mutant_bodypart])
+	return assoc_to_keys_features(GLOB.sprite_accessories[relevant_mutant_bodypart])
 
 /datum/preference/toggle/genital_skin_tone
 	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
@@ -68,7 +87,7 @@
 	if(!accessory?.factual || !accessory.has_skintone_shading)
 		return FALSE
 	var/allowed = preferences.read_preference(/datum/preference/toggle/allow_mismatched_parts)
-	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences)
+	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences) && preferences.read_preference(/datum/preference/toggle/allow_genitals)
 	return erp_allowed && (passed_initial_check || allowed)
 
 /datum/preference/toggle/genital_skin_color
@@ -84,7 +103,7 @@
 	if(!initial(species_type.use_skintones))
 		return FALSE
 	var/allowed = preferences.read_preference(/datum/preference/toggle/allow_mismatched_parts)
-	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences)
+	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences) && preferences.read_preference(/datum/preference/toggle/allow_genitals)
 	var/part_enabled = is_factual_sprite_accessory(relevant_mutant_bodypart, preferences.read_preference(genital_pref_type))
 	return erp_allowed && part_enabled && (passed_initial_check || allowed)
 
@@ -98,7 +117,7 @@
 /datum/preference/tri_color/genital/is_accessible(datum/preferences/preferences)
 	var/passed_initial_check = ..(preferences)
 	var/allowed = preferences.read_preference(/datum/preference/toggle/allow_mismatched_parts)
-	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences)
+	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences) && preferences.read_preference(/datum/preference/toggle/allow_genitals)
 	var/can_color = TRUE
 	/// Checks that the use skin color pref is both enabled and actually accessible. If so, then this is useless.
 	if(preferences.read_preference(skin_color_type))
@@ -117,7 +136,7 @@
 /datum/preference/tri_bool/genital/is_accessible(datum/preferences/preferences)
 	var/passed_initial_check = ..(preferences)
 	var/allowed = preferences.read_preference(/datum/preference/toggle/allow_mismatched_parts)
-	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences)
+	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences) && preferences.read_preference(/datum/preference/toggle/allow_genitals)
 	var/can_color = TRUE
 	/// Checks that the use skin color pref is both enabled and actually accessible. If so, then this is useless.
 	if(preferences.read_preference(skin_color_type))
@@ -160,7 +179,7 @@
 /datum/preference/numeric/penis_length/is_accessible(datum/preferences/preferences)
 	var/passed_initial_check = ..(preferences)
 	var/allowed = preferences.read_preference(/datum/preference/toggle/allow_mismatched_parts)
-	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences)
+	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences) && preferences.read_preference(/datum/preference/toggle/allow_genitals)
 	var/part_enabled = is_factual_sprite_accessory(relevant_mutant_bodypart, preferences.read_preference(/datum/preference/choiced/genital/penis))
 	return erp_allowed && part_enabled && (passed_initial_check || allowed)
 
@@ -181,7 +200,7 @@
 /datum/preference/numeric/penis_girth/is_accessible(datum/preferences/preferences)
 	var/passed_initial_check = ..(preferences)
 	var/allowed = preferences.read_preference(/datum/preference/toggle/allow_mismatched_parts)
-	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences)
+	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences) && preferences.read_preference(/datum/preference/toggle/allow_genitals)
 	var/part_enabled = is_factual_sprite_accessory(relevant_mutant_bodypart, preferences.read_preference(/datum/preference/choiced/genital/penis))
 	return erp_allowed && part_enabled && (passed_initial_check || allowed)
 
@@ -218,7 +237,7 @@
 		return FALSE
 	var/passed_initial_check = ..(preferences)
 	var/allowed = preferences.read_preference(/datum/preference/toggle/allow_mismatched_parts)
-	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences)
+	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences) && preferences.read_preference(/datum/preference/toggle/allow_genitals)
 	var/part_enabled = is_factual_sprite_accessory(relevant_mutant_bodypart, preferences.read_preference(/datum/preference/choiced/genital/penis))
 	return erp_allowed && part_enabled && (passed_initial_check || allowed)
 
@@ -231,7 +250,7 @@
 /datum/preference/choiced/penis_sheath/is_accessible(datum/preferences/preferences)
 	var/passed_initial_check = ..(preferences)
 	var/allowed = preferences.read_preference(/datum/preference/toggle/allow_mismatched_parts)
-	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences)
+	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences) && preferences.read_preference(/datum/preference/toggle/allow_genitals)
 	var/part_enabled = is_factual_sprite_accessory(relevant_mutant_bodypart, preferences.read_preference(/datum/preference/choiced/genital/penis))
 	return erp_allowed && part_enabled && (passed_initial_check || allowed)
 
@@ -290,7 +309,7 @@
 /datum/preference/numeric/balls_size/is_accessible(datum/preferences/preferences)
 	var/passed_initial_check = ..(preferences)
 	var/allowed = preferences.read_preference(/datum/preference/toggle/allow_mismatched_parts)
-	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences)
+	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences) && preferences.read_preference(/datum/preference/toggle/allow_genitals)
 	var/part_enabled = is_factual_sprite_accessory(relevant_mutant_bodypart, preferences.read_preference(/datum/preference/choiced/genital/testicles))
 	return erp_allowed && part_enabled && (passed_initial_check || allowed)
 
@@ -390,7 +409,7 @@
 /datum/preference/toggle/breasts_lactation/is_accessible(datum/preferences/preferences)
 	var/passed_initial_check = ..(preferences)
 	var/allowed = preferences.read_preference(/datum/preference/toggle/allow_mismatched_parts)
-	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences)
+	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences) && preferences.read_preference(/datum/preference/toggle/allow_genitals)
 	var/part_enabled = is_factual_sprite_accessory(relevant_mutant_bodypart, preferences.read_preference(/datum/preference/choiced/genital/breasts))
 	return erp_allowed && part_enabled && (passed_initial_check || allowed)
 
@@ -401,12 +420,12 @@
 	relevant_mutant_bodypart = ORGAN_SLOT_BREASTS
 
 /datum/preference/choiced/breasts_size/init_possible_values()
-	return GLOB.preference_breast_sizes
+	return GLOB.breast_size_to_number
 
 /datum/preference/choiced/breasts_size/is_accessible(datum/preferences/preferences)
 	var/passed_initial_check = ..(preferences)
 	var/allowed = preferences.read_preference(/datum/preference/toggle/allow_mismatched_parts)
-	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences)
+	var/erp_allowed = preferences.read_preference(/datum/preference/toggle/master_erp_preferences) && preferences.read_preference(/datum/preference/toggle/allow_genitals)
 	var/part_enabled = is_factual_sprite_accessory(relevant_mutant_bodypart, preferences.read_preference(/datum/preference/choiced/genital/breasts))
 	return erp_allowed && part_enabled && (passed_initial_check || allowed)
 
