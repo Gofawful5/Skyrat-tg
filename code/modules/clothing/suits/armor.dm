@@ -138,11 +138,11 @@
 			RESKIN_WORN_ICON = 'modular_skyrat/master_files/icons/mob/clothing/suit.dmi',
 			RESKIN_WORN_ICON_STATE = "trenchcloak"
 		),
-		"Peacekeeper" = list(
+		"Black" = list(
 			RESKIN_ICON = 'modular_skyrat/master_files/icons/obj/clothing/suits.dmi',
-			RESKIN_ICON_STATE = "peacekeeper_trench_hos",
+			RESKIN_ICON_STATE = "hos_black",
 			RESKIN_WORN_ICON = 'modular_skyrat/master_files/icons/mob/clothing/suit.dmi',
-			RESKIN_WORN_ICON_STATE = "peacekeeper_trench_hos",
+			RESKIN_WORN_ICON_STATE = "hos_black",
 			RESKIN_SUPPORTS_VARIATIONS_FLAGS = NONE
 		)
 	)
@@ -503,17 +503,6 @@
 	inhand_icon_state = null
 	material_flags = MATERIAL_EFFECTS | MATERIAL_ADD_PREFIX | MATERIAL_COLOR | MATERIAL_AFFECT_STATISTICS//Can change color and add prefix
 	armor_type = /datum/armor/knight_greyscale
-
-/datum/armor/knight_greyscale
-	melee = 35
-	bullet = 10
-	laser = 10
-	energy = 10
-	bomb = 10
-	bio = 10
-	fire = 40
-	acid = 40
-	wound = 15
 
 /obj/item/clothing/suit/armor/vest/durathread
 	name = "durathread vest"
