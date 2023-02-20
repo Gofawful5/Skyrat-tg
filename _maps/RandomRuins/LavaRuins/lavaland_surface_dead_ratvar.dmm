@@ -3,130 +3,97 @@
 /turf/template_noop,
 /area/template_noop)
 "b" = (
-/turf/open/misc/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ratvar)
+/turf/open/misc/asteroid/basalt/lava_land_surface)
 "c" = (
 /obj/structure/fluff/clockwork/alloy_shards/small,
-/turf/open/misc/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ratvar)
+/turf/open/misc/asteroid/basalt/lava_land_surface)
 "d" = (
 /obj/structure/girder/bronze,
-/turf/open/misc/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ratvar)
+/turf/open/misc/asteroid/basalt/lava_land_surface)
 "e" = (
 /obj/item/stack/sheet/bronze,
-/turf/open/floor/bronze/filled/lavaland,
-/area/ruin/unpowered/ratvar)
+/turf/open/floor/bronze/filled/lavaland)
 "f" = (
-/turf/closed/mineral/volcanic/lava_land_surface,
-/area/ruin/unpowered/ratvar)
+/turf/closed/mineral/volcanic/lava_land_surface)
 "g" = (
 /obj/structure/fluff/clockwork/alloy_shards/medium_gearbit,
-/turf/open/misc/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ratvar)
+/turf/open/misc/asteroid/basalt/lava_land_surface)
 "h" = (
-/turf/open/floor/bronze/filled/lavaland,
-/area/ruin/unpowered/ratvar)
+/turf/open/floor/bronze/filled/lavaland)
 "i" = (
 /obj/structure/grille/broken,
-/turf/open/misc/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ratvar)
+/turf/open/misc/asteroid/basalt/lava_land_surface)
 "j" = (
-/turf/closed/wall/mineral/bronze,
-/area/ruin/unpowered/ratvar)
+/turf/closed/wall/mineral/bronze)
 "k" = (
 /obj/structure/fluff/clockwork/alloy_shards/small,
-/turf/open/floor/bronze/filled/lavaland,
-/area/ruin/unpowered/ratvar)
+/turf/open/floor/bronze/filled/lavaland)
 "l" = (
-/turf/open/lava/smooth/lava_land_surface,
-/area/ruin/unpowered/ratvar)
+/turf/open/lava/smooth/lava_land_surface)
 "m" = (
 /obj/structure/fluff/clockwork/alloy_shards/medium,
-/turf/open/misc/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ratvar)
+/turf/open/misc/asteroid/basalt/lava_land_surface)
 "n" = (
 /obj/structure/fluff/clockwork/blind_eye,
-/turf/open/misc/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ratvar)
+/turf/open/misc/asteroid/basalt/lava_land_surface)
 "o" = (
 /obj/structure/fluff/clockwork/alloy_shards/large,
-/turf/open/misc/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ratvar)
+/turf/open/misc/asteroid/basalt/lava_land_surface)
 "p" = (
 /obj/structure/fluff/clockwork/alloy_shards/medium,
-/turf/open/floor/bronze/filled/lavaland,
-/area/ruin/unpowered/ratvar)
+/turf/open/floor/bronze/filled/lavaland)
 "q" = (
 /obj/structure/lattice,
-/turf/open/lava/smooth/lava_land_surface,
-/area/ruin/unpowered/ratvar)
+/turf/open/lava/smooth/lava_land_surface)
 "r" = (
 /obj/structure/lattice,
-/turf/open/misc/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ratvar)
+/turf/open/misc/asteroid/basalt/lava_land_surface)
 "s" = (
 /obj/structure/fluff/clockwork/alloy_shards/large,
-/turf/open/floor/bronze/filled/lavaland,
-/area/ruin/unpowered/ratvar)
+/turf/open/floor/bronze/filled/lavaland)
 "t" = (
 /obj/item/stack/sheet/bronze,
-/turf/open/misc/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ratvar)
+/turf/open/misc/asteroid/basalt/lava_land_surface)
 "u" = (
 /obj/structure/grille,
-/turf/open/floor/bronze/filled/lavaland,
-/area/ruin/unpowered/ratvar)
+/turf/open/floor/bronze/filled/lavaland)
 "v" = (
 /obj/structure/fluff/clockwork/alloy_shards/medium,
 /obj/structure/lattice,
-/turf/open/misc/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ratvar)
+/turf/open/misc/asteroid/basalt/lava_land_surface)
 "w" = (
 /obj/structure/grille/broken,
-/turf/open/floor/bronze/filled/lavaland,
-/area/ruin/unpowered/ratvar)
+/turf/open/floor/bronze/filled/lavaland)
 "x" = (
 /obj/structure/girder/bronze,
 /obj/item/stack/sheet/bronze,
-/turf/open/floor/bronze/filled/lavaland,
-/area/ruin/unpowered/ratvar)
+/turf/open/floor/bronze/filled/lavaland)
 "y" = (
 /obj/structure/fluff/clockwork/fallen_armor,
-/turf/open/floor/bronze/filled/lavaland,
-/area/ruin/unpowered/ratvar)
+/turf/open/floor/bronze/filled/lavaland)
 "z" = (
 /obj/structure/girder/bronze,
-/turf/open/floor/bronze/filled/lavaland,
-/area/ruin/unpowered/ratvar)
+/turf/open/floor/bronze/filled/lavaland)
 "A" = (
 /obj/structure/fluff/clockwork/clockgolem_remains,
-/turf/open/floor/bronze/filled/lavaland,
-/area/ruin/unpowered/ratvar)
+/turf/open/floor/bronze/filled/lavaland)
 "B" = (
 /obj/item/nullrod/spear,
-/turf/open/floor/bronze/filled/lavaland,
-/area/ruin/unpowered/ratvar)
+/turf/open/floor/bronze/filled/lavaland)
 "C" = (
 /obj/structure/fluff/clockwork/alloy_shards/medium_gearbit,
-/turf/open/floor/bronze/filled/lavaland,
-/area/ruin/unpowered/ratvar)
+/turf/open/floor/bronze/filled/lavaland)
 "D" = (
 /obj/structure/grille,
-/turf/open/misc/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ratvar)
+/turf/open/misc/asteroid/basalt/lava_land_surface)
 "E" = (
 /obj/structure/fluff/clockwork/clockgolem_remains,
-/turf/open/misc/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ratvar)
+/turf/open/misc/asteroid/basalt/lava_land_surface)
 "F" = (
-/obj/structure/dead_ratvar,
-/turf/open/floor/bronze/filled/lavaland,
-/area/ruin/unpowered/ratvar)
+/turf/open/floor/bronze/filled/lavaland)
 "G" = (
 /obj/item/stack/sheet/bronze/thirty,
-/turf/open/misc/asteroid/basalt/lava_land_surface,
-/area/ruin/unpowered/ratvar)
+/turf/open/misc/asteroid/basalt/lava_land_surface)
 
 (1,1,1) = {"
 a
