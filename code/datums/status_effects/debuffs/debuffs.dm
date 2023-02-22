@@ -31,7 +31,7 @@
 	if(!.)
 		return
 	if(owner.client.prefs.read_preference(/datum/preference/toggle/unsugarcoated))
-		owner.playsound_local(owner, 'modular_skyrat/master_files/sound/effects/sugarcoat.ogg', 100, TRUE, -1)
+		owner.playsound_local(owner, 'modular_skyrat/master_files/sound/effects/sugarcoat.ogg', vol = 100, vary = FALSE)
 	ADD_TRAIT(owner, TRAIT_INCAPACITATED, TRAIT_STATUS_EFFECT(id))
 	ADD_TRAIT(owner, TRAIT_IMMOBILIZED, TRAIT_STATUS_EFFECT(id))
 	ADD_TRAIT(owner, TRAIT_HANDS_BLOCKED, TRAIT_STATUS_EFFECT(id))
@@ -82,7 +82,7 @@
 	if(!.)
 		return
 	if(owner.client.prefs.read_preference(/datum/preference/toggle/unsugarcoated))
-		owner.playsound_local(owner, 'modular_skyrat/master_files/sound/effects/sugarcoat.ogg', 100, TRUE, -1)
+		owner.playsound_local(owner, 'modular_skyrat/master_files/sound/effects/sugarcoat.ogg', vol = 100, vary = FALSE)
 	ADD_TRAIT(owner, TRAIT_INCAPACITATED, TRAIT_STATUS_EFFECT(id))
 	ADD_TRAIT(owner, TRAIT_IMMOBILIZED, TRAIT_STATUS_EFFECT(id))
 	ADD_TRAIT(owner, TRAIT_FLOORED, TRAIT_STATUS_EFFECT(id))
@@ -106,7 +106,7 @@
 	if(!.)
 		return
 	if(owner.client.prefs.read_preference(/datum/preference/toggle/unsugarcoated))
-		owner.playsound_local(owner, 'modular_skyrat/master_files/sound/effects/sugarcoat.ogg', 100, TRUE, -1)
+		owner.playsound_local(owner, 'modular_skyrat/master_files/sound/effects/sugarcoat.ogg', vol = 100, vary = FALSE)
 	ADD_TRAIT(owner, TRAIT_INCAPACITATED, TRAIT_STATUS_EFFECT(id))
 
 // When the status effect runs out, your TRAIT_INCAPACITATED is removed.

@@ -199,6 +199,10 @@
 	else
 		target.apply_damage(stamina_damage, STAMINA)
 		if(!trait_check)
+			if(user.client)
+				if(user.client.prefs.read_preference(/datum/preference/toggle/unsugarcoated))
+					if (user != target)
+						user.playsound_local(target, 'modular_skyrat/master_files/sound/effects/sugarcoat.ogg', vol = 100, vary = FALSE)
 			target.Knockdown((isnull(stun_override) ? knockdown_time : stun_override))
 		additional_effects_non_cyborg(target, user)
 	return TRUE
