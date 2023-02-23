@@ -55,10 +55,10 @@
 	)
 
 /obj/structure/closet/ammunitionlocker/useful/PopulateContents()
-	new /obj/item/storage/box/rubbershot(src)
-	new /obj/item/storage/box/rubbershot(src)
-	new /obj/item/storage/box/rubbershot(src)
-	new /obj/item/storage/box/rubbershot(src)
+	new /obj/item/storage/box/lethalshot(src)
+	new /obj/item/storage/box/lethalshot(src)
+	new /obj/item/storage/box/lethalshot(src)
+	new /obj/item/storage/box/lethalshot(src)
 
 /*
 *	AMMO BOXES
