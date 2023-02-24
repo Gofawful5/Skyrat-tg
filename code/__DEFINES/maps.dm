@@ -76,6 +76,7 @@ Always compile, always use that verb, and always make sure that it works for wha
 #define ZTRAIT_CENTCOM "CentCom"
 #define ZTRAIT_STATION "Station"
 #define ZTRAIT_MINING "Mining"
+#define ZTRAIT_REEBE "Reebe"
 #define ZTRAIT_RESERVED "Transit/Reserved"
 #define ZTRAIT_AWAY "Away Mission"
 #define ZTRAIT_SPACE_RUINS "Space Ruins"
@@ -143,6 +144,7 @@ Always compile, always use that verb, and always make sure that it works for wha
 ///Z level traits for Secret Away Missions
 #define ZTRAITS_AWAY_SECRET list(ZTRAIT_AWAY = TRUE, ZTRAIT_SECRET = TRUE, ZTRAIT_NOPHASE = TRUE)
 
+#define ZTRAITS_REEBE list(ZTRAIT_REEBE = TRUE, ZTRAIT_BOMBCAP_MULTIPLIER = 0.5)
 #define DL_NAME "name"
 #define DL_TRAITS "traits"
 #define DECLARE_LEVEL(NAME, TRAITS) list(DL_NAME = NAME, DL_TRAITS = TRAITS)
@@ -159,6 +161,7 @@ Always compile, always use that verb, and always make sure that it works for wha
 #define CAMERA_LOCK_STATION 1
 #define CAMERA_LOCK_MINING 2
 #define CAMERA_LOCK_CENTCOM 4
+#define CAMERA_LOCK_REEBE 8
 
 //Reserved/Transit turf type
 #define RESERVED_TURF_TYPE /turf/open/space/basic //What the turf is when not being used

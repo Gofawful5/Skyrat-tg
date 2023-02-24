@@ -23,6 +23,8 @@
 			src.add_antag_datum(antag)
 		if(ROLE_CULTIST)
 			src.add_antag_datum(/datum/antagonist/cult)
+		if(ROLE_SERVANT_OF_RATVAR)
+			src.add_antag_datum(/datum/antagonist/servant_of_ratvar)
 		if(ROLE_BROTHER)
 			if(!istype(opt, /datum/team/brother_team))
 				message_admins("Attempted to create bloodbrothers but no team was specified!")

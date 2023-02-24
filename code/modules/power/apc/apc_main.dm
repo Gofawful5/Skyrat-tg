@@ -105,6 +105,10 @@
 	var/icon_update_needed = FALSE
 	///Reference to our remote control
 	var/mob/remote_control_user = null
+
+	var/clock_cog_rewarded = FALSE	//Clockcult - Has the reward for converting an APC been given?
+	var/integration_cog = null		//Clockcult - The integration cog inserted inside of us
+
 	///Represents a signel source of power alarms for this apc
 	var/datum/alarm_handler/alarm_manager
 	/// Offsets the object by APC_PIXEL_OFFSET (defined in apc_defines.dm) pixels in the direction we want it placed in. This allows the APC to be embedded in a wall, yet still inside an area (like mapping).
@@ -240,6 +244,8 @@
 		else
 			. += {"It's [ !terminal ? "not" : "" ] wired up.\n
 			The electronics are[!has_electronics?"n't":""] installed."}
+		if(integration_cog || (user.hallucinating() && prob(20)))
+			. += "A small cogwheel is inside of it."
 	else
 		if(machine_stat & MAINT)
 			. += "The cover is closed. Something is wrong with it. It doesn't work."
@@ -570,6 +576,12 @@
 		else // chargemode off
 			charging = APC_NOT_CHARGING
 			chargecount = 0
+
+		//=====Clock Cult=====
+		if(integration_cog && cell.charge >= cell.maxcharge/2)
+			var/power_delta = CLAMP(cell.charge - 20, 0, 20)
+			GLOB.clockcult_power += power_delta
+			cell.charge -= power_delta
 
 	else // no cell, switch everything off
 

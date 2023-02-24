@@ -497,6 +497,8 @@
 			return FALSE
 		if(specific_cult?.is_sacrifice_target(target.mind))
 			return FALSE
+		if(is_servant_of_ratvar(target))
+			return FALSE
 		if(target.mind.enslaved_to && !IS_CULTIST(target.mind.enslaved_to))
 			return FALSE
 		if(target.mind.unconvertable)

@@ -19,7 +19,12 @@
 		balloon_alert(user, "locking the cover")
 		update_appearance()
 		return
-
+	if(opened && integration_cog || has_electronics != APC_ELECTRONICS_INSTALLED)
+		to_chat(user, "<span class='notice'>You begin prying something out of the APC...</span>")
+		crowbar.play_tool_sound(src)
+		if(crowbar.use_tool(src, user, 50))
+			to_chat(user, "<span class='warning'>You screw up breaking whatever was inside!</span>")
+			QDEL_NULL(integration_cog)
 	if(!opened || has_electronics != APC_ELECTRONICS_INSTALLED)
 		return
 	if(terminal)

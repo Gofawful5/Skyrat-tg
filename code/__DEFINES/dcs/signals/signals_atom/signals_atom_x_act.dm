@@ -25,6 +25,12 @@
 ///from base of atom/narsie_act(): ()
 #define COMSIG_ATOM_NARSIE_ACT "atom_narsie_act"
 ///from base of atom/rcd_act(): (/mob, /obj/item/construction/rcd, passed_mode)
+
+#define COMSIG_ATOM_RATVAR_ACT "atom_ratvar_act"
+//! from base of atom/ratvar_act(): ()
+#define COMSIG_ATOM_EMINENCE_ACT "atom_eminence_act"
+//! from base of atom/eminence_act(): ()
+
 #define COMSIG_ATOM_RCD_ACT "atom_rcd_act"
 ///from base of atom/singularity_pull(): (/datum/component/singularity, current_size)
 #define COMSIG_ATOM_SING_PULL "atom_sing_pull"
@@ -38,3 +44,6 @@
 #define COMSIG_ATOM_SECONDARY_TOOL_ACT(tooltype) "tool_secondary_act_[tooltype]"
 	// We have the same returns here as COMSIG_ATOM_TOOL_ACT
 	// #define COMPONENT_BLOCK_TOOL_ATTACK (1<<0)
+
+// /datum/component/clockwork_trap signals
+#define COMSIG_CLOCKWORK_SIGNAL_RECIEVED "clock_recieved"			//! When anything the trap is attatched to is triggered

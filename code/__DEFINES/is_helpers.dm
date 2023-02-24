@@ -165,6 +165,10 @@ GLOBAL_LIST_INIT(turfs_openspace, typecacheof(list(
 
 #define isclown(A) (istype(A, /mob/living/simple_animal/hostile/retaliate/clown))
 
+#define iseminence(A) (istype(A, /mob/living/simple_animal/eminence))
+
+#define iscogscarab(A) (istype(A, /mob/living/simple_animal/drone/cogscarab))
+
 #define isspider(A) (istype(A, /mob/living/simple_animal/hostile/giant_spider))
 
 

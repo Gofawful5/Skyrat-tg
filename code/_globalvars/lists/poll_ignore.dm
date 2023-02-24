@@ -18,6 +18,7 @@
 #define POLL_IGNORE_IMAGINARYFRIEND "imaginary_friend"
 #define POLL_IGNORE_SPLITPERSONALITY "split_personality"
 #define POLL_IGNORE_CONTRACTOR_SUPPORT "contractor_support"
+#define POLL_IGNORE_CLOCKWORK "clockwork"
 #define POLL_IGNORE_ACADEMY_WIZARD "academy_wizard"
 #define POLL_IGNORE_CORTICAL_BORER "cortical_borer" // SKYRAT EDIT - Cortical Borer
 #define POLL_IGNORE_PAI "pai"

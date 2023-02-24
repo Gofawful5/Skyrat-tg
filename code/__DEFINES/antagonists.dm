@@ -201,6 +201,9 @@ GLOBAL_LIST_INIT(ai_employers, list(
 /// Checks if the given mob is a blood cultist
 #define IS_CULTIST(mob) (mob?.mind?.has_antag_datum(/datum/antagonist/cult))
 
+/// Checks if the given mob is a clockwork cultist
+#define is_servant_of_ratvar(mob) (mob?.mind?.has_antag_datum(/datum/antagonist/servant_of_ratvar))
+
 /// Checks if the given mob is a nuclear operative
 #define IS_NUKE_OP(mob) (mob?.mind?.has_antag_datum(/datum/antagonist/nukeop))
 

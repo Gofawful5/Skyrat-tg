@@ -351,6 +351,12 @@
 	if(data["misc"] >= (25 SECONDS)) // 10 units
 		affected_mob.adjust_stutter_up_to(4 SECONDS * delta_time, 20 SECONDS)
 		affected_mob.set_dizzy_if_lower(10 SECONDS)
+		if(is_servant_of_ratvar(affected_mob) && prob(20))
+			affected_mob.say(text2ratvar(pick("Please don't leave me...", "Rat'var what happened?", "My friends, where are you?", "The hierophant network just went dark, is anyone there?", "The light is fading...", "No... It can't be...")), forced = "holy water")
+			if(prob(40))
+				if(!HAS_TRAIT_FROM(affected_mob, TRAIT_DEPRESSION, HOLYWATER_TRAIT))
+					to_chat(affected_mob, "<span class='large_brass'>You feel the light fading and the world collapsing around you...</span>")
+					ADD_TRAIT(affected_mob, TRAIT_DEPRESSION, HOLYWATER_TRAIT)
 		if(IS_CULTIST(affected_mob) && DT_PROB(10, delta_time))
 			affected_mob.say(pick("Av'te Nar'Sie","Pa'lid Mors","INO INO ORA ANA","SAT ANA!","Daim'niodeis Arc'iai Le'eones","R'ge Na'sie","Diabo us Vo'iscum","Eld' Mon Nobis"), forced = "holy water")
 			if(prob(10))
@@ -359,8 +365,11 @@
 				to_chat(affected_mob, "<span class='cultlarge'>[pick("Your blood is your bond - you are nothing without it", "Do not forget your place", \
 				"All that power, and you still fail?", "If you cannot scour this poison, I shall scour your meager life!")].</span>")
 	if(data["misc"] >= (1 MINUTES)) // 24 units
-		if(IS_CULTIST(affected_mob))
-			affected_mob.mind.remove_antag_datum(/datum/antagonist/cult)
+		if(IS_CULTIST(affected_mob) || is_servant_of_ratvar(affected_mob))
+			if(IS_CULTIST(affected_mob))
+				affected_mob.mind.remove_antag_datum(/datum/antagonist/cult)
+			if(is_servant_of_ratvar(affected_mob))
+				affected_mob.mind.remove_antag_datum(/datum/antagonist/servant_of_ratvar)
 			affected_mob.Unconscious(100)
 		affected_mob.remove_status_effect(/datum/status_effect/jitter)
 		affected_mob.remove_status_effect(/datum/status_effect/speech/stutter)

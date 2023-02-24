@@ -17,8 +17,6 @@ GLOBAL_VAR_INIT(drone_machine_blacklist_enabled, TRUE)
 #define REPAIRDRONE "drone_repair"
 /// Scout Drone icon_state
 #define SCOUTDRONE "drone_scout"
-/// Clockwork Drone icon_state
-#define CLOCKDRONE "drone_clock"
 
 /// [MAINTDRONE] hacked icon_state
 #define MAINTDRONE_HACKED "drone_maint_red"
