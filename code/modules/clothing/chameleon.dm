@@ -387,6 +387,23 @@
 
 	var/datum/action/item_action/chameleon/change/chameleon_action
 
+/obj/item/clothing/under/chameleon/ratvar
+	name = "ratvarian engineer's jumpsuit"
+	desc = "A tough jumpsuit woven from alloy threads. It can take on the appearance of other jumpsuits."
+	icon_state = "engine"
+	item_state = "engi_suit"
+	greyscale_colors = null
+	greyscale_config = null
+	greyscale_config_inhand_left = null
+	greyscale_config_inhand_right = null
+	greyscale_config_worn = null
+
+/obj/item/clothing/under/chameleon/envirosuit/ratvar
+	name = "ratvarian engineer's envirosuit"
+	desc = "A tough envirosuit woven from alloy threads. It can take on the appearance of other jumpsuits."
+	icon_state = "engineer_envirosuit"
+	item_state = "engineer_envirosuit"
+
 /datum/armor/under_chameleon
 	melee = 10
 	bullet = 10

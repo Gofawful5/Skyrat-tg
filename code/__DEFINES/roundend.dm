@@ -35,5 +35,6 @@
 #define STATION_NUKED 20
 /// The station was destroyed by the supermatter cascade
 #define SUPERMATTER_CASCADE 21
+#define CLOCK_PROSELYTIZATION 23
 /// The emergency shuttle was successfully hijacked
 #define SHUTTLE_HIJACK 24

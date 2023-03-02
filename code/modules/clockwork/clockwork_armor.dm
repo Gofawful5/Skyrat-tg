@@ -1,4 +1,5 @@
 //Clockwork armor: High melee protection but weak to lasers
+
 /obj/item/clothing/head/helmet/clockwork
 	name = "clockwork helmet"
 	desc = "A heavy helmet made of brass."
@@ -7,12 +8,12 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	flags_inv = HIDEEARS|HIDEHAIR|HIDEFACE
-	armor = list("melee" = 60, "bullet" = 70, "laser" = -25, "energy" = 0, "bomb" = 60, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 100)
+	armor_type = /datum/armor/clockwork
 
 /obj/item/clothing/head/helmet/clockwork/equipped(mob/living/user, slot)
 	..()
-	if(slot == SLOT_HEAD)
-		if(!iscultist(user))
+	if(slot == ITEM_SLOT_HEAD)
+		if(!IS_CULTIST(user))
 			to_chat(user, "<span class='heavy_brass'>\"Now now, this is for my servants, not you.\"</span>")
 			user.visible_message("<span class='warning'>As [user] puts [src] on, it flickers off [user.p_their()] head!</span>", "<span class='warning'>The helmet flickers off your head, leaving only nausea!</span>")
 			if(iscarbon(user))
@@ -36,13 +37,12 @@
 	cold_protection = CHEST|GROIN|LEGS
 	heat_protection = CHEST|GROIN|LEGS
 	resistance_flags = FIRE_PROOF | ACID_PROOF
-	armor = list("melee" = 60, "bullet" = 70, "laser" = -25, "energy" = 0, "bomb" = 60, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 100)
 	allowed = list(/obj/item/clockwork)
 
 /obj/item/clothing/suit/armor/clockwork/equipped(mob/living/user, slot)
 	..()
-	if(slot == SLOT_WEAR_SUIT)
-		if(!iscultist(user))
+	if(slot == ITEM_SLOT_OCLOTHING)
+		if(!IS_CULTIST(user))
 			to_chat(user, "<span class='heavy_brass'>\"Now now, this is for my servants, not you.\"</span>")
 			user.visible_message("<span class='warning'>As [user] puts [src] on, it flickers off [user.p_their()] body!</span>", "<span class='warning'>The cuirass flickers off your body, leaving only nausea!</span>")
 			if(iscarbon(user))
@@ -54,7 +54,7 @@
 			user.emote("scream")
 			user.apply_damage(15, BURN, BODY_ZONE_CHEST)
 			user.adjust_fire_stacks(2)
-			user.IgniteMob()
+			user.ignite_mob()
 		addtimer(CALLBACK(user, /mob/living.proc/dropItemToGround, src, TRUE), 1)
 
 /obj/item/clothing/gloves/clockwork
@@ -62,25 +62,21 @@
 	desc = "Heavy, shock-resistant gauntlets with brass reinforcement."
 	icon = 'icons/obj/clothing/clockwork_garb.dmi'
 	icon_state = "clockwork_gauntlets"
-	item_state = "clockwork_gauntlets"
-	item_color = null //So they don't wash.
 	strip_delay = 50
 	equip_delay_other = 30
 	body_parts_covered = ARMS
 	cold_protection = ARMS
 	heat_protection = ARMS
 	siemens_coefficient = 0
-	permeability_coefficient = 0.05
 	resistance_flags = FIRE_PROOF | ACID_PROOF
-	armor = list("melee" = 80, "bullet" = 70, "laser" = -25, "energy" = 0, "bomb" = 60, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 100)
 
 /obj/item/clothing/gloves/clockwork/mob_can_equip(mob/M, mob/equipper, slot, disable_warning = 0)
 	return 0
 
 /obj/item/clothing/gloves/clockwork/equipped(mob/living/user, slot)
 	..()
-	if(slot == SLOT_GLOVES)
-		if(!iscultist(user))
+	if(slot == ITEM_SLOT_GLOVES)
+		if(!IS_CULTIST(user))
 			to_chat(user, "<span class='heavy_brass'>\"Now now, this is for my servants, not you.\"</span>")
 			user.visible_message("<span class='warning'>As [user] puts [src] on, it flickers off [user.p_their()] arms!</span>", "<span class='warning'>The gauntlets flicker off your arms, leaving only nausea!</span>")
 			if(iscarbon(user))
@@ -104,16 +100,20 @@
 	equip_delay_other = 30
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 
-/obj/item/clothing/shoes/clockwork/negates_gravity()
-	return TRUE
+/obj/item/clothing/shoes/clockwork/equipped(mob/user, slot)
+	. = ..()
+	if(slot & ITEM_SLOT_FEET)
+		update_gravity_trait(user)
+	else
+		REMOVE_TRAIT(user, TRAIT_NEGATES_GRAVITY, type)
 
 /obj/item/clothing/shoes/clockwork/mob_can_equip(mob/M, mob/equipper, slot, disable_warning = 0)
 	return 0
 
 /obj/item/clothing/shoes/clockwork/equipped(mob/living/user, slot)
 	..()
-	if(slot == SLOT_SHOES)
-		if(!iscultist(user))
+	if(slot == ITEM_SLOT_FEET)
+		if(!IS_CULTIST(user))
 			to_chat(user, "<span class='heavy_brass'>\"Now now, this is for my servants, not you.\"</span>")
 			user.visible_message("<span class='warning'>As [user] puts [src] on, it flickers off [user.p_their()] feet!</span>", "<span class='warning'>The treads flicker off your feet, leaving only nausea!</span>")
 			if(iscarbon(user))

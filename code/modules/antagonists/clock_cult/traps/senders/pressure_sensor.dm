@@ -13,16 +13,20 @@
 	alpha = 60
 	layer = PRESSURE_PLATE_LAYER
 	max_integrity = 5
-	obj_integrity = 5
 
 /datum/component/clockwork_trap/pressure_sensor
 	sends_input = TRUE
 
 /datum/component/clockwork_trap/pressure_sensor/Initialize()
 	. = ..()
-	RegisterSignal(parent, COMSIG_MOVABLE_CROSSED, .proc/crossed)
+	var/static/list/loc_connections = list(
+		COMSIG_ATOM_ENTERED = .proc/on_entered,
+	)
+	AddComponent(/datum/component/connect_loc_behalf, parent, loc_connections)
 
-/datum/component/clockwork_trap/pressure_sensor/proc/crossed(datum/source, atom/movable/AM)
+/datum/component/clockwork_trap/pressure_sensor/proc/on_entered(datum/source, atom/movable/AM)
+	SIGNAL_HANDLER
+
 	//Item's in hands or boxes shouldn't trigger it
 	if(!istype(AM.loc, /turf))
 		return
@@ -37,5 +41,5 @@
 	trigger_connected()
 	for(var/obj/structure/destructible/clockwork/trap/T in get_turf(parent))
 		if(T != parent)
-			SEND_SIGNAL(T, COMSIG_CLOCKWORK_SIGNAL_RECIEVED)
+			SEND_SIGNAL(T, COMSIG_CLOCKWORK_SIGNAL_RECEIVED)
 	playsound(get_turf(parent), 'sound/machines/click.ogg', 50)

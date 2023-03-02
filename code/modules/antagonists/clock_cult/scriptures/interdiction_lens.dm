@@ -20,7 +20,6 @@
 	anchored = TRUE
 	break_message = "<span class='warning'>The interdiction lens breaks into multiple fragments, which gently float to the ground.</span>"
 	max_integrity = 150
-	obj_integrity = 150
 	minimum_power = 5
 	var/enabled = FALSE			//Misnomer - Whether we want to be enabled or not, processing would be if we are enabled
 	var/processing = FALSE
@@ -65,11 +64,6 @@
 		if(!is_servant_of_ratvar(L))
 			if(use_power(5))
 				L.apply_status_effect(STATUS_EFFECT_INTERDICTION)
-	for(var/obj/mecha/M in range(INTERDICTION_LENS_RANGE, src))
-		if(use_power(5))
-			M.use_power(8000)
-			M.take_damage(80)
-			do_sparks(4, TRUE, M)
 
 /obj/structure/destructible/clockwork/gear_base/interdiction_lens/repowered()
 	if(enabled)
@@ -80,32 +74,9 @@
 		flick("interdiction_lens_recharged", src)
 		if(istype(dampening_field))
 			QDEL_NULL(dampening_field)
-		dampening_field = make_field(/datum/proximity_monitor/advanced/peaceborg_dampener/clockwork, list("current_range" = INTERDICTION_LENS_RANGE, "host" = src, "projector" = internal_dampener))
-
-/obj/structure/destructible/clockwork/gear_base/interdiction_lens/depowered()
-	if(processing)
-		STOP_PROCESSING(SSobj, src)
-		processing = FALSE
-	icon_state = "interdiction_lens_inactive"
-	flick("interdiction_lens_discharged", src)
-	QDEL_NULL(dampening_field)
-
-//Dampening field
-/datum/proximity_monitor/advanced/peaceborg_dampener/clockwork
-	name = "\improper Reality Distortion Field"
-
-/datum/proximity_monitor/advanced/peaceborg_dampener/clockwork/setup_edge_turf(turf/T)
-	edge_turfs[T] = new /obj/effect/abstract/proximity_checker/advanced/field_edge(T, src)
-
-/datum/proximity_monitor/advanced/peaceborg_dampener/clockwork/capture_projectile(obj/item/projectile/P, track_projectile = TRUE)
-	if(P in tracked)
-		return
-	if(isliving(P.firer))
-		if(is_servant_of_ratvar(P.firer))
-			return
-	projector.dampen_projectile(P, track_projectile)
-	if(track_projectile)
-		tracked += P
+		dampening_field =  new(src, field_radius, TRUE, src)
+		RegisterSignal(dampening_field, COMSIG_DAMPENER_CAPTURE, PROC_REF(dampen_projectile))
+		RegisterSignal(dampening_field, COMSIG_DAMPENER_RELEASE, PROC_REF(release_projectile))
 
 /obj/item/borg/projectile_dampen/clockcult
 	name = "internal clockcult projectile dampener"

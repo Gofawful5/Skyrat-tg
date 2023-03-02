@@ -9,10 +9,7 @@
 	desc = "A spiked, brass skewer attached to a steam powered extension mechanism."
 	icon_state = "brass_skewer"
 	component_datum = /datum/component/clockwork_trap/skewer
-	unwrench_path = /obj/item/clockwork/trap_placer/skewer
-	buckle_lying = FALSE
-	max_integrity = 40
-	obj_integrity = 40
+	unwrench_path = /obj/
 	var/cooldown = 0
 	var/extended = FALSE
 	var/mutable_appearance/stab_overlay

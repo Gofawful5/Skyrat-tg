@@ -4,6 +4,10 @@
 #define COMSIG_ACTION_TRIGGER "action_trigger"
 	// Return to block the trigger from occuring
 	#define COMPONENT_ACTION_BLOCK_TRIGGER (1<<0)
+// /datum/mind signals
+#define COMSIG_MIND_TRANSFER_TO	"mind_transfer_to"					// (mob/old, mob/new)
+// /datum/component/clockwork_trap signals
+#define COMSIG_CLOCKWORK_SIGNAL_RECEIVED "clock_received"			//! When anything the trap is attatched to is triggered
 /// From /datum/action/Grant(): (mob/grant_to)
 #define COMSIG_ACTION_GRANTED "action_grant"
 /// From /datum/action/Grant(): (datum/action)

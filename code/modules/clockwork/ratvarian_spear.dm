@@ -23,7 +23,7 @@
 		if(issilicon(target))
 			target.visible_message("<span class='warning'>[target] shudders violently at [src]'s touch!</span>", "<span class='userdanger'>ERROR: Temperature rising!</span>")
 			bonus_damage *= 5 //total 40 damage on borgs, 70 with ratvar
-		else if(iscultist(target) || isconstruct(target))
+		else if(IS_CULTIST(target) || isconstruct(target))
 			to_chat(target, "<span class='userdanger'>Your body flares with agony at [src]'s presence!</span>")
 			bonus_damage *= 3 //total 30 damage on cultists, 50 with ratvar
 
@@ -33,7 +33,7 @@
 		var/mob/living/L = hit_atom
 		if(!..())
 			if(!L.anti_magic_check())
-				if(issilicon(L) || iscultist(L))
+				if(issilicon(L) || IS_CULTIST(L))
 					L.Paralyze(100)
 				else
 					L.Paralyze(40)

@@ -70,22 +70,6 @@
 		network_id = NETWORK_NAME_COMBINE(STATION_NETWORK_ROOT, network_id) // I regret nothing!!
 	AddComponent(/datum/component/ntnet_interface, network_id, id_tag)
 
-/// A list of all /obj by their id_tag
-GLOBAL_LIST_EMPTY(objects_by_id_tag)
-
-/obj/Initialize(mapload)
-	. = ..()
-
-	if (id_tag)
-		GLOB.objects_by_id_tag[id_tag] = src
-
-/obj/Destroy(force)
-	if(!ismachinery(src))
-		STOP_PROCESSING(SSobj, src) // TODO: Have a processing bitflag to reduce on unnecessary loops through the processing lists
-	SStgui.close_uis(src)
-	GLOB.objects_by_id_tag -= id_tag
-	. = ..()
-
 /obj/attacked_by(obj/item/attacking_item, mob/living/user)
 	if(!attacking_item.force)
 		return
@@ -381,3 +365,7 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 ///unfreezes this obj if its frozen
 /obj/proc/unfreeze()
 	SEND_SIGNAL(src, COMSIG_OBJ_UNFREEZE)
+
+/obj/proc/setAnchored(anchorvalue)
+	SEND_SIGNAL(src, COMSIG_OBJ_SETANCHORED, anchorvalue)
+	anchored = anchorvalue
