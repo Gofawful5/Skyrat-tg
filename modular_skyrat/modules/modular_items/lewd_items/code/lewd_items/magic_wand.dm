@@ -1,7 +1,8 @@
 /obj/item/clothing/sextoy/magic_wand
 	name = "magic wand"
 	desc = "Not sure where is magic in this thing, but if you press button - it makes funny vibrations"
-	icon_state = "magicwand"
+	icon_state = "magicwand_off"
+	base_icon_state = "magicwand"
 	worn_icon_state = "magicwand"
 	inhand_icon_state = "magicwand"
 	worn_icon = 'modular_skyrat/modules/modular_items/lewd_items/icons/mob/lewd_items/lewd_items.dmi'
@@ -55,7 +56,7 @@
 
 /obj/item/clothing/sextoy/magic_wand/update_icon_state()
 	. = ..()
-	icon_state = "[initial(icon_state)]_[vibration_mode]"
+	icon_state = "[base_icon_state]_[vibration_mode]"
 
 /obj/item/clothing/sextoy/magic_wand/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
@@ -68,20 +69,20 @@
 	. = ..()
 	STOP_PROCESSING(SSobj, src)
 
-/obj/item/clothing/sextoy/magic_wand/process(delta_time)
+/obj/item/clothing/sextoy/magic_wand/process(seconds_per_tick)
 	var/mob/living/carbon/human/vibrated = loc
 	if(!istype(vibrated))
 		return
 	// I tried using switch here, but it need static value, and u.arousal can't be it. So fuck switches. Reject it, embrace the IFs
 	if(vibration_mode == "low" && vibrated.arousal < 30)
-		vibrated.adjust_arousal(0.6 * delta_time)
-		vibrated.adjust_pleasure(0.7 * delta_time)
+		vibrated.adjust_arousal(0.6 * seconds_per_tick)
+		vibrated.adjust_pleasure(0.7 * seconds_per_tick)
 	else if(vibration_mode == "medium" && vibrated.arousal < 60)
-		vibrated.adjust_arousal(0.8 * delta_time)
-		vibrated.adjust_pleasure(0.8 * delta_time)
+		vibrated.adjust_arousal(0.8 * seconds_per_tick)
+		vibrated.adjust_pleasure(0.8 * seconds_per_tick)
 	else if(vibration_mode == "hard")
-		vibrated.adjust_arousal(1 * delta_time)
-		vibrated.adjust_pleasure(1 * delta_time)
+		vibrated.adjust_arousal(1 * seconds_per_tick)
+		vibrated.adjust_pleasure(1 * seconds_per_tick)
 
 /obj/item/clothing/sextoy/magic_wand/attack(mob/living/carbon/human/target, mob/living/carbon/human/user)
 	. = ..()
@@ -97,8 +98,8 @@
 		return
 	switch(user.zone_selected) //to let code know what part of body we gonna... Yeah.
 		if(BODY_ZONE_PRECISE_GROIN)
-			var/obj/item/organ/external/genital/penis = target.getorganslot(ORGAN_SLOT_PENIS)
-			var/obj/item/organ/external/genital/vagina = target.getorganslot(ORGAN_SLOT_VAGINA)
+			var/obj/item/organ/external/genital/penis = target.get_organ_slot(ORGAN_SLOT_PENIS)
+			var/obj/item/organ/external/genital/vagina = target.get_organ_slot(ORGAN_SLOT_VAGINA)
 			if(vagina && penis)
 				if(target.is_bottomless() || vagina.visibility_preference == GENITAL_ALWAYS_SHOW && penis.visibility_preference == GENITAL_ALWAYS_SHOW)
 					message = (user == target) ? pick("massages their penis with the [src]", "[vibration_mode == "low" ? "gently" : ""][vibration_mode = "hard" ? "roughly" : ""] teases their penis with [src]", "massages their pussy with the [src]", "[vibration_mode == "low" ? "gently" : ""][vibration_mode = "hard" ? "roughly" : ""] teases their pussy with [src]") : pick("[vibration_mode == "low" ? "delicately" : ""][vibration_mode = "hard" ? "aggressively" : ""] massages [target]'s penis with [src]", "uses [src] to [vibration_mode == "low" ? "gently" : ""][vibration_mode = "hard" ? "roughly" : ""] massage [target]'s penis", "leans the vibrator against [target]'s penis", "[vibration_mode == "low" ? "delicately" : ""][vibration_mode = "hard" ? "aggressively" : ""] massages [target]'s pussy with [src]", "uses [src] to [vibration_mode == "low" ? "gently" : ""][vibration_mode = "hard" ? "roughly" : ""] massage [target]'s pussy", "leans the vibrator against [target]'s pussy")
@@ -128,7 +129,7 @@
 			target.adjust_pleasure((vibration_mode == "low" ? 2 : (vibration_mode == "hard" ? 10 : 5)))
 
 		if(BODY_ZONE_CHEST)
-			var/obj/item/organ/external/genital/breasts = target.getorganslot(ORGAN_SLOT_BREASTS)
+			var/obj/item/organ/external/genital/breasts = target.get_organ_slot(ORGAN_SLOT_BREASTS)
 			if(!(target.is_topless() || breasts.visibility_preference == GENITAL_ALWAYS_SHOW))
 				to_chat(user, span_danger("Looks like [target]'s chest is covered!"))
 				return

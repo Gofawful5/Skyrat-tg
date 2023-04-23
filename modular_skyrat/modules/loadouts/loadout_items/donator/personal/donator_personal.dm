@@ -563,6 +563,27 @@
 	item_path = /obj/item/toy/plush/skyrat/plushie_elofy
 	//ckeywhitelist = list("october23") // Asked it to be public.
 
+/datum/loadout_item/suit/elofy
+	name = "Solar Admiral Coat"
+	item_path = /obj/item/clothing/suit/armor/hos/elofy
+	ckeywhitelist = list("october23")
+	restricted_roles = list(JOB_HEAD_OF_SECURITY)
+
+/datum/loadout_item/gloves/elofy
+	name = "Solar Admiral Gloves"
+	item_path = /obj/item/clothing/gloves/elofy
+	ckeywhitelist = list("october23")
+
+/datum/loadout_item/shoes/elofy
+	name = "Solar Admiral Boots"
+	item_path = /obj/item/clothing/shoes/jackboots/elofy
+	ckeywhitelist = list("october23")
+
+/datum/loadout_item/pocket_items/transponder
+	name = "Broken Helian Transponder"
+	item_path = /obj/item/donator/transponder
+	ckeywhitelist = list("glacii")
+
 /datum/loadout_item/glasses/goldaviator
 	name = "Purple and Gold Aviators"
 	item_path = /obj/item/clothing/glasses/gold_aviators
@@ -593,3 +614,68 @@
 	item_path = /obj/item/clothing/suit/hooded/sigmarcoat
 	ckeywhitelist = list("sigmaralkahest")
 
+/datum/loadout_item/toys/plushy_syntax1112
+	name = "Lop Bunny Plushie"
+	item_path = /obj/item/toy/plush/skyrat/plushie_syntax1112
+	ckeywhitelist = list("syntax1112")
+
+/datum/loadout_item/gloves/hypnoring_nuke
+	name = "Suspiciously Glossy Ring"
+	item_path = /obj/item/clothing/gloves/ring/hypno/nuke
+	ckeywhitelist = list("sonicgotnuked")
+
+/datum/loadout_item/head/somerandomowl
+	name = "Starry Witch Hat"
+	item_path = /obj/item/clothing/head/costume/strigihat
+	ckeywhitelist = list("somerandomowl")
+
+/datum/loadout_item/head/razurathhat
+	name = "Golden Nanotrasen Officer Cap"
+	item_path = /obj/item/clothing/head/razurathhat
+	ckeywhitelist = list("razurath")
+
+/datum/loadout_item/suit/razurathcoat
+	name = "Golden Nanotrasen Officer Coat"
+	item_path = /obj/item/clothing/suit/razurathcoat
+	ckeywhitelist = list("razurath")
+
+/datum/loadout_item/suit/digicoat_glitched
+	name = "Glitched Digicoat"
+	item_path = /obj/item/clothing/suit/toggle/digicoat/glitched
+	ckeywhitelist = list("razurath")
+
+/datum/loadout_item/pocket_items/masvedishcigar
+	name = "Holocigar"
+	item_path = /obj/item/clothing/mask/holocigarette/masvedishcigar
+	ckeywhitelist = list("masvedish")
+
+/datum/loadout_item/suit/lt3_armor
+	name = "Silver Jacket Mk II"
+	item_path = /obj/item/clothing/suit/armor/skyy
+	ckeywhitelist = list("lt3")
+	restricted_roles = list(JOB_HEAD_OF_PERSONNEL, JOB_NT_REP)
+
+/datum/loadout_item/suit/lt3_jacket
+	name = "Silver Jacket"
+	item_path = /obj/item/clothing/suit/jacket/skyy
+	ckeywhitelist = list("lt3")
+
+/datum/loadout_item/under/miscellaneous/lt3_jeans
+	name = "Silver Jeans"
+	item_path = /obj/item/clothing/under/pants/skyy
+	ckeywhitelist = list("lt3")
+
+/datum/loadout_item/gloves/lt3_gloves
+	name = "Charcoal Fingerless Gloves"
+	item_path = /obj/item/clothing/gloves/skyy
+	ckeywhitelist = list("lt3")
+
+/datum/loadout_item/toys/switchcomb
+	name = "Switchblade Comb"
+	item_path = /obj/item/hairbrush/switchblade
+	ckeywhitelist = list("stonetear")
+
+/datum/loadout_item/suit/colorblockhoodie
+	name = "Color-Block Hoodie"
+	item_path = /obj/item/clothing/suit/hooded/colorblockhoodie
+	ckeywhitelist = list("lolpopomg101")

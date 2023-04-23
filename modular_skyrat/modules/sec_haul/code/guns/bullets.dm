@@ -65,6 +65,7 @@
 	name = "9x25mm Mk.12 IHDF casing"
 	desc = "A modern 9x25mm Mk.12 bullet casing. 'Intelligent High-Impact Dispersal Foam', or in layman's terms, a really strong donk soft riot dart."
 	icon = 'modular_skyrat/modules/sec_haul/icons/guns/ammo_cartridges.dmi'
+	icon_state = "si-casing"
 	projectile_type = /obj/projectile/bullet/c9mm/ihdf
 	harmful = FALSE
 
@@ -102,7 +103,7 @@
 */
 
 /obj/item/ammo_casing/c10mm/rubber
-	name = "10mm Auto rubber bullet casing"
+	name = "10mm rubber bullet casing"
 	desc = "A 10mm rubber bullet casing."
 	icon = 'modular_skyrat/modules/sec_haul/icons/guns/ammo_cartridges.dmi'
 	icon_state = "sr-casing"
@@ -110,7 +111,7 @@
 	harmful = FALSE
 
 /obj/projectile/bullet/c10mm/rubber
-	name = "10mm Auto rubber bullet"
+	name = "10mm rubber bullet"
 	damage = 10
 	stamina = 35
 	ricochets_max = 6
@@ -122,7 +123,7 @@
 	embedding = null
 
 /obj/item/ammo_casing/c10mm/ihdf
-	name = "10mm Auto IHDF bullet casing"
+	name = "10mm IHDF bullet casing"
 	desc = "A 10mm intelligent high-impact dispersal foam bullet casing."
 	icon = 'modular_skyrat/modules/sec_haul/icons/guns/ammo_cartridges.dmi'
 	icon_state = "si-casing"
@@ -130,7 +131,7 @@
 	harmful = FALSE
 
 /obj/projectile/bullet/c10mm/ihdf
-	name = "10mm Auto ihdf bullet"
+	name = "10mm IHDF bullet"
 	icon_state = "ihdf"
 	icon = 'modular_skyrat/modules/sec_haul/icons/guns/projectiles.dmi'
 	damage = 40
@@ -245,8 +246,8 @@
 
 /obj/item/shrapnel/bullet/smartgun
 	name = "smartgun shredder"
-	icon = 'modular_skyrat/modules/sec_haul/icons/guns/projectiles.dmi'
-	icon_state = "smartgun_embed"
+	icon = 'icons/obj/weapons/guns/projectiles.dmi'
+	icon_state = "gaussphase"
 	embedding = null
 
 /*

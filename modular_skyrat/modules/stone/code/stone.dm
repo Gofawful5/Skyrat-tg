@@ -18,8 +18,8 @@
 	stairs_type = /obj/structure/stairs/stone
 
 GLOBAL_LIST_INIT(stone_recipes, list ( \
-	new/datum/stack_recipe("stone brick wall", /turf/closed/wall/mineral/stone, 5, one_per_turf = 1, on_solid_ground = 1, applies_mats = TRUE), \
-	new/datum/stack_recipe("stone brick tile", /obj/item/stack/tile/mineral/stone, 1, 4, 20),
+	new/datum/stack_recipe("stone brick wall", /turf/closed/wall/mineral/stone, 5, one_per_turf = 1, on_solid_ground = 1, applies_mats = TRUE, category = CAT_STRUCTURE), \
+	new/datum/stack_recipe("stone brick tile", /obj/item/stack/tile/mineral/stone, 1, 4, 20, check_density = FALSE, category = CAT_TILES),
 	))
 
 /obj/item/stack/sheet/mineral/stone/get_main_recipes()
@@ -85,10 +85,10 @@ GLOBAL_LIST_INIT(stone_recipes, list ( \
 	icon_state = "wall-0"
 	base_icon_state = "wall"
 	sheet_type = /obj/item/stack/sheet/mineral/stone
-	explosion_block = 2 // Rock and stone to the bone, or at least a bit longer than walls made of metal sheets!
+	explosive_resistance = 2 // Rock and stone to the bone, or at least a bit longer than walls made of metal sheets!
 	smoothing_flags = SMOOTH_BITMASK
-	smoothing_groups = list(SMOOTH_GROUP_WALLS, SMOOTH_GROUP_STONE_WALLS, SMOOTH_GROUP_CLOSED_TURFS)
-	canSmoothWith = list(SMOOTH_GROUP_STONE_WALLS)
+	smoothing_groups = SMOOTH_GROUP_STONE_WALLS + SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
+	canSmoothWith = SMOOTH_GROUP_STONE_WALLS
 	custom_materials = list(/datum/material/stone = MINERAL_MATERIAL_AMOUNT * 2)
 
 /turf/closed/wall/mineral/stone/try_decon(obj/item/item_used, mob/user) // Lets you break down stone walls with stone breaking tools
@@ -112,8 +112,8 @@ GLOBAL_LIST_INIT(stone_recipes, list ( \
 	icon_state = "wall-0"
 	base_icon_state = "wall"
 	smoothing_flags = SMOOTH_BITMASK
-	smoothing_groups = list(SMOOTH_GROUP_WALLS, SMOOTH_GROUP_STONE_WALLS, SMOOTH_GROUP_CLOSED_TURFS)
-	canSmoothWith = list(SMOOTH_GROUP_STONE_WALLS)
+	smoothing_groups = SMOOTH_GROUP_STONE_WALLS + SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
+	canSmoothWith = SMOOTH_GROUP_STONE_WALLS
 	custom_materials = list(/datum/material/stone = MINERAL_MATERIAL_AMOUNT * 2) // Does this even need materials?
 
 /obj/structure/falsewall/stone
@@ -125,5 +125,5 @@ GLOBAL_LIST_INIT(stone_recipes, list ( \
 	mineral = /obj/item/stack/sheet/mineral/stone
 	walltype = /turf/closed/wall/mineral/stone
 	smoothing_flags = SMOOTH_BITMASK
-	smoothing_groups = list(SMOOTH_GROUP_WALLS, SMOOTH_GROUP_STONE_WALLS, SMOOTH_GROUP_CLOSED_TURFS)
-	canSmoothWith = list(SMOOTH_GROUP_STONE_WALLS)
+	smoothing_groups = SMOOTH_GROUP_STONE_WALLS + SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
+	canSmoothWith = SMOOTH_GROUP_STONE_WALLS

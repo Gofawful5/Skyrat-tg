@@ -7,8 +7,6 @@
 		HAIR,
 		FACEHAIR,
 		LIPS,
-		HAS_FLESH,
-		HAS_BONE
 	)
 	inherent_traits = list(
 		TRAIT_DWARF,TRAIT_SNOB,
@@ -34,5 +32,5 @@
 /datum/species/dwarf/prepare_human_for_preview(mob/living/carbon/human/human)
 	human.facial_hairstyle = "Beard (Dwarf)"
 	human.facial_hair_color = "#a55310"
-	human.update_mutant_bodyparts(TRUE)
+	regenerate_organs(human, src, visual_only = TRUE)
 	human.update_body(TRUE)
