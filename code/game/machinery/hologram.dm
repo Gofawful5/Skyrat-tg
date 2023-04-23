@@ -43,8 +43,11 @@ Possible to do for anyone motivated enough:
 	plane = GAME_PLANE
 	req_access = list(ACCESS_KEYCARD_AUTH) //Used to allow for forced connecting to other (not secure) holopads. Anyone can make a call, though.
 	max_integrity = 300
-	armor = list(MELEE = 50, BULLET = 20, LASER = 20, ENERGY = 20, BOMB = 0, BIO = 0, FIRE = 50, ACID = 0)
+	armor_type = /datum/armor/machinery_holopad
 	circuit = /obj/item/circuitboard/machine/holopad
+	// Blue, dim light
+	light_power = 0.8
+	light_color = LIGHT_COLOR_BLUE
 	/// associative lazylist of the form: list(mob calling us = hologram representing that mob).
 	/// this is only populated for holopads answering calls from another holopad
 	var/list/masters
@@ -86,6 +89,13 @@ Possible to do for anyone motivated enough:
 	var/calling = FALSE
 	///bitfield. used to turn on and off hearing sensitivity depending on if we can act on Hear() at all - meant for lowering the number of unessesary hearable atoms
 	var/can_hear_flags = NONE
+
+/datum/armor/machinery_holopad
+	melee = 50
+	bullet = 20
+	laser = 20
+	energy = 20
+	fire = 50
 
 /obj/machinery/holopad/Initialize(mapload)
 	. = ..()
@@ -202,8 +212,8 @@ Possible to do for anyone motivated enough:
 /obj/machinery/holopad/RefreshParts()
 	. = ..()
 	var/holograph_range = 4
-	for(var/obj/item/stock_parts/capacitor/B in component_parts)
-		holograph_range += 1 * B.rating
+	for(var/datum/stock_part/capacitor/capacitor in component_parts)
+		holograph_range += 1 * capacitor.tier
 	holo_range = holograph_range
 
 /obj/machinery/holopad/examine(mob/user)
@@ -212,29 +222,6 @@ Possible to do for anyone motivated enough:
 		. += span_notice("The status display reads: Current projection range: <b>[holo_range]</b> units. Use :h to speak through the projection. Right-click to project or cancel a projection. Alt-click to hangup all active and incomming calls. Ctrl-click to end projection without jumping to your last location.")
 	else if(in_range(user, src) || isobserver(user))
 		. += span_notice("The status display reads: Current projection range: <b>[holo_range]</b> units.")
-
-	//SKYRAT EDIT ADDITION BEGIN - AI QoL
-	var/obj/effect/overlay/holo_pad_hologram/holo
-	var/line
-	var/mob/living/silicon/ai/aiPlayer
-	for(var/mob/living/silicon/ai/master in masters)
-		if(masters[master])
-			holo = masters[master]
-	if(LAZYLEN(masters))
-		for(var/I in masters)
-			var/mob/living/master = I
-			var/mob/living/silicon/ai/AI = master
-			if(!istype(AI))
-				AI = null
-			else
-				aiPlayer = AI
-	if(LAZYLEN(masters))
-		if(holo.Impersonation)
-			. += holo.Impersonation.examine(user)
-		else
-			. += "<span class='info'>*---------*\nThis is <EM>[aiPlayer.name].</EM>\n*---------*</span>"
-			. += line
-	//SKYRAT EDIT ADDITION END - AI QoL
 
 /obj/machinery/holopad/wrench_act(mob/living/user, obj/item/tool)
 	. = ..()
@@ -261,7 +248,7 @@ Possible to do for anyone motivated enough:
 	if(default_deconstruction_screwdriver(user, "holopad_open", "holopad0", P))
 		return
 
-	if(default_pry_open(P))
+	if(default_pry_open(P, close_after_pry = TRUE, closed_density = FALSE))
 		return
 
 	if(default_deconstruction_crowbar(P))
@@ -461,6 +448,7 @@ Possible to do for anyone motivated enough:
 		if(!LAZYLEN(holo_calls))
 			set_can_hear_flags(CAN_HEAR_ACTIVE_HOLOCALLS, FALSE)
 
+	update_appearance(UPDATE_ICON_STATE)
 	return TRUE
 
 /**
@@ -510,7 +498,7 @@ Possible to do for anyone motivated enough:
 	if(outgoing_call)
 		outgoing_call.Check()
 
-	ringing = FALSE
+	var/are_ringing = FALSE
 
 	for(var/datum/holocall/holocall as anything in holo_calls)
 		if(holocall.connected_holopad == src)
@@ -526,9 +514,11 @@ Possible to do for anyone motivated enough:
 			holocall.Disconnect(src)//can't answer calls while calling
 		else
 			playsound(src, 'sound/machines/twobeep.ogg', 100) //bring, bring!
-			ringing = TRUE
+			are_ringing = TRUE
 
-	update_appearance(UPDATE_ICON_STATE)
+	if(ringing != are_ringing)
+		ringing = are_ringing
+		update_appearance(UPDATE_ICON_STATE)
 
 /obj/machinery/holopad/proc/activate_holo(mob/living/user)
 	var/mob/living/silicon/ai/AI = user
@@ -540,31 +530,30 @@ Possible to do for anyone motivated enough:
 			to_chat(user, "[span_danger("ERROR:")] \black Image feed in progress.")
 			return
 
-		var/obj/effect/overlay/holo_pad_hologram/Hologram = new(loc)//Spawn a blank effect at the location.
+		// What to pull our appearance out of
+		var/obj/effect/overlay/holo_pad_hologram/hologram = new(loc)//Spawn a blank effect at the location.
+		var/atom/work_off = AI?.hologram_appearance || user
+
+		hologram.icon = work_off.icon
+		hologram.icon_state = work_off.icon_state
+		hologram.copy_overlays(work_off, TRUE)
+		hologram.makeHologram()
+
 		if(AI)
-			Hologram.icon = AI.holo_icon
 			AI.eyeobj.setLoc(get_turf(src)) //ensure the AI camera moves to the holopad
+			hologram.Impersonation = AI //SKYRAT EDIT -- ADDITION -- Customization; puts the AI core as the impersonated mob so that the examine proc can be redirected
 		else //make it like real life
-			Hologram.icon = user.icon
-			Hologram.icon_state = user.icon_state
-			Hologram.copy_overlays(user, TRUE)
-			//codersprite some holo effects here
-			Hologram.alpha = 100
-			Hologram.add_atom_colour("#77abff", FIXED_COLOUR_PRIORITY)
-			Hologram.Impersonation = user
+			hologram.Impersonation = user
+		//Hologram.mouse_opacity = MOUSE_OPACITY_TRANSPARENT//So you can't click on it. //SKYRAT EDIT -- Customization; Making holograms clickable/examinable
+		hologram.layer = FLY_LAYER //Above all the other objects/mobs. Or the vast majority of them.
+		SET_PLANE_EXPLICIT(hologram, ABOVE_GAME_PLANE, src)
+		hologram.set_anchored(TRUE)//So space wind cannot drag it.
+		hologram.name = user.name //SKYRAT EDIT -- Make the name exact, so that the double-emotes are less jarring in the chat
 
-		Hologram.mouse_opacity = MOUSE_OPACITY_TRANSPARENT//So you can't click on it.
-		Hologram.layer = FLY_LAYER //Above all the other objects/mobs. Or the vast majority of them.
-		SET_PLANE_EXPLICIT(Hologram, ABOVE_GAME_PLANE, src)
-		Hologram.set_anchored(TRUE)//So space wind cannot drag it.
-		Hologram.name = "[user.name] (Hologram)"//If someone decides to right click.
-		Hologram.set_light(2) //hologram lighting
-		move_hologram()
-
-		set_holo(user, Hologram)
+		set_holo(user, hologram)
 		visible_message(span_notice("A holographic image of [user] flickers to life before your eyes!"))
 
-		return Hologram
+		return hologram
 	else
 		to_chat(user, "[span_danger("ERROR:")] Unable to project hologram.")
 
@@ -620,15 +609,8 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		AI.current = src
 	SetLightsAndPower()
 	update_holoray(user, get_turf(loc))
-	RegisterSignal(user, COMSIG_MOB_EMOTE, PROC_REF(handle_hologram_emote)) // SKYRAT ADDITION - HOLOGRAM EMOTE MIRROR
 	return TRUE
 
-// SKYRAT ADDITION - HOLOGRAM EMOTE MIRROR
-/obj/machinery/holopad/proc/handle_hologram_emote(atom/movable/source, datum/emote/emote, action, type_override, message, intentional)
-	SIGNAL_HANDLER
-	for(var/mob/mob_viewer in viewers(world.view, src))
-		to_chat(mob_viewer, "<span class='emote'><b>[source]</b> [message]</span>")
-// SKYRAT ADDITION - END
 
 /obj/machinery/holopad/proc/clear_holo(mob/living/user)
 	qdel(masters[user]) // Get rid of user's hologram
@@ -660,7 +642,6 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	qdel(holorays[user])
 	LAZYREMOVE(holorays, user)
 	SetLightsAndPower()
-	UnregisterSignal(user, COMSIG_MOB_EMOTE) // SKYRAT ADDITION - HOLOGRAM EMOTE MIRROR
 	return TRUE
 
 //Try to transfer hologram to another pad that can project on T
@@ -694,20 +675,20 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		return FALSE
 
 /obj/machinery/holopad/proc/move_hologram(mob/living/user, turf/new_turf)
-	if(LAZYLEN(masters) && masters[user])
-		var/obj/effect/overlay/holo_pad_hologram/holo = masters[user]
-		var/transfered = FALSE
-		if(!validate_location(new_turf))
-			if(!transfer_to_nearby_pad(new_turf,user))
-				clear_holo(user)
-				return FALSE
-			else
-				transfered = TRUE
-		//All is good.
-		holo.abstract_move(new_turf)
-		SET_PLANE(holo, ABOVE_GAME_PLANE, new_turf)
-		if(!transfered)
-			update_holoray(user,new_turf)
+	if(!LAZYLEN(masters) || !masters[user])
+		return TRUE
+	var/obj/effect/overlay/holo_pad_hologram/holo = masters[user]
+	var/transfered = FALSE
+	if(!validate_location(new_turf))
+		if(!transfer_to_nearby_pad(new_turf,user))
+			return FALSE
+		else
+			transfered = TRUE
+	//All is good.
+	holo.abstract_move(new_turf)
+	SET_PLANE(holo, ABOVE_GAME_PLANE, new_turf)
+	if(!transfered)
+		update_holoray(user,new_turf)
 	return TRUE
 
 
@@ -737,21 +718,19 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 // RECORDED MESSAGES
 
 /obj/machinery/holopad/proc/setup_replay_holo(datum/holorecord/record)
-	var/obj/effect/overlay/holo_pad_hologram/Hologram = new(loc)//Spawn a blank effect at the location.
-	Hologram.add_overlay(record.caller_image)
-	Hologram.alpha = 170
-	Hologram.add_atom_colour("#77abff", FIXED_COLOUR_PRIORITY)
-	Hologram.dir = SOUTH //for now
-	var/datum/language_holder/holder = Hologram.get_language_holder()
+	var/obj/effect/overlay/holo_pad_hologram/hologram = new(loc)//Spawn a blank effect at the location.
+	hologram.add_overlay(record.caller_image)
+	hologram.makeHologram()
+
+	var/datum/language_holder/holder = hologram.get_language_holder()
 	holder.selected_language = record.language
-	Hologram.mouse_opacity = MOUSE_OPACITY_TRANSPARENT//So you can't click on it.
-	Hologram.layer = FLY_LAYER//Above all the other objects/mobs. Or the vast majority of them.
-	SET_PLANE_EXPLICIT(Hologram, ABOVE_GAME_PLANE, src)
-	Hologram.set_anchored(TRUE)//So space wind cannot drag it.
-	Hologram.name = "[record.caller_name] (Hologram)"//If someone decides to right click.
-	Hologram.set_light(2) //hologram lighting
+	hologram.mouse_opacity = MOUSE_OPACITY_TRANSPARENT//So you can't click on it.
+	hologram.layer = FLY_LAYER//Above all the other objects/mobs. Or the vast majority of them.
+	SET_PLANE_EXPLICIT(hologram, ABOVE_GAME_PLANE, src)
+	hologram.set_anchored(TRUE)//So space wind cannot drag it.
+	hologram.name = "[record.caller_name] (Hologram)"//If someone decides to right click.
 	visible_message(span_notice("A holographic image of [record.caller_name] flickers to life before your eyes!"))
-	return Hologram
+	return hologram
 
 /obj/machinery/holopad/proc/replay_start()
 	if(!replay_mode)
@@ -849,6 +828,8 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		QDEL_NULL(disk.record)
 
 /obj/effect/overlay/holo_pad_hologram
+	// Adds KEEP_TOGETHER to ensure we render overlays right
+	appearance_flags = TILE_BOUND|PIXEL_SCALE|LONG_GLIDE|KEEP_TOGETHER
 	initial_language_holder = /datum/language_holder/universal
 	var/mob/living/Impersonation
 	var/datum/holocall/HC
@@ -880,10 +861,30 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	pixel_x = -32
 	pixel_y = -32
 	alpha = 100
+	var/atom/movable/render_step/emissive/glow
 
-#undef HOLOPAD_PASSIVE_POWER_USAGE
-#undef HOLOGRAM_POWER_USAGE
-#undef CAN_HEAR_MASTERS
+/obj/effect/overlay/holoray/Initialize(mapload)
+	. = ..()
+	if(!render_target)
+		var/static/uid = 0
+		render_target = "holoray#[uid]"
+		uid++
+	// Let's GLOW BROTHER! (Doing it like this is the most robust option compared to duped overlays)
+	glow = new(src, render_target)
+	// We need to counteract the pixel offset to ensure we don't double offset (I hate byond)
+	glow.pixel_x = 32
+	glow.pixel_y = 32
+	add_overlay(glow)
+	LAZYADD(update_overlays_on_z, glow)
+
+/obj/effect/overlay/holoray/Destroy(force)
+	. = ..()
+	QDEL_NULL(glow)
+
 #undef CAN_HEAR_ACTIVE_HOLOCALLS
-#undef CAN_HEAR_RECORD_MODE
 #undef CAN_HEAR_ALL_FLAGS
+#undef CAN_HEAR_HOLOCALL_USER
+#undef CAN_HEAR_MASTERS
+#undef CAN_HEAR_RECORD_MODE
+#undef HOLOGRAM_POWER_USAGE
+#undef HOLOPAD_PASSIVE_POWER_USAGE
