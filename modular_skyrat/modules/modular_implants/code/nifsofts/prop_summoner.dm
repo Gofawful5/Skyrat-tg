@@ -9,20 +9,21 @@
 /obj/item/disk/nifsoft_uploader/summoner/ghost
 	custom_price = 0
 
-
 /datum/nifsoft/summoner
 	name = "Grimoire Caeruleam"
 	program_desc = "The Grimoire Caeruleam is an open-source, virtual decentralized directory of summonable objects originally developed by the Altspace Coven, a post-pagan group of witches first digitized into engrams in the year 2544. These summonable constructs, or 'Icons,' are comprised of delicate patterns of nanomachines serving as a framework and projector for hardlight; the name 'Caeruleam' referencing the blue light an Icon casts in the summoner's hand. While the Grimoire has served thousands thus far, Corporate interests have blocked all access to Icons capable of harming their assets."
 	cooldown = TRUE
 	activation_cost = 100 // Around 1/10th the energy of a standard NIF
+	buying_category = NIFSOFT_CATEGORY_FUN
 
 	/// Does the resulting object have a holographic like filter appiled to it?
 	var/holographic_filter = TRUE
 	/// Is there any special tag added at the begining of the resulting object name?
 	var/name_tag = "cerulean "
+	purchase_price = 175
 
 	///The list of items that can be summoned from the NIFSoft.
-	var/static/list/summonable_items = list(
+	var/list/summonable_items = list(
 		/obj/item/toy/katana/nanite,
 		/obj/item/cane/nanite,
 		/obj/item/storage/dice/nanite,
@@ -45,13 +46,13 @@
 	if(!.)
 		return FALSE
 
-	if(tgui_alert(linked_mob, "Do you wish to summon a new item or dispel an already existing item?", "Grimoire Caeruleam", list("Summon", "Dispel")) == "Dispel")
+	if(tgui_alert(linked_mob, "Do you wish to summon a new item or dispel an already existing item?", program_name, list("Summon", "Dispel")) == "Dispel")
 		refund_activation_cost()
 		if(!length(summoned_items))
 			linked_mob.balloon_alert(linked_mob, "You have no summoned items!")
 			return FALSE
 
-		var/obj/item/choice = tgui_input_list(linked_mob, "Chose an object to desummon.", "Grimoire Caeruleam", summoned_items)
+		var/obj/item/choice = tgui_input_list(linked_mob, "Chose an object to desummon.", program_name, summoned_items)
 
 		if(!choice)
 			linked_mob.balloon_alert(linked_mob, "You did not chose an item!")
@@ -87,7 +88,7 @@
 		return FALSE
 
 	summoned_items += new_item
-	new_item.AddComponent(/datum/component/summoned_item, TRUE)
+	new_item.AddComponent(/datum/component/summoned_item, holographic_filter)
 
 /datum/nifsoft/summoner/Destroy()
 	QDEL_LIST(summoned_items)
@@ -100,7 +101,11 @@
 
 	return TRUE
 
-/datum/component/summoned_item/New(holographic_filter = TRUE)
+/datum/component/summoned_item
+	///What items were contained, if any, inside of the summoned item? These are deleted when the item is desummoned.
+	var/list/sub_items = list()
+
+/datum/component/summoned_item/Initialize(holographic_filter = TRUE)
 	. = ..()
 	if(!isobj(parent))
 		return COMPONENT_INCOMPATIBLE
@@ -116,6 +121,26 @@
 				stored_item.alpha = SUMMONED_ITEM_ALPHA
 				stored_item.set_light(SUMMONED_ITEM_LIGHT)
 				stored_item.add_atom_colour("#acccff",FIXED_COLOUR_PRIORITY)
+				sub_items += stored_item
+
+		if(istype(summoned_item, /obj/item/toy/cards/deck))
+			var/obj/item/toy/cards/deck/summoned_deck = summoned_item
+			var/list/cardlist = summoned_deck.fetch_card_atoms()
+			if(!cardlist)
+				return FALSE
+
+			for(var/obj/item/toy/single_card in cardlist)
+				single_card.alpha = SUMMONED_ITEM_ALPHA
+				single_card.set_light(SUMMONED_ITEM_LIGHT)
+				single_card.add_atom_colour("#acccff",FIXED_COLOUR_PRIORITY)
+				sub_items += single_card
+
+/datum/component/summoned_item/Destroy(force, silent)
+	for(var/obj/item in sub_items)
+		sub_items -= item
+		qdel(item)
+
+	return ..()
 
 //Summonable Items
 ///A somehow wekaer version of the toy katana

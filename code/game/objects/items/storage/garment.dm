@@ -71,7 +71,6 @@
 	new /obj/item/clothing/neck/cloak/hop(src)
 	new /obj/item/clothing/shoes/laceup(src)
 	new /obj/item/clothing/suit/hooded/wintercoat/hop(src)
-	new /obj/item/clothing/suit/hooded/wintercoat/hopformal(src)
 
 /obj/item/storage/bag/garment/hos/PopulateContents()
 	new /obj/item/clothing/under/rank/security/head_of_security/skirt(src)
@@ -86,7 +85,7 @@
 	new /obj/item/clothing/suit/armor/vest/leather(src)
 	new /obj/item/clothing/glasses/hud/security/sunglasses/eyepatch(src)
 	new /obj/item/clothing/glasses/hud/security/sunglasses/gars/giga(src)
-	new /obj/item/clothing/head/hats/hos(src)
+	new /obj/item/clothing/head/hats/hos/cap(src)
 	new /obj/item/clothing/mask/gas/sechailer/swat(src)
 	new /obj/item/clothing/neck/cloak/hos(src)
 
