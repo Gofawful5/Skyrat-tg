@@ -15,6 +15,7 @@
 	cooldown = TRUE
 	activation_cost = 100 // Around 1/10th the energy of a standard NIF
 	buying_category = NIFSOFT_CATEGORY_FUN
+	ui_icon = "book-open"
 
 	/// Does the resulting object have a holographic like filter appiled to it?
 	var/holographic_filter = TRUE
@@ -73,7 +74,7 @@
 
 		summon_choices[summon_item] = obj_icon
 
-	var/obj/item/choice = show_radial_menu(linked_mob, linked_mob, summon_choices, radius = 42, custom_check = CALLBACK(src, .proc/check_menu, linked_mob))
+	var/obj/item/choice = show_radial_menu(linked_mob, linked_mob, summon_choices, radius = 42, custom_check = CALLBACK(src, PROC_REF(check_menu), linked_mob))
 	if(!choice)
 		refund_activation_cost()
 		return FALSE

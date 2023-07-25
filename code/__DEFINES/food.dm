@@ -18,7 +18,8 @@
 #define ORANGES (1<<17)
 #define BUGS (1<<18)
 #define GORE (1<<19)
-#define BLOODY (1<<20) // SKYRAT EDIT - Hemophage Food
+#define STONE (1<<20)
+#define BLOODY (1<<21) // SKYRAT EDIT - Hemophage Food
 
 DEFINE_BITFIELD(foodtypes, list(
 	"MEAT" = MEAT,
@@ -41,6 +42,7 @@ DEFINE_BITFIELD(foodtypes, list(
 	"ORANGES" = ORANGES,
 	"BUGS" = BUGS,
 	"GORE" = GORE,
+	"STONE" = STONE,
 	"BLOODY" = BLOODY, // SKYRAT EDIT - Hemophage Food
 ))
 
@@ -66,6 +68,7 @@ DEFINE_BITFIELD(foodtypes, list(
 	"ORANGES", \
 	"BUGS", \
 	"GORE", \
+	"STONE", \
 	"BLOODY", /* SKYRAT EDIT - Hemophage Food */ \
 )
 
@@ -91,15 +94,17 @@ DEFINE_BITFIELD(foodtypes, list(
 	"Oranges", \
 	"Bugs", \
 	"Gore", \
+	"Rocks", \
 	"Bloody", /* SKYRAT EDIT - Hemophage Food */ \
 )
 
-#define DRINK_NICE 1
-#define DRINK_GOOD 2
-#define DRINK_VERYGOOD 3
-#define DRINK_FANTASTIC 4
-#define FOOD_AMAZING 5
-#define RACE_DRINK 6 // SKYRAT ADDITION
+#define DRINK_REVOLTING 1
+#define DRINK_NICE 2
+#define DRINK_GOOD 3
+#define DRINK_VERYGOOD 4
+#define DRINK_FANTASTIC 5
+#define FOOD_AMAZING 6
+#define RACE_DRINK 7 // SKYRAT ADDITION
 
 /// Food is "in a container", not in a code sense, but in a literal sense (canned foods)
 #define FOOD_IN_CONTAINER (1<<0)
@@ -193,3 +198,6 @@ DEFINE_BITFIELD(food_flags, list(
 // Venues for the barbots.
 #define VENUE_RESTAURANT "Restaurant Venue"
 #define VENUE_BAR "Bar Venue"
+
+/// How much milk is needed to make butter on a reagent grinder
+#define MILK_TO_BUTTER_COEFF 25

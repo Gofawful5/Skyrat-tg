@@ -2,12 +2,6 @@
 	name = "Ghoul"
 	id = SPECIES_GHOUL
 	examine_limb_id = SPECIES_GHOUL
-	species_traits = list(
-		NOEYESPRITES,
-		DYNCOLORS,
-		HAIR,
-		FACEHAIR
-	)
 	can_have_genitals = FALSE //WHY WOULD YOU WANT TO FUCK ONE OF THESE THINGS?
 	mutant_bodyparts = list("ghoulcolor" = "Tan Necrotic")
 	default_mutant_bodyparts = list(
@@ -23,30 +17,10 @@
 		TRAIT_EASYDISMEMBER,
 		TRAIT_EASILY_WOUNDED, //theyre like fuckin skin and bones
 		TRAIT_LITERATE,
+		TRAIT_MUTANT_COLORS,
+		TRAIT_FIXED_MUTANT_COLORS,
 	)
-	offset_features = list(
-		OFFSET_UNIFORM = list(0,0),
-		OFFSET_ID = list(0,0),
-		OFFSET_GLOVES = list(0,0),
-		OFFSET_GLASSES = list(0,1),
-		OFFSET_EARS = list(0,1),
-		OFFSET_SHOES = list(0,0),
-		OFFSET_S_STORE = list(0,0),
-		OFFSET_FACEMASK = list(0,1),
-		OFFSET_HEAD = list(0,1),
-		OFFSET_FACE = list(0,1),
-		OFFSET_BELT = list(0,0),
-		OFFSET_BACK = list(0,0),
-		OFFSET_SUIT = list(0,0),
-		OFFSET_NECK = list(0,1),
-	)
-	toxic_food = DAIRY | PINEAPPLE
-	disliked_food = VEGETABLES | FRUIT | CLOTH
-	liked_food = RAW | MEAT
 	payday_modifier = 0.75 //-- "Equality"
-	//armor = -100 //2x more damage
-	brutemod = 2
-	burnmod = 2
 	stunmod = 1.25 //multiplier for stun durations
 	bodytemp_normal = T20C
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT

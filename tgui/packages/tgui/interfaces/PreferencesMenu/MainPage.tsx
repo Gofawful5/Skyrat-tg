@@ -201,23 +201,25 @@ const GenderButton = (
       popperContent={
         genderMenuOpen && (
           <Stack backgroundColor="white" ml={0.5} p={0.3}>
-            {[Gender.Male, Gender.Female, Gender.Other].map((gender) => {
-              return (
-                <Stack.Item key={gender}>
-                  <Button
-                    selected={gender === props.gender}
-                    onClick={() => {
-                      props.handleSetGender(gender);
-                      setGenderMenuOpen(false);
-                    }}
-                    fontSize="22px"
-                    icon={GENDERS[gender].icon}
-                    tooltip={GENDERS[gender].text}
-                    tooltipPosition="top"
-                  />
-                </Stack.Item>
-              );
-            })}
+            {[Gender.Male, Gender.Female, Gender.Other, Gender.Other2].map(
+              (gender) => {
+                return (
+                  <Stack.Item key={gender}>
+                    <Button
+                      selected={gender === props.gender}
+                      onClick={() => {
+                        props.handleSetGender(gender);
+                        setGenderMenuOpen(false);
+                      }}
+                      fontSize="22px"
+                      icon={GENDERS[gender].icon}
+                      tooltip={GENDERS[gender].text}
+                      tooltipPosition="top"
+                    />
+                  </Stack.Item>
+                );
+              }
+            )}
           </Stack>
         )
       }>
@@ -556,18 +558,20 @@ export const MainPage = (
                     />
                   </Stack.Item>
 
-                  <Dropdown
+                  <Stack.Item
                     // SKYRAT EDIT ADDITION
-                    width="100%"
-                    position="relative"
-                    selected={data.preview_selection}
-                    options={data.preview_options}
-                    onSelected={(value) =>
-                      act('update_preview', {
-                        updated_preview: value,
-                      })
-                    }
-                  />
+                    position="relative">
+                    <Dropdown
+                      width="100%"
+                      selected={data.preview_selection}
+                      options={data.preview_options}
+                      onSelected={(value) =>
+                        act('update_preview', {
+                          updated_preview: value,
+                        })
+                      }
+                    />
+                  </Stack.Item>
 
                   <Stack.Item position="relative">
                     <NameInput

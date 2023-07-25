@@ -160,7 +160,7 @@
 
 	. += span_notice("<br>[src] is currently [forge_temperature] degrees hot, going towards [target_temperature] degrees.<br>")
 
-	if(reagent_forging)
+	if(reagent_forging && (is_species(user, /datum/species/lizard/ashwalker) || is_species(user, /datum/species/human/felinid/primitive)))
 		. += span_warning("[src] has a fine gold trim, it is ready to imbue chemicals into reagent objects.")
 
 	return .
@@ -388,27 +388,30 @@
 			if(!forced)
 				to_chat(user, span_notice("Some careful placement and stoking of the flame will allow you to keep at least the embers burning..."))
 			minimum_target_temperature = 25 // Will allow quicker reheating from having no fuel
-			temperature_loss_reduction = 2
+			temperature_loss_reduction = 3
 			forge_level = FORGE_LEVEL_JOURNEYMAN
 
 		if(SKILL_LEVEL_EXPERT)
 			if(!forced)
-				to_chat(user, span_notice("With just the right heat treating technique, metal could be made to accept reagents..."))
-			create_reagent_forge()
-			temperature_loss_reduction = 3
+				to_chat(user, span_notice("[src] has become nearly perfect, able to hold heat for long enough that even a piece of wood can outmatch the longevity of lesser forges."))
+			temperature_loss_reduction = 4
 			minimum_target_temperature = 25
 			forge_level = FORGE_LEVEL_EXPERT
 
 		if(SKILL_LEVEL_MASTER)
 			if(!forced)
-				to_chat(user, span_notice("[src] has become nearly perfect, able to hold heat for long enough that even a piece of wood can outmatch the longevity of lesser forges."))
-			temperature_loss_reduction = 4
+				to_chat(user, span_notice("The perfect forge for a perfect metalsmith, with your knowledge it should bleed heat so slowly, that not even you will live to see [src] cool."))
+			temperature_loss_reduction = MAX_TEMPERATURE_LOSS_DECREASE
 			minimum_target_temperature = 25
 			forge_level = FORGE_LEVEL_MASTER
 
 		if(SKILL_LEVEL_LEGENDARY)
 			if(!forced)
-				to_chat(user, span_notice("The perfect forge for a perfect metalsmith, with your knowledge it should bleed heat so slowly, that not even you will live to see [src] cool."))
+				if(is_species(user, /datum/species/lizard/ashwalker) || is_species(user, /datum/species/human/felinid/primitive))
+					to_chat(user, span_notice("With just the right heat treating technique, metal could be made to accept reagents..."))
+					create_reagent_forge()
+				if(forge_level == FORGE_LEVEL_MASTER)
+					to_chat(user, span_warning("It is impossible to further improve the forge!"))
 			temperature_loss_reduction = MAX_TEMPERATURE_LOSS_DECREASE
 			minimum_target_temperature = 25 // This won't matter except in a few cases here, but we still need to cover those few cases
 			forge_level = FORGE_LEVEL_LEGENDARY
@@ -557,6 +560,16 @@
 
 /// Handles weapon reagent imbuing
 /obj/structure/reagent_forge/proc/handle_weapon_imbue(obj/attacking_item, mob/living/user)
+	//This code will refuse all non-ashwalkers & non-icecats from imbuing
+	if(!ishuman(user))
+		to_chat(user, span_danger("It is impossible for you to imbue!")) //maybe remove (ashwalkers & icecats only) after some time
+		return
+
+	var/mob/living/carbon/human/human_user = user
+	if(!is_species(human_user, /datum/species/lizard/ashwalker) && !is_species(human_user, /datum/species/human/felinid/primitive))
+		to_chat(user, span_danger("It is impossible for you to imbue!")) //maybe remove (ashwalkers & icecats only) after some time
+		return
+
 	in_use = TRUE
 	balloon_alert_to_viewers("imbuing...")
 
@@ -597,6 +610,16 @@
 
 /// Handles clothing imbuing, extremely similar to weapon imbuing but not in the same proc because of how uhh... goofy the way this has to be done is
 /obj/structure/reagent_forge/proc/handle_clothing_imbue(obj/attacking_item, mob/living/user)
+	//This code will refuse all non-ashwalkers & non-icecats from imbuing
+	if(!ishuman(user))
+		to_chat(user, span_danger("It is impossible for you to imbue!")) //maybe remove (ashwalkers & icecats only) after some time
+		return
+
+	var/mob/living/carbon/human/human_user = user
+	if(!is_species(human_user, /datum/species/lizard/ashwalker) && !is_species(human_user, /datum/species/human/felinid/primitive))
+		to_chat(user, span_danger("It is impossible for you to imbue!")) //maybe remove (ashwalkers & icecats only) after some time
+		return
+
 	in_use = TRUE
 	balloon_alert_to_viewers("imbuing...")
 
@@ -685,6 +708,7 @@
 	var/obj/item/glassblowing/molten_glass/spawned_glass = new /obj/item/glassblowing/molten_glass(get_turf(src))
 	user.mind.adjust_experience(/datum/skill/production, 10)
 	COOLDOWN_START(spawned_glass, remaining_heat, glassblowing_amount)
+	spawned_glass.total_time = glassblowing_amount
 
 /// Handles creating molten glass from a metal cup filled with sand
 /obj/structure/reagent_forge/proc/handle_metal_cup_melting(obj/attacking_item, mob/living/user)
@@ -714,6 +738,7 @@
 	var/obj/item/glassblowing/molten_glass/spawned_glass = new /obj/item/glassblowing/molten_glass(get_turf(src))
 	user.mind.adjust_experience(/datum/skill/production, 10)
 	COOLDOWN_START(spawned_glass, remaining_heat, glassblowing_amount)
+	spawned_glass.total_time = glassblowing_amount
 
 /obj/structure/reagent_forge/billow_act(mob/living/user, obj/item/tool)
 	if(in_use) // Preventing billow use if the forge is in use to prevent spam
@@ -793,11 +818,11 @@
 		var/list/material_list = list()
 
 		if(search_stack.material_type)
-			material_list[GET_MATERIAL_REF(search_stack.material_type)] = MINERAL_MATERIAL_AMOUNT
+			material_list[GET_MATERIAL_REF(search_stack.material_type)] = SHEET_MATERIAL_AMOUNT
 
 		else
 			for(var/material as anything in search_stack.custom_materials)
-				material_list[material] = MINERAL_MATERIAL_AMOUNT
+				material_list[material] = SHEET_MATERIAL_AMOUNT
 
 		if(!search_stack.use(1))
 			fail_message(user, "not enough of [search_stack]")
@@ -877,8 +902,27 @@
 	new /obj/item/stack/sheet/iron/ten(get_turf(src))
 	return ..()
 
-/obj/structure/reagent_forge/ready
+/obj/structure/reagent_forge/tier2
+	forge_level = FORGE_LEVEL_NOVICE
+
+/obj/structure/reagent_forge/tier3
+	forge_level = FORGE_LEVEL_APPRENTICE
+
+/obj/structure/reagent_forge/tier4
+	forge_level = FORGE_LEVEL_JOURNEYMAN
+
+/obj/structure/reagent_forge/tier5
+	forge_level = FORGE_LEVEL_EXPERT
+
+/obj/structure/reagent_forge/tier6
+	forge_level = FORGE_LEVEL_MASTER
+
+/obj/structure/reagent_forge/tier7
 	forge_level = FORGE_LEVEL_LEGENDARY
+
+/obj/structure/reagent_forge/tier7/imbuing/Initialize(mapload)
+	. = ..()
+	create_reagent_forge()
 
 /particles/smoke/mild
 	spawning = 1

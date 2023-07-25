@@ -34,8 +34,8 @@
 		gas_temp -= (laser_part.tier * 5)
 
 	processing_speed = 6 SECONDS //starts at 6 seconds, should go down to 4 seconds at most.
-	for(var/datum/stock_part/manipulator/manipulator_part in component_parts)
-		processing_speed -= (manipulator_part.tier * (0.5 SECONDS))
+	for(var/datum/stock_part/servo/servo_part in component_parts)
+		processing_speed -= (servo_part.tier * (0.5 SECONDS))
 
 /obj/machinery/bluespace_miner/update_overlays()
 	. = ..()
@@ -128,13 +128,14 @@
 /obj/machinery/bluespace_miner/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(obj_flags & EMAGGED)
 		balloon_alert(user, "already emagged!")
-		return
+		return FALSE
 	ore_chance += list(/obj/item/stack/sheet/mineral/bananium = 1)
 	obj_flags |= EMAGGED
 	balloon_alert_to_viewers("fizzles!")
+	return TRUE
 
 /obj/item/circuitboard/machine/bluespace_miner
-	name = "Bluespace Miner (Machine Board)"
+	name = "Bluespace Miner"
 	desc = "The bluespace miner is a machine that, when provided the correct temperature and pressure, will produce materials."
 	greyscale_colors = CIRCUIT_COLOR_GENERIC
 	build_path = /obj/machinery/bluespace_miner
@@ -143,7 +144,7 @@
 		/obj/item/stack/ore/bluespace_crystal/refined = 1,
 		/datum/stock_part/matter_bin = 2,
 		/datum/stock_part/micro_laser = 2,
-		/datum/stock_part/manipulator = 2,
+		/datum/stock_part/servo = 2,
 	)
 	needs_anchored = TRUE
 

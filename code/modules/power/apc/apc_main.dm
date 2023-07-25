@@ -8,7 +8,7 @@
 /obj/machinery/power/apc
 	name = "area power controller"
 	desc = "A control terminal for the area's electrical systems."
-
+	icon = 'icons/obj/machines/wallmounts.dmi'
 	icon_state = "apc0"
 	use_power = NO_POWER_USE
 	req_access = null
@@ -138,12 +138,6 @@
 
 /obj/machinery/power/apc/Initialize(mapload, ndir)
 	. = ..()
-	//Initialize name & access of the apc
-	if(!req_access)
-		req_access = list(ACCESS_ENGINE_EQUIP)
-	if(auto_name)
-		name = "\improper [get_area_name(area, TRUE)] APC"
-
 	//Pixel offset its appearance based on its direction
 	dir = ndir
 	switch(dir)
@@ -174,8 +168,14 @@
 			log_mapping("Duplicate APC created at [AREACOORD(src)] [area.type]. Original at [AREACOORD(area.apc)] [area.type].")
 		area.apc = src
 
+	//Initialize name & access of the apc. Name requires area to be assigned first
+	if(!req_access)
+		req_access = list(ACCESS_ENGINE_EQUIP)
+	if(auto_name)
+		name = "\improper [get_area_name(area, TRUE)] APC"
+
 	//Initialize its electronics
-	wires = new /datum/wires/apc(src)
+	set_wires(new /datum/wires/apc(src))
 	alarm_manager = new(src)
 	AddElement(/datum/element/atmos_sensitive, mapload)
 	// for apcs created during map load make them fully functional
@@ -201,13 +201,21 @@
 	RegisterSignal(SSdcs, COMSIG_GLOB_GREY_TIDE, PROC_REF(grey_tide))
 	update_appearance()
 
-	GLOB.apcs_list += src
+	var/static/list/hovering_mob_typechecks = list(
+		/mob/living/silicon = list(
+			SCREENTIP_CONTEXT_CTRL_LMB = "Toggle power",
+			SCREENTIP_CONTEXT_ALT_LMB = "Toggle equipment power",
+			SCREENTIP_CONTEXT_SHIFT_LMB = "Toggle lighting power",
+			SCREENTIP_CONTEXT_CTRL_SHIFT_LMB = "Toggle environment power",
+		)
+	)
+
+	AddElement(/datum/element/contextual_screentip_bare_hands, rmb_text = "Toggle interface lock")
+	AddElement(/datum/element/contextual_screentip_mob_typechecks, hovering_mob_typechecks)
 
 /obj/machinery/power/apc/Destroy()
-	GLOB.apcs_list -= src
-
 	if(malfai && operating)
-		malfai.malf_picker.processing_time = clamp(malfai.malf_picker.processing_time - 10,0,1000)
+		malfai.malf_picker.processing_time = clamp(malfai.malf_picker.processing_time - 10, 0, 1000)
 	disconnect_from_area()
 	QDEL_NULL(alarm_manager)
 	if(occupier)
@@ -218,6 +226,7 @@
 		QDEL_NULL(cell)
 	if(terminal)
 		disconnect_terminal()
+
 	return ..()
 
 /obj/machinery/power/apc/proc/assign_to_area(area/target_area = get_area(src))
@@ -263,6 +272,11 @@
 /obj/machinery/power/apc/examine(mob/user)
 	. = ..()
 	if(machine_stat & BROKEN)
+		if(opened != APC_COVER_REMOVED)
+			. += "The cover is broken and can probably be <i>pried</i> off with enough force."
+			return
+		if(terminal && has_electronics)
+			. += "The cover is missing but can be replaced using a new frame."
 		return
 	if(opened)
 		if(has_electronics && terminal)
@@ -277,11 +291,6 @@
 			. += "The cover is broken. It may be hard to force it open."
 		else
 			. += "The cover is closed."
-
-	. += span_notice("Right-click the APC to [ locked ? "unlock" : "lock"] the interface.")
-
-	if(issilicon(user))
-		. += span_notice("Ctrl-Click the APC to switch the breaker [ operating ? "off" : "on"].")
 
 /obj/machinery/power/apc/deconstruct(disassembled = TRUE)
 	if(flags_1 & NODECONSTRUCT_1)
@@ -711,7 +720,7 @@
 
 /// Used for full_charge apc helper, which sets apc charge to 100%.
 /obj/machinery/power/apc/proc/set_full_charge()
-	cell.charge = 100
+	cell.charge = cell.maxcharge
 
 /*Power module, used for APC construction*/
 /obj/item/electronics/apc

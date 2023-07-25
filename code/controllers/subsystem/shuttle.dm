@@ -166,6 +166,17 @@ SUBSYSTEM_DEF(shuttle)
 		if(!pack.contains)
 			continue
 
+		//Adds access requirements to the end of each description.
+		if(pack.access && pack.access_view)
+			if(pack.access == pack.access_view)
+				pack.desc += " Requires [SSid_access.get_access_desc(pack.access)] access to open or purchase."
+			else
+				pack.desc += " Requires [SSid_access.get_access_desc(pack.access)] access to open, or [SSid_access.get_access_desc(pack.access_view)] access to purchase."
+		else if(pack.access)
+			pack.desc += " Requires [SSid_access.get_access_desc(pack.access)] access to open."
+		else if(pack.access_view)
+			pack.desc += " Requires [SSid_access.get_access_desc(pack.access_view)] access to purchase."
+
 		supply_packs[pack.id] = pack
 
 	setup_shuttles(stationary_docking_ports)
@@ -191,8 +202,8 @@ SUBSYSTEM_DEF(shuttle)
 		if(!thing)
 			mobile_docking_ports.Remove(thing)
 			continue
-		var/obj/docking_port/mobile/P = thing
-		P.check()
+		var/obj/docking_port/mobile/port = thing
+		port.check()
 	for(var/thing in transit_docking_ports)
 		var/obj/docking_port/stationary/transit/T = thing
 		if(!T.owner)
@@ -655,7 +666,7 @@ SUBSYSTEM_DEF(shuttle)
 	// Proposals use 2 extra hidden tiles of space, from the cordons that surround them
 	transit_utilized += (proposal.width + 2) * (proposal.height + 2)
 	M.assigned_transit = new_transit_dock
-	RegisterSignal(proposal, COMSIG_PARENT_QDELETING, PROC_REF(transit_space_clearing))
+	RegisterSignal(proposal, COMSIG_QDELETING, PROC_REF(transit_space_clearing))
 
 	return new_transit_dock
 
@@ -794,9 +805,9 @@ SUBSYSTEM_DEF(shuttle)
 	hidden_shuttle_turf_images -= remove_images
 	hidden_shuttle_turf_images += add_images
 
-	for(var/V in GLOB.navigation_computers)
-		var/obj/machinery/computer/camera_advanced/shuttle_docker/C = V
-		C.update_hidden_docking_ports(remove_images, add_images)
+	for(var/obj/machinery/computer/camera_advanced/shuttle_docker/docking_computer \
+		as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/computer/camera_advanced/shuttle_docker))
+		docking_computer.update_hidden_docking_ports(remove_images, add_images)
 
 	QDEL_LIST(remove_images)
 
@@ -927,6 +938,8 @@ SUBSYSTEM_DEF(shuttle)
 	if(preview_shuttle)
 		preview_shuttle.jumpToNullSpace()
 	preview_shuttle = null
+	if(preview_reservation)
+		QDEL_NULL(preview_reservation)
 
 /datum/controller/subsystem/shuttle/ui_state(mob/user)
 	return GLOB.admin_state

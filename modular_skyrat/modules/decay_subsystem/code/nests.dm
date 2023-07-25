@@ -163,7 +163,7 @@
 	desc = "A bush... oozing blood?"
 	icon_state = "nest_grass"
 	light_color = LIGHT_COLOR_GREEN
-	monster_types = list(/mob/living/simple_animal/hostile/killertomato)
+	monster_types = list(/mob/living/basic/killer_tomato)
 	loot = list(/obj/item/seeds/random = 3)
 	max_mobs = 6
 
@@ -172,10 +172,10 @@
 	desc = "Filled with little beings that exist only to make your life a living hell."
 	icon_state = "nest_bee"
 	light_color = LIGHT_COLOR_BRIGHT_YELLOW
-	monster_types = list(/mob/living/simple_animal/hostile/bee)
+	monster_types = list(/mob/living/basic/bee)
 	max_mobs = 15
 	spawn_cooldown = 5 SECONDS
-	loot = list(/obj/item/reagent_containers/honeycomb = 5, /obj/item/queen_bee)
+	loot = list(/obj/item/food/honeycomb = 5, /obj/item/queen_bee)
 	var/swarmed = FALSE
 
 /obj/structure/mob_spawner/beehive/attacked_by(obj/item/I, mob/living/user)
@@ -184,14 +184,14 @@
 		playsound(src, 'sound/creatures/bee.ogg', 100)
 		visible_message(span_userdanger("[src] buzzes violently as bees pour out!"))
 		for(var/i=1, i<max_mobs, ++i)
-			new /mob/living/simple_animal/hostile/bee (loc)
+			new /mob/living/basic/bee (loc)
 		swarmed = TRUE
 
 /obj/structure/mob_spawner/beehive/toxic
 	name = "oozing beehive"
 	desc = "A beehive... it looks off however, it's oozing some kind of green glowing goop."
 	icon_state = "nest_bee_toxic"
-	monster_types = list(/mob/living/simple_animal/hostile/bee/toxin)
+	monster_types = list(/mob/living/basic/bee/toxin)
 	max_mobs = 6
 	color = LIGHT_COLOR_ELECTRIC_GREEN
 

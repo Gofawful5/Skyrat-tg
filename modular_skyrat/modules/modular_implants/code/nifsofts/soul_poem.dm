@@ -1,5 +1,5 @@
 /obj/item/disk/nifsoft_uploader/soul_poem
-	name = "Automatic Appraisal"
+	name = "Soul Poem"
 	loaded_nifsoft = /datum/nifsoft/soul_poem
 
 //Modular Persistence variables for the soul_poem NIFSoft
@@ -15,6 +15,7 @@
 	persistence = TRUE
 	purchase_price = 0 //It came free with your NIF.
 	buying_category = NIFSOFT_CATEGORY_FUN
+	ui_icon = "scroll"
 
 	///Is the NIFSoft transmitting data?
 	var/transmitting_data = TRUE

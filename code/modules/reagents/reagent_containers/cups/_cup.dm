@@ -1,12 +1,12 @@
 /obj/item/reagent_containers/cup
-	name = "glass"
+	name = "open container"
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5, 10, 15, 20, 25, 30, 50)
 	volume = 50
 	reagent_flags = OPENCONTAINER | DUNKABLE
 	spillable = TRUE
 	resistance_flags = ACID_PROOF
-
+	icon_state = "bottle"
 	lefthand_file = 'icons/mob/inhands/items/drinks_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/items/drinks_righthand.dmi'
 
@@ -25,33 +25,36 @@
 		var/list/types = bitfield_to_list(drink_type, FOOD_FLAGS)
 		. += span_notice("It is [lowertext(english_list(types))].")
 
-/obj/item/reagent_containers/cup/proc/checkLiked(fraction, mob/M)
-	if(last_check_time + 50 >= world.time)
-		return
-	if(!ishuman(M))
-		return
-	var/mob/living/carbon/human/H = M
-	if(HAS_TRAIT(H, TRAIT_AGEUSIA))
-		if(drink_type & H.dna.species.toxic_food)
-			to_chat(H, span_warning("You don't feel so good..."))
-			H.adjust_disgust(25 + 30 * fraction)
-	else
-		if(drink_type & H.dna.species.toxic_food)
-			to_chat(H,span_warning("What the hell was that thing?!"))
-			H.adjust_disgust(25 + 30 * fraction)
-			H.add_mood_event("toxic_food", /datum/mood_event/disgusting_food)
-		else if(drink_type & H.dna.species.disliked_food)
-			to_chat(H,span_notice("That didn't taste very good..."))
-			H.adjust_disgust(11 + 15 * fraction)
-			H.add_mood_event("gross_food", /datum/mood_event/gross_food)
-		else if(drink_type & H.dna.species.liked_food)
-			to_chat(H,span_notice("I love this taste!"))
-			H.adjust_disgust(-5 + -2.5 * fraction)
-			H.add_mood_event("fav_food", /datum/mood_event/favorite_food)
-
+/**
+ * Checks if the mob actually liked drinking this cup.
+ *
+ * This is a bunch of copypaste from the edible component, consider reworking this to use it!
+ */
+/obj/item/reagent_containers/cup/proc/checkLiked(fraction, mob/eater)
+	if(last_check_time + 5 SECONDS > world.time)
+		return FALSE
+	if(!ishuman(eater))
+		return FALSE
+	var/mob/living/carbon/human/gourmand = eater
+	//Bruh this breakfast thing is cringe and shouldve been handled separately from food-types, remove this in the future (Actually, just kill foodtypes in general)
 	if((drink_type & BREAKFAST) && world.time - SSticker.round_start_time < STOP_SERVING_BREAKFAST)
-		H.add_mood_event("breakfast", /datum/mood_event/breakfast)
+		gourmand.add_mood_event("breakfast", /datum/mood_event/breakfast)
 	last_check_time = world.time
+
+	var/food_taste_reaction = gourmand.get_food_taste_reaction(src, drink_type)
+	switch(food_taste_reaction)
+		if(FOOD_TOXIC)
+			to_chat(gourmand,span_warning("What the hell was that thing?!"))
+			gourmand.adjust_disgust(25 + 30 * fraction)
+			gourmand.add_mood_event("toxic_food", /datum/mood_event/disgusting_food)
+		if(FOOD_DISLIKED)
+			to_chat(gourmand,span_notice("That didn't taste very good..."))
+			gourmand.adjust_disgust(11 + 15 * fraction)
+			gourmand.add_mood_event("gross_food", /datum/mood_event/gross_food)
+		if(FOOD_LIKED)
+			to_chat(gourmand,span_notice("I love this taste!"))
+			gourmand.adjust_disgust(-5 + -2.5 * fraction)
+			gourmand.add_mood_event("fav_food", /datum/mood_event/favorite_food)
 
 /obj/item/reagent_containers/cup/attack(mob/living/target_mob, mob/living/user, obj/target)
 	if(!canconsume(target_mob, user))
@@ -223,10 +226,10 @@
 	lefthand_file = 'icons/mob/inhands/items_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/items_righthand.dmi'
 	worn_icon_state = "beaker"
-	custom_materials = list(/datum/material/glass=500)
+	custom_materials = list(/datum/material/glass=SMALL_MATERIAL_AMOUNT*5)
+	fill_icon_thresholds = list(0, 1, 20, 40, 60, 80, 100)
 	volume = 60 //SKYRAT EDIT: Addition
 	possible_transfer_amounts = list(5,10,15,20,30,60) //SKYRAT EDIT: Addition
-	fill_icon_thresholds = list(0, 1, 20, 40, 60, 80, 100)
 
 /obj/item/reagent_containers/cup/beaker/Initialize(mapload)
 	. = ..()
@@ -245,7 +248,7 @@
 	name = "large beaker"
 	desc = "A large beaker. Can hold up to 120 units." //SKYRAT EDIT: Used to say Can hold up to 100 units.
 	icon_state = "beakerlarge"
-	custom_materials = list(/datum/material/glass=2500)
+	custom_materials = list(/datum/material/glass= SHEET_MATERIAL_AMOUNT*1.25)
 	volume = 120 //SKYRAT EDIT: Original value (100)
 	amount_per_transfer_from_this = 10
 	//possible_transfer_amounts = list(5,10,15,20,25,30,50,100) //SKYRAT EDIT: Original Values
@@ -256,7 +259,7 @@
 	name = "x-large beaker"
 	desc = "An extra-large beaker. Can hold up to 150 units." //SKYRAT EDIT: Used to say Can hold up to 120 units
 	icon_state = "beakerwhite"
-	custom_materials = list(/datum/material/glass=2500, /datum/material/plastic=3000)
+	custom_materials = list(/datum/material/glass=SHEET_MATERIAL_AMOUNT*1.25, /datum/material/plastic=SHEET_MATERIAL_AMOUNT * 1.5)
 	volume = 150 //SKYRAT EDIT: Original Value (120)
 	amount_per_transfer_from_this = 10
 	//possible_transfer_amounts = list(5,10,15,20,25,30,60,120) //SKYRAT EDIT: Original values
@@ -267,7 +270,7 @@
 	name = "metamaterial beaker"
 	desc = "A large beaker. Can hold up to 180 units."
 	icon_state = "beakergold"
-	custom_materials = list(/datum/material/glass=2500, /datum/material/plastic=3000, /datum/material/gold=1000, /datum/material/titanium=1000)
+	custom_materials = list(/datum/material/glass=SHEET_MATERIAL_AMOUNT*1.25, /datum/material/plastic=SHEET_MATERIAL_AMOUNT * 1.5, /datum/material/gold=HALF_SHEET_MATERIAL_AMOUNT, /datum/material/titanium=HALF_SHEET_MATERIAL_AMOUNT)
 	volume = 180
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5,10,15,20,25,30,60,120,180)
@@ -278,7 +281,7 @@
 	desc = "A cryostasis beaker that allows for chemical storage without \
 		reactions. Can hold up to 50 units."
 	icon_state = "beakernoreact"
-	custom_materials = list(/datum/material/iron=3000)
+	custom_materials = list(/datum/material/iron=SHEET_MATERIAL_AMOUNT * 1.5)
 	reagent_flags = OPENCONTAINER | NO_REACT
 	volume = 50
 	amount_per_transfer_from_this = 10
@@ -289,7 +292,7 @@
 		and Element Cuban combined with the Compound Pete. Can hold up to \
 		300 units."
 	icon_state = "beakerbluespace"
-	custom_materials = list(/datum/material/glass = 5000, /datum/material/plasma = 3000, /datum/material/diamond = 1000, /datum/material/bluespace = 1000)
+	custom_materials = list(/datum/material/glass =SHEET_MATERIAL_AMOUNT * 2.5, /datum/material/plasma =SHEET_MATERIAL_AMOUNT * 1.5, /datum/material/diamond =HALF_SHEET_MATERIAL_AMOUNT, /datum/material/bluespace =HALF_SHEET_MATERIAL_AMOUNT)
 	volume = 300
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5,10,15,20,25,30,50,100,300)
@@ -345,8 +348,8 @@
 
 /obj/item/reagent_containers/cup/bucket
 	name = "bucket"
-	desc = "It's a bucket. You can squeeze a mop's contents into it by using right-click." //SKYRAT EDIT CHANGE
-	icon = 'icons/obj/janitor.dmi'
+	desc = "It's a bucket. You can squeeze a mop's contents into it by using right-click." //SKYRAT EDIT CHANGE - ORIGINAL: desc = "It's a bucket."
+	icon = 'icons/obj/service/janitor.dmi'
 	worn_icon = 'icons/mob/clothing/head/utility.dmi'
 	icon_state = "bucket"
 	inhand_icon_state = "bucket"
@@ -357,7 +360,7 @@
 	greyscale_config_worn = /datum/greyscale_config/buckets_worn
 	greyscale_config_inhand_left = /datum/greyscale_config/buckets_inhands_left
 	greyscale_config_inhand_right = /datum/greyscale_config/buckets_inhands_right
-	custom_materials = list(/datum/material/iron=200)
+	custom_materials = list(/datum/material/iron=SMALL_MATERIAL_AMOUNT * 2)
 	w_class = WEIGHT_CLASS_NORMAL
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = list(5,10,15,20,25,30,50,100) //SKYRAT EDIT CHANGE
@@ -396,7 +399,7 @@
 	greyscale_config_worn = null
 	greyscale_config_inhand_left = null
 	greyscale_config_inhand_right = null
-	custom_materials = list(/datum/material/wood = MINERAL_MATERIAL_AMOUNT * 2)
+	custom_materials = list(/datum/material/wood = SHEET_MATERIAL_AMOUNT * 2)
 	resistance_flags = FLAMMABLE
 	armor_type = /datum/armor/bucket_wooden
 
@@ -404,32 +407,46 @@
 	melee = 10
 	acid = 50
 
-/obj/item/reagent_containers/cup/bucket/attackby(obj/O, mob/living/user, params) //SKYRAT EDIT CHANGE
-	if(istype(O, /obj/item/mop)) //SKYRAT EDIT CHANGE
+// SKYRAT EDIT CHANGE START - LIQUIDS
+/* Original
+/obj/item/reagent_containers/cup/bucket/attackby(obj/O, mob/user, params)
+	if(istype(O, /obj/item/mop))
+		if(reagents.total_volume < 1)
+			user.balloon_alert(user, "empty!")
+		else
+			reagents.trans_to(O, 5, transfered_by = user)
+			user.balloon_alert(user, "doused [O]")
+			playsound(loc, 'sound/effects/slosh.ogg', 25, TRUE)
+		return
+*/
+/obj/item/reagent_containers/cup/bucket/attackby(obj/mop, mob/living/user, params)
+	if(istype(mop, /obj/item/mop))
 		var/is_right_clicking = LAZYACCESS(params2list(params), RIGHT_CLICK)
 		if(is_right_clicking)
-			if(O.reagents.total_volume == 0)
-				to_chat(user, "<span class='warning'>[O] is dry, you can't squeeze anything out!</span>")
+			if(mop.reagents.total_volume == 0)
+				user.balloon_alert(user, "mop is dry!")
 				return
 			if(reagents.total_volume == reagents.maximum_volume)
-				to_chat(user, "<span class='warning'>[src] is full!</span>")
+				user.balloon_alert(user, "mop is full!")
 				return
-			O.reagents.remove_any(O.reagents.total_volume * SQUEEZING_DISPERSAL_RATIO)
-			O.reagents.trans_to(src, O.reagents.total_volume, transfered_by = user)
-			to_chat(user, "<span class='notice'>You squeeze the liquids from [O] to [src].</span>")
+			mop.reagents.remove_any(mop.reagents.total_volume * SQUEEZING_DISPERSAL_RATIO)
+			mop.reagents.trans_to(src, mop.reagents.total_volume, transfered_by = user)
+			user.balloon_alert(user, "mop squeezed")
 		else
 			if(reagents.total_volume < 1)
-				to_chat(user, "<span class='warning'>[src] is out of water!</span>")
+				user.balloon_alert(user, "container empty!")
 			else
-				reagents.trans_to(O, 5, transfered_by = user)
-				to_chat(user, "<span class='notice'>You wet [O] in [src].</span>")
-				playsound(loc, 'sound/effects/slosh.ogg', 25, TRUE) //SKYRAT EDIT CHANGE END
-	else if(isprox(O)) //This works with wooden buckets for now. Somewhat unintended, but maybe someone will add sprites for it soon(TM)
-		to_chat(user, span_notice("You add [O] to [src]."))
-		qdel(O)
+				reagents.trans_to(mop, 5, transfered_by = user)
+				user.balloon_alert(user, "mop wet")
+				playsound(loc, 'sound/effects/slosh.ogg', 25, TRUE)
+
+	else if(isprox(mop)) //This works with wooden buckets for now. Somewhat unintended, but maybe someone will add sprites for it soon(TM)
+		to_chat(user, span_notice("You add [mop] to [src]."))
+		qdel(mop)
 		var/obj/item/bot_assembly/cleanbot/new_cleanbot_ass = new(null, src)
 		user.put_in_hands(new_cleanbot_ass)
 		return
+// SKYRAT EDIT CHANGE END - LIQUIDS
 
 /obj/item/reagent_containers/cup/bucket/equipped(mob/user, slot)
 	. = ..()
@@ -469,7 +486,7 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5, 10, 15, 20, 25, 30, 50, 100)
 	volume = 100
-	custom_materials = list(/datum/material/wood = MINERAL_MATERIAL_AMOUNT)
+	custom_materials = list(/datum/material/wood = SHEET_MATERIAL_AMOUNT)
 	resistance_flags = FLAMMABLE
 	reagent_flags = OPENCONTAINER
 	spillable = TRUE
@@ -559,3 +576,15 @@
 	volume = 240
 	icon_state = "coffeepot_bluespace"
 	fill_icon_thresholds = list(0)
+
+///Test tubes created by chem master and pandemic and placed in racks
+/obj/item/reagent_containers/cup/tube
+	name = "tube"
+	desc = "A small test tube."
+	icon_state = "test_tube"
+	fill_icon_state = "tube"
+	inhand_icon_state = "atoxinbottle"
+	worn_icon_state = "beaker"
+	possible_transfer_amounts = list(5, 10, 15, 30)
+	volume = 30
+	fill_icon_thresholds = list(0, 1, 20, 40, 60, 80, 100)
