@@ -67,7 +67,7 @@
 	)
 	death_message = "beeps, its mechanical parts hissing before the chassis collapses in a loud thud."
 	gold_core_spawnable = NO_SPAWN
-	nofur = TRUE
+	can_be_shaved = FALSE
 	ai_controller = /datum/ai_controller/basic_controller/dog/borgi
 	unsuitable_atmos_damage = 0
 	minimum_survivable_temperature = 0
@@ -157,18 +157,21 @@
 
 	harass_target(thrown_by)
 
-/mob/living/basic/pet/dog/corgi/borgi/bullet_act(obj/projectile/proj)
+/mob/living/basic/pet/dog/corgi/borgi/bullet_act(obj/projectile/hitting_projectile, def_zone, piercing_hit = FALSE)
 	. = ..()
 
-	if(!istype(proj, /obj/projectile/beam) && !istype(proj, /obj/projectile/bullet))
+	if(. != BULLET_ACT_HIT)
 		return
 
-	var/mob/living/carbon/human/target = proj.firer
-	if(proj.damage >= 10)
-		if(proj.damage_type != BRUTE && proj.damage_type != BURN)
+	if(!istype(hitting_projectile, /obj/projectile/beam) && !istype(hitting_projectile, /obj/projectile/bullet))
+		return
+
+	var/mob/living/carbon/human/target = hitting_projectile.firer
+	if(hitting_projectile.damage >= 10)
+		if(hitting_projectile.damage_type != BRUTE && hitting_projectile.damage_type != BURN)
 			return
 
-		adjustBruteLoss(proj.damage)
+		adjustBruteLoss(hitting_projectile.damage)
 		if(!isliving(target) || health <= 0)
 			return
 
