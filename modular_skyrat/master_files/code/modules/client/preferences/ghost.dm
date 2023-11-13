@@ -17,7 +17,7 @@
 		join_action.Remove(ghost)
 		return TRUE
 
-	var/datum/action/innate/join_soulcatcher/new_join_action = new(ghost)
+	var/datum/action/innate/join_soulcatcher/new_join_action = new
 	new_join_action.Grant(ghost)
 	return TRUE
 

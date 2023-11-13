@@ -22,8 +22,6 @@
 	)
 	step_energy_drain = 4
 	can_use_overclock = TRUE
-	overclock_safety_available = TRUE
-	overclock_safety = TRUE
 
 /datum/armor/mecha_gygax
 	melee = 25

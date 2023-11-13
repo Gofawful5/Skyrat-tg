@@ -5,14 +5,6 @@
 "b" = (
 /turf/closed/indestructible/alien,
 /area/centcom/mafia)
-"d" = (
-/obj/effect/landmark/mafia,
-/turf/open/floor/plating/abductor,
-/area/centcom/mafia)
-"f" = (
-/obj/effect/spawner/structure/window/reinforced/plasma/plastitanium,
-/turf/closed/indestructible/alien,
-/area/centcom/mafia)
 "g" = (
 /obj/mafia_game_board,
 /obj/effect/mapping_helpers/broken_floor,
@@ -40,10 +32,12 @@
 /turf/open/floor/plating/abductor,
 /area/centcom/mafia)
 "m" = (
+/obj/effect/landmark/mafia,
 /obj/structure/bed/abductor,
 /turf/open/floor/plating/abductor,
 /area/centcom/mafia)
 "n" = (
+/obj/effect/landmark/mafia,
 /obj/structure/bed/abductor,
 /turf/open/floor/plating/abductor2,
 /area/centcom/mafia)
@@ -51,6 +45,15 @@
 /obj/structure/closet/abductor,
 /obj/item/abductor/gizmo,
 /turf/open/floor/plating/abductor2,
+/area/centcom/mafia)
+"p" = (
+/obj/machinery/door/poddoor/preopen{
+	desc = "When it's time to sleep, the lights will go out. Remember - no one in space can hear you scream.";
+	id = "mafia";
+	max_integrity = 99999;
+	name = "Station Night Shutters"
+	},
+/turf/closed/indestructible/fakeglass,
 /area/centcom/mafia)
 "q" = (
 /turf/open/floor/plating/abductor,
@@ -78,8 +81,8 @@
 	max_integrity = 99999;
 	name = "Station Night Shutters"
 	},
-/obj/effect/spawner/structure/window/reinforced/plasma/plastitanium,
-/turf/open/space/basic,
+/obj/structure/window/reinforced/plasma/plastitanium,
+/turf/open/floor/plating/abductor2,
 /area/centcom/mafia)
 "z" = (
 /obj/structure/grille/indestructible,
@@ -142,10 +145,6 @@
 /turf/closed/indestructible/abductor{
 	icon_state = "alien21"
 	},
-/area/centcom/mafia)
-"O" = (
-/obj/effect/landmark/mafia,
-/turf/open/floor/plating/abductor2,
 /area/centcom/mafia)
 "P" = (
 /turf/closed/indestructible/abductor,
@@ -345,7 +344,7 @@ i
 N
 o
 r
-x
+p
 m
 q
 x
@@ -395,13 +394,13 @@ W
 G
 x
 r
-O
+r
 x
-d
+q
 x
-O
+r
 x
-d
+q
 q
 x
 E
@@ -445,13 +444,13 @@ j
 m
 q
 q
-d
+q
 x
 t
 t
 t
 x
-O
+r
 r
 r
 n
@@ -495,13 +494,13 @@ j
 n
 r
 r
-O
+r
 x
 t
 t
 t
 x
-d
+q
 q
 q
 m
@@ -545,13 +544,13 @@ I
 J
 x
 q
-d
+q
 x
-O
+r
 x
-d
+q
 x
-O
+r
 r
 x
 Y
@@ -573,7 +572,7 @@ q
 b
 b
 r
-f
+b
 q
 b
 b

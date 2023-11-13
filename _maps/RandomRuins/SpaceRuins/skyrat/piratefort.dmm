@@ -80,7 +80,7 @@
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/powered)
 "di" = (
-/mob/living/basic/skeleton,
+/mob/living/simple_animal/hostile/skeleton,
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/powered)
 "dv" = (
@@ -89,7 +89,7 @@
 /turf/open/floor/wood,
 /area/ruin/space/has_grav/powered)
 "dF" = (
-/mob/living/basic/trooper/nanotrasen/peaceful,
+/mob/living/simple_animal/hostile/retaliate/nanotrasenpeace,
 /turf/open/floor/engine,
 /area/ruin/space/has_grav/powered)
 "dI" = (
@@ -171,7 +171,7 @@
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/powered)
 "ga" = (
-/mob/living/basic/trooper/pirate/melee,
+/mob/living/simple_animal/hostile/pirate/melee,
 /turf/open/floor/carpet,
 /area/ruin/space/has_grav/powered)
 "ge" = (
@@ -185,7 +185,7 @@
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/powered)
 "gl" = (
-/mob/living/basic/trooper/syndicate/ranged{
+/mob/living/basic/syndicate/ranged{
 	desc = "Yarr-harr fiddley dee.";
 	faction = list("pirate");
 	name = "Pirate Operative"
@@ -340,7 +340,7 @@
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/powered)
 "mx" = (
-/mob/living/basic/trooper/pirate/melee,
+/mob/living/simple_animal/hostile/pirate/melee,
 /obj/effect/turf_decal/trimline/dark_blue/filled/line{
 	dir = 10
 	},
@@ -353,7 +353,7 @@
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/powered)
 "na" = (
-/mob/living/basic/trooper/syndicate/melee{
+/mob/living/basic/syndicate/melee{
 	desc = "Yo-ho-ho he took a bite'a gum-gum.";
 	faction = list("pirate");
 	name = "Pirate Operative"
@@ -436,7 +436,7 @@
 /turf/open/floor/engine,
 /area/ruin/space)
 "pu" = (
-/mob/living/basic/trooper/syndicate/ranged{
+/mob/living/basic/syndicate/ranged{
 	desc = "Yarr-harr fiddley dee.";
 	faction = list("pirate");
 	name = "Pirate Operative"
@@ -459,7 +459,7 @@
 /turf/open/floor/wood,
 /area/ruin/space/has_grav/powered)
 "pS" = (
-/mob/living/basic/trooper/pirate/melee,
+/mob/living/simple_animal/hostile/pirate/melee,
 /obj/effect/turf_decal/trimline/dark_red/filled/line{
 	dir = 8
 	},
@@ -481,7 +481,7 @@
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/powered)
 "qy" = (
-/mob/living/basic/trooper/syndicate/melee{
+/mob/living/basic/syndicate/melee{
 	desc = "Yo-ho-ho he took a bite'a gum-gum.";
 	faction = list("pirate");
 	name = "Pirate Operative"
@@ -665,7 +665,7 @@
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/powered)
 "wr" = (
-/mob/living/basic/trooper/pirate/ranged,
+/mob/living/simple_animal/hostile/pirate/ranged,
 /obj/effect/turf_decal/trimline/dark_red/filled/line{
 	dir = 8
 	},
@@ -720,7 +720,7 @@
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/powered)
 "xD" = (
-/mob/living/basic/trooper/syndicate/melee{
+/mob/living/basic/syndicate/melee{
 	desc = "Yo-ho-ho he took a bite'a gum-gum.";
 	faction = list("pirate");
 	name = "Pirate Operative"
@@ -737,7 +737,7 @@
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/powered)
 "xM" = (
-/mob/living/basic/trooper/pirate/melee,
+/mob/living/simple_animal/hostile/pirate/melee,
 /turf/open/floor/wood,
 /area/ruin/space/has_grav/powered)
 "xV" = (
@@ -779,7 +779,7 @@
 /turf/open/floor/iron/kitchen,
 /area/ruin/space/has_grav/powered)
 "yE" = (
-/mob/living/basic/trooper/pirate/melee,
+/mob/living/simple_animal/hostile/pirate/melee,
 /obj/effect/turf_decal/trimline/dark_red/filled/corner{
 	dir = 8
 	},
@@ -837,7 +837,7 @@
 /turf/open/floor/carpet,
 /area/ruin/space/has_grav/powered)
 "AA" = (
-/mob/living/basic/trooper/pirate/ranged,
+/mob/living/simple_animal/hostile/pirate/ranged,
 /obj/effect/turf_decal/trimline/dark_red/filled/line{
 	dir = 4
 	},
@@ -860,7 +860,7 @@
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/powered)
 "BV" = (
-/mob/living/basic/trooper/syndicate/ranged{
+/mob/living/basic/syndicate/ranged{
 	desc = "Yarr-harr fiddley dee.";
 	faction = list("pirate");
 	name = "Pirate Operative"
@@ -944,7 +944,7 @@
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/powered)
 "EC" = (
-/mob/living/basic/trooper/pirate/melee,
+/mob/living/simple_animal/hostile/pirate/melee,
 /obj/effect/turf_decal/trimline/dark_red/filled/line{
 	dir = 1
 	},
@@ -999,7 +999,7 @@
 /turf/open/floor/iron/kitchen,
 /area/ruin/space/has_grav/powered)
 "Gc" = (
-/mob/living/basic/trooper/pirate/ranged,
+/mob/living/simple_animal/hostile/pirate/ranged,
 /turf/open/floor/wood,
 /area/ruin/space/has_grav/powered)
 "Gf" = (
@@ -1096,7 +1096,7 @@
 /turf/closed/wall/r_wall/syndicate,
 /area/ruin/space/has_grav/powered)
 "LG" = (
-/mob/living/basic/trooper/pirate/melee,
+/mob/living/simple_animal/hostile/pirate/melee,
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/powered)
 "LI" = (
@@ -1112,7 +1112,7 @@
 /turf/open/floor/wood,
 /area/ruin/space/has_grav/powered)
 "Ma" = (
-/mob/living/basic/trooper/pirate/melee,
+/mob/living/simple_animal/hostile/pirate/melee,
 /obj/effect/turf_decal/trimline/dark_red/filled/line,
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/powered)
@@ -1145,7 +1145,7 @@
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/powered)
 "Nz" = (
-/mob/living/basic/trooper/syndicate/melee{
+/mob/living/basic/syndicate/melee{
 	desc = "Yo-ho-ho he took a bite'a gum-gum.";
 	faction = list("pirate");
 	name = "Pirate Operative"
@@ -1281,7 +1281,7 @@
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/powered)
 "TK" = (
-/mob/living/basic/trooper/pirate/ranged/space,
+/mob/living/simple_animal/hostile/pirate/ranged/space,
 /turf/open/misc/asteroid/lowpressure,
 /area/ruin/space)
 "TO" = (
@@ -1332,7 +1332,7 @@
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/powered)
 "UL" = (
-/mob/living/basic/trooper/pirate/ranged{
+/mob/living/simple_animal/hostile/pirate/ranged{
 	health = 200;
 	maxHealth = 200;
 	name = "Pirate Captain"
@@ -1360,11 +1360,11 @@
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/powered)
 "VI" = (
-/mob/living/basic/trooper/pirate/melee/space,
+/mob/living/simple_animal/hostile/pirate/melee/space,
 /turf/open/misc/asteroid/lowpressure,
 /area/ruin/space)
 "VL" = (
-/mob/living/basic/trooper/pirate/melee,
+/mob/living/simple_animal/hostile/pirate/melee,
 /obj/effect/turf_decal/trimline/dark_red/filled/corner{
 	dir = 1
 	},

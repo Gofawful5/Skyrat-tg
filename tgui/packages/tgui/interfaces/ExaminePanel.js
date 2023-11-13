@@ -3,33 +3,6 @@ import { Stack, Section, ByondUi } from '../components';
 import { Window } from '../layouts';
 import { resolveAsset } from '../assets';
 
-const formatURLs = (text) => {
-  if (!text) return;
-  const parts = [];
-  let regex = /https?:\/\/[^\s/$.?#].[^\s]*/gi;
-  let lastIndex = 0;
-
-  text.replace(regex, (url, index) => {
-    parts.push(text.substring(lastIndex, index));
-    parts.push(
-      <a
-        style={{
-          'color': '#0591e3',
-          'text-decoration': 'none',
-        }}
-        href={url}>
-        {url}
-      </a>
-    );
-    lastIndex = index + url.length;
-    return url;
-  });
-
-  parts.push(text.substring(lastIndex));
-
-  return <div>{parts}</div>;
-};
-
 export const ExaminePanel = (props, context) => {
   const { act, data } = useBackend(context);
   const {
@@ -90,7 +63,7 @@ export const ExaminePanel = (props, context) => {
                   fill
                   title={character_name + "'s Flavor Text:"}
                   preserveWhitespace>
-                  {formatURLs(flavor_text)}
+                  {flavor_text}
                 </Section>
               </Stack.Item>
               <Stack.Item grow>
@@ -101,7 +74,7 @@ export const ExaminePanel = (props, context) => {
                       fill
                       title="OOC Notes"
                       preserveWhitespace>
-                      {formatURLs(ooc_notes)}
+                      {ooc_notes}
                     </Section>
                   </Stack.Item>
                   <Stack.Item grow basis={0}>
@@ -115,7 +88,7 @@ export const ExaminePanel = (props, context) => {
                       }
                       preserveWhitespace>
                       {custom_species
-                        ? formatURLs(custom_species_lore)
+                        ? custom_species_lore
                         : 'Just a normal space dweller.'}
                     </Section>
                   </Stack.Item>

@@ -1,295 +1,227 @@
-// Modularly set the correct icon file
-/obj/machinery/barsign/update_icon_state()
-	. = ..()
-	// uses tg icon file
-	if(!istype(chosen_sign, /datum/barsign/skyrat) || icon_state == "empty")
-		icon = initial(icon)
-		return
-
-	// uses modular icon file
-	if(istype(chosen_sign, /datum/barsign/skyrat/large))
-		icon = SKYRAT_LARGE_BARSIGN_FILE
-	else
-		icon = SKYRAT_BARSIGN_FILE
-
-/datum/barsign/skyrat/topmen
+/datum/barsign/topmen
 	name = "Top Men"
-	icon_state = "topmen"
-	neon_color = "#C2AACA"
+	icon = "topmen"
 
-/datum/barsign/skyrat/spaceballgrille
+/datum/barsign/spaceballgrille
 	name = "Spaceball Grille"
-	icon_state = "spaceballgrille"
-	neon_color = "#827973"
+	icon = "spaceballgrille"
 
-/datum/barsign/skyrat/clubee
+/datum/barsign/clubee
 	name = "Club Bee"
-	icon_state = "clubee"
-	neon_color = "#F2EEEE"
+	icon = "clubee"
 
-/datum/barsign/skyrat/thesun
+/datum/barsign/thesun
 	name = "The Sun"
-	icon_state = "thesun"
-	neon_color = "#F8F0B8"
+	icon = "thesun"
 
-/datum/barsign/skyrat/limbo
+/datum/barsign/limbo
 	name = "The Limbo"
-	icon_state = "limbo"
+	icon = "limbo"
 	desc = "A popular haunt for lost souls. The mood lighting is killer!"
-	neon_color = "#777777"
 
-/datum/barsign/skyrat/meadbay
+/datum/barsign/meadbay
 	name = "Meadbay"
-	icon_state = "meadbay"
-	neon_color = "#EBB823"
+	icon = "meadbay"
 
-/datum/barsign/skyrat/cindikate
+/datum/barsign/cindikate
 	name = "Cindi Kate's"
-	icon_state = "cindikate"
-	neon_color = "#FF3403"
+	icon = "cindikate"
 
-/datum/barsign/skyrat/theclownshead
+/datum/barsign/theclownshead
 	name = "The Clown's Head"
-	icon_state = "theclownshead"
+	icon = "theclownshead"
 	desc = "Home of Headdy, the honking clown head!"
-	neon_color = "#FFD800"
 
-/datum/barsign/skyrat/theorchard
+/datum/barsign/theorchard
 	name = "The Orchard"
-	icon_state = "theorchard"
-	neon_color = "#CFFF47"
+	icon = "theorchard"
 
-/datum/barsign/skyrat/thesaucyclown
+/datum/barsign/thesaucyclown
 	name = "The Saucy Clown"
-	icon_state = "thesaucyclown"
+	icon = "thesaucyclown"
 	desc = "A known gathering site for the annual clown courtship rituals."
-	neon_color = "#FF66CC"
 
-/datum/barsign/skyrat/thedamnwall
+/datum/barsign/thedamnwall
 	name = "The Damn Wall"
-	icon_state = "thedamnwall"
+	icon = "thedamnwall"
 	desc = "When you're up against a wall, it's best to have stout friends and stout liquor right there beside you."
-	neon_color = "#CC3333"
 
-/datum/barsign/skyrat/whiskeyimplant
+/datum/barsign/whiskeyimplant
 	name = "Whiskey Implant"
-	icon_state = "whiskeyimplant"
-	neon_color = "#E9F517"
+	icon = "whiskeyimplant"
 
-/datum/barsign/skyrat/carpecarp
+/datum/barsign/carpecarp
 	name = "Carpe Carp"
-	icon_state = "carpecarp"
-	neon_color = "#C717FE"
+	icon = "carpecarp"
 
-/datum/barsign/skyrat/robustroadhouse
+/datum/barsign/robustroadhouse
 	name = "Robust Roadhouse"
-	icon_state = "robustroadhouse"
-	neon_color = "#F7A804"
+	icon = "robustroadhouse"
 
-/datum/barsign/skyrat/theredshirt
+/datum/barsign/theredshirt
 	name = "The Redshirt"
-	icon_state = "theredshirt"
-	neon_color = "#FF92E0"
+	icon = "theredshirt"
 
-/datum/barsign/skyrat/maltesefalconmk2
+/datum/barsign/maltesefalconmk2
 	name = "Maltese Falcon MK2"
-	icon_state = "maltesefalconmk2"
+	icon = "maltesefalconmk2"
 	desc = "The Maltese Falcon mark two, now extra hard boiled."
-	neon_color = "#E30000"
 
-/datum/barsign/skyrat/thecavernmk2
+/datum/barsign/thecavernmk2
 	name = "The Cavern MK2"
-	icon_state = "thecavernmk2"
+	icon = "thecavernmk2"
 	desc = "Fine drinks while listening to some fine tunes."
-	neon_color = "#AA9393"
 
-/datum/barsign/skyrat/lv426
+/datum/barsign/lv426
 	name = "LV-426"
-	icon_state = "lv426"
+	icon = "lv426"
 	desc = "Drinking with fancy facemasks is clearly more important than going to medbay."
-	neon_color = "#00F206"
 
-/datum/barsign/skyrat/zocalo
+/datum/barsign/zocalo
 	name = "Zocalo"
-	icon_state = "zocalo"
+	icon = "zocalo"
 	desc = "Anteriormente ubicado en Spessmerica."
-	neon_color = "#E5AF1C"
 
-/datum/barsign/skyrat/fourtheemprah
+/datum/barsign/fourtheemprah
 	name = "4 The Emprah"
-	icon_state = "4theemprah"
+	icon = "4theemprah"
 	desc = "Enjoyed by fanatics, heretics, and brain-damaged patrons alike."
-	neon_color = "#E5AF1C"
 
-/datum/barsign/skyrat/ishimura
+/datum/barsign/ishimura
 	name = "Ishimura"
-	icon_state = "ishimura"
+	icon = "ishimura"
 	desc = "Well known for their quality brownstar and delicious crackers."
-	neon_color = "#FF0000"
 
-/datum/barsign/skyrat/tardis
+/datum/barsign/tardis
 	name = "Tardis"
-	icon_state = "tardis"
+	icon = "tardis"
 	desc = "This establishment has been through at least 5,343 iterations."
-	neon_color = "#2739AA"
 
-/datum/barsign/skyrat/quarks
+/datum/barsign/quarks
 	name = "Quark's"
-	icon_state = "quarks"
+	icon = "quarks"
 	desc = "Frequenters of this establishment are often seen wearing meson scanners; how quaint."
-	neon_color = "#10E500"
 
-/datum/barsign/skyrat/tenforward
+/datum/barsign/tenforward
 	name = "Ten Forward"
-	icon_state = "tenforward"
-	neon_color = "#E5AF1C"
+	icon = "tenforward"
 
-/datum/barsign/skyrat/theprancingpony
+/datum/barsign/thepranicngpony
 	name = "The Prancing Pony"
-	icon_state = "theprancingpony"
+	icon = "thepranicngpony"
 	desc = "Ok, we don't take to kindly to you short folk pokin' round looking for some ranger scum."
-	neon_color = "#FF9100"
 
-/datum/barsign/skyrat/vault13
+/datum/barsign/vault13
 	name = "Vault 13"
-	icon_state = "vault13"
+	icon = "vault13"
 	desc = "Coincidence is intentional."
-	neon_color = "#FFA800"
 
-/datum/barsign/skyrat/thehive
+/datum/barsign/thehive
 	name = "The Hive"
-	icon_state = "thehive"
-	neon_color = "#FFC62A"
+	icon = "thehive"
 
-/datum/barsign/skyrat/cantina
+/datum/barsign/cantina
 	name = "Chalmun's Cantina"
-	icon_state = "cantina"
+	icon = "cantina"
 	desc = "The bar was founded on the principles of originality; they have the same music playing 24/7."
-	neon_color = "#0078FF"
 
-/datum/barsign/skyrat/milliways42
+/datum/barsign/milliways42
 	name = "Milliways 42"
-	icon_state = "milliways42"
+	icon = "milliways42"
 	desc = "It's not really the end; it's the beginning, meaning, and answer for all your beverage needs."
-	neon_color = "#FF00F6"
 
-/datum/barsign/skyrat/timeofeve
+/datum/barsign/timeofeve
 	name = "The Time of Eve"
-	icon_state = "thetimeofeve"
+	icon = "thetimeofeve"
 	desc = "Vintage drinks from 2453!."
-	neon_color = "#EB52F8"
 
-/datum/barsign/skyrat/spaceasshole
+/datum/barsign/spaceasshole
 	name = "Space Asshole"
-	icon_state = "spaceasshole"
+	icon = "spaceasshole"
 	desc = "Open since 2125, Not much has changed since then; the engineers still release the singulo and the damn miners still are more likely to cave your face in that deliver ores."
-	neon_color = "#FF0000"
 
-/datum/barsign/skyrat/birdcage
+/datum/barsign/birdcage
 	name = "The Bird Cage"
-	icon_state = "birdcage"
+	icon = "birdcage"
 	desc = "Caw."
-	neon_color = "#FFD21E"
 
-/datum/barsign/skyrat/narsie
+/datum/barsign/narsie
 	name = "Narsie Bistro"
-	icon_state = "narsiebistro"
+	icon = "narsiebistro"
 	desc = "The last pub before the World's End."
-	neon_color = "#FF0000"
 
-/datum/barsign/skyrat/fallout
+/datum/barsign/fallout
 	name = "The Booze Bunker"
-	icon_state = "boozebunker"
+	icon = "boozebunker"
 	desc = "Never duck for cover without a drink!"
-	neon_color = "#FCC41B"
 
-/datum/barsign/skyrat/brokendreams
+/datum/barsign/brokendreams
 	name = "The Cafe of Broken Dreams"
-	icon_state = "brokendreams"
+	icon = "brokendreams"
 	desc = "Try our new dogmeat sliders!"
-	neon_color = "#E8E8A5"
 
-/datum/barsign/skyrat/toolboxtavern
+/datum/barsign/toolboxtavern
 	name = "Toolbox Tavern"
-	icon_state = "toolboxtavern"
+	icon = "toolboxtavern"
 	desc = "Free lodging with every Screwdriver purchased!"
-	neon_color = ""
 
-/datum/barsign/skyrat/blueoyster
+/datum/barsign/blueoyster
 	name = "The Blue Oyster"
-	icon_state = "blueoyster"
+	icon = "blueoyster"
 	desc = "The totally heterosexual bar for totally heterosexual men, just come inside and see."
-	neon_color = ""
 
-/datum/barsign/skyrat/foreign
+/datum/barsign/foreign
 	name = "Foreign Food Sign"
-	icon_state = "foreign"
+	icon = "foreign"
 	desc = "A sign written in some dead language advertising some non-descript foreign food."
-	neon_color = ""
 
-/datum/barsign/skyrat/commie
+/datum/barsign/commie
 	name = "Prole's Preferred"
-	icon_state = "commie"
+	icon = "commie"
 	desc = "The only bar you will ever need, comrade!"
-	neon_color = "#E46F6F"
 
-/datum/barsign/skyrat/brokenheros
+/datum/barsign/brokenheros
 	name = "The Bar of Broken Heros"
-	icon_state = "brokenheros"
+	icon = "brokenheros"
 	desc = "Do you enjoy hurting other people?"
-	neon_color = ""
 
-/datum/barsign/skyrat/sociallubricator
+/datum/barsign/sociallubricator
 	name = "The Social Lubricator"
-	icon_state = "sociallubricator"
+	icon = "sociallubricator"
 	desc = "The perfect thing to make you like people you hate."
-	neon_color = ""
 
-/datum/barsign/skyrat/chemlab
+/datum/barsign/chemlab
 	name = "The Chem Lab"
-	icon_state = "chemlab"
+	icon = "chemlab"
 	desc = "Try our new plasma martinis!"
-	neon_color = ""
 
-/datum/barsign/skyrat/mime
+/datum/barsign/mime
 	name = "Moonshine Mime"
-	icon_state = "mime"
+	icon = "mime"
 	desc = "Silent, not stirred."
-	neon_color = ""
 
-/datum/barsign/skyrat/clown
+/datum/barsign/clown
 	name = "Honking Clown"
-	icon_state = "clown"
+	icon = "clown"
 	desc = "Bananas not included."
-	neon_color = ""
 
-/datum/barsign/skyrat/progressive
+/datum/barsign/progressive
 	name = "A Modern and Progressive Tavern"
-	icon_state = "progressive"
+	icon = "progressive"
 	desc = "Whatever that means."
-	neon_color = "#DB9B9A"
 
-/datum/barsign/skyrat/va11halla
+/datum/barsign/va11halla
 	name = "VA-11 HALL-A"
-	icon_state = "va11halla"
+	icon = "va11halla"
 	desc = "Not as dangerous as N1-RV Ann-A."
-	neon_color = "#FB3F7D"
 
-/datum/barsign/skyrat/squatopia
+/datum/barsign/squatopia
 	name = "Squatopia"
-	icon_state = "squatopia"
+	icon = "squatopia"
 	desc = "The crystal belonged to my father. He was murdered."
-	neon_color = "#CC0033"
 
-/datum/barsign/skyrat/bug
+/datum/barsign/bug
 	name = "The Hungry Bug"
-	icon_state = "hungrybug"
+	icon = "hungrybug"
 	desc = "Stop by and enjoy some of the Hole's famous gyoza!"
-	neon_color = "#E2B001"
 
-// 96x96 signs
-
-/datum/barsign/skyrat/large/cyberslyph
-	name = "Cyberslyph"
-	icon_state = "cyberslyph"
-	neon_color = "#00FFFF"

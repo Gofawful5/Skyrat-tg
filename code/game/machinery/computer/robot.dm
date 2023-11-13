@@ -67,15 +67,15 @@
 		data["cyborgs"] += list(cyborg_data)
 
 	data["drones"] = list()
-	for(var/mob/living/basic/drone/drone in GLOB.drones_list)
-		if(drone.hacked)
+	for(var/mob/living/simple_animal/drone/D in GLOB.drones_list)
+		if(D.hacked)
 			continue
-		if(!is_valid_z_level(current_turf, get_turf(drone)))
+		if(!is_valid_z_level(current_turf, get_turf(D)))
 			continue
 		var/list/drone_data = list(
-			name = drone.name,
-			status = drone.stat,
-			ref = REF(drone)
+			name = D.name,
+			status = D.stat,
+			ref = REF(D)
 		)
 		data["drones"] += list(drone_data)
 
@@ -148,7 +148,7 @@
 
 		if("killdrone")
 			if(allowed(usr))
-				var/mob/living/basic/drone/drone = locate(params["ref"]) in GLOB.mob_list
+				var/mob/living/simple_animal/drone/drone = locate(params["ref"]) in GLOB.mob_list
 				if(drone.hacked)
 					to_chat(usr, span_danger("ERROR: [drone] is not responding to external commands."))
 				else

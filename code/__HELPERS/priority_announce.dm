@@ -2,18 +2,13 @@
 
 // these four are just text spans that furnish the TEXT itself with the appropriate CSS classes
 #define MAJOR_ANNOUNCEMENT_TITLE(string) ("<span class='major_announcement_title'>" + string + "</span>")
-#define SUBHEADER_ANNOUNCEMENT_TITLE(string) ("<span class='subheader_announcement_text'>" + string + "</span>")
 #define MAJOR_ANNOUNCEMENT_TEXT(string) ("<span class='major_announcement_text'>" + string + "</span>")
 #define MINOR_ANNOUNCEMENT_TITLE(string) ("<span class='minor_announcement_title'>" + string + "</span>")
 #define MINOR_ANNOUNCEMENT_TEXT(string) ("<span class='minor_announcement_text'>" + string + "</span>")
 
-#define ANNOUNCEMENT_HEADER(string) ("<span class='announcement_header'>" + string + "</span>")
-
 // these two are the ones that actually give the striped background
 #define CHAT_ALERT_DEFAULT_SPAN(string) ("<div class='chat_alert_default'>" + string + "</div>")
 #define CHAT_ALERT_COLORED_SPAN(color, string) ("<div class='chat_alert_" + color + "'>" + string + "</div>")
-
-#define ANNOUNCEMENT_COLORS list("default", "green", "blue", "pink", "yellow", "orange", "red", "purple")
 
 /**
  * Make a big red text announcement to
@@ -37,7 +32,7 @@
  * * encode_title - if TRUE, the title will be HTML encoded
  * * encode_text - if TRUE, the text will be HTML encoded
  */
-/proc/priority_announce(text, title = "", sound, type, sender_override, has_important_message = FALSE, list/mob/players, encode_title = TRUE, encode_text = TRUE, color_override)
+/proc/priority_announce(text, title = "", sound, type, sender_override, has_important_message = FALSE, list/mob/players, encode_title = TRUE, encode_text = TRUE)
 	if(!text)
 		return
 
@@ -60,7 +55,7 @@
 		if(ANNOUNCEMENT_TYPE_PRIORITY)
 			header = MAJOR_ANNOUNCEMENT_TITLE("Priority Announcement")
 			if(length(title) > 0)
-				header += SUBHEADER_ANNOUNCEMENT_TITLE(title)
+				header += MINOR_ANNOUNCEMENT_TITLE(title)
 		if(ANNOUNCEMENT_TYPE_CAPTAIN)
 			header = MAJOR_ANNOUNCEMENT_TITLE("Captain's Announcement")
 			GLOB.news_network.submit_article(text, "Captain's Announcement", "Station Announcements", null)
@@ -69,39 +64,30 @@
 		else
 			header += generate_unique_announcement_header(title, sender_override)
 
-	announcement_strings += ANNOUNCEMENT_HEADER(header)
+	announcement_strings += header
 
 	///If the announcer overrides alert messages, use that message.
 	if(SSstation.announcer.custom_alert_message && !has_important_message)
-		announcement_strings += MAJOR_ANNOUNCEMENT_TEXT(SSstation.announcer.custom_alert_message)
+		announcement_strings += SSstation.announcer.custom_alert_message
 	else
 		announcement_strings += MAJOR_ANNOUNCEMENT_TEXT(text)
 
-	var/finalized_announcement
-	if(color_override)
-		finalized_announcement = CHAT_ALERT_COLORED_SPAN(color_override, jointext(announcement_strings, ""))
-	else
-		finalized_announcement = CHAT_ALERT_DEFAULT_SPAN(jointext(announcement_strings, ""))
+	var/finalized_announcement = CHAT_ALERT_DEFAULT_SPAN(jointext(announcement_strings, "<br>"))
 
 	dispatch_announcement_to_players(finalized_announcement, players, sound)
 
 	if(isnull(sender_override))
 		if(length(title) > 0)
-			GLOB.news_network.submit_article(title + "<br><br>" + text, "[command_name()]", "Station Announcements", null)
+			GLOB.news_network.submit_article(title + "<br><br>" + text, "Central Command", "Station Announcements", null)
 		else
-			GLOB.news_network.submit_article(text, "[command_name()] Update", "Station Announcements", null)
+			GLOB.news_network.submit_article(text, "Central Command Update", "Station Announcements", null)
 
 /proc/print_command_report(text = "", title = null, announce=TRUE)
 	if(!title)
 		title = "Classified [command_name()] Update"
 
 	if(announce)
-		priority_announce(
-			text = "A report has been downloaded and printed out at all communications consoles.",
-			title = "Incoming Classified Message",
-			sound = SSstation.announcer.get_rand_report_sound(),
-			has_important_message = TRUE,
-		)
+		priority_announce("A report has been downloaded and printed out at all communications consoles.", "Incoming Classified Message", SSstation.announcer.get_rand_report_sound(), has_important_message = TRUE)
 
 	var/datum/comm_message/message = new
 	message.title = title
@@ -121,9 +107,8 @@
  * players - optional, a list mobs to send the announcement to. If unset, sends to all palyers.
  * sound_override - optional, use the passed sound file instead of the default notice sounds.
  * should_play_sound - Whether the notice sound should be played or not.
- * color_override - optional, use the passed color instead of the default notice color.
  */
-/proc/minor_announce(message, title = "Attention:", alert = FALSE, html_encode = TRUE, list/players, sound_override, should_play_sound = TRUE, color_override)
+/proc/minor_announce(message, title = "Attention:", alert = FALSE, html_encode = TRUE, list/players = null, sound_override = null, should_play_sound = TRUE)
 	if(!message)
 		return
 
@@ -132,15 +117,10 @@
 		message = html_encode(message)
 
 	var/list/minor_announcement_strings = list()
-	if(title != null && title != "")
-		minor_announcement_strings += ANNOUNCEMENT_HEADER(MINOR_ANNOUNCEMENT_TITLE(title))
+	minor_announcement_strings += MINOR_ANNOUNCEMENT_TITLE(title)
 	minor_announcement_strings += MINOR_ANNOUNCEMENT_TEXT(message)
 
-	var/finalized_announcement
-	if(color_override)
-		finalized_announcement = CHAT_ALERT_COLORED_SPAN(color_override, jointext(minor_announcement_strings, ""))
-	else
-		finalized_announcement = CHAT_ALERT_DEFAULT_SPAN(jointext(minor_announcement_strings, ""))
+	var/finalized_announcement = CHAT_ALERT_DEFAULT_SPAN(jointext(minor_announcement_strings, "<br>"))
 
 	var/custom_sound = sound_override || (alert ? 'modular_skyrat/modules/alerts/sound/alerts/alert1.ogg' : 'sound/misc/notice2.ogg') // SKYRAT EDIT CHANGE - CUSTOM ANNOUNCEMENTS - Original: 'sound/misc/notice1.ogg'
 	dispatch_announcement_to_players(finalized_announcement, players, custom_sound, should_play_sound)
@@ -163,10 +143,10 @@
 		message = selected_level.lowering_to_announcement
 
 	var/list/level_announcement_strings = list()
-	level_announcement_strings += ANNOUNCEMENT_HEADER(MINOR_ANNOUNCEMENT_TITLE(title))
+	level_announcement_strings += MINOR_ANNOUNCEMENT_TITLE(title)
 	level_announcement_strings += MINOR_ANNOUNCEMENT_TEXT(message)
 
-	var/finalized_announcement = CHAT_ALERT_COLORED_SPAN(current_level_color, jointext(level_announcement_strings, ""))
+	var/finalized_announcement = CHAT_ALERT_COLORED_SPAN(current_level_color, jointext(level_announcement_strings, "<br>"))
 
 	dispatch_announcement_to_players(finalized_announcement, GLOB.player_list, current_level_sound)
 
@@ -180,9 +160,9 @@
 		returnable_strings += MAJOR_ANNOUNCEMENT_TITLE(sender_override)
 
 	if(length(title) > 0)
-		returnable_strings += SUBHEADER_ANNOUNCEMENT_TITLE(title)
+		returnable_strings += MINOR_ANNOUNCEMENT_TITLE(title)
 
-	return jointext(returnable_strings, "")
+	return jointext(returnable_strings, "<br>")
 
 /// Proc that just dispatches the announcement to our applicable audience. Only the announcement is a mandatory arg.
 /proc/dispatch_announcement_to_players(announcement, list/players, sound_override = null, should_play_sound = TRUE)

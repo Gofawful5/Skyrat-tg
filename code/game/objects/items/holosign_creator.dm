@@ -15,16 +15,13 @@
 	item_flags = NOBLUDGEON
 	var/list/signs
 	var/max_signs = 10
-	//time to create a holosign in deciseconds.
-	var/creation_time = 0
-	//holosign image that is projected
+	var/creation_time = 0 //time to create a holosign in deciseconds.
 	var/holosign_type = /obj/structure/holosign/wetsign
 	var/holocreator_busy = FALSE //to prevent placing multiple holo barriers at once
 
 /obj/item/holosign_creator/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/openspace_item_click_handler)
-	RegisterSignal(src, COMSIG_OBJ_PAINTED, TYPE_PROC_REF(/obj/item/holosign_creator, on_color_change))
 
 /obj/item/holosign_creator/handle_openspace_click(turf/target, mob/user, proximity_flag, click_parameters)
 	afterattack(target, user, proximity_flag, click_parameters)
@@ -67,9 +64,6 @@
 		if(target_turf.is_blocked_turf(TRUE)) //don't try to sneak dense stuff on our tile during the wait.
 			return .
 	target_holosign = new holosign_type(get_turf(target), src)
-	target_holosign.add_hiddenprint(user)
-	if(color)
-		target_holosign.color = color
 	return .
 
 /obj/item/holosign_creator/attack(mob/living/carbon/human/M, mob/user)
@@ -77,24 +71,16 @@
 
 /obj/item/holosign_creator/attack_self(mob/user)
 	if(LAZYLEN(signs))
-		for(var/obj/structure/holosign/hologram as anything in signs)
-			qdel(hologram)
+		for(var/H in signs)
+			qdel(H)
 		balloon_alert(user, "holograms cleared")
 
 /obj/item/holosign_creator/Destroy()
 	. = ..()
 	if(LAZYLEN(signs))
-		for(var/obj/structure/holosign/hologram as anything in signs)
-			qdel(hologram)
+		for(var/H in signs)
+			qdel(H)
 
-/obj/item/holosign_creator/proc/on_color_change(obj/item/holosign_creator, mob/user, obj/item/toy/crayon/spraycan/spraycan, is_dark_color)
-	SIGNAL_HANDLER
-	if(!spraycan.actually_paints)
-		return
-
-	if(LAZYLEN(signs))
-		for(var/obj/structure/holosign/hologram as anything in signs)
-			hologram.color = color
 
 /obj/item/holosign_creator/janibarrier
 	name = "custodial holobarrier projector"
@@ -141,28 +127,28 @@
 	creation_time = 1.5 SECONDS
 	max_signs = 9
 	holosign_type = /obj/structure/holosign/barrier/cyborg
-	var/shock = FALSE
+	var/shock = 0
 
 /obj/item/holosign_creator/cyborg/attack_self(mob/user)
 	if(iscyborg(user))
-		var/mob/living/silicon/robot/borg = user
+		var/mob/living/silicon/robot/R = user
 
 		if(shock)
 			to_chat(user, span_notice("You clear all active holograms, and reset your projector to normal."))
 			holosign_type = /obj/structure/holosign/barrier/cyborg
-			creation_time = 0.5 SECONDS
-			for(var/obj/structure/holosign/hologram as anything in signs)
-				qdel(hologram)
-			shock = FALSE
+			creation_time = 5
+			for(var/sign in signs)
+				qdel(sign)
+			shock = 0
 			return
-		if(borg.emagged && !shock)
+		if(R.emagged && !shock)
 			to_chat(user, span_warning("You clear all active holograms, and overload your energy projector!"))
 			holosign_type = /obj/structure/holosign/barrier/cyborg/hacked
-			creation_time = 3 SECONDS
-			for(var/obj/structure/holosign/hologram as anything in signs)
-				qdel(hologram)
-			shock = TRUE
+			creation_time = 30
+			for(var/sign in signs)
+				qdel(sign)
+			shock = 1
 			return
-	for(var/obj/structure/holosign/hologram as anything in signs)
-		qdel(hologram)
+	for(var/sign in signs)
+		qdel(sign)
 	balloon_alert(user, "holograms cleared")

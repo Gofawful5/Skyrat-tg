@@ -1,4 +1,4 @@
-/obj/machinery/portable_atmospherics/pump
+/obj/machinery/portable_atmospherics/pump //SKYRAT EDIT - ICON OVERRIDEN IN SCRUBBER.DM AESTHETICS
 	name = "portable air pump"
 	icon_state = "siphon"
 	density = TRUE

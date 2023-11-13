@@ -1,8 +1,5 @@
 import { BlockQuote, Stack } from '../components';
 import { Window } from '../layouts';
-// SKYRAT EDIT BEGIN
-import { Rules } from './AntagInfoRules';
-// SKYRAT EDIT END
 
 const goodstyle = {
   color: 'lightgreen',
@@ -51,11 +48,6 @@ export const AntagInfoMorph = (props, context) => {
               </span>{' '}
             </BlockQuote>
           </Stack.Item>
-          {/* SKYRAT EDIT ADDITION START */}
-          <Stack.Item>
-            <Rules />
-          </Stack.Item>
-          {/* SKYRAT EDIT ADDITION END */}
         </Stack>
       </Window.Content>
     </Window>

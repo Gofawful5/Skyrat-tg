@@ -613,16 +613,12 @@
 	return
 
 /**
- * Called by the RPD.dm pre_attack()
+ * Called by the RPD.dm pre_attack(), overriden by pipes.dm
  * Arguments:
  * * paint_color - color that the pipe will be painted in (colors in hex like #4f4f4f)
  */
 /obj/machinery/atmospherics/proc/paint(paint_color)
-	if(paintable)
-		add_atom_colour(paint_color, FIXED_COLOUR_PRIORITY)
-		set_pipe_color(paint_color)
-		update_node_icon()
-	return paintable
+	return FALSE
 
 /// Setter for pipe color, so we can ensure it's all uniform and save cpu time
 /obj/machinery/atmospherics/proc/set_pipe_color(pipe_colour)

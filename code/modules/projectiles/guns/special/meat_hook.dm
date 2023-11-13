@@ -29,7 +29,7 @@
 	desc = "A hook."
 	projectile_type = /obj/projectile/hook
 	caliber = CALIBER_HOOK
-	firing_effect_type = /obj/effect/temp_visual/dir_setting/firing_effect
+	firing_effect_type = /obj/effect/temp_visual/dir_setting/firing_effect/energy
 
 /obj/projectile/hook
 	name = "hook"

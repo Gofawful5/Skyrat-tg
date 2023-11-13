@@ -60,6 +60,7 @@
 /turf/open/floor/fakebasalt,
 /area/centcom/mafia)
 "an" = (
+/obj/effect/landmark/mafia,
 /obj/effect/turf_decal/trimline/brown/filled/line{
 	dir = 9
 	},
@@ -82,8 +83,7 @@
 	max_integrity = 99999;
 	name = "Station Night Shutters"
 	},
-/obj/effect/spawner/structure/window/reinforced/indestructible,
-/turf/open/space/basic,
+/turf/closed/indestructible/fakeglass,
 /area/centcom/mafia)
 "aq" = (
 /turf/open/floor/fakebasalt,
@@ -126,7 +126,6 @@
 /obj/effect/turf_decal/trimline/brown/filled/end{
 	dir = 4
 	},
-/obj/effect/landmark/mafia,
 /turf/open/floor/iron,
 /area/centcom/mafia)
 "az" = (
@@ -138,11 +137,17 @@
 /obj/structure/closet/secure_closet/miner/unlocked,
 /turf/open/floor/iron,
 /area/centcom/mafia)
+"aA" = (
+/obj/effect/landmark/mafia,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 6
+	},
+/turf/open/floor/iron,
+/area/centcom/mafia)
 "aB" = (
 /obj/effect/turf_decal/trimline/brown/filled/end{
 	dir = 1
 	},
-/obj/effect/landmark/mafia,
 /turf/open/floor/iron,
 /area/centcom/mafia)
 "aC" = (
@@ -178,6 +183,13 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/mafia)
+"aG" = (
+/obj/effect/landmark/mafia,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 10
+	},
+/turf/open/floor/iron,
+/area/centcom/mafia)
 "aH" = (
 /obj/effect/turf_decal/trimline/brown/filled/line{
 	dir = 10
@@ -197,6 +209,7 @@
 /turf/open/floor/iron,
 /area/centcom/mafia)
 "aJ" = (
+/obj/effect/landmark/mafia,
 /obj/effect/turf_decal/trimline/brown/filled/line{
 	dir = 6
 	},
@@ -212,6 +225,13 @@
 /obj/item/shovel,
 /obj/item/pickaxe,
 /obj/structure/closet/secure_closet/miner/unlocked,
+/turf/open/floor/iron,
+/area/centcom/mafia)
+"aL" = (
+/obj/effect/landmark/mafia,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 5
+	},
 /turf/open/floor/iron,
 /area/centcom/mafia)
 "aM" = (
@@ -238,7 +258,13 @@
 /area/centcom/mafia)
 "aP" = (
 /obj/effect/turf_decal/trimline/brown/filled/end,
+/turf/open/floor/iron,
+/area/centcom/mafia)
+"aQ" = (
 /obj/effect/landmark/mafia,
+/obj/effect/turf_decal/trimline/brown/filled/line{
+	dir = 9
+	},
 /turf/open/floor/iron,
 /area/centcom/mafia)
 "aR" = (
@@ -251,7 +277,6 @@
 /obj/effect/turf_decal/trimline/brown/filled/end{
 	dir = 8
 	},
-/obj/effect/landmark/mafia,
 /turf/open/floor/iron,
 /area/centcom/mafia)
 "aT" = (
@@ -283,16 +308,12 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/mafia)
-"qp" = (
-/turf/template_noop,
-/area/template_noop)
 "GL" = (
 /obj/effect/turf_decal/tile/red/half/contrasted,
 /turf/open/floor/iron/dark,
 /area/centcom/mafia)
 
 (1,1,1) = {"
-qp
 aa
 aa
 aa
@@ -314,10 +335,10 @@ aa
 aa
 aa
 aa
-qp
+aa
+aa
 "}
 (2,1,1) = {"
-qp
 aa
 aY
 aY
@@ -338,12 +359,13 @@ aY
 aY
 aY
 aY
+aY
+aY
 aa
-qp
 "}
 (3,1,1) = {"
-qp
 aa
+aY
 aY
 ac
 ac
@@ -363,12 +385,12 @@ ac
 ac
 ac
 aY
+aY
 aa
-qp
 "}
 (4,1,1) = {"
-qp
 aa
+aY
 aY
 ac
 ag
@@ -388,12 +410,12 @@ ah
 ak
 ac
 aY
+aY
 aa
-qp
 "}
 (5,1,1) = {"
 aa
-aa
+aY
 aY
 ac
 ah
@@ -413,7 +435,7 @@ ai
 ah
 ac
 aY
-aa
+aY
 aa
 "}
 (6,1,1) = {"
@@ -451,11 +473,11 @@ aY
 ar
 aM
 ap
-aq
+am
 aq
 ap
 aw
-aV
+aA
 ap
 aq
 al
@@ -473,7 +495,7 @@ ac
 ad
 ad
 aY
-aF
+aL
 aN
 aY
 aY
@@ -483,7 +505,7 @@ ax
 aY
 aY
 aq
-aq
+am
 aY
 ad
 ad
@@ -502,11 +524,11 @@ ap
 aO
 aP
 ap
-am
+aq
 ap
 ay
 ap
-am
+aq
 aq
 ap
 aY
@@ -547,10 +569,10 @@ aY
 ac
 ad
 aj
-aq
-aq
-aq
 am
+aq
+aq
+aq
 ap
 aq
 aZ
@@ -606,10 +628,10 @@ aq
 ab
 aq
 ap
+aq
+aq
+aq
 am
-aq
-aq
-aq
 aj
 ad
 ac
@@ -650,11 +672,11 @@ aY
 aY
 ap
 aq
-am
+aq
 ap
 aS
 ap
-am
+aq
 ap
 aB
 aD
@@ -673,7 +695,7 @@ ac
 af
 ad
 aY
-aq
+am
 aq
 aY
 aY
@@ -683,7 +705,7 @@ aq
 aY
 aY
 aE
-aM
+aG
 aY
 ad
 ad
@@ -701,11 +723,11 @@ aY
 al
 aq
 ap
-as
+aQ
 aU
 ap
 aq
-aq
+am
 ap
 aF
 aI
@@ -743,7 +765,7 @@ aa
 "}
 (19,1,1) = {"
 aa
-aa
+aY
 aY
 ac
 ah
@@ -763,12 +785,12 @@ ad
 ah
 ac
 aY
-aa
+aY
 aa
 "}
 (20,1,1) = {"
-qp
 aa
+aY
 aY
 ac
 ak
@@ -788,12 +810,12 @@ ah
 av
 ac
 aY
+aY
 aa
-qp
 "}
 (21,1,1) = {"
-qp
 aa
+aY
 aY
 ac
 ac
@@ -813,11 +835,10 @@ ac
 ac
 ac
 aY
+aY
 aa
-qp
 "}
 (22,1,1) = {"
-qp
 aa
 aY
 aY
@@ -838,11 +859,11 @@ aY
 aY
 aY
 aY
+aY
+aY
 aa
-qp
 "}
 (23,1,1) = {"
-qp
 aa
 aa
 aa
@@ -864,5 +885,6 @@ aa
 aa
 aa
 aa
-qp
+aa
+aa
 "}

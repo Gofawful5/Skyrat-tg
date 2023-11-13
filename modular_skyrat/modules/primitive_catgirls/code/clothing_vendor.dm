@@ -33,8 +33,4 @@
 
 /obj/machinery/vending/primitive_catgirl_clothing_vendor/Initialize(mapload)
 	. = ..()
-
 	onstation = FALSE
-
-/obj/machinery/vending/primitive_catgirl_clothing_vendor/speak(message)
-	return

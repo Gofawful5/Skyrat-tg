@@ -1,7 +1,10 @@
 /obj/machinery/barsign // All Signs are 64 by 32 pixels, they take two tiles
 	name = "bar sign"
 	desc = "A bar sign which has not been initialized, somehow. Complain at a coder!"
-	icon = 'icons/obj/machines/barsigns.dmi'
+	//SKYRAT EDIT CHANGE BEGIN - BARSIGNS
+	//icon = 'icons/obj/machines/barsigns.dmi'
+	icon = 'modular_skyrat/modules/barsigns/icons/barsigns.dmi'
+	//SKYRAT EDIT CHANGE END
 	icon_state = "empty"
 	req_access = list(ACCESS_BAR)
 	max_integrity = 500
@@ -37,8 +40,8 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/barsign, 32)
 	update_appearance()
 
 /obj/machinery/barsign/update_icon_state()
-	if(!(machine_stat & BROKEN) && (!(machine_stat & NOPOWER) || machine_stat & EMPED) && chosen_sign && chosen_sign.icon_state)
-		icon_state = chosen_sign.icon_state
+	if(!(machine_stat & (NOPOWER|BROKEN)) && chosen_sign && chosen_sign.icon)
+		icon_state = chosen_sign.icon
 	else
 		icon_state = "empty"
 
@@ -60,11 +63,11 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/barsign, 32)
 /obj/machinery/barsign/update_overlays()
 	. = ..()
 
-	if(((machine_stat & NOPOWER) && !(machine_stat & EMPED)) || (machine_stat & BROKEN))
+	if(machine_stat & (NOPOWER|BROKEN))
 		return
 
 	if(chosen_sign && chosen_sign.light_mask)
-		. += emissive_appearance(icon, "[chosen_sign.icon_state]-light-mask", src)
+		. += emissive_appearance(icon, "[chosen_sign.icon]-light-mask", src)
 
 /obj/machinery/barsign/update_appearance(updates=ALL)
 	. = ..()
@@ -202,7 +205,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/barsign, 32)
 	/// User-visible name of the sign.
 	var/name
 	/// Icon state associated with this sign
-	var/icon_state
+	var/icon
 	/// Description shown in the sign's examine text.
 	var/desc
 	/// Hidden from list of selectable options.
@@ -222,195 +225,171 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/barsign, 32)
 
 /datum/barsign/maltesefalcon
 	name = "Maltese Falcon"
-	icon_state = "maltesefalcon"
+	icon = "maltesefalcon"
 	desc = "The Maltese Falcon, Space Bar and Grill."
 	neon_color = "#5E8EAC"
 
 /datum/barsign/thebark
 	name = "The Bark"
-	icon_state = "thebark"
+	icon = "thebark"
 	desc = "Ian's bar of choice."
 	neon_color = "#f7a604"
 
 /datum/barsign/harmbaton
 	name = "The Harmbaton"
-	icon_state = "theharmbaton"
+	icon = "theharmbaton"
 	desc = "A great dining experience for both security members and assistants."
 	neon_color = "#ff7a4d"
 
 /datum/barsign/thesingulo
 	name = "The Singulo"
-	icon_state = "thesingulo"
+	icon = "thesingulo"
 	desc = "Where people go that'd rather not be called by their name."
 	neon_color = "#E600DB"
 
 /datum/barsign/thedrunkcarp
 	name = "The Drunk Carp"
-	icon_state = "thedrunkcarp"
+	icon = "thedrunkcarp"
 	desc = "Don't drink and swim."
 	neon_color = "#a82196"
 
 /datum/barsign/scotchservinwill
 	name = "Scotch Servin Willy's"
-	icon_state = "scotchservinwill"
+	icon = "scotchservinwill"
 	desc = "Willy sure moved up in the world from clown to bartender."
 	neon_color = "#fee4bf"
 
 /datum/barsign/officerbeersky
 	name = "Officer Beersky's"
-	icon_state = "officerbeersky"
+	icon = "officerbeersky"
 	desc = "Man eat a dong, these drinks are great."
 	neon_color = "#16C76B"
 
 /datum/barsign/thecavern
 	name = "The Cavern"
-	icon_state = "thecavern"
+	icon = "thecavern"
 	desc = "Fine drinks while listening to some fine tunes."
 	neon_color = "#0fe500"
 
 /datum/barsign/theouterspess
 	name = "The Outer Spess"
-	icon_state = "theouterspess"
+	icon = "theouterspess"
 	desc = "This bar isn't actually located in outer space."
 	neon_color = "#30f3cc"
 
 /datum/barsign/slipperyshots
 	name = "Slippery Shots"
-	icon_state = "slipperyshots"
+	icon = "slipperyshots"
 	desc = "Slippery slope to drunkeness with our shots!"
 	neon_color = "#70DF00"
 
 /datum/barsign/thegreytide
 	name = "The Grey Tide"
-	icon_state = "thegreytide"
+	icon = "thegreytide"
 	desc = "Abandon your toolboxing ways and enjoy a lazy beer!"
 	neon_color = "#00F4D6"
 
 /datum/barsign/honkednloaded
 	name = "Honked 'n' Loaded"
-	icon_state = "honkednloaded"
+	icon = "honkednloaded"
 	desc = "Honk."
 	neon_color = "#FF998A"
 
-/datum/barsign/le_cafe_silencieux
-	name = "Le Café Silencieux"
-	icon_state = "le_cafe_silencieux"
-	desc = "..."
-	neon_color = "#ffffff"
-
 /datum/barsign/thenest
 	name = "The Nest"
-	icon_state = "thenest"
+	icon = "thenest"
 	desc = "A good place to retire for a drink after a long night of crime fighting."
 	neon_color = "#4d6796"
 
 /datum/barsign/thecoderbus
 	name = "The Coderbus"
-	icon_state = "thecoderbus"
+	icon = "thecoderbus"
 	desc = "A very controversial bar known for its wide variety of constantly-changing drinks."
 	neon_color = "#ffffff"
 
 /datum/barsign/theadminbus
 	name = "The Adminbus"
-	icon_state = "theadminbus"
+	icon = "theadminbus"
 	desc = "An establishment visited mainly by space-judges. It isn't bombed nearly as much as court hearings."
 	neon_color = "#ffffff"
 
 /datum/barsign/oldcockinn
 	name = "The Old Cock Inn"
-	icon_state = "oldcockinn"
+	icon = "oldcockinn"
 	desc = "Something about this sign fills you with despair."
 	neon_color = "#a4352b"
 
 /datum/barsign/thewretchedhive
 	name = "The Wretched Hive"
-	icon_state = "thewretchedhive"
+	icon = "thewretchedhive"
 	desc = "Legally obligated to instruct you to check your drinks for acid before consumption."
 	neon_color = "#26b000"
 
 /datum/barsign/robustacafe
 	name = "The Robusta Cafe"
-	icon_state = "robustacafe"
+	icon = "robustacafe"
 	desc = "Holder of the 'Most Lethal Barfights' record 5 years uncontested."
 	neon_color = "#c45f7a"
 
 /datum/barsign/emergencyrumparty
 	name = "The Emergency Rum Party"
-	icon_state = "emergencyrumparty"
+	icon = "emergencyrumparty"
 	desc = "Recently relicensed after a long closure."
 	neon_color = "#f90011"
 
 /datum/barsign/combocafe
 	name = "The Combo Cafe"
-	icon_state = "combocafe"
+	icon = "combocafe"
 	desc = "Renowned system-wide for their utterly uncreative drink combinations."
 	neon_color = "#33ca40"
 
 /datum/barsign/vladssaladbar
 	name = "Vlad's Salad Bar"
-	icon_state = "vladssaladbar"
+	icon = "vladssaladbar"
 	desc = "Under new management. Vlad was always a bit too trigger happy with that shotgun."
 	neon_color = "#306900"
 
 /datum/barsign/theshaken
 	name = "The Shaken"
-	icon_state = "theshaken"
+	icon = "theshaken"
 	desc = "This establishment does not serve stirred drinks."
 	neon_color = "#dcd884"
 
 /datum/barsign/thealenath
 	name = "The Ale' Nath"
-	icon_state = "thealenath"
+	icon = "thealenath"
 	desc = "All right, buddy. I think you've had EI NATH. Time to get a cab."
 	neon_color = "#ed0000"
 
 /datum/barsign/thealohasnackbar
 	name = "The Aloha Snackbar"
-	icon_state = "alohasnackbar"
+	icon = "alohasnackbar"
 	desc = "A tasteful, inoffensive tiki bar sign."
 	neon_color = ""
 
 /datum/barsign/thenet
 	name = "The Net"
-	icon_state = "thenet"
+	icon = "thenet"
 	desc = "You just seem to get caught up in it for hours."
 	neon_color = "#0e8a00"
 
 /datum/barsign/maidcafe
 	name = "Maid Cafe"
-	icon_state = "maidcafe"
+	icon = "maidcafe"
 	desc = "Welcome back, master!"
 	neon_color = "#ff0051"
 
 /datum/barsign/the_lightbulb
 	name = "The Lightbulb"
-	icon_state = "the_lightbulb"
+	icon = "the_lightbulb"
 	desc = "A cafe popular among moths and moffs. Once shut down for a week after the bartender used mothballs to protect her spare uniforms."
 	neon_color = "#faff82"
 
 /datum/barsign/goose
 	name = "The Loose Goose"
-	icon_state = "goose"
+	icon = "goose"
 	desc = "Drink till you puke and/or break the laws of reality!"
 	neon_color = "#00cc33"
-
-/datum/barsign/maltroach
-	name = "Maltroach"
-	icon_state = "maltroach"
-	desc = "Mothroaches politely greet you into the bar, or are they greeting eachother?"
-	neon_color = "#649e8a"
-
-/datum/barsign/rock_bottom
-	name = "Rock Bottom"
-	icon_state = "rock-bottom"
-	desc = "When it feels like you're stuck in a pit, might as well have a drink."
-	neon_color = "#aa2811"
-
-/datum/barsign/orangejuice
-	name = "Oranges' Juicery"
-	icon_state = "orangejuice"
-	desc = "For those who wish to be optimally tactful to the non-alcoholic population."
-	neon_color = COLOR_ORANGE
 
 // Hidden signs list below this point
 
@@ -419,19 +398,19 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/barsign, 32)
 
 /datum/barsign/hiddensigns/empbarsign
 	name = "EMP'd"
-	icon_state = "empbarsign"
+	icon = "empbarsign"
 	desc = "Something has gone very wrong."
 	rename_area = FALSE
 
 /datum/barsign/hiddensigns/syndibarsign
 	name = "Syndi Cat"
-	icon_state = "syndibarsign"
+	icon = "syndibarsign"
 	desc = "Syndicate or die."
 	neon_color = "#ff0000"
 
 /datum/barsign/hiddensigns/signoff
 	name = "Off"
-	icon_state = "empty"
+	icon = "empty"
 	desc = "This sign doesn't seem to be on."
 	rename_area = FALSE
 	light_mask = FALSE

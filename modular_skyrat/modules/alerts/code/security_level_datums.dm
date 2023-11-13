@@ -12,7 +12,7 @@
 	sound = 'modular_skyrat/modules/alerts/sound/security_levels/red.ogg'
 
 /datum/security_level/delta
-	announcement_color = "pink"
+	announcement_color = "default"
 	lowering_to_configuration_key = /datum/config_entry/string/alert_delta_downto
 	elevating_to_configuration_key = /datum/config_entry/string/alert_delta_upto
 	sound = 'modular_skyrat/modules/alerts/sound/security_levels/delta.ogg'

@@ -443,6 +443,12 @@
 	},
 /turf/open/floor/iron/dark,
 /area/ruin/syndicate_lava_base/medbay)
+"eh" = (
+/obj/structure/window/reinforced/survival_pod/spawner/directional/south,
+/obj/structure/window/reinforced/survival_pod/spawner/directional/west,
+/obj/structure/window/reinforced/survival_pod/spawner/directional/south,
+/turf/open/floor/engine,
+/area/ruin/syndicate_lava_base/testlab)
 "ej" = (
 /obj/effect/turf_decal/tile/bar{
 	dir = 4
@@ -1389,6 +1395,10 @@
 /obj/machinery/airalarm/directional/north,
 /obj/item/healthanalyzer{
 	pixel_x = -5;
+	pixel_y = 5
+	},
+/obj/item/clothing/mask/breath/anesthetic{
+	pixel_x = 8;
 	pixel_y = 5
 	},
 /turf/open/floor/iron/dark,
@@ -5941,7 +5951,7 @@ Zd
 Ku
 Fx
 ji
-ch
+eh
 Jt
 Ow
 OW

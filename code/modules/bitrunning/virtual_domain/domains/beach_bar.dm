@@ -8,14 +8,15 @@
 	map_name = "beach_bar"
 	safehouse_path = /datum/map_template/safehouse/mine
 
-/datum/lazy_template/virtual_domain/beach_bar/setup_domain(list/created_atoms)
+/obj/item/reagent_containers/cup/glass/drinkingglass/filled/virtual_domain
+	name = "pina colada"
+	desc = "Whose drink is this? Not yours, that's for sure. Well, it's not like they're going to miss it."
+	list_reagents = list(/datum/reagent/consumable/ethanol/pina_colada = 30)
+
+/obj/item/reagent_containers/cup/glass/drinkingglass/filled/virtual_domain/Initialize(mapload, vol)
 	. = ..()
 
-	for(var/obj/item/reagent_containers/cup/glass/drink in created_atoms)
-		RegisterSignal(drink, COMSIG_GLASS_DRANK, PROC_REF(on_drink_drank))
-
-/// Eventually reveal the cache
-/datum/lazy_template/virtual_domain/beach_bar/proc/on_drink_drank(datum/source)
-	SIGNAL_HANDLER
-
-	add_points(0.5)
+	AddComponent(/datum/component/bitrunning_points, \
+		signal_type = COMSIG_GLASS_DRANK, \
+		points_per_signal = 0.5, \
+	)

@@ -45,7 +45,12 @@
 /obj/mafia_game_board,
 /turf/open/floor/plating,
 /area/centcom/mafia)
+"n" = (
+/obj/effect/landmark/mafia,
+/turf/open/floor/mineral/plastitanium,
+/area/centcom/mafia)
 "o" = (
+/obj/effect/turf_decal/tile/red/fourcorners,
 /turf/open/floor/iron/dark,
 /area/centcom/mafia)
 "p" = (
@@ -55,15 +60,14 @@
 	max_integrity = 99999;
 	name = "Station Night Shutters"
 	},
-/obj/effect/spawner/structure/window/reinforced/plasma/plastitanium,
-/turf/open/space/basic,
+/turf/closed/indestructible/opsglass,
 /area/centcom/mafia)
 "q" = (
 /obj/structure/chair/office{
 	dir = 1;
 	name = "tactical swivel chair"
 	},
-/obj/effect/landmark/mafia,
+/obj/effect/turf_decal/tile/red/fourcorners,
 /turf/open/floor/iron/dark,
 /area/centcom/mafia)
 "r" = (
@@ -81,28 +85,27 @@
 /turf/open/floor/plating,
 /area/centcom/mafia)
 "w" = (
-/turf/closed/wall/r_wall,
+/turf/closed/indestructible/syndicate,
 /area/centcom/mafia)
 "x" = (
 /obj/structure/chair/office{
 	dir = 4;
 	name = "tactical swivel chair"
 	},
-/obj/effect/landmark/mafia,
+/obj/effect/turf_decal/tile/red/fourcorners,
 /turf/open/floor/iron/dark,
 /area/centcom/mafia)
 "y" = (
 /obj/structure/chair/office{
 	name = "tactical swivel chair"
 	},
-/obj/effect/landmark/mafia,
 /turf/open/floor/mineral/plastitanium,
 /area/centcom/mafia)
 "z" = (
 /obj/structure/chair/office{
 	name = "tactical swivel chair"
 	},
-/obj/effect/landmark/mafia,
+/obj/effect/turf_decal/tile/red/fourcorners,
 /turf/open/floor/iron/dark,
 /area/centcom/mafia)
 "A" = (
@@ -110,7 +113,6 @@
 	dir = 8;
 	name = "tactical swivel chair"
 	},
-/obj/effect/landmark/mafia,
 /turf/open/floor/mineral/plastitanium,
 /area/centcom/mafia)
 "B" = (
@@ -118,7 +120,6 @@
 	dir = 4;
 	name = "tactical swivel chair"
 	},
-/obj/effect/landmark/mafia,
 /turf/open/floor/mineral/plastitanium,
 /area/centcom/mafia)
 "C" = (
@@ -126,7 +127,7 @@
 	dir = 8;
 	name = "tactical swivel chair"
 	},
-/obj/effect/landmark/mafia,
+/obj/effect/turf_decal/tile/red/fourcorners,
 /turf/open/floor/iron/dark,
 /area/centcom/mafia)
 "E" = (
@@ -134,7 +135,6 @@
 	dir = 1;
 	name = "tactical swivel chair"
 	},
-/obj/effect/landmark/mafia,
 /turf/open/floor/mineral/plastitanium,
 /area/centcom/mafia)
 "G" = (
@@ -142,7 +142,13 @@
 	desc = "A storage closet for syndicate conflict resolution operatives.";
 	name = "red closet"
 	},
+/obj/effect/turf_decal/tile/red/fourcorners,
 /obj/effect/spawner/random/clothing/syndie,
+/turf/open/floor/iron/dark,
+/area/centcom/mafia)
+"H" = (
+/obj/effect/landmark/mafia,
+/obj/effect/turf_decal/tile/red/fourcorners,
 /turf/open/floor/iron/dark,
 /area/centcom/mafia)
 "Q" = (
@@ -151,15 +157,8 @@
 "S" = (
 /turf/open/floor/mineral/plastitanium/red,
 /area/centcom/mafia)
-"W" = (
-/turf/closed/wall/mineral/plastitanium,
-/area/centcom/mafia)
-"Y" = (
-/turf/template_noop,
-/area/template_noop)
 
 (1,1,1) = {"
-Y
 a
 a
 a
@@ -181,10 +180,10 @@ a
 a
 a
 a
-Y
+a
+a
 "}
 (2,1,1) = {"
-Y
 a
 w
 w
@@ -205,12 +204,13 @@ w
 w
 w
 w
+w
+w
 a
-Y
 "}
 (3,1,1) = {"
-Y
 a
+w
 w
 c
 c
@@ -230,12 +230,12 @@ c
 c
 c
 w
+w
 a
-Y
 "}
 (4,1,1) = {"
-Y
 a
+w
 w
 c
 g
@@ -255,32 +255,32 @@ h
 k
 c
 w
+w
 a
-Y
 "}
 (5,1,1) = {"
 a
-a
+w
 w
 c
 h
 d
 d
 i
-W
-W
+w
+w
 j
-W
+w
 j
-W
-W
+w
+w
 d
 d
 i
 h
 c
 w
-a
+w
 a
 "}
 (6,1,1) = {"
@@ -289,19 +289,19 @@ w
 w
 c
 i
-W
-W
+w
+w
 j
-W
+w
 b
 r
-W
+w
 o
 G
-W
+w
 j
-W
-W
+w
+w
 d
 c
 w
@@ -314,19 +314,19 @@ w
 c
 c
 d
-W
+w
 G
 o
 p
-r
+n
 r
 p
 o
-o
+H
 p
 r
 b
-W
+w
 d
 c
 c
@@ -339,19 +339,19 @@ w
 c
 d
 d
-W
+w
+H
 o
+w
+w
+r
+w
 o
-W
-W
+w
+w
 r
-W
-o
-W
-W
-r
-r
-W
+n
+w
 d
 d
 c
@@ -363,8 +363,8 @@ a
 w
 c
 d
-W
-W
+w
+w
 p
 o
 x
@@ -376,8 +376,8 @@ p
 B
 r
 p
-W
-W
+w
+w
 d
 c
 w
@@ -388,10 +388,10 @@ a
 w
 c
 d
-W
+w
 b
 p
-W
+w
 p
 p
 p
@@ -399,10 +399,10 @@ p
 p
 p
 p
-W
+w
 p
 G
-W
+w
 d
 c
 w
@@ -414,7 +414,7 @@ w
 c
 d
 j
-r
+n
 r
 r
 y
@@ -426,7 +426,7 @@ p
 q
 o
 o
-o
+H
 j
 i
 c
@@ -438,10 +438,10 @@ a
 w
 c
 i
-W
-W
+w
+w
 p
-W
+w
 p
 p
 Q
@@ -449,10 +449,10 @@ u
 Q
 p
 p
-W
+w
 p
-W
-W
+w
+w
 d
 c
 w
@@ -464,7 +464,7 @@ w
 c
 d
 j
-o
+H
 o
 o
 z
@@ -476,7 +476,7 @@ p
 E
 r
 r
-r
+n
 j
 d
 c
@@ -488,10 +488,10 @@ a
 w
 c
 d
-W
+w
 G
 p
-W
+w
 p
 p
 p
@@ -499,10 +499,10 @@ p
 p
 p
 p
-W
+w
 p
 b
-W
+w
 i
 c
 w
@@ -513,8 +513,8 @@ a
 w
 c
 d
-W
-W
+w
+w
 p
 r
 A
@@ -526,8 +526,8 @@ p
 C
 o
 p
-W
-W
+w
+w
 d
 c
 w
@@ -539,19 +539,19 @@ w
 c
 f
 d
-W
+w
+n
 r
+w
+w
+o
+w
 r
-W
-W
+w
+w
 o
-W
-r
-W
-W
-o
-o
-W
+H
+w
 d
 d
 c
@@ -564,19 +564,19 @@ w
 c
 c
 d
-W
+w
 b
 r
 p
-o
+H
 o
 p
 r
-r
+n
 p
 o
 G
-W
+w
 d
 c
 c
@@ -589,19 +589,19 @@ w
 w
 c
 d
-W
-W
+w
+w
 j
-W
+w
 G
 o
-W
+w
 r
 b
-W
+w
 j
-W
-W
+w
+w
 d
 c
 w
@@ -610,32 +610,32 @@ a
 "}
 (19,1,1) = {"
 a
-a
+w
 w
 c
 h
 i
 d
 d
-W
-W
+w
+w
 j
-W
+w
 j
-W
-W
+w
+w
 d
 i
 d
 h
 c
 w
-a
+w
 a
 "}
 (20,1,1) = {"
-Y
 a
+w
 w
 c
 k
@@ -655,12 +655,12 @@ h
 v
 c
 w
+w
 a
-Y
 "}
 (21,1,1) = {"
-Y
 a
+w
 w
 c
 c
@@ -680,11 +680,10 @@ c
 c
 c
 w
+w
 a
-Y
 "}
 (22,1,1) = {"
-Y
 a
 w
 w
@@ -705,11 +704,11 @@ w
 w
 w
 w
+w
+w
 a
-Y
 "}
 (23,1,1) = {"
-Y
 a
 a
 a
@@ -731,5 +730,6 @@ a
 a
 a
 a
-Y
+a
+a
 "}

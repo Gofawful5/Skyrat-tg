@@ -1,6 +1,6 @@
 /obj/item/hhmirror
 	name = "handheld mirror"
-	desc = "A handheld mirror."
+	desc = "A handheld mirror that allows you to change your looks."
 	icon = 'modular_skyrat/master_files/icons/obj/hhmirror.dmi'
 	icon_state = "hhmirror"
 
@@ -8,6 +8,7 @@
 	. = ..()
 	if(.)
 		return
+	to_chat(user, span_notice("Damn, that hairstyle be looking skewed, maybe head to the barber for a change?"))
 
 /obj/item/hhmirror/fullmagic
 	name = "full handheld magic mirror"

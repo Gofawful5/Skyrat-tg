@@ -1,9 +1,6 @@
 import { useBackend } from '../backend';
 import { Box, Collapsible, Divider, LabeledList, Section, Stack } from '../components';
 import { Objective } from './common/Objectives';
-// SKYRAT EDIT BEGIN
-import { Rules } from './AntagInfoRules';
-// SKYRAT EDIT END
 
 import { Window } from '../layouts';
 
@@ -28,7 +25,6 @@ export const AntagInfoBlob = (props, context) => {
           <Structures />
           <Minions />
           <ObjectiveDisplay />
-          <Rules /* SKYRAT EDIT ADDITION */ />
         </Section>
       </Window.Content>
     </Window>

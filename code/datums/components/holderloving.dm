@@ -37,7 +37,6 @@
 		COMSIG_ITEM_EQUIPPED,
 		COMSIG_ATOM_ENTERED,
 		COMSIG_ATOM_EXITED,
-		COMSIG_ITEM_STORED,
 	), PROC_REF(check_my_loc))
 
 /datum/component/holderloving/UnregisterFromParent()
@@ -47,7 +46,6 @@
 		COMSIG_ITEM_EQUIPPED,
 		COMSIG_ATOM_ENTERED,
 		COMSIG_ATOM_EXITED,
-		COMSIG_ITEM_STORED,
 	))
 
 /datum/component/holderloving/PostTransfer()

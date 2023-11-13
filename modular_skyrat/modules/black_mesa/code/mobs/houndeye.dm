@@ -39,11 +39,11 @@
 
 /mob/living/simple_animal/hostile/blackmesa/xen/houndeye/Initialize(mapload)
 	. = ..()
-	charge = new(src)
+	charge = new /datum/action/cooldown/mob_cooldown/charge/basic_charge()
 	charge.Grant(src)
 
 /mob/living/simple_animal/hostile/blackmesa/xen/houndeye/Destroy()
-	charge = null
+	QDEL_NULL(charge)
 	return ..()
 
 /mob/living/simple_animal/hostile/blackmesa/xen/houndeye/OpenFire()

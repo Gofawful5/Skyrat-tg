@@ -2144,6 +2144,10 @@
 /obj/effect/turf_decal/trimline/purple/filled/line{
 	dir = 6
 	},
+/obj/machinery/button/door/directional/south{
+	id = "genetics_shutters";
+	name = "Genetics Shutters"
+	},
 /obj/item/storage/box/monkeycubes{
 	pixel_x = 6;
 	pixel_y = 9
@@ -4064,7 +4068,7 @@
 /area/station/engineering/storage)
 "bgW" = (
 /obj/structure/dresser,
-/obj/item/book/manual/fish_catalog{
+/obj/item/book/fish_catalog{
 	pixel_y = 10
 	},
 /turf/open/floor/carpet/green,
@@ -16601,6 +16605,7 @@
 /obj/effect/turf_decal/trimline/brown/filled/line{
 	dir = 4
 	},
+/obj/machinery/firealarm/directional/east,
 /obj/structure/bed/dogbed{
 	anchored = 1;
 	name = "Markus's bed"
@@ -19447,7 +19452,7 @@
 /area/station/command/cc_dock)
 "fFf" = (
 /obj/effect/mapping_helpers/broken_floor,
-/mob/living/basic/trooper/russian,
+/mob/living/basic/syndicate/russian,
 /turf/open/floor/wood,
 /area/station/maintenance/rus_gambling)
 "fFg" = (
@@ -24336,7 +24341,6 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/obj/machinery/air_sensor/engine_chamber,
 /turf/open/floor/engine,
 /area/station/engineering/supermatter)
 "haq" = (
@@ -28470,7 +28474,7 @@
 /obj/structure/chair/sofa/left/brown{
 	dir = 8
 	},
-/mob/living/basic/trooper/russian,
+/mob/living/basic/syndicate/russian,
 /turf/open/floor/wood,
 /area/station/maintenance/rus_gambling)
 "ila" = (
@@ -33521,10 +33525,6 @@
 /obj/machinery/atmospherics/pipe/layer_manifold/supply/hidden,
 /obj/machinery/airalarm/directional/west,
 /obj/effect/mapping_helpers/airalarm/mixingchamber_access,
-/obj/effect/mapping_helpers/airalarm/link{
-	chamber_id = "ordnanceburn"
-	},
-/obj/effect/mapping_helpers/airalarm/tlv_no_checks,
 /turf/open/floor/engine,
 /area/station/science/ordnance/burnchamber)
 "jCA" = (
@@ -34478,14 +34478,10 @@
 /obj/effect/turf_decal/trimline/dark_red/filled/line{
 	dir = 4
 	},
-/obj/effect/mapping_helpers/airalarm/link{
-	chamber_id = "ordnancefreezer"
-	},
-/obj/effect/mapping_helpers/airalarm/tlv_no_checks,
 /turf/open/floor/iron/smooth_edge{
 	dir = 8
 	},
-/area/station/science/ordnance)
+/area/station/science/ordnance/freezerchamber)
 "jOG" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
 	dir = 8
@@ -60206,7 +60202,7 @@
 /area/station/medical/virology)
 "qLu" = (
 /obj/effect/decal/cleanable/blood/old,
-/mob/living/basic/trooper/russian,
+/mob/living/basic/syndicate/russian,
 /turf/open/floor/wood,
 /area/station/maintenance/rus_gambling)
 "qLy" = (
@@ -65824,7 +65820,6 @@
 	dir = 1
 	},
 /obj/structure/disposalpipe/segment,
-/obj/machinery/gbp_redemption,
 /turf/open/floor/iron/smooth_edge,
 /area/station/cargo/lobby)
 "ssU" = (
@@ -65978,7 +65973,7 @@
 /obj/structure/chair/stool/directional/north{
 	pixel_y = 6
 	},
-/mob/living/basic/trooper/russian,
+/mob/living/basic/syndicate/russian,
 /turf/open/floor/wood,
 /area/station/maintenance/rus_gambling)
 "svC" = (
@@ -80161,10 +80156,6 @@
 	},
 /obj/machinery/airalarm/directional/west,
 /obj/effect/mapping_helpers/airalarm/engine_access,
-/obj/effect/mapping_helpers/airalarm/link{
-	chamber_id = "engine"
-	},
-/obj/effect/mapping_helpers/airalarm/tlv_no_checks,
 /turf/open/floor/engine,
 /area/station/engineering/supermatter)
 "wjk" = (

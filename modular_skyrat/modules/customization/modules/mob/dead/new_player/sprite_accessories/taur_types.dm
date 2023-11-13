@@ -77,10 +77,6 @@
 	name = "Drake (Old)"
 	icon_state = "drake_old"
 
-/datum/sprite_accessory/taur/tarantula
-	name = "Tarantula"
-	icon_state = "tarantula"
-
 /datum/sprite_accessory/taur/drider
 	name = "Drider"
 	icon_state = "drider"
@@ -101,16 +97,6 @@
 	icon_state = "naga"
 	taur_mode = STYLE_TAUR_SNAKE
 
-/datum/sprite_accessory/taur/naga/striped
-	name = "Naga, Striped"
-	icon_state = "nagastriped"
-	taur_mode = STYLE_TAUR_SNAKE
-
-/datum/sprite_accessory/taur/naga/rattle
-	name = "Naga, Rattle"
-	icon_state = "nagarattle"
-	taur_mode = STYLE_TAUR_SNAKE
-
 /datum/sprite_accessory/taur/otie
 	name = "Otie"
 	icon_state = "otie"
@@ -124,12 +110,6 @@
 /datum/sprite_accessory/taur/tentacle
 	name = "Tentacle"
 	icon_state = "tentacle"
-	taur_mode = STYLE_TAUR_SNAKE
-	color_src = USE_ONE_COLOR
-
-/datum/sprite_accessory/taur/tentacle/alt
-	name = "Tentacle, Alt"
-	icon_state = "tentaclealt"
 	taur_mode = STYLE_TAUR_SNAKE
 	color_src = USE_ONE_COLOR
 

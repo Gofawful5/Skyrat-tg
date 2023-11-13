@@ -86,7 +86,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 
 /obj/effect/landmark/start/bitrunner
 	name = "Bitrunner"
-	icon_state = "Bitrunner"
+	icon_state = "x3"
 
 /obj/effect/landmark/start/bartender
 	name = "Bartender"

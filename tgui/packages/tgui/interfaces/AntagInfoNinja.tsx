@@ -3,9 +3,6 @@ import { useBackend } from '../backend';
 import { Icon, Section, Stack } from '../components';
 import { Window } from '../layouts';
 import { ObjectivePrintout, Objective, ReplaceObjectivesButton } from './common/Objectives';
-// SKYRAT EDIT BEGIN
-import { Rules } from './AntagInfoRules';
-// SKYRAT EDIT END
 
 const ninja_emphasis = {
   color: 'red',
@@ -51,11 +48,6 @@ export const AntagInfoNinja = (props, context) => {
                 what you can do!
               </Section>
             </Stack.Item>
-            {/* SKYRAT EDIT ADDITION START */}
-            <Stack.Item>
-              <Rules />
-            </Stack.Item>
-            {/* SKYRAT EDIT ADDITION END */}
             <Stack.Item>
               <ObjectivePrintout
                 objectives={objectives}

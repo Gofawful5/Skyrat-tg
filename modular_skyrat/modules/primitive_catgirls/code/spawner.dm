@@ -19,7 +19,6 @@
 	var/datum/team/primitive_catgirls/team
 
 	restricted_species = list(/datum/species/human/felinid/primitive)
-	quirks_enabled = TRUE
 	random_appearance = FALSE
 	loadout_enabled = FALSE
 	uses = 9

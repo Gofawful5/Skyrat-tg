@@ -5,10 +5,6 @@
 	return
 
 /turf/open/pollute_turf(pollution_type, amount, cap)
-	// Don't add pollution when the subsystem is off.
-	if(!SSpollution.can_fire)
-		return
-
 	if(!pollution)
 		pollution = new(src)
 	if(cap && pollution.total_amount >= cap)
@@ -16,10 +12,6 @@
 	pollution.add_pollutant(pollution_type, amount)
 
 /turf/open/pollute_turf_list(list/pollutions, cap)
-	// Don't add pollution when the subsystem is off.
-	if(!SSpollution.can_fire)
-		return
-
 	if(!pollution)
 		pollution = new(src)
 	if(cap && pollution.total_amount >= cap)

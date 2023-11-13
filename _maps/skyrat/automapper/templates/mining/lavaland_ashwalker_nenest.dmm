@@ -687,7 +687,7 @@
 /turf/open/misc/asteroid/basalt/lava_land_surface,
 /area/ruin/unpowered/ash_walkers)
 "xo" = (
-/mob/living/basic/mining/gutlunch/grub,
+/mob/living/simple_animal/hostile/asteroid/gutlunch/grublunch,
 /turf/open/misc/asteroid/basalt/lava_land_surface,
 /area/ruin/unpowered/ash_walkers)
 "xY" = (
@@ -943,7 +943,7 @@
 /obj/structure/stone_tile/block{
 	dir = 4
 	},
-/mob/living/basic/mining/gutlunch/warrior,
+/mob/living/simple_animal/hostile/asteroid/gutlunch/guthen,
 /turf/open/misc/asteroid/basalt/lava_land_surface,
 /area/ruin/unpowered/ash_walkers)
 "Hf" = (
@@ -1180,12 +1180,12 @@
 /area/ruin/unpowered/ash_walkers)
 "QI" = (
 /obj/item/flashlight/flare/torch{
-	start_on = 1
+	on = 1
 	},
 /turf/closed/indestructible/riveted/boss,
 /area/ruin/unpowered/ash_walkers)
 "QU" = (
-/mob/living/basic/mining/gutlunch/milk,
+/mob/living/simple_animal/hostile/asteroid/gutlunch/gubbuck,
 /turf/open/misc/asteroid/basalt/lava_land_surface,
 /area/ruin/unpowered/ash_walkers)
 "Re" = (

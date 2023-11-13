@@ -5093,6 +5093,9 @@
 /obj/machinery/power/emitter/energycannon{
 	dir = 8
 	},
+/obj/machinery/power/emitter/energycannon{
+	dir = 8
+	},
 /turf/open/floor/circuit/red,
 /area/awaymission/black_mesa/black_ops_turret_blockade)
 "cUd" = (
@@ -6326,6 +6329,9 @@
 /turf/open/floor/iron/smooth_large,
 /area/awaymission/black_mesa/lambda_teleporter)
 "fjj" = (
+/obj/machinery/power/emitter/energycannon{
+	dir = 4
+	},
 /obj/machinery/power/emitter/energycannon{
 	dir = 4
 	},

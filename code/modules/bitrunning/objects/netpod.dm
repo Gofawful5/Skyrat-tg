@@ -35,10 +35,15 @@
 	disconnect_damage = BASE_DISCONNECT_DAMAGE
 	find_server()
 
+	RegisterSignals(src, list(
+		COMSIG_QDELETING,
+		COMSIG_MACHINERY_BROKEN,
+		COMSIG_MACHINERY_POWER_LOST,
+		),
+		PROC_REF(on_broken),
+	)
 	RegisterSignal(src, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
-	RegisterSignal(src, COMSIG_ATOM_TAKE_DAMAGE, PROC_REF(on_damage_taken))
-	RegisterSignal(src, COMSIG_MACHINERY_POWER_LOST, PROC_REF(on_power_loss))
-	RegisterSignals(src, list(COMSIG_QDELETING,	COMSIG_MACHINERY_BROKEN),PROC_REF(on_broken))
+	RegisterSignal(src, COMSIG_ATOM_TAKE_DAMAGE, PROC_REF(on_take_damage))
 
 	register_context()
 	update_appearance()
@@ -81,10 +86,10 @@
 
 /obj/machinery/netpod/MouseDrop_T(mob/target, mob/user)
 	var/mob/living/carbon/player = user
-	if(!iscarbon(player) || !Adjacent(player) || !ISADVANCEDTOOLUSER(player) || !is_operational || !state_open)
+	if(!iscarbon(player))
 		return
 
-	if(player.buckled || HAS_TRAIT(player, TRAIT_HANDS_BLOCKED))
+	if((HAS_TRAIT(player, TRAIT_UI_BLOCKED) && !player.resting) || !Adjacent(player) || !player.Adjacent(target) || !ISADVANCEDTOOLUSER(player) || !is_operational)
 		return
 
 	close_machine(target)
@@ -121,6 +126,11 @@
 	if(!state_open && gone == occupant)
 		container_resist_act(gone)
 
+/obj/machinery/netpod/Exited(atom/movable/gone, direction)
+	. = ..()
+	if(!state_open && gone == occupant)
+		container_resist_act(gone)
+
 /obj/machinery/netpod/relaymove(mob/living/user, direction)
 	if(!state_open)
 		container_resist_act(user)
@@ -132,10 +142,9 @@
 	open_machine()
 
 /obj/machinery/netpod/open_machine(drop = TRUE, density_to_set = FALSE)
+	unprotect_and_signal()
 	playsound(src, 'sound/machines/tramopen.ogg', 60, TRUE, frequency = 65000)
 	flick("[base_icon_state]_opening", src)
-	SEND_SIGNAL(src, COMSIG_BITRUNNER_NETPOD_OPENED)
-	update_use_power(IDLE_POWER_USE)
 
 	return ..()
 
@@ -146,6 +155,10 @@
 	playsound(src, 'sound/machines/tramclose.ogg', 60, TRUE, frequency = 65000)
 	flick("[base_icon_state]_closing", src)
 	..()
+
+	if(!iscarbon(occupant))
+		open_machine()
+		return
 
 	enter_matrix()
 
@@ -171,7 +184,6 @@
 
 	if(do_after(pryer, 15 SECONDS, src))
 		if(!state_open)
-			sever_connection()
 			open_machine()
 
 	return TRUE
@@ -220,32 +232,27 @@
 	if(isnull(our_target) || !our_observer.orbit(our_target))
 		return ..()
 
-/// Puts the occupant in netpod stasis, basically short-circuiting environmental conditions
-/obj/machinery/netpod/proc/add_healing(mob/living/target)
-	if(target != occupant)
-		return
-
-	target.AddComponent(/datum/component/netpod_healing, pod = src)
-	target.playsound_local(src, 'sound/effects/submerge.ogg', 20, vary = TRUE)
-	target.extinguish_mob()
-	update_use_power(ACTIVE_POWER_USE)
-
 /// Disconnects the occupant after a certain time so they aren't just hibernating in netpod stasis. A balance change
 /obj/machinery/netpod/proc/auto_disconnect()
 	if(isnull(occupant) || state_open || connected)
 		return
 
-	var/mob/player = occupant
+	if(!iscarbon(occupant))
+		open_machine()
+		return
+
+	var/mob/living/carbon/player = occupant
+
 	player.playsound_local(src, 'sound/effects/splash.ogg', 60, TRUE)
 	to_chat(player, span_notice("The machine disconnects itself and begins to drain."))
 	open_machine()
 
 /// Handles occupant post-disconnection effects like damage, sounds, etc
-/obj/machinery/netpod/proc/disconnect_occupant(cause_damage = FALSE)
+/obj/machinery/netpod/proc/disconnect_occupant(forced = FALSE)
 	connected = FALSE
 
 	var/mob/living/mob_occupant = occupant
-	if(isnull(occupant) || mob_occupant.stat == DEAD)
+	if(isnull(occupant) || !isliving(occupant) || mob_occupant.stat == DEAD)
 		open_machine()
 		return
 
@@ -254,16 +261,12 @@
 	mob_occupant.set_temp_blindness(1 SECONDS)
 	mob_occupant.Paralyze(2 SECONDS)
 
-	if(!is_operational)
-		open_machine()
-		return
-
 	var/heal_time = 1
 	if(mob_occupant.health < mob_occupant.maxHealth)
 		heal_time = (mob_occupant.stat + 2) * 5
 	addtimer(CALLBACK(src, PROC_REF(auto_disconnect)), heal_time SECONDS, TIMER_UNIQUE|TIMER_STOPPABLE|TIMER_DELETE_ME)
 
-	if(!cause_damage)
+	if(!forced)
 		return
 
 	mob_occupant.flash_act(override_blindness_check = TRUE, visual = TRUE)
@@ -296,8 +299,9 @@
 		return
 
 	var/mob/living/carbon/current_avatar = avatar_ref?.resolve()
+	var/obj/structure/hololadder/wayout
 	if(isnull(current_avatar) || current_avatar.stat != CONSCIOUS) // We need a viable avatar
-		var/obj/structure/hololadder/wayout = server.generate_hololadder()
+		wayout = server.generate_hololadder()
 		if(isnull(wayout))
 			balloon_alert(neo, "out of bandwidth!")
 			return
@@ -306,10 +310,16 @@
 		server.stock_gear(current_avatar, neo, generated_domain)
 
 	neo.set_static_vision(3 SECONDS)
-	add_healing(occupant)
+	protect_occupant(occupant)
+	if(!do_after(neo, 2 SECONDS, src))
+		return
 
-	if(!validate_entry(neo, current_avatar))
-		open_machine()
+	// Very invalid
+	if(QDELETED(neo) || QDELETED(current_avatar) || QDELETED(src))
+		return
+
+	// Invalid
+	if(occupant != neo || isnull(neo.mind) || neo.stat == DEAD || current_avatar.stat == DEAD)
 		return
 
 	current_avatar.AddComponent( \
@@ -334,7 +344,7 @@
 		return
 
 	server_ref = WEAKREF(server)
-	RegisterSignal(server, COMSIG_MACHINERY_REFRESH_PARTS, PROC_REF(on_server_upgraded))
+	RegisterSignal(server, COMSIG_BITRUNNER_SERVER_UPGRADED, PROC_REF(on_server_upgraded))
 	RegisterSignal(server, COMSIG_BITRUNNER_DOMAIN_COMPLETE, PROC_REF(on_domain_complete))
 	RegisterSignal(server, COMSIG_BITRUNNER_DOMAIN_SCRUBBED, PROC_REF(on_domain_scrubbed))
 
@@ -347,12 +357,14 @@
 		"outfits" = list()
 	)
 
-	for(var/datum/outfit/outfit as anything in outfit_list)
+	for(var/path as anything in outfit_list)
+		var/datum/outfit/outfit = path
+
 		var/outfit_name = initial(outfit.name)
 		if(findtext(outfit_name, "(") != 0 || findtext(outfit_name, "-") != 0) // No special variants please
 			continue
 
-		collection["outfits"] += list(list("path" = outfit, "name" = outfit_name))
+		collection["outfits"] += list(list("path" = path, "name" = outfit_name))
 
 	return list(collection)
 
@@ -360,30 +372,20 @@
 /obj/machinery/netpod/proc/on_broken(datum/source)
 	SIGNAL_HANDLER
 
-	sever_connection()
+	if(!state_open)
+		open_machine()
 
-/// Checks the integrity, alerts occupants
-/obj/machinery/netpod/proc/on_damage_taken(datum/source, damage_amount)
-	SIGNAL_HANDLER
-
-	if(isnull(occupant) || !connected)
-		return
-
-	var/total = max_integrity - damage_amount
-	var/integrity = (atom_integrity / total) * 100
-	if(integrity > 50)
-		return
-
-	SEND_SIGNAL(src, COMSIG_BITRUNNER_NETPOD_INTEGRITY)
+	if(occupant)
+		unprotect_and_signal()
 
 /// Puts points on the current occupant's card account
 /obj/machinery/netpod/proc/on_domain_complete(datum/source, atom/movable/crate, reward_points)
 	SIGNAL_HANDLER
 
-	if(isnull(occupant) || !connected)
+	if(isnull(occupant) || !connected || !iscarbon(occupant))
 		return
 
-	var/mob/living/player = occupant
+	var/mob/living/carbon/player = occupant
 
 	var/datum/bank_account/account = player.get_bank_account()
 	if(isnull(account))
@@ -391,24 +393,9 @@
 
 	account.bitrunning_points += reward_points * 100
 
-/// The domain has been fully purged, so we should double check our avatar is deleted
-/obj/machinery/netpod/proc/on_domain_scrubbed(datum/source)
-	SIGNAL_HANDLER
-
-	var/mob/avatar = avatar_ref?.resolve()
-	if(isnull(avatar))
-		return
-
-	QDEL_NULL(avatar)
-
 /// User inspects the machine
 /obj/machinery/netpod/proc/on_examine(datum/source, mob/examiner, list/examine_text)
 	SIGNAL_HANDLER
-
-	if(isnull(server_ref?.resolve()))
-		examine_text += span_infoplain("It's not connected to anything.")
-		examine_text += span_infoplain("Netpods must be built within 4 tiles of a server.")
-		return
 
 	examine_text += span_infoplain("Drag yourself into the pod to engage the link.")
 	examine_text += span_infoplain("It has limited resuscitation capabilities. Remaining in the pod can heal some injuries.")
@@ -421,38 +408,71 @@
 	examine_text += span_notice("It is currently occupied by [occupant].")
 	examine_text += span_notice("It can be pried open with a crowbar, but its safety mechanisms will alert the occupant.")
 
-/// Boots out anyone in the machine && opens it
-/obj/machinery/netpod/proc/on_power_loss(datum/source)
+/// The domain has been fully purged, so we should double check our avatar is deleted
+/obj/machinery/netpod/proc/on_domain_scrubbed(datum/source)
 	SIGNAL_HANDLER
 
-	if(state_open)
+	var/mob/living/current_avatar = avatar_ref?.resolve()
+	if(isnull(current_avatar))
 		return
 
-	if(isnull(occupant) || !connected)
-		connected = FALSE
-		open_machine()
-		return
-
-	sever_connection()
+	QDEL_NULL(current_avatar)
 
 /// When the server is upgraded, drops brain damage a little
-/obj/machinery/netpod/proc/on_server_upgraded(obj/machinery/quantum_server/source)
+/obj/machinery/netpod/proc/on_server_upgraded(datum/source, servo_rating)
 	SIGNAL_HANDLER
 
-	disconnect_damage = BASE_DISCONNECT_DAMAGE * (1 - source.servo_bonus)
+	disconnect_damage = BASE_DISCONNECT_DAMAGE * (1 - servo_rating)
+
+/// Checks the integrity, alerts occupants
+/obj/machinery/netpod/proc/on_take_damage(datum/source, damage_amount)
+	SIGNAL_HANDLER
+
+	if(isnull(occupant))
+		return
+
+	var/total = max_integrity - damage_amount
+	var/integrity = (atom_integrity / total) * 100
+	if(integrity > 50)
+		return
+
+	SEND_SIGNAL(src, COMSIG_BITRUNNER_NETPOD_INTEGRITY)
+
+/// Puts the occupant in netpod stasis, basically short-circuiting environmental conditions
+/obj/machinery/netpod/proc/protect_occupant(mob/living/target)
+	if(target != occupant)
+		return
+
+	target.AddComponent(/datum/component/netpod_healing, \
+		brute_heal = 4, \
+		burn_heal = 4, \
+		toxin_heal = 4, \
+		clone_heal = 4, \
+		blood_heal = 4, \
+	)
+
+	target.playsound_local(src, 'sound/effects/submerge.ogg', 20, TRUE)
+	target.extinguish_mob()
+	update_use_power(ACTIVE_POWER_USE)
+
+/// On unbuckle or break, make sure the occupant ref is null
+/obj/machinery/netpod/proc/unprotect_and_signal()
+	unprotect_occupant(occupant)
+	SEND_SIGNAL(src, COMSIG_BITRUNNER_SEVER_AVATAR)
+
+/// Removes the occupant from netpod stasis
+/obj/machinery/netpod/proc/unprotect_occupant(mob/living/target)
+	var/datum/component/netpod_healing/healing_eff = target?.GetComponent(/datum/component/netpod_healing)
+	if(healing_eff)
+		qdel(healing_eff)
+
+	update_use_power(IDLE_POWER_USE)
 
 /// Resolves a path to an outfit.
 /obj/machinery/netpod/proc/resolve_outfit(text)
 	var/path = text2path(text)
 	if(ispath(path, /datum/outfit))
 		return path
-
-/// Severs the connection with the current avatar
-/obj/machinery/netpod/proc/sever_connection()
-	if(isnull(occupant) || !connected)
-		return
-
-	SEND_SIGNAL(src, COMSIG_BITRUNNER_NETPOD_SEVER)
 
 /// Closes the machine without shoving in an occupant
 /obj/machinery/netpod/proc/shut_pod()
@@ -462,20 +482,5 @@
 	set_density(TRUE)
 
 	update_appearance()
-
-/// Checks for cases to eject/fail connecting an avatar
-/obj/machinery/netpod/proc/validate_entry(mob/living/neo, mob/living/avatar)
-	if(!do_after(neo, 2 SECONDS, src))
-		return FALSE
-
-	// Very invalid
-	if(QDELETED(neo) || QDELETED(avatar) || QDELETED(src) || !is_operational)
-		return FALSE
-
-	// Invalid
-	if(occupant != neo || isnull(neo.mind) || neo.stat > SOFT_CRIT || avatar.stat == DEAD)
-		return FALSE
-
-	return TRUE
 
 #undef BASE_DISCONNECT_DAMAGE

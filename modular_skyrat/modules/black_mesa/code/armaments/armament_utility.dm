@@ -57,7 +57,7 @@
 	cost = 1
 
 /datum/armament_entry/hecu/utility/suppressor
-	item_type = /obj/item/suppressor/standard
+	item_type = /obj/item/suppressor
 	max_purchase = 4
 	cost = 2
 

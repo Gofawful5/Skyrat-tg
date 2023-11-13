@@ -439,7 +439,6 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	to_insert.forceMove(resolve_location)
 	item_insertion_feedback(user, to_insert, override)
 	resolve_location.update_appearance()
-	SEND_SIGNAL(to_insert, COMSIG_ITEM_STORED)
 	return TRUE
 
 /**
@@ -975,10 +974,6 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 /// Signal handler for when we get attacked with secondary click by an item.
 /datum/storage/proc/open_storage_attackby_secondary(datum/source, atom/weapon, mob/user)
 	SIGNAL_HANDLER
-
-	if(istype(weapon, /obj/item/chameleon))
-		var/obj/item/chameleon/chameleon_weapon = weapon
-		chameleon_weapon.make_copy(source, user)
 
 	return open_storage_on_signal(source, user)
 

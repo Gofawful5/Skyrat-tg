@@ -1,15 +1,14 @@
-## Title: Novaya Rossiyskaya Imperiya Module
+## Title: Novaya Rossiyskaya Imperiya ERT
 
-MODULE ID: NRI STUFF
+MODULE ID: NRI ERT
 
 ### Description:
 
-Everything mainly NRI-related, from various cosmetic clothing to guns to ERTs.
+A new style ERT for our Russian downstream, requested by them! It's a cool looking Russian style space ERT with guns and vodka!
 
 ### Credits:
 Gandalf2k15 - Code and some icons.
 Stalkeros - Code and some icons.
-Zydras - NRI police clothing, stun gun and NRI holobarriers icons.
 Ramirez - Icons and idea.
 Flavrius - Icons + misc.
-Paxilmaniac - Surplus weapons and armor.
+Paxilmaniac - Surplus weapons and armor

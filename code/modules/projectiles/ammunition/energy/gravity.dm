@@ -4,7 +4,6 @@
 	select_name = "gravity"
 	delay = 50
 	var/obj/item/gun/energy/gravity_gun/gun
-	firing_effect_type = /obj/effect/temp_visual/dir_setting/firing_effect
 
 /obj/item/ammo_casing/energy/gravity/Initialize(mapload)
 	if(istype(loc,/obj/item/gun/energy/gravity_gun))

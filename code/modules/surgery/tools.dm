@@ -597,30 +597,32 @@
 		ui.open()
 
 /obj/item/blood_filter/ui_data(mob/user)
-	. = list()
-
-	.["whitelist"] = list()
+	var/list/data = list()
+	var/list/chem_names = list()
 	for(var/key in whitelist)
-		.["whitelist"] += whitelist[key]
+		chem_names += whitelist[key]
+	data["whitelist"] = chem_names
+	return data
 
 /obj/item/blood_filter/ui_act(action, params)
 	. = ..()
 	if(.)
 		return
-
 	. = TRUE
 	switch(action)
 		if("add")
-			var/selected_reagent = tgui_input_list(usr, "Select reagent to filter", "Whitelist reagent", GLOB.name2reagent)
+			var/selected_reagent = tgui_input_list(usr, "Select reagent to filter", "Whitelist reagent", GLOB.chemical_name_list)
 			if(!selected_reagent)
-				return FALSE
+				return TRUE
 
-			var/datum/reagent/chem_id = GLOB.name2reagent[selected_reagent]
+			var/chem_id = get_chem_id(selected_reagent)
 			if(!chem_id)
-				return FALSE
+				return TRUE
 
 			if(!(chem_id in whitelist))
 				whitelist[chem_id] = selected_reagent
+
+
 
 		if("remove")
 			var/chem_name = params["reagent"]

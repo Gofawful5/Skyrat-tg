@@ -10,25 +10,20 @@
 	use_power = FALSE
 	circuit = null
 	resistance_flags = FIRE_PROOF
-	flags_1 = NODECONSTRUCT_1
+
+	/// A list of the different soup pots we can spawn with
+	var/static/list/random_soup_pot_types = list(
+		/obj/item/reagent_containers/cup/soup_pot/material/fake_copper,
+		/obj/item/reagent_containers/cup/soup_pot/material/fake_brass,
+		/obj/item/reagent_containers/cup/soup_pot/material/fake_tin,
+	)
 
 /obj/machinery/primitive_stove/Initialize(mapload)
 	. = ..()
 
-	AddComponent(/datum/component/stove/primitive, container_x = -7, container_y = 7, spawn_container = new /obj/item/reagent_containers/cup/soup_pot)
+	var/random_chosen_soup_pot_type = pick(random_soup_pot_types)
 
-/obj/machinery/primitive_stove/examine(mob/user)
-	. = ..()
-
-	. += span_notice("It can be taken apart with a <b>crowbar</b>.")
-
-/obj/machinery/primitive_stove/crowbar_act(mob/living/user, obj/item/tool)
-	user.balloon_alert_to_viewers("disassembling...")
-	if(!tool.use_tool(src, user, 2 SECONDS, volume = 100))
-		return
-	new /obj/item/stack/sheet/mineral/clay(drop_location(), 5)
-	deconstruct(TRUE)
-	return TOOL_ACT_TOOLTYPE_SUCCESS
+	AddComponent(/datum/component/stove/primitive, container_x = -7, container_y = 7, spawn_container = new random_chosen_soup_pot_type)
 
 /// Stove component subtype with changed visuals and not much else
 /datum/component/stove/primitive

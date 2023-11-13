@@ -132,7 +132,6 @@
 	QDEL_LAZYLIST(methods_to_fix)
 	malfunctioning = FALSE
 	set_machine_stat(machine_stat & ~EMAGGED)
-	set_is_operational(TRUE)
 	update_appearance()
 	return TRUE
 

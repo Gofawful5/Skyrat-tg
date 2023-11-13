@@ -13,6 +13,7 @@
 	var/efficiency = 20
 	var/on = FALSE
 	var/cooldown = 0
+	var/screen = "home"
 	var/useramount = 30 // Last used amount
 	var/setting = 1 // displayed range is 3 * setting
 	var/max_range = 3 // displayed max range is 3 * max range
@@ -125,16 +126,18 @@
 
 /obj/machinery/smoke_machine/ui_data(mob/user)
 	var/data = list()
-	var/tank_contents = list()
-	var/tank_current_volume = 0
+	var/TankContents[0]
+	var/TankCurrentVolume = 0
 	for(var/datum/reagent/R in reagents.reagent_list)
-		tank_contents += list(list("name" = R.name, "volume" = R.volume)) // list in a list because Byond merges the first list...
-		tank_current_volume += R.volume
-	data["tankContents"] = tank_contents
-	data["tankCurrentVolume"] = reagents.total_volume ? reagents.total_volume : null
-	data["tankMaxVolume"] = reagents.maximum_volume
+		TankContents.Add(list(list("name" = R.name, "volume" = R.volume))) // list in a list because Byond merges the first list...
+		TankCurrentVolume += R.volume
+	data["TankContents"] = TankContents
+	data["isTankLoaded"] = reagents.total_volume ? TRUE : FALSE
+	data["TankCurrentVolume"] = reagents.total_volume ? reagents.total_volume : null
+	data["TankMaxVolume"] = reagents.maximum_volume
 	data["active"] = on
 	data["setting"] = setting
+	data["screen"] = screen
 	data["maxSetting"] = max_range
 	return data
 
@@ -160,5 +163,8 @@
 				message_admins("[ADMIN_LOOKUPFLW(usr)] activated a smoke machine that contains [english_list(reagents.reagent_list)] at [ADMIN_VERBOSEJMP(src)].")
 				usr.log_message("activated a smoke machine that contains [english_list(reagents.reagent_list)]", LOG_GAME)
 				log_combat(usr, src, "has activated [src] which contains [english_list(reagents.reagent_list)] at [AREACOORD(src)].")
+		if("goScreen")
+			screen = params["screen"]
+			. = TRUE
 
 #undef REAGENTS_BASE_VOLUME

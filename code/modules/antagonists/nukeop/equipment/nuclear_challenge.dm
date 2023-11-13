@@ -73,14 +73,7 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 	war_was_declared(memo = war_declaration)
 
 /obj/item/nuclear_challenge/proc/war_was_declared(mob/living/user, memo)
-	priority_announce(
-		text = memo,
-		title = "Declaration of War",
-		sound = 'sound/machines/alarm.ogg',
-		has_important_message = TRUE,
-		sender_override = "Nuclear Operative Outpost",
-		color_override = "red",
-	)
+	priority_announce(memo, title = "Declaration of War", sound = 'sound/machines/alarm.ogg', has_important_message = TRUE)
 	if(user)
 		to_chat(user, "You've attracted the attention of powerful forces within the syndicate. \
 			A bonus bundle of telecrystals has been granted to your team. Great things await you if you complete the mission.")
@@ -175,14 +168,7 @@ GLOBAL_LIST_EMPTY(jam_on_wardec)
 		return
 #endif
 
-	priority_announce(
-		text = memo,
-		title = "Declaration of War",
-		sound = 'sound/machines/alarm.ogg',
-		has_important_message = TRUE,
-		sender_override = "Nuclear Operative Outpost",
-		color_override = "red",
-	)
+	priority_announce(memo, title = "Declaration of War", sound = 'sound/machines/alarm.ogg', has_important_message = TRUE)
 
 /obj/item/nuclear_challenge/literally_just_does_the_message/distribute_tc()
 	return

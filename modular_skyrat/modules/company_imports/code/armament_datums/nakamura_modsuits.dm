@@ -197,13 +197,13 @@
 	cost = PAYCHECK_CREW
 
 /datum/armament_entry/company_import/nakamura_modsuits/novelty_modules/kinesis
-	item_type = /obj/item/mod/module/anomaly_locked/kinesis/prebuilt/locked
+	item_type = /obj/item/mod/module/anomaly_locked/kinesis/prebuilt
 	cost = PAYCHECK_COMMAND * 15
 
 /datum/armament_entry/company_import/nakamura_modsuits/novelty_modules/antigrav
-	item_type = /obj/item/mod/module/anomaly_locked/antigrav/prebuilt/locked
+	item_type = /obj/item/mod/module/anomaly_locked/antigrav/prebuilt
 	cost = PAYCHECK_COMMAND * 15
 
 /datum/armament_entry/company_import/nakamura_modsuits/novelty_modules/teleporter
-	item_type = /obj/item/mod/module/anomaly_locked/teleporter/prebuilt/locked
+	item_type = /obj/item/mod/module/anomaly_locked/teleporter/prebuilt
 	cost = PAYCHECK_COMMAND * 20

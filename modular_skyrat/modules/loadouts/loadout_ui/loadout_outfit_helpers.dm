@@ -48,11 +48,6 @@
 					to_chat(src, span_warning("You were unable to get a loadout item([initial(item.item_path.name)]) due to job restrictions!"))
 				continue
 
-			if(item.blacklisted_roles && equipping_job && (equipping_job.title in item.blacklisted_roles))
-				if(client)
-					to_chat(src, span_warning("You were unable to get a loadout item([initial(item.item_path.name)]) due to job blacklists!"))
-				continue
-
 			if(item.restricted_species && !(dna.species.id in item.restricted_species))
 				if(client)
 					to_chat(src, span_warning("You were unable to get a loadout item ([initial(item.item_path.name)]) due to species restrictions!"))
@@ -68,11 +63,6 @@
 			if(item.restricted_roles && equipping_job && !(equipping_job.title in item.restricted_roles))
 				if(client)
 					to_chat(src, span_warning("You were unable to get a loadout item([initial(item.item_path.name)]) due to job restrictions!"))
-				continue
-
-			if(item.blacklisted_roles && equipping_job && (equipping_job.title in item.blacklisted_roles))
-				if(client)
-					to_chat(src, span_warning("You were unable to get a loadout item([initial(item.item_path.name)]) due to job blacklists!"))
 				continue
 
 			if(item.restricted_species && !(dna.species.id in item.restricted_species))

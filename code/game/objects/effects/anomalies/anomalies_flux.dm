@@ -14,7 +14,6 @@
 		COMSIG_ATOM_ENTERED = PROC_REF(on_entered),
 	)
 	AddElement(/datum/element/connect_loc, loc_connections)
-	apply_wibbly_filters(src)
 
 /obj/effect/anomaly/flux/anomalyEffect()
 	..()
@@ -67,7 +66,7 @@
 	///range in whuich we zap
 	var/zap_range = 1
 	///strength of the zappy
-	var/zap_power = 2500
+	var/zap_power = 1e6
 	///the zappy flags
 	var/zap_flags = ZAP_GENERATES_POWER | ZAP_MOB_DAMAGE | ZAP_OBJ_DAMAGE
 
@@ -79,7 +78,7 @@
 /obj/effect/anomaly/flux/big/anomalyEffect()
 	. = ..()
 
-	tesla_zap(source = src, zap_range = zap_range, power = zap_power, cutoff = 1e3, zap_flags = zap_flags)
+	tesla_zap(src, zap_range, zap_power, zap_flags)
 
 /obj/effect/anomaly/flux/big/Bumped(atom/movable/bumpee)
 	. = ..()

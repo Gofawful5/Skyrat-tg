@@ -7,16 +7,19 @@
 	size = 4
 	requires_ntnet = TRUE
 	available_on_ntnet = FALSE
+	ui_header = "downloader_finished.gif"
 	tgui_id = "NtosNetDownloader"
 	program_icon = "download"
 
-	var/datum/computer_file/program/downloaded_file
+	var/datum/computer_file/program/downloaded_file = null
 	var/hacked_download = FALSE
 	var/download_completion = FALSE //GQ of downloaded data.
 	var/download_netspeed = 0
 	var/downloaderror = ""
+	var/list/main_repo
+	var/list/antag_repo
 
-	var/static/list/show_categories = list(
+	var/list/show_categories = list(
 		PROGRAM_CATEGORY_CREW,
 		PROGRAM_CATEGORY_ENGI,
 		PROGRAM_CATEGORY_SCI,
@@ -24,9 +27,10 @@
 		PROGRAM_CATEGORY_MISC,
 	)
 
-/datum/computer_file/program/ntnetdownload/kill_program(mob/user)
+/datum/computer_file/program/ntnetdownload/on_start()
 	. = ..()
-	ui_header = null
+	main_repo = SSmodular_computers.available_station_software
+	antag_repo = SSmodular_computers.available_antag_software
 
 /datum/computer_file/program/ntnetdownload/proc/begin_file_download(filename)
 	if(downloaded_file)
@@ -46,10 +50,10 @@
 
 	ui_header = "downloader_running.gif"
 
-	if(PRG in SSmodular_computers.available_station_software)
+	if(PRG in main_repo)
 		generate_network_log("Began downloading file [PRG.filename].[PRG.filetype] from NTNet Software Repository.")
 		hacked_download = FALSE
-	else if(PRG in SSmodular_computers.available_antag_software)
+	else if(PRG in antag_repo)
 		generate_network_log("Began downloading file **ENCRYPTED**.[PRG.filetype] from unspecified server.")
 		hacked_download = TRUE
 	else
@@ -64,7 +68,7 @@
 	generate_network_log("Aborted download of file [hacked_download ? "**ENCRYPTED**" : "[downloaded_file.filename].[downloaded_file.filetype]"].")
 	downloaded_file = null
 	download_completion = FALSE
-	ui_header = null
+	ui_header = "downloader_finished.gif"
 
 /datum/computer_file/program/ntnetdownload/proc/complete_file_download()
 	if(!downloaded_file)
@@ -86,11 +90,11 @@
 	download_netspeed = 0
 	// Speed defines are found in misc.dm
 	switch(ntnet_status)
-		if(NTNET_LOW_SIGNAL)
+		if(1)
 			download_netspeed = NTNETSPEED_LOWSIGNAL
-		if(NTNET_GOOD_SIGNAL)
+		if(2)
 			download_netspeed = NTNETSPEED_HIGHSIGNAL
-		if(NTNET_ETHERNET_SIGNAL)
+		if(3)
 			download_netspeed = NTNETSPEED_ETHERNET
 	download_completion += download_netspeed
 
@@ -128,7 +132,7 @@
 	data["disk_used"] = computer.used_capacity
 	data["emagged"] = (computer.obj_flags & EMAGGED)
 
-	var/list/repo = SSmodular_computers.available_antag_software | SSmodular_computers.available_station_software
+	var/list/repo = antag_repo | main_repo
 	var/list/program_categories = list()
 
 	for(var/datum/computer_file/program/programs as anything in repo)
@@ -143,7 +147,7 @@
 			"installed" = !!computer.find_file_by_name(programs.filename),
 			"compatible" = check_compatibility(programs),
 			"size" = programs.size,
-			"access" = programs.can_run(user, downloading = TRUE, access = access),
+			"access" = (computer.obj_flags & EMAGGED) && programs.available_on_syndinet ? TRUE : programs.can_run(user, transfer = TRUE, access = access),
 			"verifiedsource" = programs.available_on_ntnet,
 		))
 

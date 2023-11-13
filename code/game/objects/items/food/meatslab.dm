@@ -26,6 +26,7 @@
 		diseases = null,\
 	)
 
+
 /obj/item/food/meat/slab
 	name = "meat"
 	desc = "A slab of meat."
@@ -379,7 +380,6 @@
 	tastes = list("bacon" = 1)
 	foodtypes = MEAT | BREAKFAST
 	crafting_complexity = FOOD_COMPLEXITY_1
-	blood_decal_type = null
 
 /obj/item/food/meat/slab/gondola
 	name = "gondola meat"
@@ -442,7 +442,6 @@
 	tastes = list("crab" = 1)
 	foodtypes = SEAFOOD
 	crafting_complexity = FOOD_COMPLEXITY_1
-	blood_decal_type = null
 
 /obj/item/food/meat/slab/chicken
 	name = "chicken meat"
@@ -501,7 +500,6 @@
 	foodtypes = MEAT
 	tastes = list("meat" = 1)
 	crafting_complexity = FOOD_COMPLEXITY_1
-	blood_decal_type = null
 
 /obj/item/food/meat/steak/Initialize(mapload)
 	. = ..()
@@ -546,10 +544,12 @@
 /obj/item/food/meat/steak/xeno
 	name = "xeno steak"
 	tastes = list("meat" = 1, "acid" = 1)
+	blood_decal_type = /obj/effect/decal/cleanable/xenoblood
 
 /obj/item/food/meat/steak/spider
 	name = "spider steak"
 	tastes = list("cobwebs" = 1)
+	blood_decal_type = /obj/effect/decal/cleanable/insectguts
 
 /obj/item/food/meat/steak/goliath
 	name = "goliath steak"
@@ -720,7 +720,6 @@
 	tastes = list("meat" = 1)
 	foodtypes = MEAT
 	crafting_complexity = FOOD_COMPLEXITY_1
-	blood_decal_type = null
 
 /obj/item/food/meat/cutlet/Initialize(mapload)
 	. = ..()
@@ -757,6 +756,7 @@
 	name = "killer tomato cutlet"
 	tastes = list("tomato" = 1)
 	foodtypes = FRUIT
+	blood_decal_type = /obj/effect/decal/cleanable/food/tomato_smudge
 
 /obj/item/food/meat/cutlet/bear
 	name = "bear cutlet"
@@ -765,10 +765,12 @@
 /obj/item/food/meat/cutlet/xeno
 	name = "xeno cutlet"
 	tastes = list("meat" = 1, "acid" = 1)
+	blood_decal_type = /obj/effect/decal/cleanable/xenoblood
 
 /obj/item/food/meat/cutlet/spider
 	name = "spider cutlet"
 	tastes = list("cobwebs" = 1)
+	blood_decal_type = /obj/effect/decal/cleanable/insectguts
 
 /obj/item/food/meat/cutlet/gondola
 	name = "gondola cutlet"

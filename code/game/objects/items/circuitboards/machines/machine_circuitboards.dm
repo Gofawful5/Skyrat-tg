@@ -255,8 +255,7 @@
 	build_path = /obj/machinery/ntnet_relay
 	req_components = list(
 		/obj/item/stack/cable_coil = 2,
-		/datum/stock_part/filter = 1,
-	)
+		/datum/stock_part/filter = 1)
 
 /obj/item/circuitboard/machine/pacman
 	name = "PACMAN-type Generator"
@@ -463,7 +462,7 @@
 	req_components = list(
 		/datum/stock_part/matter_bin = 1,
 		/datum/stock_part/servo = 1,
-		)
+		/obj/item/reagent_containers/cup/beaker = 2)
 
 /obj/item/circuitboard/machine/circuit_imprinter/offstation
 	name = "Ancient Circuit Imprinter"
@@ -514,7 +513,7 @@
 	req_components = list(
 		/datum/stock_part/matter_bin = 2,
 		/datum/stock_part/servo = 2,
-		)
+		/obj/item/reagent_containers/cup/beaker = 2)
 
 /obj/item/circuitboard/machine/protolathe/offstation
 	name = "Ancient Protolathe"
@@ -602,7 +601,7 @@
 	req_components = list(
 		/datum/stock_part/matter_bin = 2,
 		/datum/stock_part/servo = 2,
-		)
+		/obj/item/reagent_containers/cup/beaker = 2)
 
 /obj/item/circuitboard/machine/techfab/department
 	name = "\improper Departmental Techfab"
