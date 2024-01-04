@@ -36,8 +36,13 @@
 	INVOKE_ASYNC(src, PROC_REF(poll_ghosts))
 
 /// Ask ghosts if they want to make some noise
+<<<<<<< HEAD:code/modules/antagonists/heretic/structures/knock_final.dm
 /obj/structure/knock_tear/proc/poll_ghosts()
 	var/list/candidates = poll_ghost_candidates("Would you like to be a random eldritch monster attacking the crew?", ROLE_SENTIENCE, ROLE_SENTIENCE, 10 SECONDS, POLL_IGNORE_HERETIC_MONSTER)
+=======
+/obj/structure/lock_tear/proc/poll_ghosts()
+	var/list/candidates = SSpolling.poll_ghost_candidates("Would you like to be a random eldritch monster attacking the crew?", check_jobban = ROLE_SENTIENCE, role = ROLE_SENTIENCE, poll_time = 10 SECONDS, ignore_category = POLL_IGNORE_HERETIC_MONSTER, pic_source = src, role_name_text = "eldritch monster")
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:code/modules/antagonists/heretic/structures/lock_final.dm
 	while(LAZYLEN(candidates))
 		var/mob/dead/observer/candidate = pick_n_take(candidates)
 		ghost_to_monster(candidate, should_ask = FALSE)

@@ -1,10 +1,27 @@
 import { toFixed } from 'common/math';
+
 import { useBackend } from '../backend';
+<<<<<<< HEAD:tgui/packages/tgui/interfaces/Signaler.js
 import { Button, Grid, NumberInput, Section } from '../components';
 import { Window } from '../layouts';
 
 export const Signaler = (props, context) => {
   const { act, data } = useBackend(context);
+=======
+import { Button, NumberInput, Section, Stack } from '../components';
+import { Window } from '../layouts';
+
+type Data = {
+  code: number;
+  frequency: number;
+  cooldown: number;
+  minFrequency: number;
+  maxFrequency: number;
+};
+
+export const Signaler = (props) => {
+  const { act, data } = useBackend();
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:tgui/packages/tgui/interfaces/Signaler.tsx
   return (
     <Window width={280} height={132}>
       <Window.Content>
@@ -14,9 +31,16 @@ export const Signaler = (props, context) => {
   );
 };
 
+<<<<<<< HEAD:tgui/packages/tgui/interfaces/Signaler.js
 export const SignalerContent = (props, context) => {
   const { act, data } = useBackend(context);
   const { code, frequency, minFrequency, maxFrequency } = data;
+=======
+export const SignalerContent = (props) => {
+  const { act, data } = useBackend<Data>();
+  const { code, frequency, cooldown, minFrequency, maxFrequency } = data;
+
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:tgui/packages/tgui/interfaces/Signaler.tsx
   const color = 'rgba(13, 13, 213, 0.7)';
   const backColor = 'rgba(0, 0, 69, 0.5)';
   return (

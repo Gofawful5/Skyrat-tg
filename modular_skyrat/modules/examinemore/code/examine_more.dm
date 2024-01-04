@@ -103,6 +103,7 @@ would only be recognisable with someone that had the syndicate trait.
 						composed_message = "You note the following because of your loyalty to <b>[faction_i]</b>: <br>"
 						composed_message += special_desc
 						. += composed_message
+<<<<<<< HEAD
 			//If they are a syndicate contractor or a syndicate
 			if(EXAMINE_CHECK_CONTRACTOR)
 				var/mob/living/carbon/human/human_user = user
@@ -125,6 +126,9 @@ would only be recognisable with someone that had the syndicate trait.
 					composed_message = "You note the following because of your [span_red("<b>[special_desc_affiliation ? special_desc_affiliation : "Syndicate Affiliation"]</b>")]: <br>"
 					composed_message += special_desc
 					. += composed_message
+=======
+
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 /*
 *	EXAMPLES

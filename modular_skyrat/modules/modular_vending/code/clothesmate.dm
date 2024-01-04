@@ -33,7 +33,14 @@
 				/obj/item/clothing/neck/cloak/colourable/shroud = 5,
 				/obj/item/clothing/neck/cloak/colourable/boat = 5,
 				/obj/item/clothing/neck/mantle/recolorable = 5,
+<<<<<<< HEAD
 				/obj/item/clothing/glasses/betterunshit = 5,
+=======
+				/obj/item/clothing/neck/long_cape = 5,
+				/obj/item/clothing/neck/wide_cape = 5,
+				/obj/item/clothing/neck/robe_cape = 5,
+				/obj/item/clothing/glasses/regular/betterunshit = 5,
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 				/obj/item/clothing/glasses/thin = 5,
 				/obj/item/clothing/glasses/hud/ar/projector = 5,
 				/obj/item/clothing/gloves/bracer/wraps,

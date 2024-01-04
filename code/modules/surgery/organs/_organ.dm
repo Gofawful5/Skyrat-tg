@@ -6,6 +6,8 @@
 	throwforce = 0
 	/// The mob that owns this organ.
 	var/mob/living/carbon/owner = null
+	/// Reference to the limb we're inside of
+	var/obj/item/bodypart/bodypart_owner
 	/// The cached info about the blood this organ belongs to
 	var/list/blood_dna_info = list("Synthetic DNA" = "O+") // not every organ spawns inside a person
 	/// The body zone this organ is supposed to inhabit.
@@ -77,6 +79,7 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 			volume = reagent_vol,\
 			after_eat = CALLBACK(src, PROC_REF(OnEatFrom)))
 
+<<<<<<< HEAD
 	if(!IS_ROBOTIC_ORGAN(src))
 		add_blood_DNA(blood_dna_info)
 
@@ -201,6 +204,18 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 		diseases_to_add += disease
 	if(LAZYLEN(diseases_to_add))
 		AddComponent(/datum/component/infective, diseases_to_add)
+=======
+/obj/item/organ/Destroy()
+	if(bodypart_owner && !owner && !QDELETED(bodypart_owner))
+		bodypart_remove(bodypart_owner)
+	else if(owner)
+		// The special flag is important, because otherwise mobs can die
+		// while undergoing transformation into different mobs.
+		Remove(owner, special=TRUE)
+	else
+		STOP_PROCESSING(SSobj, src)
+	return ..()
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 /// Add a Trait to an organ that it will give its owner.
 /obj/item/organ/proc/add_organ_trait(trait)
@@ -236,15 +251,6 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 
 /obj/item/organ/proc/on_find(mob/living/finder)
 	return
-
-/**
- * Proc that gets called when the organ is surgically removed by someone, can be used for special effects
- * Currently only used so surplus organs can explode when surgically removed.
- */
-/obj/item/organ/proc/on_surgical_removal(mob/living/user, mob/living/carbon/old_owner, target_zone, obj/item/tool)
-	SHOULD_CALL_PARENT(TRUE)
-	SEND_SIGNAL(src, COMSIG_ORGAN_SURGICALLY_REMOVED, user, old_owner, target_zone, tool)
-	RemoveElement(/datum/element/decal/blood)
 
 /obj/item/organ/wash(clean_types)
 	. = ..()
@@ -448,4 +454,4 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 
 /// Tries to replace the existing organ on the passed mob with this one, with special handling for replacing a brain without ghosting target
 /obj/item/organ/proc/replace_into(mob/living/carbon/new_owner)
-	return Insert(new_owner, special = TRUE, drop_if_replaced = FALSE)
+	return Insert(new_owner, special = TRUE, movement_flags = DELETE_IF_REPLACED)

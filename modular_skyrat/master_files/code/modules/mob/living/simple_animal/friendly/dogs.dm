@@ -242,7 +242,15 @@
 	investigate_log("has been gibbed due to being emagged by [user].", INVESTIGATE_DEATHS)
 	visible_message(span_boldwarning("[user] swipes a card through [target]!"), span_notice("You overload [target]s internal reactor..."))
 
+<<<<<<< HEAD
 	notify_ghosts("[user] has shortcircuited [target] to explode in 60 seconds!", source = target, action = NOTIFY_ORBIT, flashwindow = FALSE, header = "Borgi Emagged")
+=======
+	notify_ghosts("[user] has shortcircuited [target] to explode in 60 seconds!",
+		source = target,
+		notify_flags = NOTIFY_CATEGORY_NOFLASH,
+		header = "Borgi Emagged",
+	)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	addtimer(CALLBACK(src, PROC_REF(explode_imminent)), 50 SECONDS)
 
 	return TRUE

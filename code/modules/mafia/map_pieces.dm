@@ -75,8 +75,13 @@
 
 /datum/map_template/mafia/snowy
 	name = "Snowdin"
+<<<<<<< HEAD
 	description = "Based off of the icy moon map of the same name, the guy who reworked it did a good enough job to recieve a derivative piece of work based on it. Cool!"
 	mappath = "_maps/map_files/Mafia/mafia_snow.dmm"
+=======
+	description = "Based off of the icy moon map of the same name, the guy who reworked it did a good enough job to receive a derivative piece of work based on it. Cool!"
+	map_suffix = "mafia_snow.dmm"
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	custom_outfit = /datum/outfit/mafia/snowy
 
 /datum/map_template/mafia/gothic

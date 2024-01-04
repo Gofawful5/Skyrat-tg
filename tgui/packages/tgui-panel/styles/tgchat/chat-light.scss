@@ -977,6 +977,61 @@ h2.alert {
   border-bottom: 1px dashed #000;
 }
 
+<<<<<<< HEAD
+=======
+$alert-stripe-colors: (
+  'default': #b3bfff,
+  'green': #adffad,
+  'blue': #b3bfff,
+  'pink': #ffb3df,
+  'yellow': #fff3b3,
+  'orange': #ffe2b3,
+  'red': #ffb3b3,
+  'purple': #fac2ff,
+  'grey': #e3e3e3,
+);
+
+$alert-stripe-alternate-colors: (
+  'default': #bdc8ff,
+  'green': #bdffbd,
+  'blue': #bdc8ff,
+  'pink': #ffc2e5,
+  'yellow': #fff5c2,
+  'orange': #ffe8c2,
+  'red': #ffc2c2,
+  'purple': #fbd1ff,
+  'grey': #ebebeb,
+);
+
+$alert-major-header-colors: (
+  'default': #003061,
+  'green': #005229,
+  'blue': #003061,
+  'pink': #800033,
+  'yellow': #754900,
+  'orange': #823208,
+  'red': #800029,
+  'purple': #450d8c,
+  'grey': #800033,
+);
+
+$alert-subheader-header-colors: (
+  'default': #6b0020,
+  'green': #6b0020,
+  'blue': #6b0020,
+  'pink': #002c85,
+  'yellow': #002c85,
+  'orange': #002c85,
+  'red': #002c85,
+  'purple': #002c85,
+  'grey': #002c85,
+);
+
+$border-width: 4;
+
+$border-width-px: $border-width * 1px;
+
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 .major_announcement_title {
   color: #cc0000; // SKYRAT EDIT CHANGE - ORIGINAL: color: #ff0066
   text-decoration: underline;

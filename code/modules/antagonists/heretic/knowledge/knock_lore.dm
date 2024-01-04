@@ -6,8 +6,7 @@
  * A Locksmith’s Secret
  * Grasp of Knock
  * > Sidepaths:
- *   Ashen Eyes
- *	 Codex Cicatrix
+ *   Mindgate
  * Key Keeper’s Burden
  *
  * Rite Of Passage
@@ -15,8 +14,10 @@
  * Ritual of Knowledge
  * Burglar's Finesse
  * > Sidepaths:
+ * 	 Opening Blast
  *   Apetra Vulnera
- *   Opening Blast
+ *   Unfathomable Curio
+ * 	 Unsealed arts
  *
  * Opening Blade
  * Caretaker’s Last Refuge
@@ -48,7 +49,6 @@
 	next_knowledge = list(
 		/datum/heretic_knowledge/key_ring,
 		/datum/heretic_knowledge/medallion,
-		/datum/heretic_knowledge/codex_cicatrix,
 	)
 	cost = 1
 	route = PATH_KNOCK
@@ -98,8 +98,12 @@
 		It functions the same as an ID Card, but attacking it with an ID card fuses it and gains its access. \
 		You can use it in-hand to change its form to a card you fused. \
 		Does not preserve the card used in the ritual."
+<<<<<<< HEAD:code/modules/antagonists/heretic/knowledge/knock_lore.dm
 	gain_text = "Gateways shall open before me, my very will ensnaring reality."
 	adds_sidepath_points = 1
+=======
+	gain_text = "The Keeper sneered. \"These plastic rectangles are a mockery of keys, and I curse every door that desires them.\""
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:code/modules/antagonists/heretic/knowledge/lock_lore.dm
 	required_atoms = list(
 		/obj/item/storage/wallet = 1,
 		/obj/item/stack/rods = 1,
@@ -143,12 +147,23 @@
 	name = "Burglar's Finesse"
 	desc = "Grants you Burglar's Finesse, a single-target spell \
 		that puts a random item from the victims backpack into your hand."
+<<<<<<< HEAD:code/modules/antagonists/heretic/knowledge/knock_lore.dm
 	gain_text = "Their trinkets will be mine, as will their lives in due time."
 	adds_sidepath_points = 1
 	next_knowledge = list(
 		/datum/heretic_knowledge/spell/apetra_vulnera,
 		/datum/heretic_knowledge/spell/opening_blast,
 		/datum/heretic_knowledge/blade_upgrade/flesh/knock,
+=======
+	gain_text = "Consorting with Burglar spirits is frowned upon, but a Steward will always want to learn about new doors."
+	next_knowledge = list(
+		/datum/heretic_knowledge/spell/apetra_vulnera,
+		/datum/heretic_knowledge/spell/opening_blast,
+		/datum/heretic_knowledge/blade_upgrade/flesh/lock,
+		/datum/heretic_knowledge/unfathomable_curio,
+		/datum/heretic_knowledge/curse/paralysis,
+		/datum/heretic_knowledge/painting,
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:code/modules/antagonists/heretic/knowledge/lock_lore.dm
 	)
 	spell_to_add = /datum/action/cooldown/spell/pointed/burglar_finesse
 	cost = 2
@@ -172,10 +187,16 @@
 	desc = "Gives you a spell that makes you transparent and not dense. Cannot be used near living sentient beings. \
 		While in refuge, you cannot use your hands or spells, and you are immune to slowdown. \
 		You are invincible but unable to harm anything. Cancelled by being hit with an anti-magic item."
+<<<<<<< HEAD:code/modules/antagonists/heretic/knowledge/knock_lore.dm
 	gain_text = "Then I saw my my own reflection cascaded mind-numbingly enough times that I was but a haze."
 	adds_sidepath_points = 1
 	next_knowledge = list(/datum/heretic_knowledge/ultimate/knock_final)
 	route = PATH_KNOCK
+=======
+	gain_text = "Jealously, the Guard and the Hound hunted me. But I unlocked my form, and was but a haze, untouchable."
+	next_knowledge = list(/datum/heretic_knowledge/ultimate/lock_final)
+	route = PATH_LOCK
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:code/modules/antagonists/heretic/knowledge/lock_lore.dm
 	spell_to_add = /datum/action/cooldown/spell/caretaker
 	cost = 1
 
@@ -202,8 +223,7 @@
 	for(var/mob/living/carbon/human/body in atoms)
 		if(body.stat != DEAD)
 			continue
-		var/obj/item/bodypart/chest = body.get_bodypart(BODY_ZONE_CHEST)
-		if(LAZYLEN(chest.get_organs()))
+		if(LAZYLEN(body.get_organs_for_zone(BODY_ZONE_CHEST)))
 			to_chat(user, span_hierophant_warning("[body] has organs in their chest."))
 			continue
 

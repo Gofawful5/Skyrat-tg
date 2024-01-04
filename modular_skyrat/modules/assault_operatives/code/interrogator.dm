@@ -196,7 +196,14 @@
 	for(var/datum/status_effect/goldeneye_pinpointer/iterating_pinpointer in GLOB.goldeneye_pinpointers)
 		iterating_pinpointer.set_target(new_key)
 
+<<<<<<< HEAD
 	notify_ghosts("GoldenEye key launched!", source = new_key, action = NOTIFY_ORBIT, header = "Something's Interesting!")
+=======
+	notify_ghosts("GoldenEye key launched!",
+		source = new_key,
+		header = "Something's Interesting!",
+	)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 /obj/machinery/interrogator/proc/find_drop_turf()
 	var/list/possible_turfs = list()

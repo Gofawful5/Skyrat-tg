@@ -47,6 +47,7 @@
 
 //PLEASE VIEW SKYRAT ASHWALKER MODULE FOR OVERRIDE
 /obj/structure/lavaland/ash_walker/proc/consume()
+<<<<<<< HEAD
 	for(var/mob/living/H in view(src, 1)) //Only for corpse right next to/on same tile
 		if(H.stat)
 			for(var/obj/item/W in H)
@@ -55,6 +56,18 @@
 			if(issilicon(H)) //no advantage to sacrificing borgs...
 				H.investigate_log("has been gibbed by the necropolis tendril.", INVESTIGATE_DEATHS)
 				visible_message(span_notice("Serrated tendrils eagerly pull [H] apart, but find nothing of interest."))
+=======
+	for(var/mob/living/offeredmob in view(src, 1)) //Only for corpse right next to/on same tile
+		if(offeredmob.loc == src)
+			continue //Ashwalker Revive in Progress...
+		if(offeredmob.stat)
+			offeredmob.unequip_everything()
+
+			if(issilicon(offeredmob)) //no advantage to sacrificing borgs...
+				offeredmob.investigate_log("has been gibbed by the necropolis tendril.", INVESTIGATE_DEATHS)
+				visible_message(span_notice("Serrated tendrils eagerly pull [offeredmob] apart, but find nothing of interest."))
+				offeredmob.gib()
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 				return
 
 			if(H.mind?.has_antag_datum(/datum/antagonist/ashwalker) && (H.ckey || H.get_ghost(FALSE, TRUE))) //special interactions for dead lava lizards with ghosts attached

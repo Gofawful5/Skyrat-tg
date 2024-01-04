@@ -7,6 +7,7 @@
 	key = "hierophant"
 	map_name = "hierophant"
 	reward_points = BITRUNNER_REWARD_HIGH
+<<<<<<< HEAD
 	safehouse_path = /datum/map_template/safehouse/lavaland_boss
 
 /mob/living/simple_animal/hostile/megafauna/hierophant/virtual_domain
@@ -16,3 +17,5 @@
 	loot = list(/obj/structure/closet/crate/secure/bitrunning/encrypted)
 	maxHealth = 1700
 	true_spawn = FALSE
+=======
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2

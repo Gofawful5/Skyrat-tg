@@ -71,7 +71,7 @@
 	QDEL_NULL(roach_shell)
 	return ..()
 
-/obj/item/organ/internal/heart/roach/on_insert(mob/living/carbon/organ_owner, special)
+/obj/item/organ/internal/heart/roach/on_mob_insert(mob/living/carbon/organ_owner, special)
 	. = ..()
 	if(!ishuman(organ_owner))
 		return
@@ -81,11 +81,11 @@
 	RegisterSignal(human_owner, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(modify_damage))
 	human_owner.physiology.knockdown_mod *= 3
 
-	var/obj/item/bodypart/chest/chest = human_owner.get_bodypart(BODY_ZONE_CHEST)
-	chest.add_bodypart_overlay(roach_shell)
-	human_owner.update_body_parts()
+/obj/item/organ/internal/heart/roach/on_bodypart_insert(obj/item/bodypart/limb)
+	. = ..()
+	limb.add_bodypart_overlay(roach_shell)
 
-/obj/item/organ/internal/heart/roach/on_remove(mob/living/carbon/organ_owner, special)
+/obj/item/organ/internal/heart/roach/on_mob_remove(mob/living/carbon/organ_owner, special)
 	. = ..()
 	if(!ishuman(organ_owner) || QDELETED(organ_owner))
 		return
@@ -95,12 +95,19 @@
 	UnregisterSignal(human_owner, COMSIG_MOB_APPLY_DAMAGE)
 	human_owner.physiology.knockdown_mod /= 3
 
+<<<<<<< HEAD
 	if(defense_timerid)
 		reset_damage(human_owner)
 
 	var/obj/item/bodypart/chest/chest = human_owner.get_bodypart(BODY_ZONE_CHEST)
 	chest.remove_bodypart_overlay(roach_shell)
 	human_owner.update_body_parts()
+=======
+/obj/item/organ/internal/heart/roach/on_bodypart_remove(obj/item/bodypart/limb)
+	. = ..()
+
+	limb.remove_bodypart_overlay(roach_shell)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 /**
  * Signal proc for [COMSIG_MOB_APPLY_DAMAGE]
@@ -115,6 +122,7 @@
 
 	var/mob/living/carbon/human/human_owner = owner
 	// No tactical spinning
+<<<<<<< HEAD
 	if(human_owner.flags_1 & IS_SPINNING_1)
 		return
 
@@ -136,6 +144,13 @@
 	if(!QDELETED(human_owner))
 		human_owner.physiology.brute_mod *= 2
 		human_owner.visible_message(span_warning("[human_owner]'s back softens again."))
+=======
+	if(HAS_TRAIT(blocker, TRAIT_SPINNING))
+		return FALSE
+	if(blocker.body_position == LYING_DOWN || (blocker.dir & attack_direction))
+		return TRUE
+	return FALSE
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 // Simple overlay so we can add a roach shell to guys with roach hearts
 /datum/bodypart_overlay/simple/roach_shell
@@ -187,7 +202,7 @@
 	. = ..()
 	AddElement(/datum/element/organ_set_bonus, /datum/status_effect/organ_set_bonus/roach)
 
-/obj/item/organ/internal/liver/roach/on_insert(mob/living/carbon/organ_owner, special)
+/obj/item/organ/internal/liver/roach/on_mob_insert(mob/living/carbon/organ_owner, special)
 	. = ..()
 	if(!ishuman(organ_owner))
 		return
@@ -195,13 +210,13 @@
 	var/mob/living/carbon/human/human_owner = owner
 	human_owner.physiology.tox_mod *= 2
 
-/obj/item/organ/internal/liver/roach/on_remove(mob/living/carbon/organ_owner, special)
+/obj/item/organ/internal/liver/roach/on_mob_remove(mob/living/carbon/organ_owner, special)
 	. = ..()
 	if(!ishuman(organ_owner) || QDELETED(organ_owner))
 		return
 
 	var/mob/living/carbon/human/human_owner = organ_owner
-	human_owner.physiology.tox_mod /= 2
+	human_owner.physiology.tox_mod *= 0.5
 
 /// Roach appendix:
 /// No appendicitus! weee!

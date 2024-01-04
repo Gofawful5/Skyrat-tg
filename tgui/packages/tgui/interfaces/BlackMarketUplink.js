@@ -1,10 +1,54 @@
 import { useBackend } from '../backend';
-import { AnimatedNumber, Box, Button, Modal, Section, Stack, Tabs } from '../components';
+import {
+  AnimatedNumber,
+  Box,
+  Button,
+  Modal,
+  Section,
+  Stack,
+  Tabs,
+} from '../components';
 import { formatMoney } from '../format';
 import { Window } from '../layouts';
 
+<<<<<<< HEAD:tgui/packages/tgui/interfaces/BlackMarketUplink.js
 export const BlackMarketUplink = (props, context) => {
   const { act, data } = useBackend(context);
+=======
+type Data = {
+  categories: string[];
+  markets: Market[];
+  items: Item[];
+  money: number;
+  viewing_market: string;
+  viewing_category: string;
+  buying: boolean;
+  ltsrbt_built: boolean;
+  delivery_methods: DeliveryMethod[];
+  delivery_method_description: Record<string, string>;
+};
+
+type Market = {
+  id: string;
+  name: string;
+};
+
+type Item = {
+  id: string;
+  name: string;
+  desc: string;
+  amount: number;
+  cost: number;
+};
+
+type DeliveryMethod = {
+  name: string;
+  price: number;
+};
+
+export const BlackMarketUplink = (props) => {
+  const { act, data } = useBackend<Data>();
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:tgui/packages/tgui/interfaces/BlackMarketUplink.tsx
   const {
     categories = [],
     markets = [],
@@ -37,7 +81,8 @@ export const BlackMarketUplink = (props, context) => {
                 act('set_market', {
                   market: market.id,
                 })
-              }>
+              }
+            >
               {market.name}
             </Tabs.Tab>
           ))}
@@ -54,7 +99,8 @@ export const BlackMarketUplink = (props, context) => {
                     act('set_category', {
                       category: category,
                     })
-                  }>
+                  }
+                >
                   {category}
                 </Tabs.Tab>
               ))}
@@ -93,8 +139,13 @@ export const BlackMarketUplink = (props, context) => {
   );
 };
 
+<<<<<<< HEAD:tgui/packages/tgui/interfaces/BlackMarketUplink.js
 const ShipmentSelector = (props, context) => {
   const { act, data } = useBackend(context);
+=======
+const ShipmentSelector = (props) => {
+  const { act, data } = useBackend<Data>();
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:tgui/packages/tgui/interfaces/BlackMarketUplink.tsx
   const { buying, ltsrbt_built, money } = data;
   if (!buying) {
     return null;

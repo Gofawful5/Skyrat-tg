@@ -41,6 +41,14 @@
 	desired_atom = /obj/machinery/vending/dorms
 	mode = AREA_SPAWN_MODE_HUG_WALL
 
+<<<<<<< HEAD
+=======
+/datum/area_spawn/gbp_machine
+	target_areas = list(/area/station/cargo/lobby, /area/station/cargo/boutique, /area/station/construction/storage_wing, /area/station/hallway/primary/port /* for kilo */) // lmao imagine map standardization
+	desired_atom = /obj/machinery/gbp_redemption
+	mode = AREA_SPAWN_MODE_HUG_WALL
+
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 // Wall mounts. Use sparingly as walls are prime real estate
 /datum/area_spawn/posialert_robotics
 	target_areas = list(/area/station/science/robotics, /area/station/science/robotics/lab)

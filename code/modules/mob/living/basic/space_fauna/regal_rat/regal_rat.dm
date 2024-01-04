@@ -72,6 +72,12 @@
 	riot.Grant(src)
 	ai_controller.set_blackboard_key(BB_RAISE_HORDE_ABILITY, riot)
 
+/mob/living/basic/regal_rat/death(gibbed)
+	var/datum/component/potential_component = GetComponent(/datum/component/ghost_direct_control)
+	if(!QDELETED(potential_component))
+		qdel(potential_component)
+	return ..()
+
 /mob/living/basic/regal_rat/examine(mob/user)
 	. = ..()
 	if(user == src)
@@ -103,9 +109,13 @@
 	notify_ghosts(
 		"All rise for [name], ascendant to the throne in \the [get_area(src)].",
 		source = src,
+<<<<<<< HEAD
 		action = NOTIFY_ORBIT,
 		flashwindow = FALSE,
+=======
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 		header = "Sentient Rat Created",
+		notify_flags = NOTIFY_CATEGORY_NOFLASH,
 	)
 
 /// Supplementary work we do when we login. Done this way so we synchronize with the ai controller shutting off and all that jazz as well as allowing more shit to be passed in if need be in future.

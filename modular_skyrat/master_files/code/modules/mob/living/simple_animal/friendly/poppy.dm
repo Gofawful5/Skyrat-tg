@@ -119,7 +119,15 @@
 	do_jitter_animation(60)
 	manual_emote("'s fur stands up, [src.p_their()] body trembling...")
 
+<<<<<<< HEAD
 	notify_ghosts("[src] was startled by the supermatter!", source = src, action = NOTIFY_ORBIT, flashwindow = FALSE, header = "Safety Inspection!")
+=======
+	notify_ghosts("[src] was startled by the supermatter!",
+		source = src,
+		notify_flags = NOTIFY_CATEGORY_NOFLASH,
+		header = "Safety Inspection!",
+	)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	addtimer(CALLBACK(src, PROC_REF(calm_down)), 60 SECONDS)
 
 /mob/living/simple_animal/pet/poppy/proc/calm_down()

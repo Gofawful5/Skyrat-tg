@@ -80,10 +80,22 @@ GLOBAL_LIST_INIT(guardian_radial_images, setup_guardian_radial())
 			return
 	used = TRUE
 	to_chat(user, use_message)
+<<<<<<< HEAD:code/modules/mob/living/simple_animal/guardian/guardian_creator.dm
 	var/guardian_type_name = "a random"
 	if(!random)
 		guardian_type_name = "the " + lowertext(initial(guardian_path.creator_name))
 	var/list/mob/dead/observer/candidates = poll_ghost_candidates("Do you want to play as [guardian_type_name] [mob_name] of [user.real_name]?", ROLE_PAI, FALSE, 100, POLL_IGNORE_HOLOPARASITE)
+=======
+	var/guardian_type_name = random ? "Random" : capitalize(initial(guardian_path.creator_name))
+	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates(
+		"Do you want to play as [user.real_name]'s [guardian_type_name] [mob_name]?",
+		check_jobban = ROLE_PAI,
+		poll_time = 10 SECONDS,
+		ignore_category = POLL_IGNORE_HOLOPARASITE,
+		pic_source = src,
+		role_name_text = "guardian spirit",
+	)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:code/modules/mob/living/basic/guardian/guardian_creator.dm
 	if(LAZYLEN(candidates))
 		var/mob/dead/observer/candidate = pick(candidates)
 		spawn_guardian(user, candidate, guardian_path)

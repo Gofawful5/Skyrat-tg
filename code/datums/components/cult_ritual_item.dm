@@ -39,7 +39,7 @@
 		var/datum/action/added_action = item_parent.add_item_action(action)
 		linked_action_ref = WEAKREF(added_action)
 
-/datum/component/cult_ritual_item/Destroy(force, silent)
+/datum/component/cult_ritual_item/Destroy(force)
 	cleanup_shields()
 	QDEL_NULL(linked_action_ref)
 	return ..()
@@ -372,7 +372,16 @@
 	for(var/shielded_turf in spiral_range_turfs(1, cultist, 1))
 		LAZYADD(shields, new /obj/structure/emergency_shield/cult/narsie(shielded_turf))
 
+<<<<<<< HEAD
 	notify_ghosts("[cultist] has begun scribing a Nar'Sie rune!", source = cultist, action = NOTIFY_ORBIT, header = "Maranax Infirmux!")
+=======
+	notify_ghosts(
+		"[cultist] has begun scribing a Nar'Sie rune!",
+		source = cultist,
+		header = "Maranax Infirmux!",
+		notify_flags = NOTIFY_CATEGORY_NOFLASH,
+	)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 	return TRUE
 

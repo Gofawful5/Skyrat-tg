@@ -1,6 +1,8 @@
 import { createSearch, toTitleCase } from 'common/string';
-import { useBackend, useLocalState } from '../backend';
-import { Box, Button, Input, Stack, Flex, Section } from '../components';
+import { useState } from 'react';
+
+import { useBackend } from '../backend';
+import { Button, Flex, Image, Input, Section, Stack } from '../components';
 import { Window } from '../layouts';
 
 type Ores = {
@@ -19,13 +21,19 @@ type Data = {
   ore_images: Ore_images[];
 };
 
+<<<<<<< HEAD:tgui/packages/tgui/interfaces/MaterialStand.tsx
 export const MaterialStand = (props, context) => {
   const { act, data } = useBackend<Data>(context);
+=======
+export const OreContainer = (props) => {
+  const { act, data } = useBackend<Data>();
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:tgui/packages/tgui/interfaces/OreContainer.tsx
   const { ores = [] } = data;
-  const [searchItem, setSearchItem] = useLocalState(context, 'searchItem', '');
+  const [searchItem, setSearchItem] = useState('');
   const search = createSearch(searchItem, (ore: Ores) => ore.name);
   const ores_filtered =
     searchItem.length > 0 ? ores.filter((ore) => search(ore)) : ores;
+
   return (
     <Window title="Material Stand" width={550} height={400}>
       <Window.Content>
@@ -33,7 +41,7 @@ export const MaterialStand = (props, context) => {
           <Stack.Item>
             <Section>
               <Input
-                autofocus
+                autoFocus
                 position="relative"
                 mt={0.5}
                 bottom="5%"
@@ -84,8 +92,8 @@ export const MaterialStand = (props, context) => {
   );
 };
 
-const RetrieveIcon = (props, context) => {
-  const { data } = useBackend<Data>(context);
+const RetrieveIcon = (props) => {
+  const { data } = useBackend<Data>();
   const { ore_images = [] } = data;
   const { ore } = props;
 
@@ -96,15 +104,13 @@ const RetrieveIcon = (props, context) => {
   }
 
   return (
-    <Box
-      as="img"
+    <Image
       m={1}
       src={`data:image/jpeg;base64,${icon_display.icon}`}
       height="64px"
       width="64px"
       style={{
-        '-ms-interpolation-mode': 'nearest-neighbor',
-        'vertical-align': 'middle',
+        verticalAlign: 'middle',
       }}
     />
   );

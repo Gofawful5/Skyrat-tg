@@ -7,6 +7,7 @@
 	key = "colossus"
 	map_name = "colossus"
 	reward_points = BITRUNNER_REWARD_HIGH
+<<<<<<< HEAD
 	safehouse_path = /datum/map_template/safehouse/lavaland_boss
 
 /mob/living/simple_animal/hostile/megafauna/colossus/virtual_domain
@@ -16,3 +17,5 @@
 	health = 2000
 	maxHealth = 2000
 	true_spawn = FALSE
+=======
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2

@@ -103,7 +103,7 @@ GLOBAL_LIST_INIT(mafia_role_by_alignment, setup_mafia_role_by_alignment())
 	GLOB.mafia_game = src
 	map_deleter = new
 
-/datum/mafia_controller/Destroy(force, ...)
+/datum/mafia_controller/Destroy(force)
 	. = ..()
 	if(GLOB.mafia_game == src)
 		GLOB.mafia_game = null

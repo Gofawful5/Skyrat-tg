@@ -1,9 +1,15 @@
 import { sortBy } from 'common/collections';
+<<<<<<< HEAD:tgui/packages/tgui/interfaces/PortableChemMixer.js
 import { toTitleCase } from 'common/string';
-import { useBackend } from '../backend';
-import { AnimatedNumber, Box, Button, LabeledList, Section } from '../components';
-import { Window } from '../layouts';
+=======
 
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:tgui/packages/tgui/interfaces/PortableChemMixer.tsx
+import { useBackend } from '../backend';
+import { Box, Button, Section } from '../components';
+import { Window } from '../layouts';
+import { Beaker, BeakerDisplay } from './common/BeakerDisplay';
+
+<<<<<<< HEAD:tgui/packages/tgui/interfaces/PortableChemMixer.js
 export const PortableChemMixer = (props, context) => {
   const { act, data } = useBackend(context);
   const recording = !!data.recordingRecipe;
@@ -18,6 +24,28 @@ export const PortableChemMixer = (props, context) => {
     data.beakerContents ||
     [];
   const chemicals = sortBy((chem) => chem.title)(data.chemicals);
+=======
+type DispensableReagent = {
+  title: string;
+  id: string;
+  volume: number;
+  pH: number;
+};
+
+type Data = {
+  amount: number;
+  chemicals: DispensableReagent[];
+  beaker: Beaker;
+};
+
+export const PortableChemMixer = (props) => {
+  const { act, data } = useBackend<Data>();
+  const { beaker } = data;
+  const beakerTransferAmounts = beaker ? beaker.transferAmounts : [];
+  const chemicals = sortBy((chem: DispensableReagent) => chem.id)(
+    data.chemicals,
+  );
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:tgui/packages/tgui/interfaces/PortableChemMixer.tsx
   return (
     <Window width={465} height={550}>
       <Window.Content scrollable>
@@ -35,7 +63,8 @@ export const PortableChemMixer = (props, context) => {
                 })
               }
             />
-          ))}>
+          ))}
+        >
           <Box>
             {chemicals.map((chemical) => (
               <Button
@@ -64,6 +93,7 @@ export const PortableChemMixer = (props, context) => {
               content={amount}
               onClick={() => act('remove', { amount })}
             />
+<<<<<<< HEAD:tgui/packages/tgui/interfaces/PortableChemMixer.js
           ))}>
           <LabeledList>
             <LabeledList.Item
@@ -109,6 +139,11 @@ export const PortableChemMixer = (props, context) => {
               )}
             </LabeledList.Item>
           </LabeledList>
+=======
+          ))}
+        >
+          <BeakerDisplay beaker={beaker} showpH />
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:tgui/packages/tgui/interfaces/PortableChemMixer.tsx
         </Section>
       </Window.Content>
     </Window>

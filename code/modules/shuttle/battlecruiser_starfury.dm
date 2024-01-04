@@ -135,7 +135,7 @@
  */
 /proc/summon_battlecruiser(datum/team/battlecruiser/team)
 
-	var/list/candidates = poll_ghost_candidates("Do you wish to be considered for battlecruiser crew?", ROLE_TRAITOR)
+	var/list/candidates = SSpolling.poll_ghost_candidates("Do you wish to be considered for battlecruiser crew?", check_jobban = ROLE_TRAITOR, pic_source = /obj/machinery/sleeper/syndie, role_name_text = "battlecruiser crew")
 	shuffle_inplace(candidates)
 
 	var/datum/map_template/ship = SSmapping.map_templates["battlecruiser_starfury.dmm"]
@@ -171,15 +171,23 @@
 				notify_ghosts(
 					"The battlecruiser has an object of interest: [our_candidate]!",
 					source = our_candidate,
+<<<<<<< HEAD
 					action = NOTIFY_ORBIT,
 					header = "Something's Interesting!"
 					)
+=======
+				)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 			else
 				notify_ghosts(
 					"The battlecruiser has an object of interest: [spawner]!",
 					source = spawner,
+<<<<<<< HEAD
 					action = NOTIFY_ORBIT,
 					header="Something's Interesting!"
 					)
+=======
+				)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 	priority_announce("Unidentified armed ship detected near the station.")

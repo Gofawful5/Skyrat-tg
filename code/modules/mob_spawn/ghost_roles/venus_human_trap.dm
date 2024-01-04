@@ -33,6 +33,7 @@
 /// Called when the attached flower bud has borne fruit (ie. is ready)
 /obj/effect/mob_spawn/ghost_role/venus_human_trap/proc/bear_fruit()
 	ready = TRUE
+<<<<<<< HEAD
 	notify_ghosts("[src] has borne fruit!", null, enter_link = "<a href=?src=[REF(src)];activate=1>(Click to play)</a>", source = src, action = NOTIFY_ATTACK, ignore_key = POLL_IGNORE_VENUSHUMANTRAP)
 
 /obj/effect/mob_spawn/ghost_role/venus_human_trap/Topic(href, href_list)
@@ -44,6 +45,15 @@
 		if(istype(ghost))
 			ghost.ManualFollow(src)
 			attack_ghost(ghost)
+=======
+	notify_ghosts(
+		"[src] has borne fruit!",
+		source = src,
+		header = "Venus Human Trap",
+		click_interact = TRUE,
+		ignore_key = POLL_IGNORE_VENUSHUMANTRAP,
+	)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 /obj/effect/mob_spawn/ghost_role/venus_human_trap/allow_spawn(mob/user, silent = FALSE)
 	. = ..()

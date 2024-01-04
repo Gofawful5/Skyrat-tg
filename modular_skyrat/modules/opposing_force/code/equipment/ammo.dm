@@ -1,9 +1,19 @@
 /datum/opposing_force_equipment/ammo
 	category = OPFOR_EQUIPMENT_CATEGORY_AMMUNITION
 
+<<<<<<< HEAD
 /datum/opposing_force_equipment/ammo/m45
 	item_type = /obj/item/ammo_box/magazine/m45
 	description = "An eight-round magazine for the M1911 pistol. Uses .45 caliber ammunition."
+=======
+/datum/opposing_force_equipment/ammo_exotic/rubber27_54
+	description = "A box of .27-54 Cesarzowa Rubber rounds, useful for incapacitating targets without causing too much extra harm."
+	item_type = /obj/item/ammo_box/c27_54cesarzowa/rubber
+
+/datum/opposing_force_equipment/ammo_exotic/ripper35
+	description = "A box of .35 Sol rounds, hollow-tipped for maximum damage against NON-ARMOURED combatants."
+	item_type = /obj/item/ammo_box/c35sol/ripper
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 /datum/opposing_force_equipment/ammo/m16
 	item_type = /obj/item/ammo_box/magazine/m16
@@ -15,9 +25,23 @@
 /datum/opposing_force_equipment/ammo/akmbanan
 	item_type = /obj/item/ammo_box/magazine/akm/banana
 
+<<<<<<< HEAD
 /datum/opposing_force_equipment/ammo/mp40
 	item_type = /obj/item/ammo_box/magazine/mp40
 	description = "A thirty-two round magazine for the MP-40. Uses 9x19mm ammunition."
+=======
+/datum/opposing_force_equipment/ammo_exotic/rubber310
+	description = "A box of .310 Strilka Rubber rounds, useful for incapacitating targets without causing too much extra harm."
+	item_type = /obj/item/ammo_box/c310_cargo_box/rubber
+
+/datum/opposing_force_equipment/ammo_exotic/pierce310
+	description = "A box of .310 Strilka Piercing rounds, useful against armored combatants."
+	item_type = /obj/item/ammo_box/c310_cargo_box/piercing
+
+/datum/opposing_force_equipment/ammo_exotic/magnum
+	description = "A box of magnum flechette shotgun shells, the first choice munition of many shotgun fanatics."
+	item_type = /obj/item/ammo_box/advanced/s12gauge/magnum
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 /datum/opposing_force_equipment/ammo/pps
 	item_type = /obj/item/ammo_box/magazine/pps
@@ -33,6 +57,7 @@
 	item_type = /obj/item/ammo_box/magazine/uzim9mm
 	description = "A thirty-two round magazine for the mini uzi. Uses 9x19mm ammunition."
 
+<<<<<<< HEAD
 /datum/opposing_force_equipment/ammo/sol40standard
 	item_type = /obj/item/ammo_box/magazine/c40sol_rifle/standard
 	description = "A thirty round magazine for any SolFed rifle."
@@ -40,6 +65,15 @@
 /datum/opposing_force_equipment/ammo/sol40drum
 	item_type = /obj/item/ammo_box/magazine/c40sol_rifle/drum
 	description = "A sixty round drum for any SolFed rifle."
+=======
+/datum/opposing_force_equipment/ammo_exotic/hornet
+	description = "A box of hornet's nest shotgun shells, a less-lethal pellet spread that bounces towards targets off of walls."
+	item_type = /obj/item/ammo_box/advanced/s12gauge/beehive
+
+/datum/opposing_force_equipment/ammo_exotic/stardust
+	description = "A box of stardust shotgun shells, a less-lethal spread of embedding electrodes that tire targets that move."
+	item_type = /obj/item/ammo_box/advanced/s12gauge/antitide
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 /datum/opposing_force_equipment/ammo/makarov
 	item_type = /obj/item/ammo_box/magazine/m9mm

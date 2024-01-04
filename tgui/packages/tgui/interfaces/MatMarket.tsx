@@ -1,9 +1,7 @@
-import { useBackend } from '../backend';
-import { Section, Stack, Button, Modal } from '../components';
-import { Window } from '../layouts';
 import { BooleanLike } from 'common/react';
 import { toTitleCase } from 'common/string';
 
+<<<<<<< HEAD
 type Data = {
   orderingPrive: BooleanLike; // you will need to import this
   canOrderCargo: BooleanLike;
@@ -11,6 +9,12 @@ type Data = {
   materials: Material[];
   catastrophe: BooleanLike;
 };
+=======
+import { useBackend } from '../backend';
+import { Button, Modal, Section, Stack } from '../components';
+import { formatMoney } from '../format';
+import { Window } from '../layouts';
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 type Material = {
   name: string;
@@ -21,8 +25,13 @@ type Material = {
   color: string;
 };
 
+<<<<<<< HEAD
 export const MatMarket = (props, context) => {
   const { act, data } = useBackend<Data>(context); // this will tell your editor that data is the type listed above
+=======
+export const MatMarket = (props) => {
+  const { act, data } = useBackend<Data>();
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
   const {
     orderingPrive,
@@ -51,7 +60,8 @@ export const MatMarket = (props, context) => {
                 onClick={() => act('toggle_budget')}
               />
             )
-          }>
+          }
+        >
           Buy orders for material sheets placed here will be ordered on the next
           cargo shipment.
           <br /> <br />
@@ -75,7 +85,8 @@ export const MatMarket = (props, context) => {
                     textColor={material.color ? material.color : 'white'}
                     fontSize="125%"
                     width="15%"
-                    pr="3%">
+                    pr="3%"
+                  >
                     {toTitleCase(material.name)}
                   </Stack.Item>
 
@@ -95,7 +106,8 @@ export const MatMarket = (props, context) => {
                         : material.trend === 'down'
                           ? 'red'
                           : 'white'
-                    }>
+                    }
+                  >
                     <b>{toTitleCase(material.name)}</b> is trending{' '}
                     <b>{material.trend}</b>.
                   </Stack.Item>
@@ -166,8 +178,12 @@ export const MatMarket = (props, context) => {
   );
 };
 
+<<<<<<< HEAD
 const MarketCrashModal = (props, context) => {
   const { act, data } = useBackend(context);
+=======
+const MarketCrashModal = (props) => {
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
   return (
     <Modal textAlign="center" mr={1.5}>
       ATTENTION! THE MARKET HAS CRASHED

@@ -1,3 +1,4 @@
+<<<<<<< HEAD:tgui/packages/tgui/interfaces/EightBallVote.js
 import { useBackend } from '../backend';
 import { Box, Button, Grid, Section, NoticeBox } from '../components';
 import { toTitleCase } from 'common/string';
@@ -5,6 +6,29 @@ import { Window } from '../layouts';
 
 export const EightBallVote = (props, context) => {
   const { act, data } = useBackend(context);
+=======
+import { BooleanLike } from 'common/react';
+import { toTitleCase } from 'common/string';
+
+import { useBackend } from '../backend';
+import { Box, Button, Grid, NoticeBox, Section } from '../components';
+import { Window } from '../layouts';
+
+type Data = {
+  shaking: BooleanLike;
+  question: string;
+  answers: Answer[];
+};
+
+type Answer = {
+  answer: string;
+  amount: number;
+  selected: BooleanLike;
+};
+
+export const EightBallVote = (props) => {
+  const { act, data } = useBackend<Data>();
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:tgui/packages/tgui/interfaces/EightBallVote.tsx
   const { shaking } = data;
   return (
     <Window width={400} height={600}>
@@ -17,8 +41,13 @@ export const EightBallVote = (props, context) => {
   );
 };
 
+<<<<<<< HEAD:tgui/packages/tgui/interfaces/EightBallVote.js
 const EightBallVoteQuestion = (props, context) => {
   const { act, data } = useBackend(context);
+=======
+const EightBallVoteQuestion = (props) => {
+  const { act, data } = useBackend<Data>();
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:tgui/packages/tgui/interfaces/EightBallVote.tsx
   const { question, answers = [] } = data;
   return (
     <Section>

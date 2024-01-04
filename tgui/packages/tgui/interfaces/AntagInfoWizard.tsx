@@ -1,8 +1,18 @@
 import { BooleanLike } from 'common/react';
+
 import { useBackend } from '../backend';
 import { Box, Section, Stack } from '../components';
 import { Window } from '../layouts';
+<<<<<<< HEAD
 import { ObjectivePrintout, Objective, ReplaceObjectivesButton } from './common/Objectives';
+=======
+import { Rules } from './AntagInfoRules'; // SKYRAT EDIT ADDITION
+import {
+  Objective,
+  ObjectivePrintout,
+  ReplaceObjectivesButton,
+} from './common/Objectives';
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 const teleportstyle = {
   color: 'yellow',
@@ -48,8 +58,14 @@ type Info = {
   can_change_objective: BooleanLike;
 };
 
+<<<<<<< HEAD
 export const AntagInfoWizard = (props, context) => {
   const { data, act } = useBackend<Info>(context);
+=======
+// SKYRAT CHANGE height from 630 to 700
+export const AntagInfoWizard = (props) => {
+  const { data, act } = useBackend<Info>();
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
   const { ritual, objectives, can_change_objective } = data;
 
   return (
@@ -152,7 +168,7 @@ export const AntagInfoWizard = (props, context) => {
   );
 };
 
-const RitualPrintout = (props: { ritual: GrandRitual }, context) => {
+const RitualPrintout = (props: { ritual: GrandRitual }) => {
   const { ritual } = props;
   if (!ritual.next_area) {
     return null;

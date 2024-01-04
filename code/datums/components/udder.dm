@@ -10,10 +10,15 @@
 	var/datum/callback/on_milk_callback
 
 //udder_type and reagent_produced_typepath are typepaths, not reference
-/datum/component/udder/Initialize(udder_type = /obj/item/udder, datum/callback/on_milk_callback, datum/callback/on_generate_callback, reagent_produced_typepath = /datum/reagent/consumable/milk)
+/datum/component/udder/Initialize(udder_type = /obj/item/udder, datum/callback/on_milk_callback, datum/callback/on_generate_callback, reagent_produced_override)
 	if(!isliving(parent)) //technically is possible to drop this on carbons... but you wouldn't do that to me, would you?
 		return COMPONENT_INCOMPATIBLE
+<<<<<<< HEAD
 	udder = new udder_type(null, parent, on_generate_callback, reagent_produced_typepath)
+=======
+	udder = new udder_type(null)
+	udder.add_features(parent, on_generate_callback, reagent_produced_override)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	src.on_milk_callback = on_milk_callback
 
 /datum/component/udder/RegisterWithParent()
@@ -66,16 +71,27 @@
 	var/reagent_produced_typepath = /datum/reagent/consumable/milk
 	///how much the udder holds
 	var/size = 50
+	///the probability that the udder will produce the reagent (0 - 100)
+	var/production_probability = 5
 	///mob that has the udder component
 	var/mob/living/udder_mob
 	///optional proc to callback to when the udder generates milk
 	var/datum/callback/on_generate_callback
 
+<<<<<<< HEAD
 /obj/item/udder/Initialize(mapload, udder_mob, on_generate_callback, reagent_produced_typepath = /datum/reagent/consumable/milk)
 	src.udder_mob = udder_mob
 	src.on_generate_callback = on_generate_callback
 	create_reagents(size, REAGENT_HOLDER_ALIVE)
 	src.reagent_produced_typepath = reagent_produced_typepath
+=======
+/obj/item/udder/proc/add_features(parent, callback, reagent_override)
+	udder_mob = parent
+	on_generate_callback = callback
+	create_reagents(size, REAGENT_HOLDER_ALIVE)
+	if(reagent_override)
+		reagent_produced_typepath = reagent_override
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	initial_conditions()
 	. = ..()
 
@@ -101,10 +117,21 @@
  * Proc called every 2 seconds from SSMobs to add whatever reagent the udder is generating.
  */
 /obj/item/udder/proc/generate()
+<<<<<<< HEAD
 	if(prob(5))
 		reagents.add_reagent(reagent_produced_typepath, rand(5, 10), added_purity = 1)
 		if(on_generate_callback)
 			on_generate_callback.Invoke(reagents.total_volume, reagents.maximum_volume)
+=======
+	if(!isnull(require_consume_type) && !(locate(require_consume_type) in src))
+		return FALSE
+	if(!prob(production_probability))
+		return FALSE
+	reagents.add_reagent(reagent_produced_typepath, rand(5, 10), added_purity = 1)
+	if(on_generate_callback)
+		on_generate_callback.Invoke(reagents.total_volume, reagents.maximum_volume)
+	return TRUE
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 /**
  * Proc called from attacking the component parent with the correct item, moves reagents into the glass basically.

@@ -41,7 +41,16 @@
 	new_rift.dragon = dragon
 	dragon.rift_list += new_rift
 	to_chat(owner, span_boldwarning("The rift has been summoned. Prevent the crew from destroying it at all costs!"))
+<<<<<<< HEAD
 	notify_ghosts("The Space Dragon has opened a rift!", source = new_rift, action = NOTIFY_ORBIT, flashwindow = FALSE, header = "Carp Rift Opened")
+=======
+	notify_ghosts(
+		"The Space Dragon has opened a rift!",
+		source = new_rift,
+		header = "Carp Rift Opened",
+		notify_flags = NOTIFY_CATEGORY_NOFLASH,
+	)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	ASSERT(dragon.rift_ability == src) // Badmin protection.
 	QDEL_NULL(dragon.rift_ability) // Deletes this action when used successfully, we re-gain a new one on success later.
 
@@ -189,7 +198,16 @@
 		if(light_color != LIGHT_COLOR_PURPLE)
 			set_light_color(LIGHT_COLOR_PURPLE)
 			update_light()
+<<<<<<< HEAD
 		notify_ghosts("The carp rift can summon an additional carp!", source = src, action = NOTIFY_ORBIT, flashwindow = FALSE, header = "Carp Spawn Available")
+=======
+		notify_ghosts(
+			"The carp rift can summon an additional carp!",
+			source = src,
+			header = "Carp Spawn Available",
+			notify_flags = NOTIFY_CATEGORY_NOFLASH,
+		)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 		last_carp_inc -= carp_interval
 
 	// Is the rift now fully charged?

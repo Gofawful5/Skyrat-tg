@@ -36,9 +36,25 @@
 	return ..()
 
 /obj/machinery/materials_market/wrench_act(mob/living/user, obj/item/tool)
+<<<<<<< HEAD
 	..()
 	default_unfasten_wrench(user, tool, time = 1.5 SECONDS)
 	return TOOL_ACT_TOOLTYPE_SUCCESS
+=======
+	. = ..()
+	if(default_unfasten_wrench(user, tool, time = 1.5 SECONDS) == SUCCESSFUL_UNFASTEN)
+		return ITEM_INTERACT_SUCCESS
+
+/obj/machinery/materials_market/screwdriver_act(mob/living/user, obj/item/tool)
+	. = ..()
+	if(default_deconstruction_screwdriver(user, "[base_icon_state]_open", "[base_icon_state]", tool))
+		return ITEM_INTERACT_SUCCESS
+
+/obj/machinery/materials_market/crowbar_act(mob/living/user, obj/item/tool)
+	. = ..()
+	if(default_deconstruction_crowbar(tool))
+		return ITEM_INTERACT_SUCCESS
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 /obj/machinery/materials_market/attackby(obj/item/O, mob/user, params)
 	if(default_deconstruction_screwdriver(user, "[base_icon_state]_open", "[base_icon_state]", O))

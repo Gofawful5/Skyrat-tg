@@ -78,8 +78,13 @@
 /datum/ai_controller/basic_controller/crab
 	blackboard = list(
 		BB_ALWAYS_IGNORE_FACTION = TRUE,
+<<<<<<< HEAD
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic/of_size/ours_or_smaller,
 		BB_FLEE_TARGETTING_DATUM = new /datum/targetting_datum/basic,
+=======
+		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/of_size/smaller,
+		BB_FLEE_TARGETING_STRATEGY = /datum/targeting_strategy/basic,
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	)
 
 	ai_traits = STOP_MOVING_WHEN_PULLED

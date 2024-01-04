@@ -6,6 +6,10 @@
 	icon = 'modular_skyrat/modules/primitive_cooking_additions/icons/stone_kitchen_machines.dmi'
 	circuit = null
 	use_power = FALSE
+<<<<<<< HEAD
+=======
+	obj_flags = CAN_BE_HIT | NO_DECONSTRUCTION
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 	/// A list of the different oven trays we can spawn with
 	var/static/list/random_oven_tray_types = list(
@@ -46,4 +50,15 @@
 	if(particles)
 		particles.position = list(0, 10, 0)
 
+<<<<<<< HEAD
+=======
+/obj/machinery/oven/stone/crowbar_act(mob/living/user, obj/item/tool)
+	user.balloon_alert_to_viewers("disassembling...")
+	if(!tool.use_tool(src, user, 2 SECONDS, volume = 100))
+		return
+	new /obj/item/stack/sheet/mineral/stone(drop_location(), 5)
+	deconstruct(TRUE)
+	return ITEM_INTERACT_SUCCESS
+
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 #undef OVEN_TRAY_Y_OFFSET

@@ -10,7 +10,7 @@
 	density = TRUE
 	anchored = TRUE
 	pass_flags_self = PASSGRILLE
-	flags_1 = CONDUCT_1
+	obj_flags = CONDUCTS_ELECTRICITY
 	obj_flags = CAN_BE_HIT | IGNORE_DENSITY
 	pressure_resistance = 5*ONE_ATMOSPHERE
 	armor_type = /datum/armor/structure_grille
@@ -52,6 +52,12 @@
 
 /obj/structure/grille/examine(mob/user)
 	. = ..()
+<<<<<<< HEAD
+=======
+	if(obj_flags & NO_DECONSTRUCTION)
+		return
+
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	if(anchored)
 		. += span_notice("It's secured in place with <b>screws</b>. The rods look like they could be <b>cut</b> through.")
 	if(!anchored)
@@ -65,7 +71,13 @@
 			var/cost = 0
 			var/delay = 0
 
-			if(the_rcd.rcd_design_path  == /obj/structure/window/fulltile)
+			if(the_rcd.rcd_design_path  == /obj/structure/window)
+				cost = 4
+				delay = 2 SECONDS
+			else if(the_rcd.rcd_design_path  == /obj/structure/window/reinforced)
+				cost = 6
+				delay = 2.5 SECONDS
+			else if(the_rcd.rcd_design_path  == /obj/structure/window/fulltile)
 				cost = 8
 				delay = 3 SECONDS
 			else if(the_rcd.rcd_design_path  == /obj/structure/window/reinforced/fulltile)
@@ -98,8 +110,13 @@
 			var/obj/structure/window/window_path = rcd_data["[RCD_DESIGN_PATH]"]
 			if(!ispath(window_path))
 				CRASH("Invalid window path type in RCD: [window_path]")
-			if(!initial(window_path.fulltile)) //only fulltile windows can be built here
-				return FALSE
+
+			//checks if its a valid build direction
+			if(!initial(window_path.fulltile))
+				if(!valid_build_direction(loc, user.dir, is_fulltile = FALSE))
+					balloon_alert(user, "window already here!")
+					return FALSE
+
 			var/obj/structure/window/WD = new window_path(T, user.dir)
 			WD.set_anchored(TRUE)
 			return TRUE
@@ -186,9 +203,14 @@
 	add_fingerprint(user)
 	if(shock(user, 100))
 		return
+<<<<<<< HEAD
+=======
+	if(obj_flags & NO_DECONSTRUCTION)
+		return FALSE
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	tool.play_tool_sound(src, 100)
 	deconstruct()
-	return TOOL_ACT_TOOLTYPE_SUCCESS
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/grille/screwdriver_act(mob/living/user, obj/item/tool)
 	if(!isturf(loc))
@@ -196,12 +218,17 @@
 	add_fingerprint(user)
 	if(shock(user, 90))
 		return FALSE
+<<<<<<< HEAD
+=======
+	if(obj_flags & NO_DECONSTRUCTION)
+		return FALSE
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	if(!tool.use_tool(src, user, 0, volume=100))
 		return FALSE
 	set_anchored(!anchored)
 	user.visible_message(span_notice("[user] [anchored ? "fastens" : "unfastens"] [src]."), \
 		span_notice("You [anchored ? "fasten [src] to" : "unfasten [src] from"] the floor."))
-	return TOOL_ACT_TOOLTYPE_SUCCESS
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/grille/attackby(obj/item/W, mob/user, params)
 	user.changeNext_move(CLICK_CD_MELEE)
@@ -262,7 +289,7 @@
 			return
 //window placing end
 
-	else if((W.flags_1 & CONDUCT_1) && shock(user, 70))
+	else if((W.obj_flags & CONDUCTS_ELECTRICITY) && shock(user, 70))
 		return
 
 	return ..()
@@ -281,7 +308,7 @@
 /obj/structure/grille/deconstruct(disassembled = TRUE)
 	if(!loc) //if already qdel'd somehow, we do nothing
 		return
-	if(!(flags_1&NODECONSTRUCT_1))
+	if(!(obj_flags & NO_DECONSTRUCTION))
 		var/obj/R = new rods_type(drop_location(), rods_amount)
 		transfer_fingerprints_to(R)
 		qdel(src)
@@ -289,7 +316,7 @@
 
 /obj/structure/grille/atom_break()
 	. = ..()
-	if(!broken && !(flags_1 & NODECONSTRUCT_1))
+	if(!broken && !(obj_flags & NO_DECONSTRUCTION))
 		icon_state = "brokengrille"
 		set_density(FALSE)
 		atom_integrity = 20

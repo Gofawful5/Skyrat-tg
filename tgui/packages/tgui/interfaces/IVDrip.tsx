@@ -1,6 +1,16 @@
 import { BooleanLike } from 'common/react';
+
 import { useBackend } from '../backend';
-import { Tooltip, Box, Slider, ProgressBar, NoticeBox, Button, LabeledList, Section } from '../components';
+import {
+  Box,
+  Button,
+  LabeledList,
+  NoticeBox,
+  ProgressBar,
+  Section,
+  Slider,
+  Tooltip,
+} from '../components';
 import { Window } from '../layouts';
 
 type IVDripData = {
@@ -27,8 +37,8 @@ enum MODE {
   injecting,
 }
 
-export const IVDrip = (props, context) => {
-  const { act, data } = useBackend<IVDripData>(context);
+export const IVDrip = (props) => {
+  const { act, data } = useBackend<IVDripData>();
   const {
     hasContainer,
     canRemoveContainer,
@@ -99,12 +109,43 @@ export const IVDrip = (props, context) => {
                       })
                     }
                   />
+<<<<<<< HEAD
                 </LabeledList.Item>
               )
             )}
+=======
+                  <Button
+                    width={4}
+                    lineHeight={2}
+                    align="center"
+                    icon="angles-right"
+                    onClick={() =>
+                      act('changeRate', {
+                        rate: maxTransferRate,
+                      })
+                    }
+                  />
+                </Box>
+              }
+            >
+              <Slider
+                step={transferStep}
+                my={1}
+                value={transferRate}
+                minValue={minTransferRate}
+                maxValue={maxTransferRate}
+                unit="units/sec."
+                onDrag={(e, value) =>
+                  act('changeRate', {
+                    rate: value,
+                  })
+                }
+              />
+            </LabeledList.Item>
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
             <LabeledList.Item
               label="Direction"
-              color={!mode && 'bad'}
+              color={!mode ? 'bad' : ''}
               buttons={
                 <Button
                   my={1}
@@ -117,7 +158,8 @@ export const IVDrip = (props, context) => {
                   icon={mode ? 'syringe' : 'droplet'}
                   onClick={() => act('changeMode')}
                 />
-              }>
+              }
+            >
               {mode
                 ? hasInternalStorage
                   ? 'Reagents from network'
@@ -140,17 +182,19 @@ export const IVDrip = (props, context) => {
                       onClick={() => act('eject')}
                     />
                   )
-                }>
+                }
+              >
                 <ProgressBar
-                  py={0.3}
                   value={containerCurrentVolume}
                   minValue={0}
                   maxValue={containerMaxVolume}
-                  color={containerReagentColor}>
+                  color={containerReagentColor}
+                >
                   <span
                     style={{
-                      'text-shadow': '1px 1px 0 black',
-                    }}>
+                      textShadow: '1px 1px 0 black',
+                    }}
+                  >
                     {`${containerCurrentVolume} of ${containerMaxVolume} units`}
                   </span>
                 </ProgressBar>
@@ -176,7 +220,8 @@ export const IVDrip = (props, context) => {
                     content="Disconnect"
                     onClick={() => act('detach')}
                   />
-                }>
+                }
+              >
                 <Box maxHeight={'45px'} overflow={'hidden'}>
                   {objectName}
                 </Box>

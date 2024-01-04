@@ -17,8 +17,13 @@
 /obj/machinery/quantum_server/proc/on_delete(datum/source)
 	SIGNAL_HANDLER
 
+	sever_connections()
+
 	if(generated_domain)
+<<<<<<< HEAD
 		SEND_SIGNAL(src, COMSIG_BITRUNNER_SEVER_AVATAR)
+=======
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 		scrub_vdom()
 
 	if(is_ready)
@@ -28,23 +33,6 @@
 	if(circuit)
 		qdel(circuit)
 
-/// Handles examining the server. Shows cooldown time and efficiency.
-/obj/machinery/quantum_server/proc/on_examine(datum/source, mob/examiner, list/examine_text)
-	SIGNAL_HANDLER
-
-	examine_text += span_infoplain("Can be resource intensive to run. Ensure adequate power supply.")
-
-	if(capacitor_coefficient < 1)
-		examine_text += span_infoplain("Its coolant capacity reduces cooldown time by [(1 - capacitor_coefficient) * 100]%.")
-
-	if(servo_bonus > 0.2)
-		examine_text += span_infoplain("Its manipulation potential is increasing rewards by [servo_bonus]x.")
-		examine_text += span_infoplain("Injury from unsafe ejection reduced [servo_bonus * 100]%.")
-
-	if(!is_ready)
-		examine_text += span_notice("It is currently cooling down. Give it a few moments.")
-		return
-
 /// Whenever something enters the send tiles, check if it's a loot crate. If so, alert players.
 /obj/machinery/quantum_server/proc/on_goal_turf_entered(datum/source, atom/movable/arrived, atom/old_loc, list/atom/old_locs)
 	SIGNAL_HANDLER
@@ -52,8 +40,22 @@
 	if(!istype(arrived, /obj/structure/closet/crate/secure/bitrunning/encrypted))
 		return
 
+<<<<<<< HEAD
 	var/obj/structure/closet/crate/secure/bitrunning/encrypted/loot_crate = arrived
 	if(!istype(loot_crate))
+=======
+	if((obj_flags & EMAGGED) && isliving(arrived))
+		var/mob/living/creature = arrived
+
+		if(!creature.mind?.has_antag_datum(/datum/antagonist/bitrunning_glitch, check_subtypes = TRUE))
+			return
+
+		INVOKE_ASYNC(src, PROC_REF(station_spawn), arrived, chosen_forge)
+		return
+
+	if(istype(arrived, /obj/structure/closet/crate/secure/bitrunning/encrypted))
+		generate_loot(arrived, chosen_forge)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 		return
 
 	for(var/mob/person in loot_crate.contents)
@@ -83,8 +85,17 @@
 		if(isliving(thing)) // so we can mutate them
 			var/mob/living/creature = thing
 
+<<<<<<< HEAD
 			if(creature.can_be_cybercop)
 				mutation_candidate_refs.Add(WEAKREF(creature))
+=======
+			if(ismegafauna(creature))
+				var/mob/living/simple_animal/hostile/megafauna/boss = creature
+				boss.make_virtual_megafauna()
+				continue
+
+			mutation_candidate_refs.Add(WEAKREF(creature))
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 			continue
 
 		if(istype(thing, /obj/effect/mob_spawn/ghost_role)) // so we get threat alerts
@@ -95,6 +106,16 @@
 			var/obj/effect/mob_spawn/corpse/spawner = thing
 
 			mutation_candidate_refs.Add(spawner.spawned_mob_ref)
+			continue
+
+		if(istype(thing, /obj/machinery/suit_storage_unit))
+			var/obj/machinery/suit_storage_unit/storage = thing
+			storage.disable_modlink()
+			continue
+
+		if(istype(thing, /obj/item/mod/control))
+			var/obj/item/mod/control/modsuit = thing
+			modsuit.disable_modlink()
 
 	UnregisterSignal(source, COMSIG_LAZY_TEMPLATE_LOADED)
 

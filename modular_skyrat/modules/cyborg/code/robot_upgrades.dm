@@ -242,3 +242,278 @@
 		var/obj/item/inducer/cyborg/inducer = locate() in target_robot.model
 		if (inducer)
 			target_robot.model.remove_module(inducer, TRUE)
+<<<<<<< HEAD:modular_skyrat/modules/cyborg/code/robot_upgrades.dm
+=======
+
+/*
+*	ADVANCED MINING CYBORG UPGRADES
+*/
+
+/// Welder
+/obj/item/borg/upgrade/welder
+	name = "mining cyborg welder upgrade"
+	desc = "A normal welder with a larger tank for cyborgs."
+	icon_state = "cyborg_upgrade3"
+	require_model = TRUE
+	model_type = list(/obj/item/robot_model/miner)
+	model_flags = BORG_MODEL_MINER
+
+/obj/item/borg/upgrade/welder/action(mob/living/silicon/robot/R, user = usr)
+	. = ..()
+	if(.)
+		for(var/obj/item/weldingtool/mini/W in R.model)
+			R.model.remove_module(W, TRUE)
+
+		var/obj/item/weldingtool/largetank/cyborg/WW = new /obj/item/weldingtool/largetank/cyborg(R.model)
+		R.model.basic_modules += WW
+		R.model.add_module(WW, FALSE, TRUE)
+
+/obj/item/borg/upgrade/welder/deactivate(mob/living/silicon/robot/R, user = usr)
+	. = ..()
+	if (.)
+		for(var/obj/item/weldingtool/largetank/cyborg/WW in R.model)
+			R.model.remove_module(WW, TRUE)
+
+		var/obj/item/weldingtool/mini/W = new (R.model)
+		R.model.basic_modules += W
+		R.model.add_module(W, FALSE, TRUE)
+
+/*
+*	ADVANCED CARGO CYBORG UPGRADES
+*/
+
+/// Better Clamp
+/obj/item/borg/hydraulic_clamp/better
+	name = "improved integrated hydraulic clamp"
+	desc = "A neat way to lift and move around crates for quick and painless deliveries!"
+	storage_capacity = 4
+	whitelisted_item_types = list(/obj/structure/closet/crate, /obj/item/delivery/big, /obj/item/delivery, /obj/item/bounty_cube) // If they want to carry a small package or a bounty cube instead, so be it, honestly.
+	whitelisted_item_description = "wrapped packages"
+	item_weight_limit = NONE
+	clamp_sound_volume = 50
+
+/obj/item/borg/hydraulic_clamp/better/examine(mob/user)
+	. = ..()
+	var/crate_count = contents.len
+	. += "There is currently <b>[crate_count > 0 ? crate_count : "no"]</b> crate[crate_count > 1 ? "s" : ""] stored in the clamp's internal storage."
+
+/obj/item/borg/hydraulic_clamp/mail
+	name = "integrated rapid mail delivery device"
+	desc = "Allows you to carry around a lot of mail, to distribute it around the station like the good little mailbot you are!"
+	icon = 'icons/obj/service/library.dmi'
+	icon_state = "bookbag"
+	storage_capacity = 100
+	loading_time = 0.25 SECONDS
+	unloading_time = 0.25 SECONDS
+	cooldown_duration = 0.25 SECONDS
+	whitelisted_item_types = list(/obj/item/mail)
+	whitelisted_item_description = "envelopes"
+	item_weight_limit = WEIGHT_CLASS_NORMAL
+	clamp_sound_volume = 25
+	clamp_sound = 'sound/items/pshoom.ogg'
+
+/datum/design/borg_upgrade_clamp
+	name = "improved Integrated Hydraulic Clamp Module"
+	id = "borg_upgrade_clamp"
+	build_type = MECHFAB
+	build_path = /obj/item/borg/upgrade/better_clamp
+	materials = list(/datum/material/titanium = SHEET_MATERIAL_AMOUNT * 2, /datum/material/gold = HALF_SHEET_MATERIAL_AMOUNT, /datum/material/bluespace = SMALL_MATERIAL_AMOUNT * 5)
+	construction_time = 12 SECONDS
+	category = list(RND_CATEGORY_MECHFAB_CYBORG_MODULES + RND_SUBCATEGORY_MECHFAB_CYBORG_MODULES_CARGO)
+
+
+/obj/item/borg/upgrade/better_clamp
+	name = "improved integrated hydraulic clamp"
+	desc = "An improved hydraulic clamp to allow for bigger packages to be picked up as well!"
+	icon_state = "cyborg_upgrade3"
+	require_model = TRUE
+	model_type = list(/obj/item/robot_model/cargo)
+	model_flags = BORG_MODEL_CARGO
+
+
+/obj/item/borg/upgrade/better_clamp/action(mob/living/silicon/robot/cyborg, user = usr)
+	. = ..()
+	if(!.)
+		return
+	var/obj/item/borg/hydraulic_clamp/better/big_clamp = locate() in cyborg.model.modules
+	if(big_clamp)
+		to_chat(user, span_warning("This cyborg is already equipped with an improved integrated hydraulic clamp!"))
+		return FALSE
+
+	big_clamp = new(cyborg.model)
+	cyborg.model.basic_modules += big_clamp
+	cyborg.model.add_module(big_clamp, FALSE, TRUE)
+
+
+/obj/item/borg/upgrade/better_clamp/deactivate(mob/living/silicon/robot/cyborg, user = usr)
+	. = ..()
+	if(!.)
+		return
+	var/obj/item/borg/hydraulic_clamp/better/big_clamp = locate() in cyborg.model.modules
+	if(big_clamp)
+		cyborg.model.remove_module(big_clamp, TRUE)
+
+/*
+*	UNIVERSAL CYBORG UPGRADES
+*/
+
+/// ShapeShifter
+/obj/item/borg/upgrade/borg_shapeshifter
+	name = "Cyborg Shapeshifter Module"
+	desc = "An experimental device which allows a cyborg to disguise themself into another type of cyborg."
+	icon_state = "cyborg_upgrade3"
+
+/obj/item/borg/upgrade/borg_shapeshifter/action(mob/living/silicon/robot/R, user = usr)
+	. = ..()
+	if(.)
+		var/obj/item/borg_shapeshifter/BS = new /obj/item/borg_shapeshifter(R.model)
+		R.model.basic_modules += BS
+		R.model.add_module(BS, FALSE, TRUE)
+
+/obj/item/borg/upgrade/borg_shapeshifter/deactivate(mob/living/silicon/robot/R, user = usr)
+	. = ..()
+	if (.)
+		for(var/obj/item/borg_shapeshifter/BS in R.model)
+			R.model.remove_module(BS, TRUE)
+
+/// Quadborg time
+/obj/item/borg/upgrade/affectionmodule
+	name = "borg affection module"
+	desc = "A module that upgrades the ability of borgs to display affection."
+	icon_state = "cyborg_upgrade3"
+
+/obj/item/borg/upgrade/affectionmodule/action(mob/living/silicon/robot/borg)
+	. = ..()
+	if(!.)
+		return
+	if(borg.hasAffection)
+		to_chat(usr, span_warning("This unit already has a affection module installed!"))
+		return FALSE
+	if(!(TRAIT_R_WIDE in borg.model.model_features))
+		to_chat(usr, span_warning("This unit's chassis does not support this module."))
+		return FALSE
+
+	var/obj/item/quadborg_tongue/quadtongue = new /obj/item/quadborg_tongue(borg.model)
+	borg.model.basic_modules += quadtongue
+	borg.model.add_module(quadtongue, FALSE, TRUE)
+	var/obj/item/quadborg_nose/quadnose = new /obj/item/quadborg_nose(borg.model)
+	borg.model.basic_modules += quadnose
+	borg.model.add_module(quadnose, FALSE, TRUE)
+	borg.hasAffection = TRUE
+
+/obj/item/borg/upgrade/affectionmodule/deactivate(mob/living/silicon/robot/borg, user = usr)
+	. = ..()
+	if(.)
+		return
+	borg.hasAffection = FALSE
+	for(var/obj/item/quadborg_tongue/quadtongue in borg.model.modules)
+		borg.model.remove_module(quadtongue, TRUE)
+	for(var/obj/item/quadborg_nose/quadnose in borg.model.modules)
+		borg.model.remove_module(quadnose, TRUE)
+
+// Quadruped tongue - lick lick
+/obj/item/quadborg_tongue
+	name = "synthetic tongue"
+	desc = "Useful for slurping mess off the floor before affectionally licking the crew members in the face."
+	icon = 'modular_skyrat/modules/borgs/icons/robot_items.dmi'
+	icon_state = "synthtongue"
+	hitsound = 'sound/effects/attackblob.ogg'
+	desc = "For giving affectionate kisses."
+	item_flags = NOBLUDGEON
+
+/obj/item/quadborg_tongue/afterattack(atom/target, mob/user, proximity)
+	. = ..()
+	if(!proximity || !isliving(target))
+		return
+	var/mob/living/silicon/robot/borg = user
+	var/mob/living/mob = target
+
+	if(!HAS_TRAIT(target, TRAIT_AFFECTION_AVERSION)) // Checks for Affection Aversion trait
+		if(check_zone(borg.zone_selected) == "head")
+			borg.visible_message(span_warning("\the [borg] affectionally licks \the [mob]'s face!"), span_notice("You affectionally lick \the [mob]'s face!"))
+			playsound(borg, 'sound/effects/attackblob.ogg', 50, 1)
+		else
+			borg.visible_message(span_warning("\the [borg] affectionally licks \the [mob]!"), span_notice("You affectionally lick \the [mob]!"))
+			playsound(borg, 'sound/effects/attackblob.ogg', 50, 1)
+	else
+		to_chat(user, span_warning("ERROR: [target] is on the Do Not Lick registry!"))
+
+// Quadruped nose - Boop
+/obj/item/quadborg_nose
+	name = "boop module"
+	desc = "The BOOP module"
+	icon = 'modular_skyrat/modules/borgs/icons/robot_items.dmi'
+	icon_state = "nose"
+	obj_flags = CONDUCTS_ELECTRICITY
+	item_flags = NOBLUDGEON
+	force = 0
+
+/obj/item/quadborg_nose/afterattack(atom/target, mob/user, proximity)
+	. = ..()
+	if(!proximity)
+		return
+
+	if(!HAS_TRAIT(target, TRAIT_AFFECTION_AVERSION)) // Checks for Affection Aversion trait
+		do_attack_animation(target, null, src)
+		user.visible_message(span_notice("[user] [pick("nuzzles", "pushes", "boops")] \the [target.name] with their nose!"))
+	else
+		to_chat(user, span_warning("ERROR: [target] is on the No Nosing registry!"))
+
+/// The Shrinkening
+/mob/living/silicon/robot
+	var/hasShrunk = FALSE
+	var/hasAffection = FALSE
+	var/hasAdvanced = FALSE
+
+/obj/item/borg/upgrade/shrink
+	name = "borg shrinker"
+	desc = "A cyborg resizer, it makes a cyborg small."
+	icon_state = "cyborg_upgrade3"
+
+/obj/item/borg/upgrade/shrink/action(mob/living/silicon/robot/borg, user = usr)
+	. = ..()
+	if(.)
+
+		if(borg.hasShrunk)
+			to_chat(usr, span_warning("This unit already has a shrink module installed!"))
+			return FALSE
+		if(TRAIT_R_SMALL in borg.model.model_features)
+			to_chat(usr, span_warning("This unit's chassis cannot be shrunk any further."))
+			return FALSE
+
+		borg.hasShrunk = TRUE
+		ADD_TRAIT(borg, TRAIT_NO_TRANSFORM, REF(src))
+		var/prev_lockcharge = borg.lockcharge
+		borg.SetLockdown(TRUE)
+		borg.set_anchored(TRUE)
+		var/datum/effect_system/fluid_spread/smoke/smoke = new
+		smoke.set_up(1, location = get_turf(borg))
+		smoke.start()
+		sleep(0.2 SECONDS)
+		for(var/i in 1 to 4)
+			playsound(borg, pick('sound/items/drill_use.ogg', 'sound/items/jaws_cut.ogg', 'sound/items/jaws_pry.ogg', 'sound/items/welder.ogg', 'sound/items/ratchet.ogg'), 80, TRUE, -1)
+			sleep(1.2 SECONDS)
+		if(!prev_lockcharge)
+			borg.SetLockdown(FALSE)
+		borg.set_anchored(FALSE)
+		REMOVE_TRAIT(borg, TRAIT_NO_TRANSFORM, REF(src))
+		borg.update_transform(0.75)
+
+/obj/item/borg/upgrade/shrink/deactivate(mob/living/silicon/robot/borg, user = usr)
+	. = ..()
+	if (.)
+		if (borg.hasShrunk)
+			borg.hasShrunk = FALSE
+			borg.update_transform(4/3)
+
+/// Syndijack
+/obj/item/borg/upgrade/transform/syndicatejack
+	name = "borg module picker (Syndicate)"
+	desc = "Allows you to to turn a cyborg into a experimental syndicate cyborg."
+	icon_state = "cyborg_upgrade3"
+	new_model = /obj/item/robot_model/syndicatejack
+
+/obj/item/borg/upgrade/transform/syndicatejack/action(mob/living/silicon/robot/cyborg, user = usr) // Only usable on emagged cyborgs. In exchange. makes you unable to get locked down or detonated.
+	if(cyborg.emagged)
+		return ..()
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:modular_skyrat/modules/borgs/code/robot_upgrade.dm

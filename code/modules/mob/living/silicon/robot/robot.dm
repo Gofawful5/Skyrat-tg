@@ -349,7 +349,11 @@
 		eye_lights.icon = icon
 		add_overlay(eye_lights)
 
+<<<<<<< HEAD
 	if(opened)
+=======
+	if(opened && !(TRAIT_R_UNIQUEPANEL in model.model_features))
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 		if(wiresexposed)
 			add_overlay("ov-opencover +w")
 		else if(cell)

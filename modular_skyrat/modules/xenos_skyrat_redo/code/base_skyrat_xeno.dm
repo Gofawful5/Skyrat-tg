@@ -9,7 +9,6 @@
 	var/datum/action/cooldown/alien/skyrat/sleepytime/rest_button
 	mob_size = MOB_SIZE_LARGE
 	layer = LARGE_MOB_LAYER //above most mobs, but below speechbubbles
-	plane = GAME_PLANE_UPPER_FOV_HIDDEN
 	maptext_height = 64
 	maptext_width = 64
 	pressure_resistance = 200

@@ -35,6 +35,7 @@
 	disconnect_damage = BASE_DISCONNECT_DAMAGE
 	find_server()
 
+<<<<<<< HEAD
 	RegisterSignals(src, list(
 		COMSIG_QDELETING,
 		COMSIG_MACHINERY_BROKEN,
@@ -44,13 +45,38 @@
 	)
 	RegisterSignal(src, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(src, COMSIG_ATOM_TAKE_DAMAGE, PROC_REF(on_take_damage))
+=======
+	RegisterSignal(src, COMSIG_ATOM_TAKE_DAMAGE, PROC_REF(on_damage_taken))
+	RegisterSignal(src, COMSIG_MACHINERY_POWER_LOST, PROC_REF(on_power_loss))
+	RegisterSignals(src, list(COMSIG_QDELETING,	COMSIG_MACHINERY_BROKEN),PROC_REF(on_broken))
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 	register_context()
 	update_appearance()
 
 /obj/machinery/netpod/Destroy()
 	. = ..()
-	cached_outfits.Cut()
+
+	QDEL_LIST(cached_outfits)
+
+/obj/machinery/netpod/examine(mob/user)
+	. = ..()
+
+	if(isnull(server_ref?.resolve()))
+		. += span_infoplain("It's not connected to anything.")
+		. += span_infoplain("Netpods must be built within 4 tiles of a server.")
+		return
+
+	. += span_infoplain("Drag yourself into the pod to engage the link.")
+	. += span_infoplain("It has limited resuscitation capabilities. Remaining in the pod can heal some injuries.")
+	. += span_infoplain("It has a security system that will alert the occupant if it is tampered with.")
+
+	if(isnull(occupant))
+		. += span_notice("It is currently unoccupied.")
+		return
+
+	. += span_notice("It is currently occupied by [occupant].")
+	. += span_notice("It can be pried open with a crowbar, but its safety mechanisms will alert the occupant.")
 
 /obj/machinery/netpod/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
@@ -97,24 +123,24 @@
 /obj/machinery/netpod/crowbar_act(mob/living/user, obj/item/tool)
 	if(user.combat_mode)
 		attack_hand(user)
-		return TOOL_ACT_TOOLTYPE_SUCCESS
+		return ITEM_INTERACT_SUCCESS
 
 	if(default_pry_open(tool, user) || default_deconstruction_crowbar(tool))
-		return TOOL_ACT_TOOLTYPE_SUCCESS
+		return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/netpod/screwdriver_act(mob/living/user, obj/item/tool)
 	if(occupant)
 		balloon_alert(user, "in use!")
-		return TOOL_ACT_TOOLTYPE_SUCCESS
+		return ITEM_INTERACT_SUCCESS
 
 	if(state_open)
 		balloon_alert(user, "close first.")
-		return TOOL_ACT_TOOLTYPE_SUCCESS
+		return ITEM_INTERACT_SUCCESS
 
 	if(default_deconstruction_screwdriver(user, "[base_icon_state]_panel", "[base_icon_state]_closed", tool))
 		update_appearance() // sometimes icon doesnt properly update during flick()
 		ui_close(user)
-		return TOOL_ACT_TOOLTYPE_SUCCESS
+		return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/netpod/attack_hand(mob/living/user, list/modifiers)
 	. = ..()
@@ -393,6 +419,7 @@
 
 	account.bitrunning_points += reward_points * 100
 
+<<<<<<< HEAD
 /// User inspects the machine
 /obj/machinery/netpod/proc/on_examine(datum/source, mob/examiner, list/examine_text)
 	SIGNAL_HANDLER
@@ -410,6 +437,20 @@
 
 /// The domain has been fully purged, so we should double check our avatar is deleted
 /obj/machinery/netpod/proc/on_domain_scrubbed(datum/source)
+=======
+/// The domain has been fully purged, so we should double check our avatar is deleted
+/obj/machinery/netpod/proc/on_domain_scrubbed(datum/source)
+	SIGNAL_HANDLER
+
+	var/mob/avatar = avatar_ref?.resolve()
+	if(isnull(avatar))
+		return
+
+	QDEL_NULL(avatar)
+
+/// Boots out anyone in the machine && opens it
+/obj/machinery/netpod/proc/on_power_loss(datum/source)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	SIGNAL_HANDLER
 
 	var/mob/living/current_avatar = avatar_ref?.resolve()

@@ -61,6 +61,25 @@
 	. = ..()
 	LAZYREMOVEASSOC(tracked_fish_by_type, gone.type, gone)
 
+<<<<<<< HEAD
+=======
+/obj/structure/aquarium/proc/start_autofeed(datum/source, new_reagent, amount, reagtemp, data, no_react)
+	SIGNAL_HANDLER
+	START_PROCESSING(SSobj, src)
+	UnregisterSignal(reagents, COMSIG_REAGENTS_NEW_REAGENT)
+
+/obj/structure/aquarium/process(seconds_per_tick)
+	if(!reagents.total_volume)
+		RegisterSignal(reagents, COMSIG_REAGENTS_NEW_REAGENT, PROC_REF(start_autofeed))
+		return PROCESS_KILL
+	if(world.time < last_feeding + feeding_interval)
+		return
+	last_feeding = world.time
+	var/list/fishes = get_fishes()
+	for(var/obj/item/fish/fish as anything in fishes)
+		fish.feed(reagents)
+
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 /// Returns tracked_fish_by_type but flattened and without the items in the blacklist, also shuffled if shuffle is TRUE.
 /obj/structure/aquarium/proc/get_fishes(shuffle = FALSE, blacklist)
 	. = list()
@@ -126,7 +145,7 @@
 /obj/structure/aquarium/wrench_act(mob/living/user, obj/item/tool)
 	. = ..()
 	default_unfasten_wrench(user, tool)
-	return TOOL_ACT_TOOLTYPE_SUCCESS
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/aquarium/attackby(obj/item/item, mob/living/user, params)
 	if(broken)

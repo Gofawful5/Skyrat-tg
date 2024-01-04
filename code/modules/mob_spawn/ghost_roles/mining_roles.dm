@@ -266,7 +266,18 @@
 	eggshell.egg = src
 	src.forceMove(eggshell)
 	if(spawner_area)
+<<<<<<< HEAD
 		notify_ghosts("An ash walker egg is ready to hatch in \the [spawner_area.name].", source = src, action=NOTIFY_ATTACK, flashwindow = FALSE, ignore_key = POLL_IGNORE_ASHWALKER)
+=======
+		notify_ghosts(
+			"An ash walker egg is ready to hatch in \the [spawner_area.name].",
+			source = src,
+			header = "Ash Walker Egg",
+			click_interact = TRUE,
+			ignore_key = POLL_IGNORE_ASHWALKER,
+			notify_flags = NOTIFY_CATEGORY_NOFLASH,
+		)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 /datum/outfit/ashwalker
 	name = "Ash Walker"

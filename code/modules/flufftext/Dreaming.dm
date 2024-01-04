@@ -1,3 +1,5 @@
+#define DREAMING_SOURCE "dreaming_source"
+
 /**
  * Begins the dreaming process on a sleeping carbon.
  *
@@ -6,7 +8,7 @@
  */
 
 /mob/living/carbon/proc/handle_dreams()
-	if(prob(10) && !dreaming)
+	if(!HAS_TRAIT(src, TRAIT_DREAMING) && prob(10))
 		dream()
 
 /**
@@ -19,7 +21,90 @@
 
 /mob/living/carbon/proc/dream()
 	set waitfor = FALSE
+<<<<<<< HEAD
 	var/list/dream_fragments = list()
+=======
+
+	var/datum/dream/chosen_dream = pick_weight(GLOB.dreams)
+
+	ADD_TRAIT(src, TRAIT_DREAMING, DREAMING_SOURCE)
+	dream_sequence(chosen_dream.GenerateDream(src), chosen_dream)
+
+/**
+ * Displays the passed list of dream fragments to a sleeping carbon.
+ *
+ * Displays the first string of the passed dream fragments, then either ends the dream sequence
+ * or performs a callback on itself depending on if there are any remaining dream fragments to display.
+ *
+ * Arguments:
+ * * dream_fragments - A list of strings, in the order they will be displayed.
+ * * current_dream - The dream datum used for the current dream
+ */
+
+/mob/living/carbon/proc/dream_sequence(list/dream_fragments, datum/dream/current_dream)
+	if(stat != UNCONSCIOUS || HAS_TRAIT(src, TRAIT_CRITICAL_CONDITION))
+		REMOVE_TRAIT(src, TRAIT_DREAMING, DREAMING_SOURCE)
+		current_dream.OnDreamEnd(src)
+		return
+	var/next_message = dream_fragments[1]
+	dream_fragments.Cut(1,2)
+
+	if(istype(next_message, /datum/callback))
+		var/datum/callback/something_happens = next_message
+		next_message = something_happens.InvokeAsync(src)
+
+	to_chat(src, span_notice("<i>... [next_message] ...</i>"))
+
+	if(LAZYLEN(dream_fragments))
+		var/next_wait = rand(10, 30)
+		if(current_dream.sleep_until_finished)
+			AdjustSleeping(next_wait)
+		addtimer(CALLBACK(src, PROC_REF(dream_sequence), dream_fragments, current_dream), next_wait)
+	else
+		REMOVE_TRAIT(src, TRAIT_DREAMING, DREAMING_SOURCE)
+		current_dream.OnDreamEnd(src)
+
+//-------------------------
+// DREAM DATUMS
+
+GLOBAL_LIST_INIT(dreams, populate_dream_list())
+
+/proc/populate_dream_list()
+	var/list/output = list()
+	for(var/datum/dream/dream_type as anything in subtypesof(/datum/dream))
+		output[new dream_type] = initial(dream_type.weight)
+	return output
+
+/**
+ * Contains all the behavior needed to play a kind of dream.
+ * All dream types get randomly selected from based on weight when an appropriate mobs dreams.
+ */
+/datum/dream
+	/// The relative chance this dream will be randomly selected
+	var/weight = 0
+
+	/// Causes the mob to sleep long enough for the dream to finish if begun
+	var/sleep_until_finished = FALSE
+
+/**
+ * Called when beginning a new dream for the dreamer.
+ * Gives back a list of dream events. Events can be text or callbacks that return text.
+ */
+/datum/dream/proc/GenerateDream(mob/living/carbon/dreamer)
+	return list()
+
+/**
+ * Called when the dream ends or is interrupted.
+ */
+/datum/dream/proc/OnDreamEnd(mob/living/carbon/dreamer)
+	return
+
+/// The classic random dream of various words that might form a cohesive narrative, but usually wont
+/datum/dream/random
+	weight = 1000
+
+/datum/dream/random/GenerateDream(mob/living/carbon/dreamer)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	var/list/custom_dream_nouns = list()
 	var/fragment = ""
 
@@ -81,6 +166,7 @@
  * * dream_fragments - A list of strings, in the order they will be displayed.
  */
 
+<<<<<<< HEAD
 /mob/living/carbon/proc/dream_sequence(list/dream_fragments)
 	if(stat != UNCONSCIOUS || HAS_TRAIT(src, TRAIT_CRITICAL_CONDITION))
 		dreaming = FALSE
@@ -92,3 +178,34 @@
 		addtimer(CALLBACK(src, PROC_REF(dream_sequence), dream_fragments), rand(10,30))
 	else
 		dreaming = FALSE
+=======
+/datum/dream/hear_something/New()
+	. = ..()
+	RegisterSignal(SSsounds, COMSIG_SUBSYSTEM_POST_INITIALIZE, PROC_REF(ReserveSoundChannel))
+
+/datum/dream/hear_something/GenerateDream(mob/living/carbon/dreamer)
+	. = ..()
+	. += pick("you wind up a toy", "you hear something strange", "you pick out a record to play", "you hit shuffle on your music player")
+	. += CALLBACK(src, PROC_REF(PlayRandomSound))
+	. += "it reminds you of something"
+
+/datum/dream/hear_something/OnDreamEnd(mob/living/carbon/dreamer)
+	. = ..()
+	// In case we play some long ass music track
+	addtimer(CALLBACK(src, PROC_REF(StopSound), dreamer), 5 SECONDS)
+
+/datum/dream/hear_something/proc/ReserveSoundChannel()
+	reserved_sound_channel = SSsounds.reserve_sound_channel(src)
+	UnregisterSignal(SSsounds, COMSIG_SUBSYSTEM_POST_INITIALIZE)
+
+/datum/dream/hear_something/proc/PlayRandomSound(mob/living/carbon/dreamer)
+	var/sound/random_sound = sound(pick(SSsounds.all_sounds), channel=reserved_sound_channel)
+	random_sound.status = SOUND_STREAM
+	SEND_SOUND(dreamer, random_sound)
+	return "you hear something you weren't expecting!"
+
+/datum/dream/hear_something/proc/StopSound(mob/living/carbon/dreamer)
+	SEND_SOUND(dreamer, sound(channel=reserved_sound_channel))
+
+#undef DREAMING_SOURCE
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2

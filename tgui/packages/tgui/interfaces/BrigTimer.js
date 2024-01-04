@@ -1,9 +1,27 @@
+<<<<<<< HEAD:tgui/packages/tgui/interfaces/BrigTimer.js
+=======
+import { BooleanLike } from 'common/react';
+
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:tgui/packages/tgui/interfaces/BrigTimer.tsx
 import { useBackend } from '../backend';
 import { Button, Section } from '../components';
 import { Window } from '../layouts';
 
+<<<<<<< HEAD:tgui/packages/tgui/interfaces/BrigTimer.js
 export const BrigTimer = (props, context) => {
   const { act, data } = useBackend(context);
+=======
+type Data = {
+  timing: BooleanLike;
+  minutes: number;
+  seconds: number;
+  flash_charging: BooleanLike;
+};
+
+export const BrigTimer = (props) => {
+  const { act, data } = useBackend<Data>();
+  const { timing, minutes, seconds, flash_charging } = data;
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:tgui/packages/tgui/interfaces/BrigTimer.tsx
   return (
     <Window width={300} height={138}>
       <Window.Content scrollable>
@@ -24,7 +42,8 @@ export const BrigTimer = (props, context) => {
                 onClick={() => act('flash')}
               />
             </>
-          }>
+          }
+        >
           <Button
             icon="fast-backward"
             onClick={() => act('time', { adjust: -600 })}

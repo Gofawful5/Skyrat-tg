@@ -49,7 +49,7 @@ GLOBAL_VAR(basketball_game)
 	GLOB.basketball_game = src
 	map_deleter = new
 
-/datum/basketball_controller/Destroy(force, ...)
+/datum/basketball_controller/Destroy(force)
 	. = ..()
 	GLOB.basketball_game = null
 	end_game()
@@ -119,7 +119,10 @@ GLOBAL_VAR(basketball_game)
 		header = "Basketball Minigame",
 		ghost_sound = 'sound/effects/ghost2.ogg',
 		notify_volume = 75,
+<<<<<<< HEAD
 		action = NOTIFY_ORBIT,
+=======
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	)
 
 	create_bodies(ready_players)

@@ -137,6 +137,67 @@
 		return FALSE
 	return TRUE
 
+<<<<<<< HEAD
+=======
+
+/// Will differentiate into the "tank" giant spider.
+/mob/living/basic/spider/growing/young/tank
+	grow_as = /mob/living/basic/spider/giant/tank
+	name = "young tank spider"
+	desc = "Furry and purple, it looks defenseless. This one has dim yellow eyes."
+	icon = 'icons/mob/simple/arachnoid.dmi'
+	icon_state = "young_tank"
+	icon_dead = "young_tank_dead"
+	maxHealth = 50
+	health = 50
+	damage_coeff = list(BRUTE = 0.5, BURN = 0.5, TOX = 0.5, STAMINA = 0.5, OXY = 1)
+	melee_damage_lower = 10
+	melee_damage_upper = 15
+	speed = 1
+
+/mob/living/basic/spider/growing/young/tank/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/healing_touch,\
+		heal_brute = 5,\
+		heal_burn = 5,\
+		heal_time = 2 SECONDS,\
+		self_targeting = HEALING_TOUCH_SELF_ONLY,\
+		interaction_key = DOAFTER_SOURCE_SPIDER,\
+		valid_targets_typecache = typecacheof(list(/mob/living/basic/spider/growing/young/tank, /mob/living/basic/spider/giant/tank)),\
+		extra_checks = CALLBACK(src, PROC_REF(can_mend)),\
+		action_text = "%SOURCE% begins mending themselves...",\
+		complete_text = "%SOURCE%'s wounds mend together.",\
+	)
+
+	AddElement(/datum/element/web_walker, /datum/movespeed_modifier/below_average_web)
+
+/// Prevent you from healing when on fire
+/mob/living/basic/spider/growing/young/tank/proc/can_mend(mob/living/source, mob/living/target)
+	if (on_fire)
+		balloon_alert(src, "on fire!")
+		return FALSE
+	return TRUE
+
+/// Will differentiate into the "breacher" giant spider.
+/mob/living/basic/spider/growing/young/breacher
+	grow_as = /mob/living/basic/spider/giant/breacher
+	name = "young breacher spider"
+	desc = "Furry and baige, it looks defenseless. This one has dim red eyes."
+	icon = 'icons/mob/simple/arachnoid.dmi'
+	icon_state = "young_breacher"
+	icon_dead = "young_breacher_dead"
+	maxHealth = 60
+	health = 60
+	melee_damage_lower = 5
+	melee_damage_upper = 10
+	speed = 1
+
+/mob/living/basic/spider/growing/young/breacher/Initialize(mapload)
+	. = ..()
+
+	AddElement(/datum/element/web_walker, /datum/movespeed_modifier/below_average_web)
+
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 /// Will differentiate into the "midwife" giant spider.
 /mob/living/basic/spider/growing/young/midwife
 	grow_as = /mob/living/basic/spider/giant/midwife

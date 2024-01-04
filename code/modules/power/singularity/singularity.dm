@@ -79,13 +79,18 @@
 		notify_ghosts(
 			ghost_notification_message,
 			source = src,
+<<<<<<< HEAD
 			action = NOTIFY_ORBIT,
 			flashwindow = FALSE,
 			ghost_sound = 'sound/machines/warning-buzzer.ogg',
 			header = ghost_notification_message,
 			notify_volume = 75
+=======
+			header = ghost_notification_message,
+			ghost_sound = 'sound/machines/warning-buzzer.ogg',
+			notify_volume = 75,
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 		)
-
 
 /obj/singularity/Destroy()
 	STOP_PROCESSING(SSsinguloprocess, src)

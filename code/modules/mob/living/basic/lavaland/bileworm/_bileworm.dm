@@ -51,6 +51,7 @@
 	spew_bile.Grant(src)
 	//well, one of them has to start on infinite cooldown
 	spew_bile.StartCooldownSelf(INFINITY)
+<<<<<<< HEAD
 	var/datum/action/cooldown/mob_cooldown/resurface/resurface = new(src)
 	resurface.Grant(src)
 	var/datum/action/cooldown/mob_cooldown/devour/devour = new(src)
@@ -60,3 +61,13 @@
 	ai_controller.set_blackboard_key(BB_BILEWORM_SPEW_BILE, spew_bile)
 	ai_controller.set_blackboard_key(BB_BILEWORM_RESURFACE, resurface)
 	ai_controller.set_blackboard_key(BB_BILEWORM_DEVOUR, devour)
+=======
+	ai_controller?.set_blackboard_key(BB_BILEWORM_SPEW_BILE, spew_bile)
+
+	var/static/list/other_innate_actions = list(
+		/datum/action/adjust_vision/bileworm = null,
+		/datum/action/cooldown/mob_cooldown/devour = BB_BILEWORM_DEVOUR,
+		/datum/action/cooldown/mob_cooldown/resurface = BB_BILEWORM_RESURFACE,
+	)
+	grant_actions_by_list(other_innate_actions)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2

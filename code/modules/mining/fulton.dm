@@ -136,6 +136,77 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 			if(uses_left <= 0)
 				qdel(src)
 
+<<<<<<< HEAD
+=======
+	var/obj/effect/extraction_holder/holder_obj = new(get_turf(thing))
+	holder_obj.appearance = thing.appearance
+	thing.forceMove(holder_obj)
+	balloon2 = mutable_appearance('icons/effects/fulton_balloon.dmi', "fulton_expand")
+	balloon2.pixel_y = 10
+	balloon2.appearance_flags = RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM
+	holder_obj.add_overlay(balloon2)
+
+	sleep(0.4 SECONDS)
+
+	balloon = mutable_appearance('icons/effects/fulton_balloon.dmi', "fulton_balloon")
+	balloon.pixel_y = 10
+	balloon.appearance_flags = RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM
+	holder_obj.cut_overlay(balloon2)
+	holder_obj.add_overlay(balloon)
+	playsound(holder_obj.loc, 'sound/items/fultext_deploy.ogg', vol = 50, vary = TRUE, extrarange = -3)
+
+	animate(holder_obj, pixel_z = 10, time = 2 SECONDS, flags = ANIMATION_RELATIVE)
+	animate(pixel_z = 5, time = 1 SECONDS, flags = ANIMATION_RELATIVE)
+	animate(pixel_z = -5, time = 1 SECONDS, flags = ANIMATION_RELATIVE)
+	animate(pixel_z = 5, time = 1 SECONDS, flags = ANIMATION_RELATIVE)
+	animate(pixel_z = -5, time = 1 SECONDS, flags = ANIMATION_RELATIVE)
+	sleep(6 SECONDS)
+
+	playsound(holder_obj.loc, 'sound/items/fultext_launch.ogg', vol = 50, vary = TRUE, extrarange = -3)
+	animate(holder_obj, pixel_z = 1000, time = 3 SECONDS, flags = ANIMATION_RELATIVE)
+
+	if(ishuman(thing))
+		var/mob/living/carbon/human/creature = thing
+		creature.SetUnconscious(0)
+		creature.remove_status_effect(/datum/status_effect/drowsiness)
+		creature.SetSleeping(0)
+
+	sleep(3 SECONDS)
+
+	var/turf/flooring_near_beacon = list()
+	var/turf/beacon_turf = get_turf(beacon)
+	for(var/turf/floor as anything in RANGE_TURFS(1, beacon_turf))
+		if(!floor.is_blocked_turf())
+			flooring_near_beacon += floor
+
+	if(!length(flooring_near_beacon))
+		flooring_near_beacon += beacon_turf
+
+	holder_obj.forceMove(pick(flooring_near_beacon))
+
+	animate(holder_obj, pixel_z = -990, time = 5 SECONDS, flags = ANIMATION_RELATIVE)
+	animate(pixel_z = 5, time = 1 SECONDS, flags = ANIMATION_RELATIVE)
+	animate(pixel_z = -5, time = 1 SECONDS, flags = ANIMATION_RELATIVE)
+	sleep(7 SECONDS)
+
+	balloon3 = mutable_appearance('icons/effects/fulton_balloon.dmi', "fulton_retract")
+	balloon3.pixel_y = 10
+	balloon3.appearance_flags = RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM
+	holder_obj.cut_overlay(balloon)
+	holder_obj.add_overlay(balloon3)
+	sleep(0.4 SECONDS)
+
+	holder_obj.cut_overlay(balloon3)
+	thing.set_anchored(FALSE) // An item has to be unanchored to be extracted in the first place.
+	thing.set_density(initial(thing.density))
+	animate(holder_obj, pixel_z = -10, time = 0.5 SECONDS, flags = ANIMATION_RELATIVE)
+	sleep(0.5 SECONDS)
+
+	thing.forceMove(holder_obj.loc)
+	qdel(holder_obj)
+	if(uses_left <= 0)
+		qdel(src)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 /obj/item/fulton_core
 	name = "extraction beacon assembly kit"
@@ -204,3 +275,7 @@ GLOBAL_LIST_EMPTY(total_extraction_beacons)
 
 /obj/effect/extraction_holder/singularity_pull()
 	return
+
+/obj/item/extraction_pack/syndicate
+	name = "syndicate fulton extraction pack"
+	can_use_indoors = TRUE

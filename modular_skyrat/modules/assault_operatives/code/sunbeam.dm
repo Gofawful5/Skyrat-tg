@@ -57,7 +57,14 @@
 		var/matrix/our_matrix = matrix()
 		our_matrix.Scale(scale_x, scale_y)
 		transform = our_matrix
+<<<<<<< HEAD
 	notify_ghosts("An ICARUS sunbeam has been launched! [target_atom ? "Towards: [target_atom.name]" : ""]", source = src, action = NOTIFY_ORBIT, header = "Somethings burning!")
+=======
+	notify_ghosts("An ICARUS sunbeam has been launched! [target_atom ? "Towards: [target_atom.name]" : ""]",
+		source = src,
+		header = "Somethings burning!",
+	)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	soundloop = new(src, TRUE)
 
 /obj/effect/sunbeam/Destroy(force)

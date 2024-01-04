@@ -1,6 +1,18 @@
 import { BooleanLike } from 'common/react';
+
 import { useBackend } from '../backend';
+<<<<<<< HEAD
 import { Button, Flex, Knob, LabeledControls, Section } from '../components';
+=======
+import {
+  Button,
+  Flex,
+  Knob,
+  LabeledControls,
+  NumberInput,
+  Section,
+} from '../components';
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 import { Window } from '../layouts';
 
 type Data = {
@@ -13,8 +25,8 @@ type Data = {
   allow_breeding: BooleanLike;
 };
 
-export const Aquarium = (props, context) => {
-  const { act, data } = useBackend<Data>(context);
+export const Aquarium = (props) => {
+  const { act, data } = useBackend<Data>();
   const {
     temperature,
     fluid_type,

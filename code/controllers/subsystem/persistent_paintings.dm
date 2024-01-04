@@ -144,6 +144,28 @@ SUBSYSTEM_DEF(persistent_paintings)
 
 	return SS_INIT_SUCCESS
 
+<<<<<<< HEAD
+=======
+/datum/controller/subsystem/persistent_paintings/proc/cache_paintings()
+	cached_painting_data = list()
+	admin_painting_data = list()
+
+	for(var/datum/painting/painting as anything in paintings)
+		cached_painting_data += list(list(
+				"title" = painting.title,
+				"creator" = painting.creator_name,
+				"md5" = painting.md5,
+				"ref" = REF(painting),
+				"width" = painting.width,
+				"height" = painting.height,
+				"ratio" = painting.width/painting.height,
+			))
+
+		var/list/pdata = painting.to_json()
+		pdata["ref"] = REF(painting)
+		UNTYPED_LIST_ADD(admin_painting_data, pdata)
+
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 /**
  * Generates painting data ready to be consumed by ui.
  * Args:
@@ -154,8 +176,20 @@ SUBSYSTEM_DEF(persistent_paintings)
 /datum/controller/subsystem/persistent_paintings/proc/painting_ui_data(filter=NONE, admin=FALSE, search_text)
 	. = list()
 	var/searching = filter & (PAINTINGS_FILTER_SEARCH_TITLE|PAINTINGS_FILTER_SEARCH_CREATOR) && search_text
+<<<<<<< HEAD
 	for(var/datum/painting/painting as anything in paintings)
 		if(filter & PAINTINGS_FILTER_AI_PORTRAIT && ((painting.width != 24 && painting.width != 23) || (painting.height != 24 && painting.height != 23)))
+=======
+	var/list/paintings = admin ? admin_painting_data : cached_painting_data
+
+	if(!searching && !(filter & PAINTINGS_FILTER_AI_PORTRAIT))
+		return paintings
+
+	var/list/filtered_paintings = list()
+
+	for(var/painting in paintings)
+		if(filter & PAINTINGS_FILTER_AI_PORTRAIT && ((painting["width"] != 24 && painting["width"] != 23) || (painting["height"] != 24 && painting["height"] != 23)))
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 			continue
 		if(searching)
 			var/haystack_text = ""
@@ -165,6 +199,7 @@ SUBSYSTEM_DEF(persistent_paintings)
 				haystack_text = painting.creator_name
 			if(!findtext(haystack_text, search_text))
 				continue
+<<<<<<< HEAD
 		if(admin)
 			var/list/pdata = painting.to_json()
 			pdata["ref"] = REF(painting)
@@ -177,6 +212,10 @@ SUBSYSTEM_DEF(persistent_paintings)
 				"ref" = REF(painting),
 				"ratio" = painting.width/painting.height,
 				))
+=======
+		filtered_paintings += list(painting)
+	return filtered_paintings
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 /// Returns paintings with given tag.
 /datum/controller/subsystem/persistent_paintings/proc/get_paintings_with_tag(tag_name)

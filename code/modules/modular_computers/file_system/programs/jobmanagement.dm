@@ -4,11 +4,16 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 /datum/computer_file/program/job_management
 	filename = "plexagoncore"
 	filedesc = "Plexagon HR Core"
-	category = PROGRAM_CATEGORY_CREW
-	program_icon_state = "id"
+	downloader_category = PROGRAM_CATEGORY_EQUIPMENT
+	program_open_overlay = "id"
 	extended_desc = "Program for viewing and changing job slot availability."
+<<<<<<< HEAD
 	transfer_access = list(ACCESS_COMMAND)
 	requires_ntnet = TRUE
+=======
+	download_access = list(ACCESS_COMMAND)
+	program_flags = PROGRAM_ON_NTNET_STORE | PROGRAM_REQUIRES_NTNET
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	size = 4
 	tgui_id = "NtosJobManager"
 	program_icon = "address-book"

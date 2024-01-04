@@ -43,6 +43,18 @@
 /mob/living/simple_animal/hostile/skeleton/Initialize(mapload)
 	. = ..()
 	apply_dynamic_human_appearance(src, outfit, species, r_hand = held_item)
+<<<<<<< HEAD:code/modules/mob/living/simple_animal/hostile/skeleton.dm
+=======
+	AddElement(/datum/element/footstep, FOOTSTEP_MOB_SHOE)
+	if(LAZYLEN(loot))
+		loot = string_list(loot)
+		AddElement(/datum/element/death_drops, loot)
+	AddElement(/datum/element/basic_eating, heal_amt = 50, drinking = TRUE, food_types = good_drinks)
+	AddElement(/datum/element/basic_eating, heal_amt = 0, damage_amount = 25, damage_type = BURN, drinking = TRUE, food_types = bad_drinks)
+	ADD_TRAIT(src, TRAIT_SNOWSTORM_IMMUNE, INNATE_TRAIT)
+	var/list/foods_list = good_drinks + bad_drinks
+	ai_controller?.set_blackboard_key(BB_BASIC_FOODS, typecacheof(foods_list))
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:code/modules/mob/living/basic/ruin_defender/skeleton.dm
 
 /mob/living/simple_animal/hostile/skeleton/eskimo
 	name = "undead eskimo"
@@ -74,9 +86,13 @@
 	health = 150
 	weather_immunities = list(TRAIT_SNOWSTORM_IMMUNE)
 	speed = 2
+<<<<<<< HEAD:code/modules/mob/living/simple_animal/hostile/skeleton.dm
 	speak_chance = 1
 	speak = list("THE GODS WILL IT!","DEUS VULT!","REMOVE KABAB!")
 	force_threshold = 10 //trying to simulate actually having armor
+=======
+	damage_coeff = list(BRUTE = 0.5, BURN = 0.5, TOX = 0, STAMINA = 0, OXY = 0) //trying to simulate actually having armor
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:code/modules/mob/living/basic/ruin_defender/skeleton.dm
 	obj_damage = 50
 	melee_damage_lower = 25
 	melee_damage_upper = 30

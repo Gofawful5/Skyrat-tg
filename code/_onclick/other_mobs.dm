@@ -169,6 +169,9 @@
 /mob/living/proc/resolve_right_click_attack(atom/target, list/modifiers)
 	return target.attack_animal_secondary(src, modifiers)
 
+/**
+ * Called when a simple animal is unarmed attacking / clicking on this atom.
+ */
 /atom/proc/attack_animal(mob/user, list/modifiers)
 	SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_ANIMAL, user)
 
@@ -232,31 +235,6 @@
  * Returns a SECONDARY_ATTACK_* value.
  */
 /atom/proc/attack_larva_secondary(mob/user, list/modifiers)
-	return SECONDARY_ATTACK_CALL_NORMAL
-
-
-/*
-	Slimes
-	Nothing happening here
-*/
-/mob/living/simple_animal/slime/resolve_unarmed_attack(atom/attack_target, proximity_flag, list/modifiers)
-	if(isturf(attack_target))
-		return ..()
-	attack_target.attack_slime(src, modifiers)
-
-/mob/living/simple_animal/slime/resolve_right_click_attack(atom/target, list/modifiers)
-	if(isturf(target))
-		return ..()
-	return target.attack_slime_secondary(src, modifiers)
-
-/atom/proc/attack_slime(mob/user, list/modifiers)
-	return
-
-/**
- * Called when a slime mob right clicks an atom (that is not a turf).
- * Returns a SECONDARY_ATTACK_* value.
- */
-/atom/proc/attack_slime_secondary(mob/user, list/modifiers)
 	return SECONDARY_ATTACK_CALL_NORMAL
 
 /*

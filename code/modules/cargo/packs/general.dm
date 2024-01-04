@@ -25,6 +25,7 @@
 		/obj/item/toner = 2)
 	crate_name = "tattoo crate"
 	crate_type = /obj/structure/closet/crate/wooden
+	discountable = SUPPLY_PACK_STD_DISCOUNTABLE
 
 /datum/supply_pack/misc/aquarium_kit
 	name = "Aquarium Kit"
@@ -75,6 +76,7 @@
 	contains = list(/obj/vehicle/ridden/bicycle)
 	crate_name = "bicycle crate"
 	crate_type = /obj/structure/closet/crate/large
+	discountable = SUPPLY_PACK_RARE_DISCOUNTABLE
 
 /datum/supply_pack/misc/bigband
 	name = "Big Band Instrument Collection"
@@ -114,7 +116,7 @@
 	access = ACCESS_COMMAND
 	cost = CARGO_CRATE_VALUE * 4
 	contains = list(/obj/item/encryptionkey/headset_com = 3)
-	crate_type = /obj/structure/closet/crate/secure
+	crate_type = /obj/structure/closet/crate/secure/centcom
 	crate_name = "command encryption key crate"
 
 /datum/supply_pack/misc/exploration_drone

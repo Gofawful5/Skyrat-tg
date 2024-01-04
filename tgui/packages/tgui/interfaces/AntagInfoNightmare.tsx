@@ -1,5 +1,9 @@
 import { BlockQuote, LabeledList, Section, Stack } from '../components';
 import { Window } from '../layouts';
+<<<<<<< HEAD
+=======
+import { Rules } from './AntagInfoRules'; // SKYRAT EDIT ADDITION
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 const tipstyle = {
   color: 'white',
@@ -9,7 +13,7 @@ const noticestyle = {
   color: 'lightblue',
 };
 
-export const AntagInfoNightmare = (props, context) => {
+export const AntagInfoNightmare = (props) => {
   return (
     <Window width={620} height={340}>
       <Window.Content backgroundColor="#0d0d0d">

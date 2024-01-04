@@ -12,4 +12,7 @@ See the examinemore module for information.
 #define EXAMINE_CHECK_ROLE "role"			//For displaying description information based on a specific ROLE, e.g. traitor. Remember to set the special_desc_role var on the item.
 #define EXAMINE_CHECK_JOB "job"			//For displaying descriptors for specific jobs, e.g scientist. Remember to set the special_desc_job var on the item.
 #define EXAMINE_CHECK_FACTION "faction"		//For displaying descriptors for mob factions, e.g. a zombie, or... turrets. Or syndicate. Remember to set special_desc_factions.
+<<<<<<< HEAD
 #define EXAMINE_CHECK_CONTRACTOR "contractor" // For OPFOR contractors and syndicate agents.
+=======
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2

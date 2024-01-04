@@ -1,5 +1,6 @@
 import { toFixed } from 'common/math';
 import { toTitleCase } from 'common/string';
+<<<<<<< HEAD:tgui/packages/tgui/interfaces/ChemDispenser.js
 import { Fragment } from 'inferno';
 import { useBackend, useLocalState } from '../backend';
 import { AnimatedNumber, Box, Button, Icon, LabeledList, ProgressBar, Section } from '../components';
@@ -26,6 +27,56 @@ export const ChemDispenser = (props, context) => {
       }))) ||
     data.beakerContents ||
     [];
+=======
+import { useState } from 'react';
+
+import { useBackend } from '../backend';
+import {
+  Box,
+  Button,
+  Icon,
+  LabeledList,
+  ProgressBar,
+  Section,
+} from '../components';
+import { Window } from '../layouts';
+import { Beaker, BeakerDisplay } from './common/BeakerDisplay';
+
+type DispensableReagent = {
+  title: string;
+  id: string;
+  pH: number;
+  pHCol: string;
+};
+
+type Data = {
+  showpH: BooleanLike;
+  amount: number;
+  energy: number;
+  maxEnergy: number;
+  chemicals: DispensableReagent[];
+  recipes: string[];
+  recordingRecipe: string[];
+  recipeReagents: string[];
+  beaker: Beaker;
+};
+
+export const ChemDispenser = (props) => {
+  const { act, data } = useBackend<Data>();
+  const recording = !!data.recordingRecipe;
+  const { recipeReagents = [], recipes = [], beaker } = data;
+  const [hasCol, setHasCol] = useState(false);
+
+  const beakerTransferAmounts = beaker ? beaker.transferAmounts : [];
+  const recordedContents =
+    recording &&
+    Object.keys(data.recordingRecipe).map((id) => ({
+      id,
+      name: toTitleCase(id.replace(/_/, ' ')),
+      volume: data.recordingRecipe[id],
+    }));
+
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:tgui/packages/tgui/interfaces/ChemDispenser.tsx
   return (
     <Window width={565} height={620}>
       <Window.Content scrollable>
@@ -59,7 +110,8 @@ export const ChemDispenser = (props, context) => {
                 onClick={() => setHasCol(!hasCol)}
               />
             </>
-          }>
+          }
+        >
           <LabeledList>
             <LabeledList.Item label="Energy">
               <ProgressBar value={data.energy / data.maxEnergy}>
@@ -106,7 +158,8 @@ export const ChemDispenser = (props, context) => {
                 />
               )}
             </>
-          }>
+          }
+        >
           <Box mr={-1}>
             {recipes.map((recipe) => (
               <Button
@@ -144,7 +197,8 @@ export const ChemDispenser = (props, context) => {
                 })
               }
             />
-          ))}>
+          ))}
+        >
           <Box mr={-1}>
             {data.chemicals.map((chemical) => (
               <Button
@@ -182,6 +236,7 @@ export const ChemDispenser = (props, context) => {
               content={amount}
               onClick={() => act('remove', { amount })}
             />
+<<<<<<< HEAD:tgui/packages/tgui/interfaces/ChemDispenser.js
           ))}>
           <LabeledList>
             <LabeledList.Item
@@ -227,6 +282,16 @@ export const ChemDispenser = (props, context) => {
               )}
             </LabeledList.Item>
           </LabeledList>
+=======
+          ))}
+        >
+          <BeakerDisplay
+            beaker={beaker}
+            title_label={recording && 'Virtual beaker'}
+            replace_contents={recordedContents}
+            showpH={data.showpH}
+          />
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2:tgui/packages/tgui/interfaces/ChemDispenser.tsx
         </Section>
       </Window.Content>
     </Window>

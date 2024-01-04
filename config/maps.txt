@@ -64,3 +64,16 @@ map voidraptor
 	maxplayers 100
 	votable
 endmap
+<<<<<<< HEAD
+=======
+
+map blueshift
+	minplayers 70
+	votable
+endmap
+
+map kilostation
+	maxplayers 75
+	votable
+endmap
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2

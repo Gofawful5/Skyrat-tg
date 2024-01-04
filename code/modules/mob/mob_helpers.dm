@@ -246,6 +246,7 @@
  * The kitchen sink of notification procs
  *
  * Arguments:
+<<<<<<< HEAD
  * * message
  * * ghost_sound sound to play
  * * enter_link Href link to enter the ghost role being notified for
@@ -259,6 +260,30 @@
  * * notify_volume How loud the sound should be to spook the user
  */
 /proc/notify_ghosts(message, ghost_sound, enter_link, atom/source, mutable_appearance/alert_overlay, action = NOTIFY_JUMP, flashwindow = TRUE, ignore_mapload = TRUE, ignore_key, header, notify_suiciders = TRUE, notify_volume = 100) //Easy notification of ghosts.
+=======
+ * * message: The message displayed in chat.
+ * * source: The source of the notification. This is required for an icon
+ * * header: The title text to display on the icon tooltip.
+ * * alert_overlay: Optional. Create a custom overlay if you want, otherwise it will use the source
+ * * click_interact: If true, adds a link + clicking the icon will attack_ghost the source
+ * * custom_link: Optional. If you want to add a custom link to the chat notification
+ * * ghost_sound: sound to play
+ * * ignore_key: Ignore keys if they're in the GLOB.poll_ignore list
+ * * notify_volume: How loud the sound should be to spook the user
+ */
+/proc/notify_ghosts(
+	message,
+	atom/source,
+	header = "Something Interesting!",
+	mutable_appearance/alert_overlay,
+	click_interact = FALSE,
+	custom_link = "",
+	ghost_sound,
+	ignore_key,
+	notify_flags = NOTIFY_CATEGORY_DEFAULT,
+	notify_volume = 100,
+)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 	if(ignore_mapload && SSatoms.initialized != INITIALIZATION_INNEW_REGULAR) //don't notify for objects created during a map load
 		return
@@ -313,9 +338,28 @@
 		alert_overlay.plane = FLOAT_PLANE
 		alert.add_overlay(alert_overlay)
 
+<<<<<<< HEAD
 /**
  * Heal a robotic body part on a mob
  */
+=======
+		var/interact_link = click_interact ? " <a href='?src=[REF(ghost)];play=[REF(source)]'>(Play)</a>" : ""
+		var/view_link = " <a href='?src=[REF(ghost)];view=[REF(source)]'>(View)</a>"
+
+		to_chat(ghost, span_ghostalert("[message][custom_link][interact_link][view_link]"))
+
+		var/atom/movable/screen/alert/notify_action/toast = ghost.throw_alert(
+			category = "[REF(source)]_notify_action",
+			type = /atom/movable/screen/alert/notify_action,
+		)
+		toast.add_overlay(alert_overlay)
+		toast.click_interact = click_interact
+		toast.desc = "Click to [click_interact ? "play" : "view"]."
+		toast.name = header
+		toast.target_ref = WEAKREF(source)
+
+/// Heals a robotic limb on a mob
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 /proc/item_heal_robotic(mob/living/carbon/human/human, mob/user, brute_heal, burn_heal)
 	var/obj/item/bodypart/affecting = human.get_bodypart(check_zone(user.zone_selected))
 	if(!affecting || IS_ORGANIC_LIMB(affecting))
@@ -369,7 +413,7 @@
 			var/datum/antagonist/A = M.mind.has_antag_datum(/datum/antagonist/)
 			if(A)
 				poll_message = "[poll_message] Status: [A.name]."
-	var/list/mob/dead/observer/candidates = poll_candidates_for_mob(poll_message, ROLE_PAI, FALSE, 10 SECONDS, M)
+	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates_for_mob(poll_message, check_jobban = ROLE_PAI, poll_time = 10 SECONDS, target_mob = M, pic_source = M, role_name_text = "ghost control")
 
 	if(LAZYLEN(candidates))
 		var/mob/dead/observer/C = pick(candidates)

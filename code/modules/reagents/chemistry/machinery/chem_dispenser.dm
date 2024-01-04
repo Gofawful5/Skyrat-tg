@@ -123,6 +123,7 @@
 	//SKYRAT EDIT END
 
 /obj/machinery/chem_dispenser/Initialize(mapload)
+<<<<<<< HEAD
 	. = ..()
 	dispensable_reagents = sort_list(dispensable_reagents, GLOBAL_PROC_REF(cmp_reagents_asc))
 	if(emagged_reagents)
@@ -135,6 +136,35 @@
 	if(upgrade_reagents3)
 		upgrade_reagents3 = sort_list(upgrade_reagents3, GLOBAL_PROC_REF(cmp_reagents_asc))
 	//SKYRAT EDIT ADDITION END
+=======
+	if(dispensable_reagents != null && !dispensable_reagents.len)
+		dispensable_reagents = default_dispensable_reagents
+	if(dispensable_reagents)
+		dispensable_reagents = sort_list(dispensable_reagents, GLOBAL_PROC_REF(cmp_reagents_asc))
+
+	if(upgrade_reagents != null && !upgrade_reagents.len)
+		upgrade_reagents = default_upgrade_reagents
+	if(upgrade_reagents)
+		upgrade_reagents = sort_list(upgrade_reagents, GLOBAL_PROC_REF(cmp_reagents_asc))
+	//SKYRAT EDIT ADDITION BEGIN
+	if(upgrade2_reagents != null && !upgrade2_reagents.len)
+		upgrade2_reagents = default_upgrade2_reagents
+	if(upgrade2_reagents)
+		upgrade2_reagents = sort_list(upgrade2_reagents, GLOBAL_PROC_REF(cmp_reagents_asc))
+	if(upgrade3_reagents != null && !upgrade3_reagents.len)
+		upgrade3_reagents = default_upgrade3_reagents
+	if(upgrade3_reagents)
+		upgrade3_reagents = sort_list(upgrade3_reagents, GLOBAL_PROC_REF(cmp_reagents_asc))
+	//SKYRAT EDIT ADDITION END
+
+	if(emagged_reagents != null && !emagged_reagents.len)
+		emagged_reagents = default_emagged_reagents
+	if(emagged_reagents)
+		emagged_reagents = sort_list(emagged_reagents, GLOBAL_PROC_REF(cmp_reagents_asc))
+
+	. = ..() // So that we call RefreshParts() after adjusting the lists
+
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	if(is_operational)
 		begin_processing()
 	update_appearance()
@@ -295,7 +325,25 @@
 			data["recipeReagents"] += ckey(reagent.name)
 	return data
 
+<<<<<<< HEAD
 /obj/machinery/chem_dispenser/ui_act(action, params)
+=======
+	var/list/beaker_data = null
+	if(!QDELETED(beaker))
+		beaker_data = list()
+		beaker_data["maxVolume"] = beaker.volume
+		beaker_data["transferAmounts"] = beaker.possible_transfer_amounts
+		beaker_data["pH"] = round(beaker.reagents.ph, 0.01)
+		beaker_data["currentVolume"] = round(beaker.reagents.total_volume, 0.01)
+		var/list/beakerContents = list()
+		if(length(beaker.reagents.reagent_list))
+			for(var/datum/reagent/reagent in beaker.reagents.reagent_list)
+				beakerContents += list(list("name" = reagent.name, "volume" = round(reagent.volume, 0.01))) // list in a list because Byond merges the first list...
+		beaker_data["contents"] = beakerContents
+	.["beaker"] = beaker_data
+
+/obj/machinery/chem_dispenser/ui_act(action, params, datum/tgui/ui, datum/ui_state/state)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	. = ..()
 	if(.)
 		return
@@ -416,7 +464,17 @@
 			if(beaker)
 				beaker.reagents.ui_interact(usr)
 
+	var/result = handle_ui_act(action, params, ui, state)
+	if(isnull(result))
+		result = FALSE
+	return result
+
+/// Same as ui_act() but to be used by subtypes exclusively
+/obj/machinery/chem_dispenser/proc/handle_ui_act(action, params, datum/tgui/ui, datum/ui_state/state)
+	return null
+
 /obj/machinery/chem_dispenser/wrench_act(mob/living/user, obj/item/tool)
+<<<<<<< HEAD
 	. = ..()
 	default_unfasten_wrench(user, tool)
 	return TOOL_ACT_TOOLTYPE_SUCCESS
@@ -430,21 +488,38 @@
 	if(is_reagent_container(I) && !(I.item_flags & ABSTRACT) && I.is_open_container())
 		var/obj/item/reagent_containers/B = I
 		//SKYRAT EDIT BEGIN - CHEMISTRY QOL
+=======
+	if(default_unfasten_wrench(user, tool) == SUCCESSFUL_UNFASTEN)
+		return ITEM_INTERACT_SUCCESS
+	return ITEM_INTERACT_BLOCKING
+
+/obj/machinery/chem_dispenser/screwdriver_act(mob/living/user, obj/item/tool)
+	if(default_deconstruction_screwdriver(user, icon_state, icon_state, tool))
+		update_appearance()
+		return ITEM_INTERACT_SUCCESS
+	return ITEM_INTERACT_BLOCKING
+
+/obj/machinery/chem_dispenser/crowbar_act(mob/living/user, obj/item/tool)
+	if(default_deconstruction_crowbar(tool))
+		return ITEM_INTERACT_SUCCESS
+	return ITEM_INTERACT_BLOCKING
+
+/obj/machinery/chem_dispenser/item_interaction(mob/living/user, obj/item/tool, list/modifiers, is_right_clicking)
+	if(is_reagent_container(tool) && !(tool.item_flags & ABSTRACT) && tool.is_open_container())
+		//SKYRAT EDIT ADDITION START - CHEMISTRY QOL
+		var/obj/item/reagent_containers/container = tool
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 		if(customTransferAmount)
 			transferAmounts -= customTransferAmount
-		transferAmounts = B.possible_transfer_amounts
-		//SKYRAT EDIT END
-		. = TRUE //no afterattack
-		if(!user.transferItemToLoc(B, src))
-			return
-		replace_beaker(user, B)
-		to_chat(user, span_notice("You add [B] to [src]."))
+		transferAmounts = container.possible_transfer_amounts
+		//SKYRAT EDIT ADDITION END
+		if(!user.transferItemToLoc(tool, src))
+			return ..()
+		replace_beaker(user, tool)
 		ui_interact(user)
-	else if(!user.combat_mode && !istype(I, /obj/item/card/emag))
-		to_chat(user, span_warning("You can't load [I] into [src]!"))
-		return ..()
-	else
-		return ..()
+		return ITEM_INTERACT_SUCCESS
+
+	return ..()
 
 /obj/machinery/chem_dispenser/get_cell()
 	return cell
@@ -640,8 +715,7 @@
 
 /obj/machinery/chem_dispenser/drinks/fullupgrade //fully ugpraded stock parts, emagged
 	desc = "Contains a large reservoir of soft drinks. This model has had its safeties shorted out."
-	obj_flags = CAN_BE_HIT | EMAGGED
-	flags_1 = NODECONSTRUCT_1
+	obj_flags = CAN_BE_HIT | EMAGGED | NO_DECONSTRUCTION
 	circuit = /obj/item/circuitboard/machine/chem_dispenser/drinks/fullupgrade
 
 /obj/machinery/chem_dispenser/drinks/fullupgrade/Initialize(mapload)
@@ -697,8 +771,7 @@
 
 /obj/machinery/chem_dispenser/drinks/beer/fullupgrade //fully ugpraded stock parts, emagged
 	desc = "Contains a large reservoir of the good stuff. This model has had its safeties shorted out."
-	obj_flags = CAN_BE_HIT | EMAGGED
-	flags_1 = NODECONSTRUCT_1
+	obj_flags = CAN_BE_HIT | EMAGGED | NO_DECONSTRUCTION
 	circuit = /obj/item/circuitboard/machine/chem_dispenser/drinks/beer/fullupgrade
 
 /obj/machinery/chem_dispenser/drinks/beer/fullupgrade/Initialize(mapload)
@@ -716,8 +789,12 @@
 /obj/machinery/chem_dispenser/mutagensaltpeter
 	name = "botanical chemical dispenser"
 	desc = "Creates and dispenses chemicals useful for botany."
+<<<<<<< HEAD
 	flags_1 = NODECONSTRUCT_1
 
+=======
+	obj_flags = /obj::obj_flags | NO_DECONSTRUCTION
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	circuit = /obj/item/circuitboard/machine/chem_dispenser/mutagensaltpeter
 
 	dispensable_reagents = list(
@@ -738,8 +815,7 @@
 
 /obj/machinery/chem_dispenser/fullupgrade //fully ugpraded stock parts, emagged
 	desc = "Creates and dispenses chemicals. This model has had its safeties shorted out."
-	obj_flags = CAN_BE_HIT | EMAGGED
-	flags_1 = NODECONSTRUCT_1
+	obj_flags = CAN_BE_HIT | EMAGGED | NO_DECONSTRUCTION
 	circuit = /obj/item/circuitboard/machine/chem_dispenser/fullupgrade
 
 /obj/machinery/chem_dispenser/fullupgrade/Initialize(mapload)

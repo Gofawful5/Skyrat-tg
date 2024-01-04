@@ -72,10 +72,24 @@
 	description = "A chameleon holster that fits into your belt. Designed to hold one sidearm and a spare load of ammunition, it also allows you to spin \
 		your revolver, if you have one."
 
+<<<<<<< HEAD
 /datum/opposing_force_equipment/clothing/holsternk
 	item_type = /obj/item/storage/belt/holster/nukie
 	description = "A holster retrieved from a nuclear operative. Able to hold any two types of weaponry or ammo as long as it is not extremely large. \
 		Expect security to be not so friendly if they see you wearing one of these..."
+=======
+/obj/item/storage/backpack/satchel/leather/dogginos/PopulateContents()
+	new /obj/item/clothing/under/pizza(src)
+	new /obj/item/clothing/suit/pizzaleader(src)
+	new /obj/item/clothing/suit/toggle/jacket/hoodie/pizza(src)
+	new /obj/item/clothing/head/pizza(src)
+	new /obj/item/clothing/head/soft/red(src)
+	new /obj/item/clothing/glasses/regular/betterunshit(src)
+	new /obj/item/clothing/mask/fakemoustache/italian(src)
+	new /obj/item/clothing/shoes/sneakers/red(src)
+	new /obj/item/radio/headset/headset_cent/impostorsr(src)
+	new /obj/item/card/id/advanced/chameleon(src)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 //modsuits in 2022
 

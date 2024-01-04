@@ -170,7 +170,11 @@
 	return ..()
 
 /obj/machinery/plumbing/reaction_chamber/chem/handle_reagents(seconds_per_tick)
+<<<<<<< HEAD
 	while(reagents.ph < acidic_limit || reagents.ph > alkaline_limit)
+=======
+	if(reagents.ph < acidic_limit || reagents.ph > alkaline_limit)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 		//no power
 		if(machine_stat & NOPOWER)
 			return
@@ -190,6 +194,7 @@
 			return
 
 		//transfer buffer and handle reactions
+<<<<<<< HEAD
 		var/ph_change = (reagents.ph > alkaline_limit ? (reagents.ph - alkaline_limit) : (acidic_limit - reagents.ph))
 		var/buffer_amount = ((ph_change * reagents.total_volume) / (BUFFER_IONIZING_STRENGTH * num_of_reagents))
 		if(!buffer.trans_to(reagents, buffer_amount * seconds_per_tick))
@@ -197,6 +202,15 @@
 
 		//some power for accurate ph balancing
 		use_power(active_power_usage * 0.03 * buffer_amount * seconds_per_tick)
+=======
+		var/ph_change = max((reagents.ph > alkaline_limit ? (reagents.ph - alkaline_limit) : (acidic_limit - reagents.ph)), 0.25)
+		var/buffer_amount = ((ph_change * reagents.total_volume) / (BUFFER_IONIZING_STRENGTH * num_of_reagents)) * seconds_per_tick
+		if(!buffer.trans_to(reagents, buffer_amount))
+			return
+
+		//some power for accurate ph balancing & keep track of attempts made
+		use_power(active_power_usage * 0.03 * buffer_amount)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 /obj/machinery/plumbing/reaction_chamber/chem/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)

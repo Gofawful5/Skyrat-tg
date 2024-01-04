@@ -19,6 +19,12 @@
 	melee_damage_upper = 25
 	gold_core_spawnable = HOSTILE_SPAWN
 	ai_controller = /datum/ai_controller/basic_controller/giant_spider
+<<<<<<< HEAD
+=======
+	bite_injection_flags = INJECT_CHECK_PENETRATE_THICK
+	/// Actions to grant on Initialize
+	var/list/innate_actions = null
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 
 /**
@@ -247,6 +253,100 @@
 	return TRUE
 
 /**
+<<<<<<< HEAD
+=======
+ * ### Spider Tank
+ * A subtype of the giant spider, specialized in taking damage.
+ * This spider is only slightly slower than a human.
+ */
+/mob/living/basic/spider/giant/tank
+	name = "tank spider"
+	desc = "Furry and Purple with a white top, it makes you shudder to look at it. This one has bright yellow eyes."
+	icon_state = "tank"
+	icon_living = "tank"
+	icon_dead = "tank_dead"
+	maxHealth = 500
+	health = 500
+	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 1, STAMINA = 1, OXY = 1)
+	melee_damage_lower = 5
+	melee_damage_upper = 5
+	obj_damage = 15
+	speed = 5
+	player_speed_modifier = -4
+	menu_description = "Extremly tanky with very poor offence. Able to self heal and lay reflective silk screens."
+
+/mob/living/basic/spider/giant/tank/Initialize(mapload)
+	. = ..()
+	var/datum/action/cooldown/mob_cooldown/lay_web/web_reflector/reflector_web = new(src)
+	reflector_web.Grant(src)
+
+	var/datum/action/cooldown/mob_cooldown/lay_web/web_passage/passage_web = new(src)
+	passage_web.Grant(src)
+
+	AddElement(/datum/element/web_walker, /datum/movespeed_modifier/below_average_web)
+
+	AddComponent(/datum/component/healing_touch,\
+		heal_brute = 50,\
+		heal_burn = 50,\
+		heal_time = 5 SECONDS,\
+		self_targeting = HEALING_TOUCH_SELF_ONLY,\
+		interaction_key = DOAFTER_SOURCE_SPIDER,\
+		valid_targets_typecache = typecacheof(list(/mob/living/basic/spider/growing/young/tank, /mob/living/basic/spider/giant/tank)),\
+		extra_checks = CALLBACK(src, PROC_REF(can_mend)),\
+		action_text = "%SOURCE% begins mending themselves...",\
+		complete_text = "%SOURCE%'s wounds mend together.",\
+	)
+
+/// Prevent you from healing when on fire
+/mob/living/basic/spider/giant/tank/proc/can_mend(mob/living/source, mob/living/target)
+	if (on_fire)
+		balloon_alert(src, "on fire!")
+		return FALSE
+	return TRUE
+
+/**
+ * ### Spider Breacher
+ * A subtype of the giant spider, specialized in breaching and invasion.
+ * This spider is only slightly slower than a human.
+ */
+/mob/living/basic/spider/giant/breacher
+	name = "breacher spider"
+	desc = "Furry and light brown with dark brown and red highlights, it makes you shudder to look at it. This one has bright red eyes."
+	icon_state = "breacher"
+	icon_living = "breacher"
+	icon_dead = "breacher_dead"
+	maxHealth = 120
+	health = 120
+	melee_damage_lower = 5
+	melee_damage_upper = 10
+	unsuitable_atmos_damage = 0
+	minimum_survivable_temperature = 0
+	maximum_survivable_temperature = 700
+	unsuitable_cold_damage = 0
+	wound_bonus = 25
+	bare_wound_bonus = 50
+	sharpness = SHARP_EDGED
+	obj_damage = 60
+	web_speed = 0.25
+	limb_destroyer = 50
+	speed = 5
+	player_speed_modifier = -4
+	sight = SEE_TURFS
+	menu_description = "Atmospherically resistant with the ability to destroy walls and limbs, and to send warnings to the nest."
+
+/mob/living/basic/spider/giant/breacher/Initialize(mapload)
+	. = ..()
+	var/datum/action/cooldown/mob_cooldown/lay_web/solid_web/web_solid = new(src)
+	web_solid.Grant(src)
+
+	var/datum/action/cooldown/mob_cooldown/command_spiders/warning_spiders/spiders_warning = new(src)
+	spiders_warning.Grant(src)
+
+	AddElement(/datum/element/wall_tearer)
+	AddElement(/datum/element/web_walker, /datum/movespeed_modifier/below_average_web)
+
+/**
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
  * ### Tarantula
  *
  * A subtype of the giant spider which specializes in pure strength and staying power.
@@ -264,7 +364,7 @@
 	melee_damage_lower = 35
 	melee_damage_upper = 40
 	obj_damage = 100
-	damage_coeff = list(BRUTE = 1, BURN = 1.25, TOX = 1, CLONE = 1, STAMINA = 0, OXY = 1)
+	damage_coeff = list(BRUTE = 1, BURN = 1.25, TOX = 1, STAMINA = 0, OXY = 1)
 	speed = 6
 	player_speed_modifier = -5.5 // Doesn't seem that slow but it gets a debuff off web
 	mob_size = MOB_SIZE_LARGE
@@ -493,7 +593,7 @@
 	web_speed = 0.4
 	maxHealth = 80
 	health = 80
-	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 1, CLONE = 1, STAMINA = 1, OXY = 1)
+	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 1, STAMINA = 1, OXY = 1)
 	unsuitable_cold_damage = 1
 	unsuitable_heat_damage = 1
 	menu_description = "Stronger assassin spider variant with an unmatched speed, high amount of health and very deadly poison, but deals very low amount of damage. It also has ability to ventcrawl."

@@ -73,3 +73,12 @@
 	. = ..()
 
 	controller.clear_blackboard_key(target_key)
+<<<<<<< HEAD
+=======
+	if(!succeeded)
+		return
+	var/mob/living/living_pawn = controller.pawn
+	if(QDELETED(living_pawn)) // pawn can be null at this point
+		return
+	living_pawn.set_combat_mode(initial(living_pawn.combat_mode))
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2

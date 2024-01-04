@@ -202,7 +202,7 @@
 
 /datum/brain_trauma/severe/split_personality/brainwashing/get_ghost()
 	set waitfor = FALSE
-	var/list/mob/dead/observer/candidates = poll_candidates_for_mob("Do you want to play as [owner.real_name]'s brainwashed mind?", null, null, 7.5 SECONDS, stranger_backseat)
+	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates_for_mob("Do you want to play as [owner.real_name]'s brainwashed mind?", poll_time = 7.5 SECONDS, target_mob = stranger_backseat, pic_source = owner, role_name_text = "brainwashed mind")
 	if(LAZYLEN(candidates))
 		var/mob/dead/observer/C = pick(candidates)
 		stranger_backseat.key = C.key
@@ -253,7 +253,16 @@
 /datum/brain_trauma/severe/split_personality/blackout/on_gain()
 	. = ..()
 	RegisterSignal(owner, COMSIG_ATOM_SPLASHED, PROC_REF(on_splashed))
+<<<<<<< HEAD
 	notify_ghosts("[owner] is blacking out!", source = owner, action = NOTIFY_ORBIT, flashwindow = FALSE, header = "Bro I'm not even drunk right now")
+=======
+	notify_ghosts(
+		"[owner] is blacking out!",
+		source = owner,
+		header = "Bro I'm not even drunk right now",
+		notify_flags = NOTIFY_CATEGORY_NOFLASH,
+	)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 /datum/brain_trauma/severe/split_personality/blackout/on_lose()
 	. = ..()
@@ -276,6 +285,21 @@
 	if(duration_in_seconds <= 0)
 		qdel(src)
 		return
+<<<<<<< HEAD
+=======
+	else if(duration_in_seconds <= 60 && !(duration_in_seconds % 20))
+		to_chat(owner, span_warning("You have [duration_in_seconds] seconds left before sobering up!"))
+	if(prob(10) && !HAS_TRAIT(owner, TRAIT_DISCOORDINATED_TOOL_USER))
+		ADD_TRAIT(owner, TRAIT_DISCOORDINATED_TOOL_USER, TRAUMA_TRAIT)
+		owner.balloon_alert(owner, "dexterity reduced temporarily!")
+		//We then send a callback to automatically re-add the trait
+		addtimer(TRAIT_CALLBACK_REMOVE(owner, TRAIT_DISCOORDINATED_TOOL_USER, TRAUMA_TRAIT), 10 SECONDS)
+		addtimer(CALLBACK(owner, TYPE_PROC_REF(/atom, balloon_alert), owner, "dexterity regained!"), 10 SECONDS)
+	if(prob(15))
+		playsound(owner,'sound/effects/sf_hiccup_male_01.ogg', 50)
+		owner.emote("hiccup")
+	owner.adjustStaminaLoss(-5) //too drunk to feel anything
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	duration_in_seconds -= seconds_per_tick
 
 /mob/living/split_personality/blackout

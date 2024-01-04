@@ -32,9 +32,13 @@
 		if(TOX)
 			adjustToxLoss(damage_amount, forced = forced)
 		if(OXY)
+<<<<<<< HEAD
 			adjustOxyLoss(damage_amount, forced = forced)
 		if(CLONE)
 			adjustCloneLoss(damage_amount, forced = forced)
+=======
+			final_mod *= physiology.oxy_mod
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 		if(STAMINA)
 			adjustStaminaLoss(damage_amount, forced = forced)
 	SEND_SIGNAL(src, COMSIG_MOB_AFTER_APPLY_DAMAGE, damage, damagetype, def_zone)
@@ -188,7 +192,7 @@
 
 
 ///Returns a list of bodyparts with wounds (in case someone has a wound on an otherwise fully healed limb)
-/mob/living/carbon/proc/get_wounded_bodyparts(brute = FALSE, burn = FALSE, required_bodytype)
+/mob/living/carbon/proc/get_wounded_bodyparts(required_bodytype)
 	var/list/obj/item/bodypart/parts = list()
 	for(var/X in bodyparts)
 		var/obj/item/bodypart/BP = X

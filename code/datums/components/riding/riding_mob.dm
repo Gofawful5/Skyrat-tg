@@ -31,7 +31,7 @@
 		var/mob/living/simple_animal/simple_parent = parent
 		simple_parent.stop_automated_movement = TRUE
 
-/datum/component/riding/creature/Destroy(force, silent)
+/datum/component/riding/creature/Destroy(force)
 	unequip_buckle_inhands(parent)
 	if(isanimal(parent))
 		var/mob/living/simple_animal/simple_parent = parent
@@ -458,7 +458,7 @@
 	var/mob/living/basic/mining/goliath/goliath = parent
 	goliath.add_movespeed_modifier(/datum/movespeed_modifier/goliath_mount)
 
-/datum/component/riding/creature/goliath/Destroy(force, silent)
+/datum/component/riding/creature/goliath/Destroy(force)
 	var/mob/living/basic/mining/goliath/goliath = parent
 	goliath.remove_movespeed_modifier(/datum/movespeed_modifier/goliath_mount)
 	return ..()
@@ -512,6 +512,37 @@
 	set_vehicle_dir_layer(EAST, OBJ_LAYER)
 	set_vehicle_dir_layer(WEST, OBJ_LAYER)
 
+<<<<<<< HEAD
+=======
+/datum/component/riding/creature/leaper
+	can_force_unbuckle = FALSE
+	can_use_abilities = TRUE
+	blacklist_abilities = list(/datum/action/cooldown/toggle_seethrough)
+	ride_check_flags = JUST_FRIEND_RIDERS
+
+/datum/component/riding/creature/leaper/handle_specials()
+	. = ..()
+	set_riding_offsets(RIDING_OFFSET_ALL, list(TEXT_NORTH = list(17, 46), TEXT_SOUTH = list(17,51), TEXT_EAST = list(27, 46), TEXT_WEST = list(6, 46)))
+
+/datum/component/riding/creature/leaper/Initialize(mob/living/riding_mob, force = FALSE, ride_check_flags = NONE, potion_boost = FALSE)
+	. = ..()
+	RegisterSignal(riding_mob, COMSIG_MOB_POINTED, PROC_REF(attack_pointed))
+
+/datum/component/riding/creature/leaper/proc/attack_pointed(mob/living/rider, atom/pointed)
+	SIGNAL_HANDLER
+	if(!isclosedturf(pointed))
+		return
+	var/mob/living/basic/basic_parent = parent
+	if(!basic_parent.CanReach(pointed))
+		return
+	basic_parent.melee_attack(pointed)
+
+
+/datum/component/riding/leaper/handle_unbuckle(mob/living/rider)
+	. = ..()
+	UnregisterSignal(rider,  COMSIG_MOB_POINTED)
+
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 //SKYRAT EDIT START: Human Riding Defines
 #undef OVERSIZED_OFFSET
 #undef OVERSIZED_SIDE_OFFSET

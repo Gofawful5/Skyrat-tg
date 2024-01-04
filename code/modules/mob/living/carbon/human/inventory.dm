@@ -181,7 +181,7 @@
 			gloves = equipping
 			//SKYRAT EDIT ADDITION - ERP UPDATE
 			if(gloves.breakouttime)
-				ADD_TRAIT(src, TRAIT_RESTRAINED, GLOVES_TRAIT)
+				ADD_TRAIT(src, TRAIT_RESTRAINED, TRAIT_GLOVES)
 				stop_pulling()
 				update_mob_action_buttons()
 			//SKYRAT EDIT ADDITION END
@@ -265,14 +265,15 @@
 			update_worn_oversuit()
 	else if(I == w_uniform)
 		if(invdrop)
-			if(r_store)
+			if(r_store && IS_ORGANIC_LIMB(src.get_bodypart(BODY_ZONE_R_LEG)))
 				dropItemToGround(r_store, TRUE) //Again, makes sense for pockets to drop.
-			if(l_store)
+			if(l_store && IS_ORGANIC_LIMB(src.get_bodypart(BODY_ZONE_L_LEG)))
 				dropItemToGround(l_store, TRUE)
-			if(wear_id)
-				dropItemToGround(wear_id)
-			if(belt)
-				dropItemToGround(belt)
+			if(IS_ORGANIC_LIMB(src.get_bodypart(BODY_ZONE_CHEST)))
+				if(wear_id)
+					dropItemToGround(wear_id)
+				if(belt)
+					dropItemToGround(belt)
 		w_uniform = null
 		update_suit_sensors()
 		if(!QDELETED(src))
@@ -280,7 +281,7 @@
 	else if(I == gloves)
 		//SKYRAT EDIT ADDITION - ERP UPDATE
 		if(gloves.breakouttime) //when unequipping a straightjacket
-			REMOVE_TRAIT(src, TRAIT_RESTRAINED, GLOVES_TRAIT)
+			REMOVE_TRAIT(src, TRAIT_RESTRAINED, TRAIT_GLOVES)
 			drop_all_held_items() //suit is restraining
 			update_mob_action_buttons() //certain action buttons may be usable again.
 		//SKYRAT EDIT ADDITION END

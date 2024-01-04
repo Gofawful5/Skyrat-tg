@@ -49,8 +49,13 @@
 	AddElement(/datum/element/ai_retaliate)
 	AddElement(/datum/element/swabable, CELL_LINE_TABLE_SNAKE, CELL_VIRUS_TABLE_GENERIC_MOB, 1, 5)
 
+<<<<<<< HEAD
 	AddElement(/datum/element/basic_eating, 2, 0, null, edibles)
 	ai_controller.set_blackboard_key(BB_BASIC_FOODS, edibles)
+=======
+	AddElement(/datum/element/basic_eating, heal_amt = 2, food_types = edibles)
+	ai_controller.set_blackboard_key(BB_BASIC_FOODS, typecacheof(edibles))
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 	AddComponent(\
 		/datum/component/tameable,\

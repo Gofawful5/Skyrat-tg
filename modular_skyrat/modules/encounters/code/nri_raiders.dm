@@ -128,7 +128,18 @@ GLOBAL_VAR(first_officer)
 
 	belt = /obj/item/storage/belt/security/nri
 	back = /obj/item/storage/backpack/satchel/leather
+<<<<<<< HEAD
 	backpack_contents = list(/obj/item/storage/box/nri_survival_pack/raider = 1, /obj/item/ammo_box/magazine/m9mm_aps = 3, /obj/item/gun/ballistic/automatic/pistol/nri = 1, /obj/item/crucifix = 1, /obj/item/clothing/mask/gas/hecu2 = 1, /obj/item/modular_computer/pda/security = 1)
+=======
+	backpack_contents = list(
+		/obj/item/storage/box/nri_survival_pack/raider = 1,
+		/obj/item/ammo_box/magazine/recharge/plasma_battery = 3,
+		/obj/item/gun/ballistic/automatic/pistol/plasma_marksman = 1,
+		/obj/item/crucifix = 1,
+		/obj/item/clothing/mask/gas/nri_police = 1,
+		/obj/item/modular_computer/pda/nri_police = 1,
+	)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	l_pocket = /obj/item/folder/blue/nri_cop
 	r_pocket = /obj/item/storage/pouch/ammo
 
@@ -137,6 +148,16 @@ GLOBAL_VAR(first_officer)
 
 /datum/id_trim/nri_raider/officer
 	assignment = "NRI Field Officer"
+<<<<<<< HEAD
+=======
+	trim_icon = 'modular_skyrat/master_files/icons/obj/card.dmi'
+	trim_state = "trim_nri_police"
+	department_color = COLOR_NRI_POLICE_BLUE
+	subdepartment_color = COLOR_NRI_POLICE_SILVER
+	sechud_icon_state = "hud_nri_police"
+	access = list(ACCESS_SYNDICATE, ACCESS_MAINT_TUNNELS)
+	threat_modifier = 2 // Not as treatening as syndicate, but still potentially harmful to the station
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 /datum/outfit/pirate/nri/marine
 	name = "NRI Marine"

@@ -7,6 +7,7 @@
 	key = "ash_drake"
 	map_name = "ash_drake"
 	reward_points = BITRUNNER_REWARD_MEDIUM
+<<<<<<< HEAD
 	safehouse_path = /datum/map_template/safehouse/lavaland_boss
 
 /mob/living/simple_animal/hostile/megafauna/dragon/virtual_domain
@@ -16,3 +17,5 @@
 	loot = list(/obj/structure/closet/crate/secure/bitrunning/encrypted)
 	maxHealth = 1600
 	true_spawn = FALSE
+=======
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2

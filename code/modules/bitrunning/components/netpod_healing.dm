@@ -25,6 +25,7 @@
 
 	START_PROCESSING(SSmachines, src)
 
+<<<<<<< HEAD
 	src.brute_heal = brute_heal
 	src.burn_heal = burn_heal
 	src.toxin_heal = toxin_heal
@@ -32,6 +33,9 @@
 	src.blood_heal = blood_heal
 
 /datum/component/netpod_healing/Destroy(force, silent)
+=======
+/datum/component/netpod_healing/Destroy(force)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	STOP_PROCESSING(SSmachines, src)
 
 	var/mob/living/carbon/player = parent
@@ -46,10 +50,16 @@
 		return
 
 	var/need_mob_update = FALSE
+<<<<<<< HEAD
 	need_mob_update += owner.adjustBruteLoss(-brute_heal * seconds_per_tick, updating_health = FALSE)
 	need_mob_update += owner.adjustFireLoss(-burn_heal * seconds_per_tick, updating_health = FALSE)
 	need_mob_update += owner.adjustToxLoss(-toxin_heal * seconds_per_tick, updating_health = FALSE, forced = TRUE)
 	need_mob_update += owner.adjustCloneLoss(-clone_heal * seconds_per_tick, updating_health = FALSE)
+=======
+	need_mob_update += owner.adjustBruteLoss(-BASE_HEAL * seconds_per_tick, updating_health = FALSE)
+	need_mob_update += owner.adjustFireLoss(-BASE_HEAL * seconds_per_tick, updating_health = FALSE)
+	need_mob_update += owner.adjustToxLoss(-BASE_HEAL * seconds_per_tick, updating_health = FALSE, forced = TRUE)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 	if(owner.blood_volume < BLOOD_VOLUME_NORMAL)
 		owner.blood_volume += blood_heal * seconds_per_tick
@@ -60,6 +70,13 @@
 /datum/status_effect/embryonic
 	id = "embryonic"
 	alert_type = /atom/movable/screen/alert/status_effect/embryonic
+
+/datum/status_effect/embryonic/on_apply()
+	ADD_TRAIT(owner, TRAIT_STASIS, TRAIT_STATUS_EFFECT(id))
+	return TRUE
+
+/datum/status_effect/embryonic/on_remove()
+	REMOVE_TRAIT(owner, TRAIT_STASIS, TRAIT_STATUS_EFFECT(id))
 
 /atom/movable/screen/alert/status_effect/embryonic
 	name = "Embryonic Stasis"

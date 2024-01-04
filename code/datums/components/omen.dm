@@ -17,7 +17,11 @@
 	/// Base damage from negative events. Cursed take 25% of this damage.
 	var/damage_mod = 1
 
+<<<<<<< HEAD
 /datum/component/omen/Initialize(obj/vessel, permanent, luck_mod, damage_mod)
+=======
+/datum/component/omen/Initialize(obj/vessel, incidents_left, luck_mod, damage_mod)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	if(!isliving(parent))
 		return COMPONENT_INCOMPATIBLE
 
@@ -31,8 +35,31 @@
 	if(!isnull(damage_mod))
 		src.damage_mod = damage_mod
 
+<<<<<<< HEAD
+=======
+	ADD_TRAIT(parent, TRAIT_CURSED, SMITE_TRAIT)
+
+/**
+ * This is a omen eat omen world! The stronger omen survives.
+ */
+/datum/component/omen/InheritComponent(obj/vessel, incidents_left, luck_mod, damage_mod)
+	// If we have more incidents left the new one gets deleted.
+	if(src.incidents_left > incidents_left)
+		return // make slimes get nurtiton from plasmer
+	// Otherwise we set our incidents remaining to the higher, newer value.
+	src.incidents_left = incidents_left
+	// The new omen is weaker than our current omen? Let's split the difference.
+	if(src.luck_mod > luck_mod)
+		src.luck_mod += luck_mod * 0.5
+	if(src.damage_mod > damage_mod)
+		src.luck_mod += luck_mod * 0.5
+	// This means that if you had a strong temporary omen and it was replaced by a weaker but permanent omen, the latter is made worse.
+	// Feature!
+
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 /datum/component/omen/Destroy(force)
 	var/mob/living/person = parent
+	REMOVE_TRAIT(person, TRAIT_CURSED, SMITE_TRAIT)
 	to_chat(person, span_nicegreen("You feel a horrible omen lifted off your shoulders!"))
 
 	if(vessel)

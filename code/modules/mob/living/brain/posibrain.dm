@@ -3,7 +3,7 @@ GLOBAL_VAR(posibrain_notify_cooldown)
 /obj/item/mmi/posibrain
 	name = "positronic brain"
 	desc = "A cube of shining metal, four inches to a side and covered in shallow grooves."
-	icon = 'icons/obj/assemblies/assemblies.dmi'
+	icon = 'icons/obj/devices/assemblies.dmi'
 	icon_state = "posibrain"
 	base_icon_state = "posibrain"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -49,7 +49,20 @@ GLOBAL_VAR(posibrain_notify_cooldown)
 ///Notify ghosts that the posibrain is up for grabs
 /obj/item/mmi/posibrain/proc/ping_ghosts(msg, newlymade)
 	if(newlymade || GLOB.posibrain_notify_cooldown <= world.time)
+<<<<<<< HEAD
 		notify_ghosts("[name] [msg] in [get_area(src)]! [ask_role ? "Personality requested: \[[ask_role]\]" : ""]", ghost_sound = !newlymade ? 'sound/effects/ghost2.ogg':null, notify_volume = 75, enter_link = "<a href=?src=[REF(src)];activate=1>(Click to enter)</a>", source = src, action = NOTIFY_ATTACK, flashwindow = FALSE, ignore_key = POLL_IGNORE_POSIBRAIN, notify_suiciders = FALSE)
+=======
+		notify_ghosts(
+			"[name] [msg] in [get_area(src)]! [ask_role ? "Personality requested: \[[ask_role]\]" : ""]",
+			source = src,
+			header = "Ghost in the Machine",
+			click_interact = TRUE,
+			ghost_sound = !newlymade ? 'sound/effects/ghost2.ogg':null,
+			ignore_key = POLL_IGNORE_POSIBRAIN,
+			notify_flags = (GHOST_NOTIFY_IGNORE_MAPLOAD),
+			notify_volume = 75,
+		)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 		if(!newlymade)
 			GLOB.posibrain_notify_cooldown = world.time + ask_delay
 

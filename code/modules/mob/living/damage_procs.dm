@@ -5,12 +5,26 @@
  * Sends [COMSIG_MOB_APPLY_DAMAGE]
  *
  * Arguuments:
+<<<<<<< HEAD
  * * damage - amount of damage
  * * damagetype - one of [BRUTE], [BURN], [TOX], [OXY], [CLONE], [STAMINA]
  * * def_zone - zone that is being hit if any
  * * blocked - armor value applied
  * * forced - bypass hit percentage
  * * spread_damage - used in overrides
+=======
+ * * damage - Amount of damage
+ * * damagetype - What type of damage to do. one of [BRUTE], [BURN], [TOX], [OXY], [STAMINA], [BRAIN].
+ * * def_zone - What body zone is being hit. Or a reference to what bodypart is being hit.
+ * * blocked - Percent modifier to damage. 100 = 100% less damage dealt, 50% = 50% less damage dealt.
+ * * forced - "Force" exactly the damage dealt. This means it skips damage modifier from blocked.
+ * * spread_damage - For carbons, spreads the damage across all bodyparts rather than just the targeted zone.
+ * * wound_bonus - Bonus modifier for wound chance.
+ * * bare_wound_bonus - Bonus modifier for wound chance on bare skin.
+ * * sharpness - Sharpness of the weapon.
+ * * attack_direction - Direction of the attack from the attacker to [src].
+ * * attacking_item - Item that is attacking [src].
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
  *
  * Returns TRUE if damage applied
  */
@@ -28,9 +42,13 @@
 		if(TOX)
 			adjustToxLoss(damage_amount, forced = forced)
 		if(OXY)
+<<<<<<< HEAD
 			adjustOxyLoss(damage_amount, forced = forced)
 		if(CLONE)
 			adjustCloneLoss(damage_amount, forced = forced)
+=======
+			damage_dealt = adjustOxyLoss(damage_amount, forced = forced)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 		if(STAMINA)
 			adjustStaminaLoss(damage_amount, forced = forced)
 	SEND_SIGNAL(src, COMSIG_MOB_AFTER_APPLY_DAMAGE, damage, damagetype, def_zone)
@@ -46,9 +64,13 @@
 		if(TOX)
 			return adjustToxLoss(damage)
 		if(OXY)
+<<<<<<< HEAD
 			return adjustOxyLoss(damage)
 		if(CLONE)
 			return adjustCloneLoss(damage)
+=======
+			return adjustOxyLoss(heal_amount)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 		if(STAMINA)
 			return adjustStaminaLoss(damage)
 
@@ -63,15 +85,32 @@
 			return getToxLoss()
 		if(OXY)
 			return getOxyLoss()
-		if(CLONE)
-			return getCloneLoss()
 		if(STAMINA)
 			return getStaminaLoss()
 
+<<<<<<< HEAD
 /// applies multiple damages at once via [/mob/living/proc/apply_damage]
 /mob/living/proc/apply_damages(brute = 0, burn = 0, tox = 0, oxy = 0, clone = 0, def_zone = null, blocked = FALSE, stamina = 0, brain = 0)
 	if(blocked >= 100)
 		return 0
+=======
+/// return the total damage of all types which update your health
+/mob/living/proc/get_total_damage(precision = DAMAGE_PRECISION)
+	return round(getBruteLoss() + getFireLoss() + getToxLoss() + getOxyLoss(), precision)
+
+/// Applies multiple damages at once via [apply_damage][/mob/living/proc/apply_damage]
+/mob/living/proc/apply_damages(
+	brute = 0,
+	burn = 0,
+	tox = 0,
+	oxy = 0,
+	def_zone = null,
+	blocked = 0,
+	stamina = 0,
+	brain = 0,
+)
+	var/total_damage = 0
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	if(brute)
 		apply_damage(brute, BRUTE, def_zone, blocked)
 	if(burn)
@@ -79,9 +118,13 @@
 	if(tox)
 		apply_damage(tox, TOX, def_zone, blocked)
 	if(oxy)
+<<<<<<< HEAD
 		apply_damage(oxy, OXY, def_zone, blocked)
 	if(clone)
 		apply_damage(clone, CLONE, def_zone, blocked)
+=======
+		total_damage += apply_damage(oxy, OXY, def_zone, blocked)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	if(stamina)
 		apply_damage(stamina, STAMINA, def_zone, blocked)
 	if(brain)
@@ -306,40 +349,6 @@
 	. -= fireloss
 	if(. == 0) // no change, no need to update
 		return 0
-	if(updating_health)
-		updatehealth()
-
-/mob/living/proc/getCloneLoss()
-	return cloneloss
-
-/mob/living/proc/can_adjust_clone_loss(amount, forced, required_biotype = ALL)
-	if(!forced && (!(mob_biotypes & required_biotype) || status_flags & GODMODE || HAS_TRAIT(src, TRAIT_NOCLONELOSS)))
-		return FALSE
-	if(SEND_SIGNAL(src, COMSIG_LIVING_ADJUST_CLONE_DAMAGE, CLONE, amount, forced) & COMPONENT_IGNORE_CHANGE)
-		return FALSE
-	return TRUE
-
-/mob/living/proc/adjustCloneLoss(amount, updating_health = TRUE, forced = FALSE, required_biotype = ALL)
-	if(!can_adjust_clone_loss(amount, forced, required_biotype))
-		return 0
-	. = cloneloss
-	cloneloss = clamp((cloneloss + (amount * CONFIG_GET(number/damage_multiplier))), 0, maxHealth * 2)
-	. -= cloneloss
-	if(. == 0) // no change, no need to update
-		return 0
-	if(updating_health)
-		updatehealth()
-
-/mob/living/proc/setCloneLoss(amount, updating_health = TRUE, forced = FALSE, required_biotype = ALL)
-	if(!forced && ( (status_flags & GODMODE) || HAS_TRAIT(src, TRAIT_NOCLONELOSS)) )
-		return FALSE
-	if(!forced && !(mob_biotypes & required_biotype))
-		return FALSE
-	. = cloneloss
-	cloneloss = amount
-	. -= cloneloss
-	if(!.) // no change, no need to update
-		return FALSE
 	if(updating_health)
 		updatehealth()
 

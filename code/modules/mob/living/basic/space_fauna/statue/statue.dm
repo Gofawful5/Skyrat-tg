@@ -51,10 +51,8 @@
 	pull_force = MOVE_FORCE_EXTREMELY_STRONG
 
 	ai_controller = /datum/ai_controller/basic_controller/statue
-	/// Stores the creator in here if it has one.
-	var/mob/living/creator = null
 
-/mob/living/basic/statue/Initialize(mapload, mob/living/creator)
+/mob/living/basic/statue/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/unobserved_actor, unobserved_flags = NO_OBSERVED_MOVEMENT | NO_OBSERVED_ATTACKS)
 	ADD_TRAIT(src, TRAIT_UNOBSERVANT, INNATE_TRAIT)
@@ -64,10 +62,6 @@
 	flicker.Grant(src)
 	var/datum/action/cooldown/spell/aoe/blindness/blind = new(src)
 	blind.Grant(src)
-
-	// Set creator
-	if(creator)
-		src.creator = creator
 
 /mob/living/basic/statue/med_hud_set_health()
 	return //we're a statue we're invincible
@@ -141,8 +135,12 @@
 
 /datum/ai_controller/basic_controller/statue
 	blackboard = list(
+<<<<<<< HEAD
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic(),
 		BB_LOW_PRIORITY_HUNTING_TARGET = null, // lights
+=======
+		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic,
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	)
 
 	ai_movement = /datum/ai_movement/basic_avoidance

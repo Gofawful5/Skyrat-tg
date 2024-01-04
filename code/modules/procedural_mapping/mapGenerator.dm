@@ -14,6 +14,21 @@
 		buildmode_name = copytext_char("[type]", 20) // / d a t u m / m a p g e n e r a t o r / = 20 characters.
 	initialiseModules()
 
+<<<<<<< HEAD
+=======
+/datum/map_generator/Destroy(force)
+	. = ..()
+	QDEL_LIST(modules)
+
+///This proc will be ran by areas on Initialize, and provides the areas turfs as argument to allow for generation.
+/datum/map_generator/proc/generate_terrain(list/turfs, area/generate_in)
+	return
+
+/// Populate terrain with flora, fauna, features and basically everything that isn't a turf.
+/datum/map_generator/proc/populate_terrain(list/turfs, area/generate_in)
+	return
+
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 //Defines the region the map represents, sets map
 //Returns the map
 /datum/map_generator/proc/defineRegion(turf/Start, turf/End, replace = 0)

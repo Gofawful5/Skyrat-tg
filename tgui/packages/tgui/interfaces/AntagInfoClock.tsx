@@ -1,13 +1,23 @@
+// THIS IS A SKYRAT UI FILE
 import { useBackend } from '../backend';
 import { Icon, Section, Stack } from '../components';
 import { Window } from '../layouts';
+<<<<<<< HEAD
+=======
+import { Rules } from './AntagInfoRules';
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 type Info = {
   antag_name: string;
 };
 
+<<<<<<< HEAD
 export const AntagInfoClock = (props, context) => {
   const { data } = useBackend<Info>(context);
+=======
+export const AntagInfoClock = (props) => {
+  const { data } = useBackend<Info>();
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
   const { antag_name } = data;
   return (
     <Window width={620} height={250} theme="clockwork">
@@ -19,6 +29,12 @@ export const AntagInfoClock = (props, context) => {
               {' You are the ' + antag_name + '! '}
               <Icon name={'cog'} rotation={35} spin />
             </Stack.Item>
+<<<<<<< HEAD
+=======
+            <Stack.Item>
+              <Rules />
+            </Stack.Item>
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
             <Stack.Item>
               <ObjectivePrintout />
             </Stack.Item>
@@ -29,8 +45,8 @@ export const AntagInfoClock = (props, context) => {
   );
 };
 
-const ObjectivePrintout = (props, context) => {
-  const { data } = useBackend<Info>(context);
+const ObjectivePrintout = (props) => {
+  const { data } = useBackend<Info>();
   return (
     <Stack vertical>
       <Stack.Item bold>Your goals:</Stack.Item>

@@ -45,7 +45,12 @@
 		role_unique_actions += new abilities(game, src)
 		role_unique_actions -= abilities
 
+<<<<<<< HEAD
 /datum/mafia_role/Destroy(force, ...)
+=======
+/datum/mafia_role/Destroy(force)
+	UnregisterSignal(body, COMSIG_MOB_SAY)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 	QDEL_NULL(mafia_alert)
 	QDEL_NULL(body)
 	QDEL_LIST(role_unique_actions)

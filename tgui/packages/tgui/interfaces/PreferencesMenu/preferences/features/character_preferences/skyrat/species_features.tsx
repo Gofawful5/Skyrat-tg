@@ -1,9 +1,24 @@
-import { FeatureChoiced, FeatureDropdownInput, Feature, FeatureColorInput, FeatureTextInput, FeatureShortTextInput, CheckboxInput, FeatureTriColorInput, FeatureTriBoolInput, FeatureToggle, FeatureNumberInput, FeatureValueProps, FeatureChoicedServerData } from '../../base';
+// THIS IS A SKYRAT UI FILE
+import {
+  CheckboxInput,
+  Feature,
+  FeatureChoiced,
+  FeatureChoicedServerData,
+  FeatureColorInput,
+  FeatureDropdownInput,
+  FeatureNumberInput,
+  FeatureShortTextInput,
+  FeatureTextInput,
+  FeatureToggle,
+  FeatureTriBoolInput,
+  FeatureTriColorInput,
+  FeatureValueProps,
+} from '../../base';
 
 export const feature_leg_type: FeatureChoiced = {
   name: 'Leg type',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -134,7 +149,7 @@ export const feature_body_markings: Feature<string> = {
   description:
     'Want to have a fancy species name? Put it here, or leave it blank.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -166,7 +181,7 @@ export const feature_tail: Feature<string> = {
   description:
     'Want to have a fancy species name? Put it here, or leave it blank.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -198,7 +213,7 @@ export const feature_snout: Feature<string> = {
   description:
     'Want to have a fancy species name? Put it here, or leave it blank.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -230,7 +245,7 @@ export const feature_horns: Feature<string> = {
   description:
     'Want to have a fancy species name? Put it here, or leave it blank.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -262,7 +277,7 @@ export const feature_ears: Feature<string> = {
   description:
     'Want to have a fancy species name? Put it here, or leave it blank.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -294,7 +309,7 @@ export const feature_wings: Feature<string> = {
   description:
     'Want to have a fancy species name? Put it here, or leave it blank.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -326,7 +341,7 @@ export const feature_frills: Feature<string> = {
   description:
     'Want to have a fancy species name? Put it here, or leave it blank.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -358,7 +373,7 @@ export const feature_spines: Feature<string> = {
   description:
     'Want to have a fancy species name? Put it here, or leave it blank.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -381,7 +396,7 @@ export const spines_emissive: Feature<boolean[]> = {
 export const digitigrade_legs: FeatureChoiced = {
   name: 'Legs',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -399,7 +414,7 @@ export const feature_caps: Feature<string> = {
   description:
     'Want to have a fancy species name? Put it here, or leave it blank.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -431,7 +446,7 @@ export const feature_moth_antennae: Feature<string> = {
   description:
     'Want to have a fancy species name? Put it here, or leave it blank.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -463,7 +478,7 @@ export const feature_moth_markings: Feature<string> = {
   description:
     'Want to have a fancy species name? Put it here, or leave it blank.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -495,7 +510,7 @@ export const feature_fluff: Feature<string> = {
   description:
     'Want to have a fancy species name? Put it here, or leave it blank.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -527,7 +542,7 @@ export const feature_head_acc: Feature<string> = {
   description:
     'Want to have a fancy species name? Put it here, or leave it blank.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -552,7 +567,7 @@ export const feature_ipc_screen: Feature<string> = {
   description:
     'The screen you wish to have displayed. If you have this set to "None", you won\'t get any screen at all.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -581,7 +596,7 @@ export const feature_ipc_antenna: Feature<string> = {
   name: 'Synth Antenna Selection',
   description: 'The antenna you want attached to your head.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -605,7 +620,7 @@ export const feature_ipc_chassis: Feature<string> = {
   description:
     "Allows customization of an Synth's chassis! Only works for Synths.",
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -623,7 +638,7 @@ export const feature_ipc_head: Feature<string> = {
   description:
     "Allows customization of an Synth's chassis! Only works for Synths.",
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -660,7 +675,7 @@ export const feature_neck_acc: Feature<string> = {
   description:
     'Want to have a fancy species name? Put it here, or leave it blank.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -692,7 +707,7 @@ export const feature_skrell_hair: Feature<string> = {
   description:
     'Want to have a fancy species name? Put it here, or leave it blank.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -724,7 +739,7 @@ export const feature_taur: Feature<string> = {
   description:
     'Want to have a fancy species name? Put it here, or leave it blank.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -756,7 +771,7 @@ export const feature_xenodorsal: Feature<string> = {
   description:
     'Want to have a fancy species name? Put it here, or leave it blank.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -788,7 +803,7 @@ export const feature_xenohead: Feature<string> = {
   description:
     'Want to have a fancy species name? Put it here, or leave it blank.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -830,7 +845,7 @@ export const feature_heterochromia: Feature<string> = {
   description:
     'Want to have a fancy species name? Put it here, or leave it blank.',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },
@@ -853,7 +868,7 @@ export const heterochromia_emissive: Feature<boolean[]> = {
 export const vox_bodycolor: Feature<string> = {
   name: 'Vox Bodycolor',
   component: (
-    props: FeatureValueProps<string, string, FeatureChoicedServerData>
+    props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
     return <FeatureDropdownInput buttons {...props} />;
   },

@@ -31,13 +31,13 @@
 	return TRUE
 // SKYRAT EDIT END
 
-/obj/item/organ/external/wings/functional/Insert(mob/living/carbon/receiver, special, drop_if_replaced)
+/obj/item/organ/external/wings/functional/Insert(mob/living/carbon/receiver, special, movement_flags)
 	. = ..()
 	if(. && isnull(fly))
 		fly = new
 		fly.Grant(receiver)
 
-/obj/item/organ/external/wings/functional/Remove(mob/living/carbon/organ_owner, special, moving)
+/obj/item/organ/external/wings/functional/Remove(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
 
 	fly.Remove(organ_owner)
@@ -212,3 +212,9 @@
 	name = "fly wings"
 	desc = "Fly as a fly."
 	sprite_accessory_override = /datum/sprite_accessory/wings/fly
+
+///slime wings, which relate to slimes.
+/obj/item/organ/external/wings/functional/slime
+	name = "slime wings"
+	desc = "How does something so squishy even fly?"
+	sprite_accessory_override = /datum/sprite_accessory/wings/slime

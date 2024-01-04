@@ -29,7 +29,7 @@
 	src.game_id = game_id
 	GLOB.ctf_games[game_id] = src
 
-/datum/ctf_controller/Destroy(force, ...)
+/datum/ctf_controller/Destroy(force)
 	GLOB.ctf_games[game_id] = null
 	return ..()
 
@@ -47,7 +47,15 @@
 	ctf_enabled = TRUE
 	for(var/team in teams)
 		var/obj/machinery/ctf/spawner/spawner = teams[team].spawner
+<<<<<<< HEAD
 		notify_ghosts("[spawner.name] has been activated!", source = spawner, action = NOTIFY_ORBIT, header = "CTF has been activated")
+=======
+		notify_ghosts(
+			"[spawner.name] has been activated!",
+			source = spawner,
+			header = "CTF has been activated",
+		)
+>>>>>>> f23ee25178faa842ef68ab7996cbdff89bde47d2
 
 /datum/ctf_controller/proc/stop_ctf()
 	ctf_enabled = FALSE
@@ -203,7 +211,7 @@
 	team_span = spawner.team_span
 
 ///If the team is destroyed all players in that team need their componenet removed.
-/datum/ctf_team/Destroy(force, ...)
+/datum/ctf_team/Destroy(force)
 	for(var/player in team_members)
 		var/datum/component/ctf_player/ctf_player = team_members[player]
 		ctf_player.end_game()
